@@ -12,7 +12,7 @@ describe('EV Optimizer', () => {
     const trapinch = BattleStatOptimizer({
       species: "Trapinch",
       nature: "Lax",
-      evs: {hp: 204, atk: 252, def: 52},
+      evs: {hp: 205, atk: 252, def: 51},
       level: 100
     }, 'gen9');
     assert.deepStrictEqual(trapinch, {
