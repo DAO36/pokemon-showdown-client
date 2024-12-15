@@ -745,6 +745,9 @@ class BattleTooltips {
 			if (move.flags.punch && ability === 'ironfist') {
 				text += `<p class="movetag">&#x2713; Fist <small>(boosted by Iron Fist)</small></p>`;
 			}
+			if (move.flags.sound && ability === 'diva') {
+				text += `<p class="movetag">&#x2713; Sound <small>(boosted by Diva)</small></p>`;
+			}
 			if (move.flags.pulse && ability === 'megalauncher') {
 				text += `<p class="movetag">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>`;
 			}
@@ -2084,6 +2087,9 @@ class BattleTooltips {
 		}
 		if (move.flags['sound']) {
 			value.abilityModify(1.3, "Punk Rock");
+		}
+		if (move.flags['sound']) {
+			value.abilityModify(1.3, "Diva");
 		}
 		if (move.flags['slicing']) {
 			value.abilityModify(1.5, "Sharpness");
