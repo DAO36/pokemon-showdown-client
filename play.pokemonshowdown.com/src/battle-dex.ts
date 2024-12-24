@@ -182,7 +182,7 @@ const Dex = new class implements ModdedDex {
 	resourcePrefix = (() => {
 		let prefix = '';
 		if (window.document?.location?.protocol !== 'http:') prefix = 'https:';
-		return `${prefix}//raw.githubusercontent.com/DAO36/cobblesouls-showdown-sprites/master'}/`;
+		return `${prefix}//raw.githubusercontent.com/DAO36/cobblesouls-showdown-sprites/`;
 	})();
 
 	fxPrefix = (() => {
