@@ -192,6 +192,15 @@ class BattleTextParser {
 			break;
 		}
 
+		case 'cant': {
+			let [, pokemon, effect, move] = args;
+			if (['ability: Yandere'].includes(effect)) {
+				args[0] = '-block';
+				return {args: ['-block', pokemon, effect, move, kwArgs.of], kwArgs: {}};
+			}
+			break;
+		}
+
 		case '-heal': {
 			const id = BattleTextParser.effectId(kwArgs.from);
 			if (['dryskin', 'eartheater', 'voltabsorb', 'waterabsorb'].includes(id)) kwArgs.of = '';
