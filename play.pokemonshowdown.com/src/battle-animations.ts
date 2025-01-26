@@ -1217,7 +1217,7 @@ export class BattleScene implements BattleSceneStub {
 			});
 			break;
 		case 'hologram':
-			const hologram = new Sprite(BattleEffects.hologram, {
+			const hologram = new Sprite(BattleEffects.mist, {
 				display: 'block',
 				x,
 				y,
