@@ -701,6 +701,9 @@ export class Side {
 		case 'mist':
 			this.sideConditions[condition] = [effect.name, 1, 5, 0];
 			break;
+		case 'hologram':
+			this.sideConditions[condition] = [effect.name, 1, 5, 0];
+			break;
 		case 'tailwind':
 			this.sideConditions[condition] = [effect.name, 1, this.battle.gen >= 5 ? persist ? 6 : 4 : persist ? 5 : 3, 0];
 			break;
@@ -1425,7 +1428,7 @@ export class Battle {
 	}
 	swapSideConditions() {
 		const sideConditions = [
-			'mist', 'lightscreen', 'reflect', 'spikes', 'safeguard', 'tailwind', 'toxicspikes', 'stealthrock', 'waterpledge', 'firepledge', 'grasspledge', 'stickyweb', 'auroraveil', 'gmaxsteelsurge', 'gmaxcannonade', 'gmaxvinelash', 'gmaxwildfire',
+			'mist', 'lightscreen', 'reflect', 'hologram', 'spikes', 'safeguard', 'tailwind', 'toxicspikes', 'stealthrock', 'waterpledge', 'firepledge', 'grasspledge', 'stickyweb', 'auroraveil', 'gmaxsteelsurge', 'gmaxcannonade', 'gmaxvinelash', 'gmaxwildfire',
 		];
 		if (this.gameType === 'freeforall') {
 			// TODO: Add FFA support
@@ -2710,6 +2713,9 @@ export class Battle {
 			case 'reflect':
 				this.scene.resultAnim(poke, 'Reflect', 'good');
 				break;
+			case 'hologram':
+				this.scene.resultAnim(poke, 'Reflect', 'good');
+				break;
 			}
 			if (!(effect.id === 'typechange' && poke.terastallized)) {
 				poke.addVolatile(effect.id);
@@ -2923,6 +2929,7 @@ export class Battle {
 			case 'brickbreak':
 				target!.side.removeSideCondition('Reflect');
 				target!.side.removeSideCondition('LightScreen');
+				target!.side.removeSideCondition('Hologram');
 				break;
 			case 'hyperspacefury':
 			case 'hyperspacehole':
@@ -3030,6 +3037,7 @@ export class Battle {
 			case 'auroraveil':
 			case 'reflect':
 			case 'lightscreen':
+			case 'hologram':	
 			case 'safeguard':
 			case 'mist':
 			case 'gmaxwildfire':
