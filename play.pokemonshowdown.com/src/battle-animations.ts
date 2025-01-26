@@ -1216,6 +1216,26 @@ export class BattleScene implements BattleSceneStub {
 				time: instant ? 0 : 300,
 			});
 			break;
+		case 'hologram':
+			const hologram = new Sprite(BattleEffects.hologram, {
+				display: 'block',
+				x,
+				y,
+				z: side.behind(-27),
+				xscale: 1,
+				yscale: 0,
+				opacity: 0.1,
+			}, this);
+			this.$spritesFront[spriteIndex].append(hologram.$el!);
+			this.sideConditions[siden][id] = [hologram];
+			hologram.anim({
+				opacity: 0.7,
+				time: instant ? 0 : 400,
+			}).anim({
+				opacity: 0.3,
+				time: instant ? 0 : 300,
+			});
+			break;
 		case 'stealthrock':
 			const rock1 = new Sprite(BattleEffects.rock1, {
 				display: 'block',
@@ -3171,6 +3191,10 @@ const BattleEffects: {[k: string]: SpriteData} = {
 	},
 	mist: {
 		rawHTML: '<div class="sidecondition-mist" style="display:none;position:absolute" />',
+		w: 100, h: 50,
+	},
+	hologram: {
+		rawHTML: '<div class="sidecondition-hologram" style="display:none;position:absolute" />',
 		w: 100, h: 50,
 	},
 };
