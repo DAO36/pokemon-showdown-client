@@ -2073,6 +2073,9 @@ class BattleTooltips {
 		if (value.value <= 60) {
 			value.abilityModify(1.5, "Technician");
 		}
+		if (value.value <= 60) {
+			value.abilityModify(1.5, "The Legend of Polka");	
+		}
 		if (['psn', 'tox'].includes(pokemon.status) && move.category === 'Physical') {
 			value.abilityModify(1.5, "Toxic Boost");
 		}
