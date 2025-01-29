@@ -1109,6 +1109,9 @@ class BattleTooltips {
 		if (item === 'choiceband' && !clientPokemon?.volatiles['dynamax']) {
 			stats.atk = Math.floor(stats.atk * 1.5);
 		}
+		if (item === 'choicedrip' && !clientPokemon?.volatiles['dynamax']) {
+			stats.atk = Math.floor(stats.atk * 1.5);
+		}
 		if (ability === 'purepower') {
 			stats.spa *= 2;
 		}
@@ -1216,6 +1219,9 @@ class BattleTooltips {
 		if (item === 'choicespecs' && !clientPokemon?.volatiles['dynamax']) {
 			stats.spa = Math.floor(stats.spa * 1.5);
 		}
+		if (item === 'choicedrip' && !clientPokemon?.volatiles['dynamax']) {
+			stats.spa = Math.floor(stats.spa * 1.5);
+		}
 		if (item === 'deepseatooth' && species === 'Clamperl') {
 			stats.spa *= 2;
 		}
@@ -1244,6 +1250,9 @@ class BattleTooltips {
 			stats.spd *= 2;
 		}
 		if (item === 'choicescarf' && !clientPokemon?.volatiles['dynamax']) {
+			speedModifiers.push(1.5);
+		}
+		if (item === 'choicedrip' && !clientPokemon?.volatiles['dynamax']) {
 			speedModifiers.push(1.5);
 		}
 		if (item === 'ironball' || speedHalvingEVItems.includes(item)) {
