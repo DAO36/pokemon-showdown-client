@@ -745,8 +745,14 @@ class BattleTooltips {
 			if (move.flags.punch && ability === 'ironfist') {
 				text += `<p class="movetag">&#x2713; Fist <small>(boosted by Iron Fist)</small></p>`;
 			}
+			if (move.flags.punch && ability === 'tonjokqueen') {
+				text += `<p class="movetag">&#x2713; Fist <small>(boosted by TonjokQueen)</small></p>`;
+			}
 			if (move.flags.sound && ability === 'diva') {
 				text += `<p class="movetag">&#x2713; Sound <small>(boosted by Diva)</small></p>`;
+			}
+			if (move.flags.sound && ability === 'yabairys') {
+				text += `<p class="movetag">&#x2713; Sound <small>(boosted by YabaIRyS)</small></p>`;
 			}
 			if (move.flags.pulse && ability === 'megalauncher') {
 				text += `<p class="movetag">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>`;
@@ -754,6 +760,9 @@ class BattleTooltips {
 			if (move.flags.bite && ability === 'strongjaw') {
 				text += `<p class="movetag">&#x2713; Bite <small>(boosted by Strong Jaw)</small></p>`;
 			}
+			if (move.flags.bite && ability === 'bigcatmeansbigtrouble') {
+				text += `<p class="movetag">&#x2713; Bite <small>(boosted by Big Cat Means Big Trouble)</small></p>`;
+			}	
 			if ((move.recoil || move.hasCrashDamage) && ability === 'reckless') {
 				text += `<p class="movetag">&#x2713; Recoil <small>(boosted by Reckless)</small></p>`;
 			}
@@ -2070,6 +2079,9 @@ class BattleTooltips {
 		if (move.flags['bite']) {
 			value.abilityModify(1.5, "Strong Jaw");
 		}
+		if (move.flags['bite']) {
+			value.abilityModify(1.5, "Big Cat Means Big Trouble");
+		}	
 		if (value.value <= 60) {
 			value.abilityModify(1.5, "Technician");
 		}
@@ -2093,6 +2105,9 @@ class BattleTooltips {
 		}
 		if (move.flags['sound']) {
 			value.abilityModify(1.3, "Diva");
+		}
+		if (move.flags['sound']) {
+			value.abilityModify(1.3, "YabaIRyS");
 		}
 		if (move.flags['slicing']) {
 			value.abilityModify(1.5, "Sharpness");
