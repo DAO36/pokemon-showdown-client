@@ -617,6 +617,7 @@ export class Side {
 	missedPokemon: Pokemon = null!;
 
 	wisher: Pokemon | null = null;
+	nurser: Pokemon | null = null;
 
 	active = [null] as (Pokemon | null)[];
 	lastPokemon = null as Pokemon | null;
@@ -1547,6 +1548,9 @@ export class Battle {
 		this.lastMove = move.id;
 		if (move.id === 'wish' || move.id === 'healingwish') {
 			pokemon.side.wisher = pokemon;
+		}
+		if (move.id === 'nursing') {
+			pokemon.side.nurser = pokemon;
 		}
 	}
 	animateMove(pokemon: Pokemon, move: Move, target: Pokemon | null, kwArgs: KWArgs) {
