@@ -1164,6 +1164,10 @@ class BattleTooltips {
 					if (ability === 'swiftswim') {
 						speedModifiers.push(2);
 					}
+				if (ability === 'powerofatlantis') {
+						stats.spa = Math.floor(stats.spa * 1.5);
+						stats.atk = Math.floor(stats.atk * 1.5);
+					}	
 				}
 			}
 		}
@@ -1224,6 +1228,11 @@ class BattleTooltips {
 		}
 		if (this.battle.hasPseudoWeather('Misty Terrain')) {
 			if (ability === 'sugarrush') {
+				speedModifiers.push(2);
+			} 
+		}
+		if (this.battle.hasPseudoWeather('Grassy Terrain')) {
+			if (ability === 'faunasweep') {
 				speedModifiers.push(2);
 			} 
 		}
