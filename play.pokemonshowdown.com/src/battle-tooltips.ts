@@ -1222,6 +1222,11 @@ class BattleTooltips {
 				stats.spa = Math.floor(stats.spa * 1.3333);
 			}
 		}
+		if (this.battle.hasPseudoWeather('Misty Terrain')) {
+			if (ability === 'sugarrush') {
+				speedModifiers.push(2);
+			} 
+		}
 		if (item === 'choicespecs' && !clientPokemon?.volatiles['dynamax']) {
 			stats.spa = Math.floor(stats.spa * 1.5);
 		}
