@@ -17342,74 +17342,6 @@ export const BattleMoveAnims: AnimTable = {
 			}
 		},
 	},
-	peacockattack: {
-		anim(scene, [attacker, defender]) {
-			scene.backgroundEffect('#000000', 900, 0.6);
-
-			for (let i = 0; i < 4; i++) {
-				scene.showEffect('wisp', {
-					x: defender.x + 50,
-					y: defender.y - 35,
-					z: defender.z,
-					scale: 0.2,
-					opacity: 1,
-					time: 200 * i,
-				}, {
-					x: defender.x - 50,
-					y: defender.y,
-					z: defender.z,
-					scale: 0.4,
-					opacity: 0.4,
-					time: 200 * i + 200,
-				}, 'linear', 'fade');
-				scene.showEffect('wisp', {
-					x: defender.x - 50,
-					y: defender.y + 35,
-					z: defender.z,
-					scale: 0.2,
-					opacity: 1,
-					time: 200 * i,
-				}, {
-					x: defender.x + 50,
-					y: defender.y,
-					z: defender.z,
-					scale: 0.4,
-					opacity: 0.4,
-					time: 200 * i + 200,
-				}, 'linear', 'fade');
-				scene.showEffect('wisp', {
-					x: defender.x + 50,
-					y: defender.y,
-					z: defender.z,
-					scale: 0.2,
-					opacity: 1,
-					time: 200 * i,
-				}, {
-					x: defender.x - 50,
-					y: defender.y - 35,
-					z: defender.z,
-					scale: 0.4,
-					opacity: 0.4,
-					time: 200 * i + 200,
-				}, 'linear', 'fade');
-				scene.showEffect('wisp', {
-					x: defender.x - 50,
-					y: defender.y,
-					z: defender.z,
-					scale: 0.2,
-					opacity: 1,
-					time: 200 * i,
-				}, {
-					x: defender.x + 50,
-					y: defender.y - 35,
-					z: defender.z,
-					scale: 0.4,
-					opacity: 0.4,
-					time: 200 * i + 200,
-				}, 'linear', 'fade');
-			}
-		},
-	},
 	springtidestorm: {
 		anim(scene, [attacker, ...defenders]) {
 			scene.backgroundEffect('#FF99FF', 1000, 0.3);
@@ -42561,6 +42493,7 @@ BattleMoveAnims['spyshot'] = {anim: BattleMoveAnims['waterpulse'].anim};
 BattleMoveAnims['jawlock'] = {anim: BattleMoveAnims['crunch'].anim};
 BattleMoveAnims['sharkattack'] = {anim: BattleMoveAnims['crunch'].anim};
 BattleMoveAnims['gawrrwage'] = {anim: BattleMoveAnims['outrage'].anim};
+BattleMoveAnims['peacockattack'] = {anim: BattleMoveAnims['featherdance'].anim};
 BattleMoveAnims['ameway'] = {anim: BattleMoveAnims['dragondance'].anim};
 BattleMoveAnims['timetravel'] = {anim: BattleMoveAnims['teleport'].anim};
 BattleMoveAnims['scythe'] = {anim: BattleMoveAnims['smartstrike'].anim};
