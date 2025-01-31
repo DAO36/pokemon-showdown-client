@@ -1685,9 +1685,13 @@ class BattleTooltips {
 			).flags['sound'];
 			if (isSound && value.abilityModify(0, 'Liquid Voice')) {
 				moveType = 'Water';
+			} 
+			if (isSound && value.abilityModify(0, 'Flaming Voice')) {
+				moveType = 'Fire';
 			}
 		}
 
+		
 		if (move.id === 'photongeyser' || move.id === 'lightthatburnsthesky' ||
 			(move.id === 'terablast' && pokemon.terastallized) ||
 			(move.id === 'terastarstorm' && pokemon.getSpeciesForme() === 'Terapagos-Stellar')) {
