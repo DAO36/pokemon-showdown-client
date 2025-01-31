@@ -360,48 +360,6 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'accel');
 		},
 	},
-	elfdance: {
-		anim(scene, [attacker]) {
-			scene.backgroundEffect('#987058', 800, 0.3, 400);
-			BattleOtherAnims.shake.anim(scene, [attacker]);
-			scene.showEffect('wisp', {
-				x: attacker.x + 40,
-				y: attacker.y - 40,
-				z: attacker.z,
-				scale: 0.2,
-				opacity: 1,
-				time: 0,
-			}, {
-				y: attacker.y + 60,
-				opacity: 0,
-				time: 400,
-			}, 'accel');
-			scene.showEffect('wisp', {
-				x: attacker.x - 40,
-				y: attacker.y - 40,
-				z: attacker.z,
-				scale: 0.2,
-				opacity: 1,
-				time: 200,
-			}, {
-				y: attacker.y + 60,
-				opacity: 0,
-				time: 600,
-			}, 'accel');
-			scene.showEffect('wisp', {
-				x: attacker.x,
-				y: attacker.y - 40,
-				z: attacker.z,
-				scale: 0.2,
-				opacity: 1,
-				time: 400,
-			}, {
-				y: attacker.y + 60,
-				opacity: 0,
-				time: 800,
-			}, 'accel');
-		},
-	},
 	divadance: {
 		anim(scene, [attacker]) {
 			scene.backgroundEffect('#987058', 800, 0.3, 400);
@@ -17082,6 +17040,39 @@ export const BattleMoveAnims: AnimTable = {
 		},
 	},
 	aquastep: {
+		anim(scene, [attacker, defender]) {
+			BattleOtherAnims.dance.anim(scene, [attacker, defender]);
+			scene.showEffect('foot', {
+				x: defender.x,
+				y: defender.y - 30,
+				z: defender.behind(15),
+				scale: 1,
+				opacity: 1,
+				time: 550,
+			}, {
+				x: defender.x - 50,
+				z: defender.behind(20),
+				scale: 1.7,
+				opacity: 0,
+				time: 800,
+			}, 'linear');
+			scene.showEffect('waterwisp', {
+				x: defender.x,
+				y: defender.y - 30,
+				z: defender.behind(15),
+				scale: 1,
+				opacity: 1,
+				time: 550,
+			}, {
+				x: defender.x - 50,
+				z: defender.behind(20),
+				scale: 1.7,
+				opacity: 0,
+				time: 800,
+			}, 'linear');
+		},
+	},
+	elfdance: {
 		anim(scene, [attacker, defender]) {
 			BattleOtherAnims.dance.anim(scene, [attacker, defender]);
 			scene.showEffect('foot', {
