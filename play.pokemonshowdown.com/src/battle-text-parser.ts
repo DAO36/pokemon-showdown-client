@@ -961,6 +961,9 @@ class BattleTextParser {
 			if (template) {
 				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[SOURCE]', this.pokemon(kwArgs.of)).replace('[NICKNAME]', kwArgs.wisher);
 			}
+			if (template) {
+				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[SOURCE]', this.pokemon(kwArgs.of)).replace('[NICKNAME]', kwArgs.nurser);
+			}
 
 			if (kwArgs.from && !kwArgs.from.startsWith('ability:')) {
 				template = this.template('healFromEffect');
