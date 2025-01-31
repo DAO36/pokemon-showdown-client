@@ -2883,6 +2883,9 @@ export const BattleMoveAnims: AnimTable = {
 	detect: {
 		anim: BattleOtherAnims.selfstatus.anim,
 	},
+	redheart: {
+		anim: BattleOtherAnims.selfstatus.anim,
+	},
 	kingsshield: {
 		anim: BattleOtherAnims.selfstatus.anim,
 	},

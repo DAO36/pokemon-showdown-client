@@ -1212,6 +1212,9 @@ class BattleTooltips {
 			if (ability === 'surgesurfer') {
 				speedModifiers.push(2);
 			}
+			if (ability === 'highspecsrobot') {
+				speedModifiers.push(2);
+			}	
 			if (ability === 'hadronengine') {
 				stats.spa = Math.floor(stats.spa * 1.3333);
 			}
