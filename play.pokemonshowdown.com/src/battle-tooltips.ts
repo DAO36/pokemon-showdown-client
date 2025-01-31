@@ -2127,6 +2127,9 @@ class BattleTooltips {
 		if (move.flags['contact']) {
 			value.abilityModify(1.3, "Tough Claws");
 		}
+		if (move.flags['contact']) {
+			value.abilityModify(1.3, "PPT Grip");
+		}
 		if (move.flags['sound']) {
 			value.abilityModify(1.3, "Punk Rock");
 		}
