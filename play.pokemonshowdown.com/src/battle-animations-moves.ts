@@ -7542,22 +7542,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x,
 				y: defender.y,
 				z: defender.behind(0),
-			}, 'ballistic', 'fade');
-			scene.showEffect('foot', {
-				x: defender.x,
-				y: defender.y + 20,
-				z: defender.z,
-				scale: 1,
-				opacity: 1,
-				time: 500,
-			}, {
-				x: defender.x,
-				y: defender.y + 10,
-				z: defender.behind(15),
-				scale: 2,
-				opacity: 0,
-				time: 900,
-			}, 'linear');
+			}, 'ballistic', 'fade'); 
 			scene.showEffect('shadowball', {
 				x: defender.x,
 				y: defender.y,
@@ -7621,22 +7606,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x,
 				y: defender.y,
 				z: defender.behind(0),
-			}, 'ballistic', 'fade');
-			scene.showEffect('foot', {
-				x: defender.x,
-				y: defender.y + 20,
-				z: defender.z,
-				scale: 1,
-				opacity: 1,
-				time: 500,
-			}, {
-				x: defender.x,
-				y: defender.y + 10,
-				z: defender.behind(15),
-				scale: 2,
-				opacity: 0,
-				time: 900,
-			}, 'linear');
+			}, 'ballistic', 'fade'); 
 			scene.showEffect('shadowball', {
 				x: defender.x,
 				y: defender.y,
@@ -7700,22 +7670,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x,
 				y: defender.y,
 				z: defender.behind(0),
-			}, 'ballistic', 'fade');
-			scene.showEffect('foot', {
-				x: defender.x,
-				y: defender.y + 20,
-				z: defender.z,
-				scale: 1,
-				opacity: 1,
-				time: 500,
-			}, {
-				x: defender.x,
-				y: defender.y + 10,
-				z: defender.behind(15),
-				scale: 2,
-				opacity: 0,
-				time: 900,
-			}, 'linear');
+			}, 'ballistic', 'fade'); 
 			scene.showEffect('shadowball', {
 				x: defender.x,
 				y: defender.y,
@@ -7779,22 +7734,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x,
 				y: defender.y,
 				z: defender.behind(0),
-			}, 'ballistic', 'fade');
-			scene.showEffect('foot', {
-				x: defender.x,
-				y: defender.y + 20,
-				z: defender.z,
-				scale: 1,
-				opacity: 1,
-				time: 500,
-			}, {
-				x: defender.x,
-				y: defender.y + 10,
-				z: defender.behind(15),
-				scale: 2,
-				opacity: 0,
-				time: 900,
-			}, 'linear');
+			}, 'ballistic', 'fade'); 
 			scene.showEffect('shadowball', {
 				x: defender.x,
 				y: defender.y,
@@ -7836,6 +7776,70 @@ export const BattleMoveAnims: AnimTable = {
 		},
 	},
 	cometslam: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect(attacker.sp, {
+				x: defender.leftof(-10),
+				y: attacker.y + 170,
+				z: attacker.behind(-35),
+				opacity: 0.3,
+				time: 25,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(0),
+			}, 'ballistic', 'fade');
+			scene.showEffect(attacker.sp, {
+				x: defender.leftof(-10),
+				y: attacker.y + 170,
+				z: attacker.behind(-35),
+				opacity: 0.3,
+				time: 75,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(0),
+			}, 'ballistic', 'fade'); 
+			scene.showEffect('shadowball', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0,
+				opacity: 0.7,
+				time: 500,
+			}, {
+				scale: 3,
+				opacity: 0,
+				time: 750,
+			}, 'linear', 'fade');
+
+			attacker.anim({
+				x: defender.x,
+				y: defender.y + 170,
+				z: defender.behind(-30),
+				time: 400,
+			}, 'ballistic');
+			attacker.anim({
+				x: defender.x,
+				y: defender.y + 5,
+				z: defender.z,
+				time: 200,
+			});
+			attacker.anim({
+				time: 500,
+			}, 'ballistic2Back');
+			defender.delay(500);
+			defender.anim({
+				y: defender.y - 5,
+				z: defender.behind(40),
+				yscale: 0.9,
+				time: 300,
+			}, 'swing');
+			defender.anim({
+				time: 300,
+			}, 'swing');
+		},
+	},
+	groundpound: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect(attacker.sp, {
 				x: defender.leftof(-10),
@@ -28177,6 +28181,129 @@ export const BattleMoveAnims: AnimTable = {
 		},
 		prepareAnim: BattleOtherAnims.chargestatus.anim,
 	},
+	trident: {
+		anim(scene, [attacker, defender]) {
+			let xstep = 0;
+			let ystep = 20;
+			let zstep = 0;
+
+			scene.backgroundEffect(`url('https://${Config.routes.client}/fx/weather-raindance.jpg')`, 900, 0.5);
+
+			scene.showEffect('sword', {
+				x: attacker.leftof(10),
+				y: attacker.y - 10,
+				z: attacker.z,
+				scale: 0.5,
+				opacity: 1,
+			}, {
+				y: attacker.y + 10,
+				scale: 1,
+				opacity: 0.4,
+				time: 300,
+			}, 'decel', 'fade');
+
+			for (let i = 0; i < 5; i++) {
+				scene.showEffect('wisp', {
+					x: attacker.leftof(10) + xstep * (i + 1),
+					y: attacker.y - 20 + ystep * (i + 1),
+					z: attacker.z + zstep * (i + 1),
+					scale: 1.5,
+					opacity: 1,
+					time: 40 * i + 0,
+				}, {
+					opacity: 0,
+					time: 45 * i + 500,
+				}, 'linear');
+			}
+
+			scene.showEffect('flareball', {
+				x: defender.x + 30,
+				y: defender.y + 25,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 500,
+			}, {
+				x: defender.x + 50,
+				y: defender.y + 10,
+				opacity: 0.5,
+				time: 800,
+			}, 'accel', 'explode');
+			scene.showEffect('energyball', {
+				x: defender.x - 30,
+				y: defender.y - 20,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 600,
+			}, {
+				x: defender.x - 50,
+				y: defender.y - 20,
+				opacity: 0.5,
+				time: 800,
+			}, 'accel', 'explode');
+			scene.showEffect('energyball', {
+				x: defender.x + 15,
+				y: defender.y + 10,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 700,
+			}, {
+				x: defender.x + 35,
+				y: defender.y + 30,
+				opacity: 0.5,
+				time: 900,
+			}, 'accel', 'explode');
+			scene.showEffect('flareball', {
+				x: defender.x - 15,
+				y: defender.y - 30,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 700,
+			}, {
+				x: defender.x - 35,
+				y: defender.y - 40,
+				opacity: 0.5,
+				time: 900,
+			}, 'accel', 'explode');
+			scene.showEffect('flareball', {
+				x: defender.x + 10,
+				y: defender.y - 10,
+				z: defender.z,
+				scale: 1.5,
+				opacity: 0.6,
+				time: 700,
+			}, {
+				scale: 2,
+				opacity: 0,
+				time: 1000,
+			}, 'accel', 'fade');
+			scene.showEffect('leftslash', {
+				x: defender.x - 10,
+				y: defender.y - 10,
+				z: defender.z,
+				scale: 3,
+				opacity: 0.6,
+				time: 600,
+			}, {
+				scale: 3.5,
+				opacity: 0,
+				time: 1000,
+			}, 'accel', 'fade');
+
+			defender.delay(550);
+			defender.anim({
+				z: defender.behind(20),
+				time: 200,
+			}, 'swing');
+			defender.anim({
+				time: 300,
+			}, 'swing');
+		},
+		prepareAnim: BattleOtherAnims.chargestatus.anim,
+	},
 	lightofruin: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 700, 0.2);
@@ -42432,6 +42559,47 @@ BattleMoveAnims['dynamaxcannon'] = {anim: BattleMoveAnims['dragonpulse'].anim};
 BattleMoveAnims['snipeshot'] = {anim: BattleMoveAnims['waterpulse'].anim};
 BattleMoveAnims['spyshot'] = {anim: BattleMoveAnims['waterpulse'].anim};
 BattleMoveAnims['jawlock'] = {anim: BattleMoveAnims['crunch'].anim};
+BattleMoveAnims['sharkattack'] = {anim: BattleMoveAnims['crunch'].anim};
+BattleMoveAnims['gawrrwage'] = {anim: BattleMoveAnims['outrage'].anim};
+BattleMoveAnims['ameway'] = {anim: BattleMoveAnims['dragondance'].anim};
+BattleMoveAnims['timetravel'] = {anim: BattleMoveAnims['teleport'].anim};
+BattleMoveAnims['scythe'] = {anim: BattleMoveAnims['smartstrike'].anim};
+BattleMoveAnims['grimrapper'] = {anim: BattleMoveAnims['hypervoice'].anim};
+BattleMoveAnims['tako'] = {anim: BattleMoveAnims['hydropump'].anim};
+BattleMoveAnims['wah'] = {anim: BattleMoveAnims['nastyplot'].anim};
+BattleMoveAnims['aochan'] = {anim: BattleMoveAnims['aurasphere'].anim};
+BattleMoveAnims['tentaclesstrike'] = {anim: BattleMoveAnims['powerwhip'].anim};
+BattleMoveAnims['phoenixshield'] = {anim: BattleMoveAnims['burningbulwark'].anim};
+BattleMoveAnims['phoenixblade'] = {anim: BattleMoveAnims['sacredsword'].anim};
+BattleMoveAnims['hopesoda'] = {anim: BattleMoveAnims['milkdrink'].anim};
+BattleMoveAnims['hopeful'] = {anim: BattleMoveAnims['diamondstorm'].anim};
+BattleMoveAnims['hopeless'] = {anim: BattleMoveAnims['outrage'].anim};
+BattleMoveAnims['wormhole'] = {anim: BattleMoveAnims['hyperspacehole'].anim};
+BattleMoveAnims['supernova'] = {anim: BattleMoveAnims['boomburst'].anim};
+BattleMoveAnims['bigbang'] = {anim: BattleMoveAnims['explosion'].anim};
+BattleMoveAnims['mothernature'] = {anim: BattleMoveAnims['leafstorm'].anim};
+BattleMoveAnims['gamerkirin'] = {anim: BattleMoveAnims['dragondance'].anim};
+BattleMoveAnims['natureswrath'] = {anim: BattleMoveAnims['outrage'].anim};
+BattleMoveAnims['clockstrikes'] = {anim: BattleMoveAnims['xscissor'].anim};
+BattleMoveAnims['timeflies'] = {anim: BattleMoveAnims['extremespeed'].anim};
+BattleMoveAnims['timetogo'] = {anim: BattleMoveAnims['teleport'].anim};
+BattleMoveAnims['moomers'] = {anim: BattleMoveAnims['outrage'].anim};
+BattleMoveAnims['chaosstrike'] = {anim: BattleMoveAnims['gigaimpact'].anim};
+BattleMoveAnims['forbiddenknowledge'] = {anim: BattleMoveAnims['nightshade'].anim};
+BattleMoveAnims['bejeweled'] = {anim: BattleMoveAnims['powergem'].anim};
+BattleMoveAnims['bibooblade'] = {anim: BattleMoveAnims['sacredsword'].anim};
+BattleMoveAnims['underworldmusic'] = {anim: BattleMoveAnims['hypervoice'].anim};
+BattleMoveAnims['divafork'] = {anim: BattleMoveAnims['nightslash'].anim};
+BattleMoveAnims['twinstrikes'] = {anim: BattleMoveAnims['xscissor'].anim};
+BattleMoveAnims['fuwamocomorning'] = {anim: BattleMoveAnims['playrrough'].anim};
+BattleMoveAnims['songofjustice'] = {anim: BattleMoveAnims['hypervoice'].anim};
+BattleMoveAnims['swordofjustice'] = {anim: BattleMoveAnims['sacredsword'].anim};
+BattleMoveAnims['fisted'] = {anim: BattleMoveAnims['dynamicpunch'].anim};
+BattleMoveAnims['automotanassault'] = {anim: BattleMoveAnims['sacredsword'].anim};
+BattleMoveAnims['energyblade'] = {anim: BattleMoveAnims['psyblade'].anim};
+BattleMoveAnims['windup'] = {anim: BattleMoveAnims['shiftgear'].anim};
+BattleMoveAnims['godeyes'] = {anim: BattleMoveAnims['quickattack'].anim};
+BattleMoveAnims['mamamia'] = {anim: BattleMoveAnims['crunch'].anim};
 BattleMoveAnims['stuffcheeks'] = {anim: BattleMoveAnims['stockpile'].anim};
 BattleMoveAnims['noretreat'] = {anim: BattleMoveAnims['stockpile'].anim};
 BattleMoveAnims['tarshot'] = {anim: BattleMoveAnims['mudbomb'].anim};
