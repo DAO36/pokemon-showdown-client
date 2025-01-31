@@ -42533,6 +42533,7 @@ BattleMoveAnims['energyblade'] = {anim: BattleMoveAnims['psyblade'].anim};
 BattleMoveAnims['windup'] = {anim: BattleMoveAnims['shiftgear'].anim};
 BattleMoveAnims['godeyes'] = {anim: BattleMoveAnims['quickattack'].anim};
 BattleMoveAnims['mamamia'] = {anim: BattleMoveAnims['crunch'].anim};
+
 BattleMoveAnims['stuffcheeks'] = {anim: BattleMoveAnims['stockpile'].anim};
 BattleMoveAnims['noretreat'] = {anim: BattleMoveAnims['stockpile'].anim};
 BattleMoveAnims['tarshot'] = {anim: BattleMoveAnims['mudbomb'].anim};
