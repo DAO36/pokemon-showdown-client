@@ -745,6 +745,9 @@ class BattleTooltips {
 			if (move.flags.punch && ability === 'ironfist') {
 				text += `<p class="movetag">&#x2713; Fist <small>(boosted by Iron Fist)</small></p>`;
 			}
+			if (move.flags.punch && ability === 'muscleknight') {
+				text += `<p class="movetag">&#x2713; Fist <small>(boosted by Muscle Knight)</small></p>`;
+			}
 			if (move.flags.punch && ability === 'tonjokqueen') {
 				text += `<p class="movetag">&#x2713; Fist <small>(boosted by TonjokQueen)</small></p>`;
 			}
@@ -2087,6 +2090,12 @@ class BattleTooltips {
 		}
 		if (move.flags['punch']) {
 			value.abilityModify(1.2, 'Iron Fist');
+		}
+		if (move.flags['punch']) {
+			value.abilityModify(1.2, 'TonjokQueen');
+		}
+		if (move.flags['punch']) {
+			value.abilityModify(1.2, 'Muscle Knight');
 		}
 		if (move.flags['pulse']) {
 			value.abilityModify(1.5, "Mega Launcher");
