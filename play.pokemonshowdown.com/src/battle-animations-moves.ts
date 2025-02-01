@@ -24946,97 +24946,6 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	spidercooking: {
-		anim(scene, [attacker, defender]) {
-			scene.showEffect('energyball', {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.z,
-				scale: 0.8,
-				opacity: 0.3,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.z,
-				opacity: 0.6,
-				time: 400,
-			}, 'linear', 'explode');
-			scene.showEffect('wisp', {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.z,
-				scale: 1,
-				opacity: 0.2,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.z,
-				scale: 1.5,
-				time: 400,
-			}, 'linear', 'explode');
-			scene.showEffect('energyball', {
-				x: defender.x + 30,
-				y: defender.y + 25,
-				z: defender.z,
-				scale: 0.2,
-				opacity: 0.6,
-				time: 400,
-			}, {
-				x: defender.x + 50,
-				y: defender.y + 10,
-				opacity: 0.3,
-				time: 700,
-			}, 'accel', 'explode');
-			scene.showEffect('energyball', {
-				x: defender.x - 30,
-				y: defender.y - 20,
-				z: defender.z,
-				scale: 0.2,
-				opacity: 0.6,
-				time: 500,
-			}, {
-				x: defender.x - 50,
-				y: defender.y - 20,
-				opacity: 0.3,
-				time: 700,
-			}, 'accel', 'explode');
-			scene.showEffect('energyball', {
-				x: defender.x + 15,
-				y: defender.y + 10,
-				z: defender.z,
-				scale: 0.2,
-				opacity: 0.7,
-				time: 600,
-			}, {
-				x: defender.x + 35,
-				y: defender.y + 30,
-				opacity: 0.3,
-				time: 800,
-			}, 'accel', 'explode');
-			scene.showEffect('energyball', {
-				x: defender.x - 15,
-				y: defender.y - 30,
-				z: defender.z,
-				scale: 0.2,
-				opacity: 0.7,
-				time: 600,
-			}, {
-				x: defender.x - 35,
-				y: defender.y - 40,
-				opacity: 0.3,
-				time: 800,
-			}, 'accel', 'explode');
-
-			defender.delay(400);
-			defender.anim({
-				z: defender.behind(5),
-				time: 200,
-			}, 'swing');
-			defender.anim({
-				time: 300,
-			}, 'swing');
-		},
-	},
 	electroball: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('electroball', {
@@ -25957,6 +25866,23 @@ export const BattleMoveAnims: AnimTable = {
 		},
 	},
 	stickyweb: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('web', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.1,
+				opacity: 0.5,
+			}, {
+				x: 0,
+				y: defender.y,
+				z: defender.z,
+				scale: 0.5,
+				opacity: 1,
+			}, 'ballistic');
+		},
+	},
+	spidercooking: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('web', {
 				x: attacker.x,
