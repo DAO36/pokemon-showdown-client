@@ -360,7 +360,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'accel');
 		},
 	},
-	bowdance: {
+	gundance: {
 		anim(scene, [attacker]) {
 			scene.backgroundEffect('#987058', 800, 0.3, 400);
 			BattleOtherAnims.shake.anim(scene, [attacker]);
@@ -43216,6 +43216,72 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
+	axeattack: {
+		anim(scene, [attacker, defender]) {
+			BattleOtherAnims.slashattack.anim(scene, [attacker, defender]);
+
+			scene.showEffect('rock1', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0.1,
+				opacity: 0.5,
+				time: 500,
+			}, {
+				x: defender.x - 30,
+				y: defender.y + 15,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 800,
+			}, 'ballistic', 'fade');
+			scene.showEffect('rock3', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0.1,
+				opacity: 0.5,
+				time: 500,
+			}, {
+				x: defender.x + 36,
+				y: defender.y + 45,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 800,
+			}, 'ballistic', 'fade');
+			scene.showEffect('rock2', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0.1,
+				opacity: 0.5,
+				time: 500,
+			}, {
+				x: defender.x + 40,
+				y: defender.y - 25,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 800,
+			}, 'ballistic', 'fade');
+			scene.showEffect('rock3', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0.1,
+				opacity: 0.5,
+				time: 500,
+			}, {
+				x: defender.x - 20,
+				y: defender.y - 25,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 800,
+			}, 'ballistic', 'fade');
+		},
+	},
 	stoneaxe: {
 		anim(scene, [attacker, defender]) {
 			BattleOtherAnims.slashattack.anim(scene, [attacker, defender]);
@@ -43325,7 +43391,7 @@ BattleMoveAnims['whirlpool'] = {anim: BattleMoveAnims['watersport'].anim};
 
 BattleMoveAnims['waterfall'] = {anim: BattleMoveAnims['aquajet'].anim};
 BattleMoveAnims['cleanup'] = {anim: BattleMoveAnims['icespinner'].anim};
-BattleMoveAnims['ahoy'] = {anim: BattleMoveAnims['aquajet'].anim};
+BattleMoveAnims['ahoy'] = {anim: BattleMoveAnims['aquacutter'].anim};
 BattleMoveAnims['aquatail'] = {anim: BattleMoveAnims['crabhammer'].anim};
 BattleMoveAnims['liquidation'] = {anim: BattleMoveAnims['crabhammer'].anim};
 
