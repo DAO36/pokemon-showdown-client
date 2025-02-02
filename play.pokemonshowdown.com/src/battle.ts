@@ -2833,7 +2833,7 @@ export class Battle {
 							this.scene.runOtherAnim('doomdesirehit' as ID, [poke]);
 						}
 						if (effect.name === 'Blast from the Past') {
-							this.scene.runOtherAnim('blastfromthepast' as ID, [poke]);
+							this.scene.runOtherAnim('blastfromthepasthit' as ID, [poke]);
 						}
 						if (effect.name === 'Future Sight') {
 							this.scene.runOtherAnim('futuresighthit' as ID, [poke]);
