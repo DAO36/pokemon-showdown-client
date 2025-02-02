@@ -2824,8 +2824,8 @@ export class Battle {
 						if (effect.name === 'Doom Desire') {
 							this.scene.runOtherAnim('doomdesirehit' as ID, [poke]);
 						}
-						if (effect.name === 'Time is Up') {
-							this.scene.runOtherAnim('timeisup' as ID, [poke]);
+						if (effect.name === 'Blast from the Past') {
+							this.scene.runOtherAnim('blastfromthepast' as ID, [poke]);
 						}
 						if (effect.name === 'Future Sight') {
 							this.scene.runOtherAnim('futuresighthit' as ID, [poke]);

@@ -4650,7 +4650,7 @@ export const BattleMoveAnims: AnimTable = {
 			scene.backgroundEffect('#000000', 300, 0.3, 200);
 		},
 	},
-	timeisup: {
+	blastfromthepast: {
 		anim(scene) {
 			scene.backgroundEffect('#000000', 300, 0.2);
 			scene.backgroundEffect('#000000', 300, 0.3, 200);
