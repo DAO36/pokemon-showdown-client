@@ -3777,6 +3777,85 @@ export const BattleMoveAnims: AnimTable = {
 			attacker.anim({x: attacker.x, time: 150});
 		},
 	},
+	reboot: {
+		anim(scene, [attacker]) {
+			scene.showEffect('iceball', {
+				x: attacker.x,
+				y: attacker.y - 60,
+				z: attacker.z,
+				scale: 1,
+				xscale: 3,
+				opacity: 0.5,
+				time: 100,
+			}, {
+				xscale: 6,
+				opacity: 0,
+				time: 1000,
+			}, 'linear', 'fade');
+			scene.showEffect('wisp', {
+				x: attacker.x,
+				y: attacker.y - 60,
+				z: attacker.z,
+				scale: 2,
+				opacity: 1,
+				time: 100,
+			}, {
+				y: attacker.y - 50,
+				opacity: 0,
+				time: 1000,
+			}, 'accel', 'fade');
+			scene.showEffect('wisp', {
+				x: attacker.x,
+				y: attacker.y - 40,
+				z: attacker.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 100,
+			}, {
+				x: attacker.x + 40,
+				y: attacker.y + 60,
+				opacity: 0,
+				time: 500,
+			}, 'accel');
+			scene.showEffect('wisp', {
+				x: attacker.x,
+				y: attacker.y - 40,
+				z: attacker.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 200,
+			}, {
+				x: attacker.x + 40,
+				y: attacker.y + 60,
+				opacity: 0,
+				time: 600,
+			}, 'accel');
+			scene.showEffect('wisp', {
+				x: attacker.x,
+				y: attacker.y - 40,
+				z: attacker.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 400,
+			}, {
+				y: attacker.y + 60,
+				opacity: 0,
+				time: 800,
+			}, 'accel');
+
+			attacker.anim({x: attacker.x - 5, time: 75});
+			attacker.anim({x: attacker.x + 5, time: 100});
+			attacker.anim({x: attacker.x - 10, time: 50});
+			attacker.anim({x: attacker.x + 10, time: 50});
+			attacker.anim({x: attacker.x - 10, time: 50});
+			attacker.anim({x: attacker.x + 10, time: 50});
+			attacker.anim({x: attacker.x - 10, time: 50});
+			attacker.anim({x: attacker.x + 10, time: 50});
+			attacker.anim({x: attacker.x - 10, time: 50});
+			attacker.anim({x: attacker.x + 10, time: 150});
+			attacker.anim({x: attacker.x, time: 150});
+		},
+	},
 	shiftgear: {
 		anim(scene, [attacker]) {
 			scene.showEffect('gear', {
@@ -4443,6 +4522,22 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear', 'fade');
 		},
 	},
+	waterhealing: {
+		anim(scene, [attacker]) {
+			scene.showEffect('iceball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 2,
+				opacity: 0.2,
+				time: 0,
+			}, {
+				scale: 1.5,
+				opacity: 0.5,
+				time: 400,
+			}, 'linear', 'fade');
+		},
+	},
 	coil: {
 		anim(scene, [attacker]) {
 			scene.showEffect('iceball', {
@@ -4739,6 +4834,9 @@ export const BattleMoveAnims: AnimTable = {
 		},
 	},
 	milkdrink: {
+		anim: BattleOtherAnims.consume.anim,
+	},
+	forever17: {
 		anim: BattleOtherAnims.consume.anim,
 	},
 	sake: {
@@ -5595,6 +5693,22 @@ export const BattleMoveAnims: AnimTable = {
 		},
 	},
 	tailglow: {
+		anim(scene, [attacker]) {
+			scene.showEffect('electroball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 2,
+				opacity: 0.2,
+				time: 0,
+			}, {
+				scale: 1,
+				opacity: 0.5,
+				time: 400,
+			}, 'linear', 'explode');
+		},
+	},
+	husbandhelp: {
 		anim(scene, [attacker]) {
 			scene.showEffect('electroball', {
 				x: attacker.x,
