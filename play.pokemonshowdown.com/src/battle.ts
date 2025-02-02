@@ -1913,6 +1913,14 @@ export class Battle {
 					break;
 				}
 			}
+			if (effect.id) {
+				switch (effect.id) {
+				case 'ahoy':
+					// todo: update StealBoosts so it animates 1st on Spectral Thief
+					this.scene.runOtherAnim('ahoyboost' as ID, [ofpoke!, poke]);
+					break;
+				}
+			}
 			this.log(args, kwArgs);
 			break;
 		}

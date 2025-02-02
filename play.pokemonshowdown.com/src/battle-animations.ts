@@ -5056,6 +5056,255 @@ export const BattleOtherAnims: AnimTable = {
 			});
 		},
 	},
+	ahoyboost: {
+		anim(scene, [attacker, defender]) { 
+			scene.showEffect('iceball', {
+				x: defender.x,
+				y: defender.y - 30,
+				z: defender.z,
+				scale: 0.5,
+				xscale: 0.5,
+				yscale: 1,
+				opacity: 0.5,
+			}, {
+				scale: 2,
+				xscale: 4,
+				opacity: 0.1,
+				time: 400,
+			}, 'decel', 'fade');
+			scene.showEffect('waterwisp', {
+				x: defender.x,
+				y: defender.y - 25,
+				z: defender.z,
+				scale: 1,
+			}, {
+				x: defender.x + 50,
+				scale: 3,
+				xscale: 3.5,
+				opacity: 0.3,
+				time: 500,
+			}, 'linear', 'fade');
+			scene.showEffect('waterwisp', {
+				x: defender.x,
+				y: defender.y - 25,
+				z: defender.z,
+				scale: 1,
+			}, {
+				x: defender.x - 50,
+				scale: 3,
+				xscale: 3.5,
+				opacity: 0.3,
+				time: 500,
+			}, 'linear', 'fade');
+			scene.showEffect('iceball', {
+				x: defender.x + 35,
+				y: defender.y,
+				z: defender.z,
+				opacity: 0.4,
+				scale: 0.25,
+				time: 50,
+			}, {
+				y: defender.y - 40,
+				opacity: 0,
+				time: 300,
+			}, 'accel');
+			scene.showEffect('iceball', {
+				x: defender.x - 35,
+				y: defender.y,
+				z: defender.z,
+				opacity: 0.4,
+				scale: 0.25,
+				time: 100,
+			}, {
+				y: defender.y - 40,
+				opacity: 0,
+				time: 350,
+			}, 'accel');
+			scene.showEffect('iceball', {
+				x: defender.x + 15,
+				y: defender.y,
+				z: defender.z,
+				opacity: 0.4,
+				scale: 0.5,
+				time: 150,
+			}, {
+				y: defender.y - 40,
+				opacity: 0,
+				time: 400,
+			}, 'accel');
+			scene.showEffect('iceball', {
+				x: defender.x + 15,
+				y: defender.y,
+				z: defender.z,
+				opacity: 0.4,
+				scale: 0.25,
+				time: 200,
+			}, {
+				y: defender.y - 40,
+				opacity: 0,
+				time: 450,
+			}, 'accel');
+
+			scene.showEffect('waterwisp', {
+				x: defender.x - 50,
+				y: defender.y - 40,
+				z: defender.z,
+				scale: 2,
+				opacity: 0.3,
+				time: 300,
+			}, {
+				x: attacker.x - 50,
+				y: attacker.y - 40,
+				z: attacker.z,
+				time: 900,
+			}, 'decel', 'fade');
+			scene.showEffect('waterwisp', {
+				x: defender.x - 50,
+				y: defender.y - 40,
+				z: defender.z,
+				scale: 2,
+				opacity: 0.3,
+				time: 400,
+			}, {
+				x: attacker.x - 50,
+				y: attacker.y - 40,
+				z: attacker.z,
+				time: 900,
+			}, 'decel', 'fade');
+			scene.showEffect('waterwisp', {
+				x: defender.x,
+				y: defender.y - 40,
+				z: defender.z,
+				scale: 2,
+				opacity: 0.3,
+				time: 450,
+			}, {
+				x: attacker.x,
+				y: attacker.y - 40,
+				z: attacker.z,
+				time: 950,
+			}, 'decel', 'fade');
+
+			scene.showEffect('iceball', {
+				x: attacker.x,
+				y: attacker.y - 30,
+				z: attacker.z,
+				scale: 0,
+				xscale: 0.5,
+				yscale: 1,
+				opacity: 0.5,
+				time: 750,
+			}, {
+				scale: 2,
+				xscale: 4,
+				opacity: 0.1,
+				time: 1200,
+			}, 'decel', 'fade');
+
+			scene.showEffect('iceball', {
+				x: attacker.x + 35,
+				y: attacker.y - 40,
+				z: attacker.z,
+				opacity: 0.4,
+				scale: 0.25,
+				time: 750,
+			}, {
+				y: attacker.y,
+				opacity: 0,
+				time: 1000,
+			}, 'decel');
+			scene.showEffect('iceball', {
+				x: attacker.x - 35,
+				y: attacker.y - 40,
+				z: attacker.z,
+				opacity: 1,
+				scale: 0.25,
+				time: 800,
+			}, {
+				y: attacker.y,
+				opacity: 0,
+				time: 1150,
+			}, 'decel');
+			scene.showEffect('iceball', {
+				x: attacker.x + 15,
+				y: attacker.y - 40,
+				z: attacker.z,
+				opacity: 1,
+				scale: 0.25,
+				time: 950,
+			}, {
+				y: attacker.y,
+				opacity: 0,
+				time: 1200,
+			}, 'decel');
+			scene.showEffect('iceball', {
+				x: attacker.x + 15,
+				y: attacker.y - 40,
+				z: attacker.z,
+				opacity: 1,
+				scale: 0.25,
+				time: 1000,
+			}, {
+				y: attacker.y,
+				opacity: 0,
+				time: 1350,
+			}, 'decel');
+
+			scene.showEffect('waterwisp', {
+				x: attacker.x,
+				y: attacker.y - 25,
+				z: attacker.z,
+				scale: 2,
+				opacity: 1,
+				time: 750,
+			}, {
+				x: attacker.x + 75,
+				opacity: 0.3,
+				time: 1200,
+			}, 'linear', 'fade');
+			scene.showEffect('waterwisp', {
+				x: attacker.x,
+				y: attacker.y - 25,
+				z: attacker.z,
+				scale: 2,
+				opacity: 1,
+				time: 750,
+			}, {
+				x: attacker.x - 75,
+				opacity: 0.3,
+				time: 1200,
+			}, 'linear', 'fade');
+
+			defender.anim({
+				x: defender.x - 15,
+				time: 75,
+			});
+			defender.anim({
+				x: defender.x + 15,
+				time: 100,
+			});
+			defender.anim({
+				x: defender.x - 15,
+				time: 100,
+			});
+			defender.anim({
+				x: defender.x + 15,
+				time: 100,
+			});
+			defender.anim({
+				x: defender.x - 15,
+				time: 100,
+			});
+			defender.anim({
+				x: defender.x + 15,
+				time: 100,
+			});
+			defender.anim({
+				x: defender.x,
+				time: 100,
+			});
+		},
+	},
 	schoolingin: {
 		anim(scene, [attacker]) {
 			scene.backgroundEffect('#0000DD', 600, 0.2);
