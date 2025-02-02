@@ -5118,7 +5118,7 @@ export const BattleOtherAnims: AnimTable = {
 	},
 	ahoyboost: {
 		anim(scene, [attacker, defender]) { 
-			scene.showEffect('iceball', {
+			scene.showEffect('sword', {
 				x: defender.x,
 				y: defender.y - 30,
 				z: defender.z,
@@ -5156,7 +5156,7 @@ export const BattleOtherAnims: AnimTable = {
 				opacity: 0.3,
 				time: 500,
 			}, 'linear', 'fade');
-			scene.showEffect('iceball', {
+			scene.showEffect('sword', {
 				x: defender.x + 35,
 				y: defender.y,
 				z: defender.z,
@@ -5168,7 +5168,7 @@ export const BattleOtherAnims: AnimTable = {
 				opacity: 0,
 				time: 300,
 			}, 'accel');
-			scene.showEffect('iceball', {
+			scene.showEffect('sword', {
 				x: defender.x - 35,
 				y: defender.y,
 				z: defender.z,
@@ -5180,7 +5180,7 @@ export const BattleOtherAnims: AnimTable = {
 				opacity: 0,
 				time: 350,
 			}, 'accel');
-			scene.showEffect('iceball', {
+			scene.showEffect('sword', {
 				x: defender.x + 15,
 				y: defender.y,
 				z: defender.z,
@@ -5192,7 +5192,7 @@ export const BattleOtherAnims: AnimTable = {
 				opacity: 0,
 				time: 400,
 			}, 'accel');
-			scene.showEffect('iceball', {
+			scene.showEffect('sword', {
 				x: defender.x + 15,
 				y: defender.y,
 				z: defender.z,
@@ -5245,7 +5245,7 @@ export const BattleOtherAnims: AnimTable = {
 				time: 950,
 			}, 'decel', 'fade');
 
-			scene.showEffect('iceball', {
+			scene.showEffect('sword', {
 				x: attacker.x,
 				y: attacker.y - 30,
 				z: attacker.z,
@@ -5261,7 +5261,7 @@ export const BattleOtherAnims: AnimTable = {
 				time: 1200,
 			}, 'decel', 'fade');
 
-			scene.showEffect('iceball', {
+			scene.showEffect('sword', {
 				x: attacker.x + 35,
 				y: attacker.y - 40,
 				z: attacker.z,
@@ -5273,7 +5273,7 @@ export const BattleOtherAnims: AnimTable = {
 				opacity: 0,
 				time: 1000,
 			}, 'decel');
-			scene.showEffect('iceball', {
+			scene.showEffect('sword', {
 				x: attacker.x - 35,
 				y: attacker.y - 40,
 				z: attacker.z,
@@ -5285,7 +5285,7 @@ export const BattleOtherAnims: AnimTable = {
 				opacity: 0,
 				time: 1150,
 			}, 'decel');
-			scene.showEffect('iceball', {
+			scene.showEffect('sword', {
 				x: attacker.x + 15,
 				y: attacker.y - 40,
 				z: attacker.z,
@@ -5297,7 +5297,7 @@ export const BattleOtherAnims: AnimTable = {
 				opacity: 0,
 				time: 1200,
 			}, 'decel');
-			scene.showEffect('iceball', {
+			scene.showEffect('sword', {
 				x: attacker.x + 15,
 				y: attacker.y - 40,
 				z: attacker.z,
