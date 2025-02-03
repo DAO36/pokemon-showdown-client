@@ -45861,7 +45861,7 @@ export const BattleMoveAnims: AnimTable = {
 		anim(scene, [attacker, defender]) {
 			BattleOtherAnims.slashattack.anim(scene, [attacker, defender]);
 
-			scene.showEffect('rocks', {
+			scene.showEffect('rock1', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -45891,7 +45891,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 1,
 				time: 800,
 			}, 'ballistic', 'fade');
-			scene.showEffect('rocks', {
+			scene.showEffect('rock3', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
