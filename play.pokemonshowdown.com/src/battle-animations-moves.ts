@@ -9670,7 +9670,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	falconwhip: {
 		anim(scene, [attacker, defender]) {
-			scene.showEffect('iceball', {
+			scene.showEffect('shadowball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -9682,7 +9682,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 700,
 			}, 'linear');
-			scene.showEffect('wisp', {
+			scene.showEffect('feather', {
 				x: defender.x,
 				y: defender.y - 30,
 				z: defender.z,
@@ -9694,7 +9694,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.3,
 				time: 800,
 			}, 'linear', 'fade');
-			scene.showEffect('wisp', {
+			scene.showEffect('feather', {
 				x: defender.x,
 				y: defender.y - 30,
 				z: defender.z,
