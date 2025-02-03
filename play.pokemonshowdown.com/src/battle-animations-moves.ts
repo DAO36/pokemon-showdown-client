@@ -11857,7 +11857,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 300,
 			}, 'swing');
 
-			scene.showEffect('sword', {
+			scene.showEffect('shadowball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -33490,7 +33490,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 810,
 			}, 'accel', 'explode');
-			scene.showEffect('rock2', {
+			scene.showEffect('rocks', {
 				x: defender.x - 15,
 				y: defender.y - 30,
 				z: defender.z,
@@ -33503,7 +33503,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 910,
 			}, 'accel', 'explode');
-			scene.showEffect('rock1', {
+			scene.showEffect('rocks', {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
@@ -45861,7 +45861,7 @@ export const BattleMoveAnims: AnimTable = {
 		anim(scene, [attacker, defender]) {
 			BattleOtherAnims.slashattack.anim(scene, [attacker, defender]);
 
-			scene.showEffect('rock1', {
+			scene.showEffect('rocks', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -45876,7 +45876,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 1,
 				time: 800,
 			}, 'ballistic', 'fade');
-			scene.showEffect('rock3', {
+			scene.showEffect('sword', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -45891,7 +45891,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 1,
 				time: 800,
 			}, 'ballistic', 'fade');
-			scene.showEffect('rock2', {
+			scene.showEffect('rocks', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
