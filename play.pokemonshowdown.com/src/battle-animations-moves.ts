@@ -1944,7 +1944,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 560,
 			}, 'accel', 'fade');
-			scene.showEffect('wisp', {
+			scene.showEffect('leaf1', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -1956,7 +1956,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 560,
 			}, 'linear');
-			scene.showEffect('wisp', {
+			scene.showEffect('leaf2', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
