@@ -7424,7 +7424,7 @@ export const BattleMoveAnims: AnimTable = {
 			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
 		},
 	},
-	ightslash: {
+	twinstrikes: {
 		anim(scene, [attacker, defender]) { 
 			scene.showEffect('rightslash', {
 				x: defender.x + 5,
