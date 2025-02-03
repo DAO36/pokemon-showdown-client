@@ -9345,7 +9345,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.9,
 				time: 0,
 			}, 'decel');
-			scene.showEffect('mistball', {
+			scene.showEffect('electroball', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
@@ -9360,7 +9360,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.7,
 				time: 0,
 			}, 'decel', '', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('mistball', {
+			scene.showEffect('electroball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9373,7 +9373,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 1300,
 			}, 'decel', '', {filter: 'hue-rotate(-45deg)'});
 			for (let i = 0; i < 5; i++) {
-				scene.showEffect('mistball', {
+				scene.showEffect('electroball', {
 					x: attacker.x + xstep * (i + 1),
 					y: (attacker.y + 100) + ystep * (i + 1),
 					z: attacker.z + zstep * (i + 1),
@@ -9386,7 +9386,7 @@ export const BattleMoveAnims: AnimTable = {
 					time: 60 * i + 1500,
 				}, 'linear', '', {filter: 'hue-rotate(-45deg)'});
 			}
-			scene.showEffect('mistball', {
+			scene.showEffect('electroball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9401,7 +9401,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.3,
 				time: 1000,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('mistball', {
+			scene.showEffect('electroball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9416,7 +9416,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.3,
 				time: 1075,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('mistball', {
+			scene.showEffect('electroball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9431,7 +9431,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.3,
 				time: 1150,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('mistball', {
+			scene.showEffect('electroball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9446,7 +9446,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.3,
 				time: 1225,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('mistball', {
+			scene.showEffect('electroball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9461,7 +9461,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.3,
 				time: 1300,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('mistball', {
+			scene.showEffect('electroball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9476,7 +9476,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.3,
 				time: 1375,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('mistball', {
+			scene.showEffect('electroball', {
 				x: defender.x,
 				y: defender.y - 50,
 				z: defender.z,
@@ -9490,7 +9490,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.1,
 				time: 1675,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('mistball', {
+			scene.showEffect('electroball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.behind(5),
@@ -9502,7 +9502,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 1375,
 			}, 'linear', '', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('mistball', {
+			scene.showEffect('electroball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.behind(10),
@@ -33401,134 +33401,6 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'accel', 'fade');
 		},
 	},
-	clockstrikes: {
-		anim(scene, [attacker, defender]) {
-			attacker.delay(300);
-			attacker.anim({
-				x: defender.x,
-				y: defender.y,
-				z: defender.behind(70),
-				time: 300,
-				opacity: 0.5,
-			}, 'accel');
-			attacker.anim({
-				x: defender.x,
-				y: defender.x,
-				z: defender.behind(100),
-				opacity: 0,
-				time: 100,
-			}, 'linear');
-			attacker.anim({
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.behind(70),
-				opacity: 0,
-				time: 1,
-			}, 'linear');
-			attacker.anim({
-				opacity: 1,
-				time: 500,
-			}, 'decel');
-			defender.delay(600);
-			defender.anim({
-				z: defender.behind(30),
-				time: 100,
-			}, 'swing');
-			defender.anim({
-				time: 300,
-			}, 'swing');
-
-			scene.showEffect('sword', {
-				x: attacker.leftof(-10),
-				y: attacker.y - 10,
-				z: attacker.z,
-				scale: 0.5,
-				opacity: 1,
-			}, {
-				y: attacker.y + 10,
-				scale: 1,
-				opacity: 0.4,
-				time: 300,
-			}, 'decel', 'fade');
-
-			scene.showEffect('electroball', {
-				x: defender.x + 30,
-				y: defender.y + 25,
-				z: defender.z,
-				scale: 0.2,
-				opacity: 1,
-				time: 410,
-			}, {
-				x: defender.x + 50,
-				y: defender.y + 10,
-				opacity: 0.5,
-				time: 710,
-			}, 'accel', 'explode');
-			scene.showEffect('electroball', {
-				x: defender.x - 30,
-				y: defender.y - 20,
-				z: defender.z,
-				scale: 0.2,
-				opacity: 1,
-				time: 510,
-			}, {
-				x: defender.x - 50,
-				y: defender.y - 20,
-				opacity: 0.5,
-				time: 710,
-			}, 'accel', 'explode');
-			scene.showEffect('electroball', {
-				x: defender.x + 15,
-				y: defender.y + 10,
-				z: defender.z,
-				scale: 0.2,
-				opacity: 1,
-				time: 610,
-			}, {
-				x: defender.x + 35,
-				y: defender.y + 30,
-				opacity: 0.5,
-				time: 810,
-			}, 'accel', 'explode');
-			scene.showEffect('electroball', {
-				x: defender.x - 15,
-				y: defender.y - 30,
-				z: defender.z,
-				scale: 0.2,
-				opacity: 1,
-				time: 610,
-			}, {
-				x: defender.x - 35,
-				y: defender.y - 40,
-				opacity: 0.5,
-				time: 910,
-			}, 'accel', 'explode');
-			scene.showEffect('electroball', {
-				x: defender.x + 10,
-				y: defender.y - 10,
-				z: defender.z,
-				scale: 1.5,
-				opacity: 0.6,
-				time: 610,
-			}, {
-				scale: 2,
-				opacity: 0,
-				time: 910,
-			}, 'accel', 'fade');
-			scene.showEffect('leftslash', {
-				x: defender.x - 10,
-				y: defender.y - 10,
-				z: defender.z,
-				scale: 1.5,
-				opacity: 0.6,
-				time: 610,
-			}, {
-				scale: 2,
-				opacity: 0,
-				time: 910,
-			}, 'accel', 'fade');
-		},
-	},
 	bibooblade: {
 		anim(scene, [attacker, defender]) {
 			attacker.delay(300);
@@ -34464,7 +34336,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	energyblade: {
 		anim(scene, [attacker, defender]) {
-			scene.showEffect('wisp', {
+			scene.showEffect('electroball', {
 				x: defender.x + 60,
 				y: defender.y + 30,
 				z: defender.z,
@@ -34478,7 +34350,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.4,
 				time: 200,
 			}, 'linear', 'fade');
-			scene.showEffect('wisp', {
+			scene.showEffect('electroball', {
 				x: defender.x + 60,
 				y: defender.y + 30,
 				z: defender.z,
@@ -34493,7 +34365,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.4,
 				time: 300,
 			}, 'linear', 'fade');
-			scene.showEffect('wisp', {
+			scene.showEffect('electroball', {
 				x: defender.x + 80,
 				y: defender.y + 10,
 				z: defender.z,
@@ -37852,6 +37724,123 @@ export const BattleMoveAnims: AnimTable = {
 				time: 1160,
 			}, 'linear');
 			scene.showEffect('wisp', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0,
+				opacity: 0.5,
+				time: 910,
+			}, {
+				scale: 2,
+				opacity: 0,
+				time: 1210,
+			}, 'linear');
+			scene.showEffect(attacker.sp, {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				opacity: 0.3,
+				time: 550,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(70),
+				time: 850,
+			}, 'accel', 'fade');
+			scene.showEffect(attacker.sp, {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				opacity: 0.3,
+				time: 600,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(70),
+				time: 900,
+			}, 'accel', 'fade');
+			attacker.delay(500);
+			attacker.anim({
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(70),
+				time: 300,
+				opacity: 0.5,
+			}, 'accel');
+			attacker.anim({
+				x: defender.x,
+				y: defender.x,
+				z: defender.behind(100),
+				opacity: 0,
+				time: 100,
+			}, 'linear');
+			attacker.anim({
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.behind(70),
+				opacity: 0,
+				time: 1,
+			}, 'linear');
+			attacker.anim({
+				opacity: 1,
+				time: 500,
+			}, 'decel');
+			defender.delay(760);
+			defender.anim({
+				z: defender.behind(30),
+				time: 100,
+			}, 'swing');
+			defender.anim({
+				time: 300,
+			}, 'swing');
+		},
+	},
+	rtstrike: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('rightslash', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 1,
+				opacity: 0.5,
+			}, {
+				opacity: 1,
+				time: 400,
+			}, 'linear', 'explode');
+			scene.showEffect('leftslash', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 1,
+				opacity: 0.5,
+			}, {
+				opacity: 1,
+				time: 400,
+			}, 'linear', 'explode');
+			scene.showEffect('electroball', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 1,
+				opacity: 1,
+			}, {
+				opacity: 0.5,
+				time: 400,
+			}, 'linear', 'explode');
+
+			scene.showEffect('electroball', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0,
+				opacity: 0.5,
+				time: 860,
+			}, {
+				scale: 2,
+				opacity: 0,
+				time: 1160,
+			}, 'linear');
+			scene.showEffect('electroball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
