@@ -20965,7 +20965,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	godeyes: {
 		anim(scene, [attacker, defender]) {
-			scene.backgroundEffect('#F4C000', 250, 0.3);
+			scene.backgroundEffect('#F2E102', 250, 0.3);
 			scene.backgroundEffect('#FFFFFF', 250, 0.2, 400);
 			scene.showEffect('stare', {
 				x: defender.x,
@@ -20973,7 +20973,7 @@ export const BattleMoveAnims: AnimTable = {
 				z: defender.z,
 				scale: 1,
 				yscale: 0,
-				opacity: 0.5,
+				opacity: 0.6,
 			}, {
 				yscale: 1,
 				time: 700,
