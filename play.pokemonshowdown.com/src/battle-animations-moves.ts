@@ -20088,7 +20088,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 400,
 			}, 'linear');
-			scene.showEffect('shadowball', {
+			scene.showEffect('heart', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
