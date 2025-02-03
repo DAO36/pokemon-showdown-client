@@ -23750,6 +23750,69 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'accel');
 		},
 	},
+	hopeful: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('shine', {
+				x: defender.x + 15,
+				y: defender.y - 50,
+				z: defender.z,
+				scale: 0.5,
+			}, {
+				y: defender.y + 60,
+				yscale: 1,
+				opacity: 0,
+				time: 350,
+			}, 'accel');
+			scene.showEffect('shine', {
+				x: defender.x + 30,
+				y: defender.y - 50,
+				z: defender.z,
+				scale: 0.5,
+				time: 150,
+			}, {
+				y: defender.y + 60,
+				yscale: 1,
+				opacity: 0,
+				time: 500,
+			}, 'accel');
+			scene.showEffect('shine', {
+				x: defender.x - 30,
+				y: defender.y - 50,
+				z: defender.z,
+				scale: 0.5,
+				time: 300,
+			}, {
+				y: defender.y + 60,
+				yscale: 1,
+				opacity: 0,
+				time: 650,
+			}, 'accel');
+			scene.showEffect('shine', {
+				x: defender.x,
+				y: defender.y - 50,
+				z: defender.z,
+				scale: 0.5,
+				time: 400,
+			}, {
+				y: defender.y + 60,
+				yscale: 1,
+				opacity: 0,
+				time: 750,
+			}, 'accel');
+			scene.showEffect('shine', {
+				x: defender.x - 15,
+				y: defender.y - 50,
+				z: defender.z,
+				scale: 0.5,
+				time: 500,
+			}, {
+				y: defender.y + 60,
+				yscale: 1,
+				opacity: 0,
+				time: 850,
+			}, 'accel');
+		},
+	},
 	rockslide: {
 		anim(scene, [attacker, ...defenders]) {
 			for (const defender of defenders) {
@@ -46269,7 +46332,6 @@ BattleMoveAnims['tako'] = {anim: BattleMoveAnims['hydropump'].anim};
 BattleMoveAnims['wah'] = {anim: BattleMoveAnims['nastyplot'].anim};
 BattleMoveAnims['phoenixshield'] = {anim: BattleMoveAnims['burningbulwark'].anim};
 BattleMoveAnims['hopesoda'] = {anim: BattleMoveAnims['milkdrink'].anim};
-BattleMoveAnims['hopeful'] = {anim: BattleMoveAnims['stoneedge'].anim};
 BattleMoveAnims['wormhole'] = {anim: BattleMoveAnims['hyperspacehole'].anim};
 BattleMoveAnims['mothernature'] = {anim: BattleMoveAnims['leafstorm'].anim};
 BattleMoveAnims['natureswrath'] = {anim: BattleMoveAnims['powerwhip'].anim};
