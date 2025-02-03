@@ -9334,7 +9334,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.9,
 				time: 0,
 			}, 'decel');
-			scene.showEffect('electroball', {
+			scene.showEffect('iceball', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
@@ -9349,7 +9349,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.7,
 				time: 0,
 			}, 'decel', '', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('electroball', {
+			scene.showEffect('iceball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9362,7 +9362,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 1300,
 			}, 'decel', '', {filter: 'hue-rotate(-45deg)'});
 			for (let i = 0; i < 5; i++) {
-				scene.showEffect('electroball', {
+				scene.showEffect('iceball', {
 					x: attacker.x + xstep * (i + 1),
 					y: (attacker.y + 100) + ystep * (i + 1),
 					z: attacker.z + zstep * (i + 1),
@@ -9375,7 +9375,7 @@ export const BattleMoveAnims: AnimTable = {
 					time: 60 * i + 1500,
 				}, 'linear', '', {filter: 'hue-rotate(-45deg)'});
 			}
-			scene.showEffect('electroball', {
+			scene.showEffect('iceball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9390,7 +9390,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.3,
 				time: 1000,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('electroball', {
+			scene.showEffect('iceball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9405,7 +9405,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.3,
 				time: 1075,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('electroball', {
+			scene.showEffect('iceball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9420,7 +9420,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.3,
 				time: 1150,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('electroball', {
+			scene.showEffect('iceball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9435,7 +9435,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.3,
 				time: 1225,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('electroball', {
+			scene.showEffect('iceball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9450,7 +9450,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.3,
 				time: 1300,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('electroball', {
+			scene.showEffect('iceball', {
 				x: attacker.x,
 				y: attacker.y + 100,
 				z: attacker.z,
@@ -9465,7 +9465,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.3,
 				time: 1375,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('electroball', {
+			scene.showEffect('iceball', {
 				x: defender.x,
 				y: defender.y - 50,
 				z: defender.z,
@@ -9479,7 +9479,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.1,
 				time: 1675,
 			}, 'linear', 'explode', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('electroball', {
+			scene.showEffect('iceball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.behind(5),
@@ -9491,7 +9491,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 1375,
 			}, 'linear', '', {filter: 'hue-rotate(-45deg)'});
-			scene.showEffect('electroball', {
+			scene.showEffect('iceball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.behind(10),
@@ -33934,7 +33934,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 300,
 			}, 'decel', 'fade');
 
-			scene.showEffect('mistball', {
+			scene.showEffect('leaf1', {
 				x: defender.x + 30,
 				y: defender.y + 25,
 				z: defender.z,
@@ -33947,7 +33947,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 710,
 			}, 'accel', 'explode');
-			scene.showEffect('mistball', {
+			scene.showEffect('leaf2', {
 				x: defender.x - 30,
 				y: defender.y - 20,
 				z: defender.z,
@@ -33960,7 +33960,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 710,
 			}, 'accel', 'explode');
-			scene.showEffect('mistball', {
+			scene.showEffect('leaf1', {
 				x: defender.x + 15,
 				y: defender.y + 10,
 				z: defender.z,
@@ -33973,7 +33973,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 810,
 			}, 'accel', 'explode');
-			scene.showEffect('mistball', {
+			scene.showEffect('leaf2', {
 				x: defender.x - 15,
 				y: defender.y - 30,
 				z: defender.z,
@@ -33986,7 +33986,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 910,
 			}, 'accel', 'explode');
-			scene.showEffect('mistball', {
+			scene.showEffect('leaf1', {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
