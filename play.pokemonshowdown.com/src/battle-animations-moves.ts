@@ -2445,21 +2445,6 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.6,
 				time: 400,
 			}, 'decel', 'fade');
-			scene.showEffect('mist', {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.behind(-30),
-				scale: 0.6,
-				opacity: 0.8,
-				time: 400,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.behind(20),
-				scale: 1,
-				opacity: 0.8,
-				time: 800,
-			}, 'accel', 'explode');
 
 			defender.delay(800);
 			defender.anim({
