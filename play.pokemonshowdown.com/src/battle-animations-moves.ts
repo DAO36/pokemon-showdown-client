@@ -9770,7 +9770,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	dahlah: {
 		anim(scene, [attacker, defender]) {
-			scene.showEffect('shadowball', {
+			scene.showEffect('flareball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
