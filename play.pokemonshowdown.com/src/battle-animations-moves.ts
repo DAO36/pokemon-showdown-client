@@ -30359,7 +30359,7 @@ export const BattleMoveAnims: AnimTable = {
 					y: attacker.y - 20 + ystep * (i + 1),
 					z: attacker.z + zstep * (i + 1),
 					scale: 1.5,
-					opacity: 1,
+					opacity: 0.5,
 					time: 40 * i + 0,
 				}, {
 					opacity: 0,
@@ -30380,7 +30380,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 800,
 			}, 'accel', 'explode');
-			scene.showEffect('energyball', {
+			scene.showEffect('iceball', {
 				x: defender.x - 30,
 				y: defender.y - 20,
 				z: defender.z,
@@ -30393,7 +30393,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 800,
 			}, 'accel', 'explode');
-			scene.showEffect('energyball', {
+			scene.showEffect('iceball', {
 				x: defender.x + 15,
 				y: defender.y + 10,
 				z: defender.z,
