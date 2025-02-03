@@ -7424,6 +7424,47 @@ export const BattleMoveAnims: AnimTable = {
 			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
 		},
 	},
+	ightslash: {
+		anim(scene, [attacker, defender]) { 
+			scene.showEffect('rightslash', {
+				x: defender.x + 5,
+				y: defender.y + 20,
+				z: defender.z,
+				scale: 1,
+				opacity: 1,
+				time: 500,
+			}, {
+				scale: 3,
+				opacity: 0,
+				time: 800,
+			}, 'linear', 'fade');
+			scene.showEffect('rightslash', {
+				x: defender.x - 5,
+				y: defender.y - 20,
+				z: defender.z,
+				scale: 1,
+				opacity: 1,
+				time: 600,
+			}, {
+				scale: 3,
+				opacity: 0,
+				time: 900,
+			}, 'linear', 'fade');
+			scene.showEffect('rightslash', {
+				x: defender.x - 1,
+				y: defender.y - 1,
+				z: defender.z,
+				scale: 1,
+				opacity: 1,
+				time: 600,
+			}, {
+				scale: 3,
+				opacity: 0,
+				time: 1000,
+			}, 'linear', 'fade');
+			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
+		},
+	},
 	shadowclaw: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 700, 0.3);
@@ -12245,7 +12286,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	fuwamocomorning: {
 		anim(scene, [attacker, defender]) {
-			scene.showEffect('fist', {
+			scene.showEffect('foot', {
 				x: defender.x - 10,
 				y: defender.y,
 				z: defender.z,
@@ -12305,7 +12346,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.8,
 				time: 700,
 			}, 'linear', 'explode');
-			scene.showEffect('foot', {
+			scene.showEffect('bone', {
 				x: defender.x,
 				y: defender.y + 20,
 				z: defender.z,
@@ -12336,7 +12377,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 1,
 				time: 550,
 			}, 'linear', 'explode');
-			scene.showEffect('heart', {
+			scene.showEffect('bone', {
 				x: defender.x - 30,
 				y: defender.y - 20,
 				z: defender.z,
@@ -12351,7 +12392,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 1,
 				time: 775,
 			}, 'linear', 'explode');
-			scene.showEffect('heart', {
+			scene.showEffect('foot', {
 				x: defender.x,
 				y: defender.y + 10,
 				z: defender.z,
@@ -12382,7 +12423,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.2,
 				time: 750,
 			}, 'linear', 'fade');
-			scene.showEffect('mistball', {
+			scene.showEffect('shadowball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -46307,7 +46348,6 @@ BattleMoveAnims['forbiddenknowledge'] = {anim: BattleMoveAnims['nightshade'].ani
 BattleMoveAnims['bejeweled'] = {anim: BattleMoveAnims['powergem'].anim};
 BattleMoveAnims['underworldmusic'] = {anim: BattleMoveAnims['hypervoice'].anim};
 BattleMoveAnims['divafork'] = {anim: BattleMoveAnims['nightslash'].anim};
-BattleMoveAnims['twinstrikes'] = {anim: BattleMoveAnims['xscissor'].anim};
 BattleMoveAnims['stuffcheeks'] = {anim: BattleMoveAnims['stockpile'].anim};
 BattleMoveAnims['noretreat'] = {anim: BattleMoveAnims['stockpile'].anim};
 BattleMoveAnims['tarshot'] = {anim: BattleMoveAnims['mudbomb'].anim};
