@@ -2418,6 +2418,58 @@ export const BattleMoveAnims: AnimTable = {
 				time: 300,
 			}, 'swing');
 		},
+	}, 
+	daredevil: {
+		anim(scene, [attacker, defender]) {
+			scene.backgroundEffect('#B84038', 700, 0.6);
+			scene.showEffect('mistball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.behind(-30),
+				scale: 3,
+				opacity: 0.3,
+			}, {
+				scale: 0.6,
+				opacity: 1,
+				time: 300,
+			}, 'decel', 'fade');
+			scene.showEffect('shadowball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.behind(-30),
+				scale: 3,
+				opacity: 0.3,
+				time: 100,
+			}, {
+				scale: 0.8,
+				opacity: 0.6,
+				time: 400,
+			}, 'decel', 'fade');
+			scene.showEffect('mist', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.behind(-30),
+				scale: 0.6,
+				opacity: 0.8,
+				time: 400,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(20),
+				scale: 1,
+				opacity: 0.8,
+				time: 800,
+			}, 'accel', 'explode');
+
+			defender.delay(800);
+			defender.anim({
+				z: defender.behind(10),
+				time: 200,
+			}, 'swing');
+			defender.anim({
+				time: 300,
+			}, 'swing');
+		},
 	},
 	tarotattack: {
 		anim(scene, [attacker, defender]) {
@@ -2446,58 +2498,6 @@ export const BattleMoveAnims: AnimTable = {
 				time: 400,
 			}, 'decel', 'fade');
 			scene.showEffect('mistball', {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.behind(-30),
-				scale: 0.6,
-				opacity: 0.8,
-				time: 400,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.behind(20),
-				scale: 1,
-				opacity: 0.8,
-				time: 800,
-			}, 'accel', 'explode');
-
-			defender.delay(800);
-			defender.anim({
-				z: defender.behind(10),
-				time: 200,
-			}, 'swing');
-			defender.anim({
-				time: 300,
-			}, 'swing');
-		},
-	},
-	twintails: {
-		anim(scene, [attacker, defender]) {
-			scene.backgroundEffect('#B84038', 700, 0.6);
-			scene.showEffect('electroball', {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.behind(-30),
-				scale: 3,
-				opacity: 0.3,
-			}, {
-				scale: 0.6,
-				opacity: 1,
-				time: 300,
-			}, 'decel', 'fade');
-			scene.showEffect('electroball', {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.behind(-30),
-				scale: 3,
-				opacity: 0.3,
-				time: 100,
-			}, {
-				scale: 0.8,
-				opacity: 0.6,
-				time: 400,
-			}, 'decel', 'fade');
-			scene.showEffect('electroball', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.behind(-30),
@@ -8315,70 +8315,6 @@ export const BattleMoveAnims: AnimTable = {
 				z: defender.behind(0),
 			}, 'ballistic', 'fade'); 
 			scene.showEffect('electroball', {
-				x: defender.x,
-				y: defender.y,
-				z: defender.z,
-				scale: 0,
-				opacity: 0.7,
-				time: 500,
-			}, {
-				scale: 3,
-				opacity: 0,
-				time: 750,
-			}, 'linear', 'fade');
-
-			attacker.anim({
-				x: defender.x,
-				y: defender.y + 170,
-				z: defender.behind(-30),
-				time: 400,
-			}, 'ballistic');
-			attacker.anim({
-				x: defender.x,
-				y: defender.y + 5,
-				z: defender.z,
-				time: 200,
-			});
-			attacker.anim({
-				time: 500,
-			}, 'ballistic2Back');
-			defender.delay(500);
-			defender.anim({
-				y: defender.y - 5,
-				z: defender.behind(40),
-				yscale: 0.9,
-				time: 300,
-			}, 'swing');
-			defender.anim({
-				time: 300,
-			}, 'swing');
-		},
-	},
-	daredevil: {
-		anim(scene, [attacker, defender]) {
-			scene.showEffect(attacker.sp, {
-				x: defender.leftof(-10),
-				y: attacker.y + 170,
-				z: attacker.behind(-35),
-				opacity: 0.3,
-				time: 25,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.behind(0),
-			}, 'ballistic', 'fade');
-			scene.showEffect(attacker.sp, {
-				x: defender.leftof(-10),
-				y: attacker.y + 170,
-				z: attacker.behind(-35),
-				opacity: 0.3,
-				time: 75,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.behind(0),
-			}, 'ballistic', 'fade'); 
-			scene.showEffect('shadowball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -20833,6 +20769,37 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.6,
 				time: 330,
 			}, 'linear', 'fade');
+		},
+	},
+	twintails: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('mistball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.9,
+				opacity: 0.6,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				opacity: 0.6,
+				time: 300,
+			}, 'linear', 'explode');
+			scene.showEffect('mistball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.9,
+				opacity: 0.6,
+				time: 30,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				opacity: 0.6,
+				time: 330,
+			}, 'linear', 'explode');
 		},
 	},
 	candycrash: {
