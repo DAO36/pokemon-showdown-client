@@ -15351,55 +15351,31 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	ymd: {
 		anim(scene, [attacker, defender]) {
-			scene.backgroundEffect('#000000', 700, 0.2);
-			scene.showEffect('impact', {
+			scene.backgroundEffect('#987058', 400, 0.3);
+			scene.showEffect('mistball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
 				scale: 0,
-				opacity: 0.4,
+				opacity: 0.5,
 				time: 300,
 			}, {
-				scale: 4,
+				scale: 3,
 				opacity: 0,
 				time: 600,
 			}, 'linear');
-			scene.showEffect('impact', {
+			scene.showEffect('shadowball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
 				scale: 0,
-				opacity: 0.4,
+				opacity: 0.5,
 				time: 500,
 			}, {
-				scale: 4,
+				scale: 3,
 				opacity: 0,
 				time: 800,
 			}, 'linear');
-			scene.showEffect(attacker.sp, {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.z,
-				opacity: 0.3,
-				time: 50,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.behind(-5),
-				time: 350,
-			}, 'accel', 'fade');
-			scene.showEffect(attacker.sp, {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.z,
-				opacity: 0.3,
-				time: 100,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.behind(-5),
-				time: 400,
-			}, 'accel', 'fade');
 			attacker.anim({
 				x: defender.x,
 				y: defender.y,
