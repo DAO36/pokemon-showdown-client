@@ -37795,7 +37795,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	rtstrike: {
+	clockstrikes: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('rightslash', {
 				x: defender.x,
