@@ -1932,7 +1932,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	deez: {
 		anim(scene, [attacker, defender]) {
-			scene.showEffect('leftslash', {
+			scene.showEffect('leaf1', {
 				x: defender.x - 10,
 				y: defender.y - 10,
 				z: defender.z,
@@ -1944,7 +1944,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 560,
 			}, 'accel', 'fade');
-			scene.showEffect('leaf1', {
+			scene.showEffect('leaf2', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -1956,7 +1956,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 560,
 			}, 'linear');
-			scene.showEffect('leaf2', {
+			scene.showEffect('leaf1', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
