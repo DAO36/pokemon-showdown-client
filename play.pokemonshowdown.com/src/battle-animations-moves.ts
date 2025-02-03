@@ -15468,7 +15468,7 @@ export const BattleMoveAnims: AnimTable = {
 	zombiestrike: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 700, 0.2);
-			scene.showEffect('impact', {
+			scene.showEffect('sword', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -15480,7 +15480,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 600,
 			}, 'linear');
-			scene.showEffect('impact', {
+			scene.showEffect('shadowball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
