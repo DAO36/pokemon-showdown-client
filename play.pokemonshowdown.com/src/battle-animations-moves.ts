@@ -11736,7 +11736,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 300,
 			}, 'swing');
 
-			scene.showEffect('fist', {
+			scene.showEffect('bone', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -11766,7 +11766,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 1,
 				time: 550,
 			}, 'linear', 'explode');
-			scene.showEffect('fist', {
+			scene.showEffect('bone', {
 				x: defender.x + 30,
 				y: defender.y - 20,
 				z: defender.z,
@@ -11796,7 +11796,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 1,
 				time: 775,
 			}, 'linear', 'explode');
-			scene.showEffect('fist', {
+			scene.showEffect('bone', {
 				x: defender.x,
 				y: defender.y - 10,
 				z: defender.z,
@@ -14141,7 +14141,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	yubiyubi: {
 		anim(scene, [attacker, defender]) {
-			scene.showEffect('fist', {
+			scene.showEffect('pointer', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
