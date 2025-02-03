@@ -2052,7 +2052,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	polmao: {
 		anim(scene, [attacker, defender]) {
-			scene.showEffect('leftslash', {
+			scene.showEffect('wisp', {
 				x: defender.x - 10,
 				y: defender.y - 10,
 				z: defender.z,
@@ -2064,7 +2064,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 560,
 			}, 'accel', 'fade');
-			scene.showEffect('wisp', {
+			scene.showEffect('flareball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -2076,7 +2076,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 560,
 			}, 'linear');
-			scene.showEffect('wisp', {
+			scene.showEffect('iceball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
