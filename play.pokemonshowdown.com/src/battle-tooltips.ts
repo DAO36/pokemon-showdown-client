@@ -1624,6 +1624,9 @@ class BattleTooltips {
 		if (move.id === 'aurawheel' && pokemon.getSpeciesForme() === 'Morpeko-Hangry') {
 			moveType = 'Dark';
 		}
+		if (move.id === 'fuwamocomorning' && pokemon.getSpeciesForme() === 'FuwaMoco-Wawa') {
+			moveType = 'Fairy';
+		}
 		// Raging Bull's type depends on the Tauros forme
 		if (move.id === 'ragingbull') {
 			switch (pokemon.getSpeciesForme()) {
