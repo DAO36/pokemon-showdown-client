@@ -1810,6 +1810,126 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
+	chaosstrike: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('mistball', {
+				x: defender.x - 10,
+				y: defender.y - 10,
+				z: defender.z,
+				scale: 1.5,
+				opacity: 0.6,
+				time: 260,
+			}, {
+				scale: 2,
+				opacity: 0,
+				time: 560,
+			}, 'accel', 'fade');
+			scene.showEffect('shadowball', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0,
+				opacity: 0.5,
+				time: 260,
+			}, {
+				scale: 2,
+				opacity: 0,
+				time: 560,
+			}, 'linear');
+			scene.showEffect('fireball', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0,
+				opacity: 0.5,
+				time: 310,
+			}, {
+				scale: 2,
+				opacity: 0,
+				time: 610,
+			}, 'linear');
+			scene.showEffect(attacker.sp, {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				opacity: 0.3,
+				time: 50,
+			}, {
+				x: defender.x - 60,
+				y: defender.y + 60,
+				z: defender.behind(-40),
+				time: 250,
+			}, 'ballistic', 'fade');
+			scene.showEffect(attacker.sp, {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				opacity: 0.3,
+				time: 100,
+			}, {
+				x: defender.leftof(20),
+				y: defender.y,
+				z: defender.behind(-40),
+				time: 300,
+			}, 'ballistic2Under', 'fade');
+			scene.showEffect(attacker.sp, {
+				x: defender.x - 60,
+				y: defender.y + 60,
+				z: defender.behind(-40),
+				opacity: 0.5,
+				time: 250,
+			}, {
+				x: defender.leftof(-5),
+				y: defender.y - 5,
+				z: defender.behind(20),
+				time: 350,
+			}, 'ballistic', 'fade');
+			scene.showEffect(attacker.sp, {
+				x: defender.leftof(20),
+				y: defender.y,
+				z: defender.behind(-40),
+				opacity: 0.5,
+				time: 300,
+			}, {
+				x: defender.leftof(-5),
+				y: defender.y - 5,
+				z: defender.behind(20),
+				time: 400,
+			}, 'ballistic2', 'fade');
+
+			attacker.anim({
+				x: defender.x,
+				y: defender.y + 60,
+				z: defender.behind(-80),
+				time: 200,
+				opacity: 0.5,
+			}, 'ballistic');
+			attacker.anim({
+				x: defender.leftof(-5),
+				y: defender.y - 5,
+				z: defender.behind(20),
+				time: 100,
+				opacity: 0.5,
+			});
+			attacker.anim({
+				x: defender.x,
+				y: defender.y + 5,
+				z: defender.z,
+				time: 100,
+			});
+			attacker.anim({
+				time: 500,
+			}, 'ballistic2');
+			defender.delay(260);
+			defender.anim({
+				z: defender.behind(30),
+				time: 100,
+			}, 'swing');
+			defender.anim({
+				time: 300,
+			}, 'swing');
+		},
+	},
 	splitpersonality: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('leftslash', {
@@ -46194,7 +46314,6 @@ BattleMoveAnims['wormhole'] = {anim: BattleMoveAnims['hyperspacehole'].anim};
 BattleMoveAnims['mothernature'] = {anim: BattleMoveAnims['leafstorm'].anim};
 BattleMoveAnims['natureswrath'] = {anim: BattleMoveAnims['powerwhip'].anim};
 BattleMoveAnims['timetogo'] = {anim: BattleMoveAnims['teleport'].anim};
-BattleMoveAnims['chaosstrike'] = {anim: BattleMoveAnims['dualwingbeat'].anim};
 BattleMoveAnims['forbiddenknowledge'] = {anim: BattleMoveAnims['nightshade'].anim};
 BattleMoveAnims['bejeweled'] = {anim: BattleMoveAnims['powergem'].anim};
 BattleMoveAnims['underworldmusic'] = {anim: BattleMoveAnims['hypervoice'].anim};
