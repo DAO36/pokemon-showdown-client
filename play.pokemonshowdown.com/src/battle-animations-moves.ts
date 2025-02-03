@@ -4756,6 +4756,25 @@ export const BattleMoveAnims: AnimTable = {
 			attacker.anim({opacity: 1, time: 300});
 		},
 	},
+	timetravel: {
+		anim(scene, [attacker]) {
+			scene.backgroundEffect('#E9DA0B', 1000, 0.3);
+			attacker.anim({
+				xscale: 0.3,
+				time: 200,
+			}, 'linear');
+			attacker.anim({
+				y: attacker.y + 200,
+				xscale: 0.1,
+				yscale: 2,
+				opacity: 0.5,
+				time: 300,
+			}, 'accel');
+			attacker.delay(500);
+			attacker.anim({opacity: 0, time: 0});
+			attacker.anim({opacity: 1, time: 300});
+		},
+	},
 	cottonguard: {
 		anim: BattleOtherAnims.selfstatus.anim,
 	},
@@ -45378,7 +45397,6 @@ BattleMoveAnims['sharkattack'] = {anim: BattleMoveAnims['crunch'].anim};
 BattleMoveAnims['gawrrage'] = {anim: BattleMoveAnims['outrage'].anim};
 BattleMoveAnims['peacockattack'] = {anim: BattleMoveAnims['featherdance'].anim};
 BattleMoveAnims['ameway'] = {anim: BattleMoveAnims['dragondance'].anim};
-BattleMoveAnims['timetravel'] = {anim: BattleMoveAnims['shadowsneak'].anim};
 BattleMoveAnims['tako'] = {anim: BattleMoveAnims['hydropump'].anim};
 BattleMoveAnims['wah'] = {anim: BattleMoveAnims['nastyplot'].anim};
 BattleMoveAnims['phoenixshield'] = {anim: BattleMoveAnims['burningbulwark'].anim};
