@@ -17368,7 +17368,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 600,
 			}, 'ballistic');
 
-			scene.showEffect('flareball', {
+			scene.showEffect('leaf1', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -17380,7 +17380,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 900,
 			}, 'linear');
-			scene.showEffect('flareball', {
+			scene.showEffect('leaf2', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -21399,7 +21399,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
-				scale: 0.7,
+				scale: 0.6,
 				opacity: 0.6,
 			}, {
 				x: defender.x,
@@ -21412,7 +21412,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
-				scale: 0.7,
+				scale: 0.6,
 				opacity: 0.6,
 				time: 30,
 			}, {
@@ -21420,7 +21420,7 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y,
 				z: defender.z,
 				opacity: 0.6,
-				time: 330,
+				time: 360,
 			}, 'linear', 'explode');
 		},
 	},
@@ -21430,7 +21430,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
-				scale: 0.7,
+				scale: 0.6,
 				opacity: 0.6,
 			}, {
 				x: defender.x,
@@ -21443,7 +21443,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
-				scale: 0.7,
+				scale: 0.6,
 				opacity: 0.6,
 				time: 30,
 			}, {
@@ -21451,7 +21451,7 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y,
 				z: defender.z,
 				opacity: 0.6,
-				time: 330,
+				time: 360,
 			}, 'linear', 'explode');
 		},
 	},
