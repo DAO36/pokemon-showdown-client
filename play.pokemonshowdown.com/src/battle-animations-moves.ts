@@ -10897,7 +10897,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.1,
 				time: 1100,
 			}, 'decel', 'fade');
-			scene.showEffect('shadowball', {
+			scene.showEffect('iceball', {
 				x: defender.x,
 				y: defender.y - 5,
 				z: defender.z,
