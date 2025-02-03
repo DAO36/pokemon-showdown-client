@@ -20075,7 +20075,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	succubussong: {
 		anim(scene, [attacker]) {
-			scene.showEffect('shadowball', {
+			scene.showEffect('heart', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
@@ -20088,7 +20088,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 400,
 			}, 'linear');
-			scene.showEffect('heart', {
+			scene.showEffect('shadowball', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
@@ -20101,7 +20101,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 600,
 			}, 'linear');
-			scene.showEffect('shadowball', {
+			scene.showEffect('heart', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
