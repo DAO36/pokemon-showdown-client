@@ -3158,6 +3158,47 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear');
 		},
 	},
+	bigbang: {
+		anim(scene, [attacker]) {
+			scene.showEffect('mistball', {
+				x: attacker.x + 40,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0,
+				opacity: 0.6,
+			}, {
+				scale: 6,
+				opacity: 0,
+			}, 'decel');
+			scene.showEffect('shadowball', {
+				x: attacker.x - 40,
+				y: attacker.y - 20,
+				z: attacker.z,
+				scale: 0,
+				opacity: 0.6,
+				time: 150,
+			}, {
+				scale: 6,
+				opacity: 0,
+			}, 'decel');
+			scene.showEffect('electroball', {
+				x: attacker.x + 10,
+				y: attacker.y + 20,
+				z: attacker.z,
+				scale: 0,
+				opacity: 0.6,
+				time: 300,
+			}, {
+				scale: 6,
+				opacity: 0,
+			}, 'decel');
+			attacker.delay(450).anim({
+				scale: 4,
+				time: 400,
+				opacity: 0,
+			}, 'linear');
+		},
+	},
 	populationbomb: {
 		anim(scene, [attacker, defender]) {
 			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
@@ -45622,7 +45663,6 @@ BattleMoveAnims['hopesoda'] = {anim: BattleMoveAnims['milkdrink'].anim};
 BattleMoveAnims['hopeful'] = {anim: BattleMoveAnims['stoneedge'].anim};
 BattleMoveAnims['wormhole'] = {anim: BattleMoveAnims['hyperspacehole'].anim};
 BattleMoveAnims['supernova'] = {anim: BattleMoveAnims['boomburst'].anim};
-BattleMoveAnims['bigbang'] = {anim: BattleMoveAnims['explosion'].anim};
 BattleMoveAnims['mothernature'] = {anim: BattleMoveAnims['leafstorm'].anim};
 BattleMoveAnims['natureswrath'] = {anim: BattleMoveAnims['powerwhip'].anim};
 BattleMoveAnims['clockstrikes'] = {anim: BattleMoveAnims['xscissor'].anim};
