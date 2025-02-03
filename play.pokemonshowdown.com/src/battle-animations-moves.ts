@@ -2590,58 +2590,6 @@ export const BattleMoveAnims: AnimTable = {
 				time: 300,
 			}, 'swing');
 		},
-	}, 
-	tarotattack: {
-		anim(scene, [attacker, defender]) {
-			scene.backgroundEffect('#B84038', 700, 0.6);
-			scene.showEffect('mistball', {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.behind(-30),
-				scale: 3,
-				opacity: 0.3,
-			}, {
-				scale: 0.6,
-				opacity: 1,
-				time: 300,
-			}, 'decel', 'fade');
-			scene.showEffect('mistball', {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.behind(-30),
-				scale: 3,
-				opacity: 0.3,
-				time: 100,
-			}, {
-				scale: 0.8,
-				opacity: 0.6,
-				time: 400,
-			}, 'decel', 'fade');
-			scene.showEffect('mistball', {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.behind(-30),
-				scale: 0.6,
-				opacity: 0.8,
-				time: 400,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.behind(20),
-				scale: 1,
-				opacity: 0.8,
-				time: 800,
-			}, 'accel', 'explode');
-
-			defender.delay(800);
-			defender.anim({
-				z: defender.behind(10),
-				time: 200,
-			}, 'swing');
-			defender.anim({
-				time: 300,
-			}, 'swing');
-		},
 	},
 	aurasphere: {
 		anim(scene, [attacker, defender]) {
@@ -21344,7 +21292,7 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y,
 				z: defender.z,
 				opacity: 0.6,
-				time: 300,
+				time: 350,
 			}, 'linear', 'explode');
 			scene.showEffect('shadowball', {
 				x: attacker.x,
@@ -21358,7 +21306,7 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y,
 				z: defender.z,
 				opacity: 0.6,
-				time: 330,
+				time: 400,
 			}, 'linear', 'fade');
 		},
 	},
@@ -21393,6 +21341,50 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear', 'fade');
 		},
 	},
+	tarotattack: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('mistball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.5,
+				opacity: 0.6,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				opacity: 0.6,
+				time: 300,
+			}, 'linear', 'explode');
+			scene.showEffect('mistball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.5,
+				opacity: 0.6,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				opacity: 0.6,
+				time: 350,
+			}, 'linear', 'explode');
+			scene.showEffect('mistball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.5,
+				opacity: 0.6,
+				time: 360,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				opacity: 0.6,
+				time: 400,
+			}, 'linear', 'fade');
+		},
+	},
 	twintails: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('mistball', {
@@ -21420,7 +21412,7 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y,
 				z: defender.z,
 				opacity: 0.6,
-				time: 360,
+				time: 400,
 			}, 'linear', 'explode');
 		},
 	},
@@ -21451,7 +21443,7 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y,
 				z: defender.z,
 				opacity: 0.6,
-				time: 360,
+				time: 400,
 			}, 'linear', 'explode');
 		},
 	},
