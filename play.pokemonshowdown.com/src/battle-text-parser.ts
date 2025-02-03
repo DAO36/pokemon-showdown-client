@@ -510,12 +510,16 @@ class BattleTextParser {
 				case 'mimikyubusted': id = 'disguise'; break;
 				case 'zygardecomplete': id = 'powerconstruct'; break;
 				case 'necrozmaultra': id = 'ultranecroziumz'; break;
+				case 'akaihaatohaachama': id = 'chamachange'; break;
+				case 'akaihaato': id = 'chamachange'; templateName = 'transformEnd'; break;
 				case 'darmanitanzen': id = 'zenmode'; break;
 				case 'darmanitan': id = 'zenmode'; templateName = 'transformEnd'; break;
 				case 'darmanitangalarzen': id = 'zenmode'; break;
 				case 'darmanitangalar': id = 'zenmode'; templateName = 'transformEnd'; break;
 				case 'aegislashblade': id = 'stancechange'; break;
 				case 'aegislash': id = 'stancechange'; templateName = 'transformEnd'; break;
+				case 'moonahhoshinova': id = 'moonmania'; break;
+				case 'moonah': id = 'moonamania'; templateName = 'transformEnd'; break;
 				case 'wishiwashischool': id = 'schooling'; break;
 				case 'wishiwashi': id = 'schooling'; templateName = 'transformEnd'; break;
 				case 'miniormeteor': id = 'shieldsdown'; break;
