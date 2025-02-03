@@ -12392,7 +12392,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 1,
 				time: 775,
 			}, 'linear', 'explode');
-			scene.showEffect('foot', {
+			scene.showEffect('bone', {
 				x: defender.x,
 				y: defender.y + 10,
 				z: defender.z,
