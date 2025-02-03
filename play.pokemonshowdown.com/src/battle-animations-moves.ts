@@ -10043,7 +10043,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	clubsmash: {
 		anim(scene, [attacker, defender]) {
-			scene.showEffect('shadowball', {
+			scene.showEffect('sword', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -21424,6 +21424,37 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear', 'explode');
 		},
 	},
+	carrotstrike: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('energyball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.7,
+				opacity: 0.6,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				opacity: 0.6,
+				time: 300,
+			}, 'linear', 'explode');
+			scene.showEffect('energyball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.7,
+				opacity: 0.6,
+				time: 30,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				opacity: 0.6,
+				time: 330,
+			}, 'linear', 'explode');
+		},
+	},
 	candycrash: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('mistball', {
@@ -24368,7 +24399,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	elfarrows: {
 		anim(scene, [attacker, defender]) {
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
@@ -24390,7 +24421,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 600,
 			}, 'decel', 'fade');
 
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: attacker.x,
 				y: attacker.y - 35,
 				z: attacker.z,
@@ -24405,7 +24436,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 300,
 			}, 'decel');
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: attacker.x,
 				y: attacker.y - 35,
 				z: attacker.z,
@@ -24420,7 +24451,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 350,
 			}, 'decel');
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: attacker.x,
 				y: attacker.y - 35,
 				z: attacker.z,
@@ -24435,7 +24466,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 400,
 			}, 'decel');
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: attacker.x,
 				y: attacker.y - 35,
 				z: attacker.z,
@@ -24450,7 +24481,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 450,
 			}, 'decel');
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: attacker.x,
 				y: attacker.y - 35,
 				z: attacker.z,
@@ -24465,7 +24496,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 500,
 			}, 'decel', 'fade');
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: attacker.x,
 				y: attacker.y - 35,
 				z: attacker.z,
@@ -24481,7 +24512,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 550,
 			}, 'decel', 'fade');
 
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: defender.x - 20,
 				y: defender.y + 200,
 				z: defender.behind(5),
@@ -24494,7 +24525,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 675,
 			}, 'decel');
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: defender.x - 20,
 				y: defender.y - 50,
 				z: defender.behind(5),
@@ -24509,7 +24540,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 675,
 			}, 'linear');
 
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: defender.x + 40,
 				y: defender.y + 200,
 				z: defender.behind(-5),
@@ -24522,7 +24553,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 800,
 			}, 'decel');
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: defender.x + 40,
 				y: defender.y - 50,
 				z: defender.behind(-5),
@@ -24537,7 +24568,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 800,
 			}, 'linear');
 
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: defender.x - 70,
 				y: defender.y + 200,
 				z: defender.behind(-10),
@@ -24551,7 +24582,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 825,
 			}, 'decel');
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: defender.x - 70,
 				y: defender.y - 50,
 				z: defender.z,
@@ -24566,7 +24597,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 825,
 			}, 'linear');
 
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: defender.x + 70,
 				y: defender.y + 200,
 				z: defender.behind(10),
@@ -24579,7 +24610,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 950,
 			}, 'decel');
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: defender.x + 70,
 				y: defender.y - 50,
 				z: defender.behind(10),
@@ -24594,7 +24625,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 950,
 			}, 'linear');
 
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: defender.x,
 				y: defender.y + 200,
 				z: defender.z,
@@ -24607,7 +24638,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 1000,
 			}, 'decel');
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: defender.x,
 				y: defender.y - 50,
 				z: defender.z,
@@ -24622,7 +24653,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 1000,
 			}, 'linear');
 
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: defender.x,
 				y: defender.y + 200,
 				z: defender.behind(-20),
@@ -24635,7 +24666,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 1025,
 			}, 'decel');
-			scene.showEffect('flareball', {
+			scene.showEffect('mistball', {
 				x: defender.x,
 				y: defender.y - 35,
 				z: defender.behind(-20),
@@ -26654,97 +26685,6 @@ export const BattleMoveAnims: AnimTable = {
 		},
 	},
 	energyball: {
-		anim(scene, [attacker, defender]) {
-			scene.showEffect('energyball', {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.z,
-				scale: 0.8,
-				opacity: 0.3,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.z,
-				opacity: 0.6,
-				time: 400,
-			}, 'linear', 'explode');
-			scene.showEffect('wisp', {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.z,
-				scale: 1,
-				opacity: 0.2,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.z,
-				scale: 1.5,
-				time: 400,
-			}, 'linear', 'explode');
-			scene.showEffect('energyball', {
-				x: defender.x + 30,
-				y: defender.y + 25,
-				z: defender.z,
-				scale: 0.2,
-				opacity: 0.6,
-				time: 400,
-			}, {
-				x: defender.x + 50,
-				y: defender.y + 10,
-				opacity: 0.3,
-				time: 700,
-			}, 'accel', 'explode');
-			scene.showEffect('energyball', {
-				x: defender.x - 30,
-				y: defender.y - 20,
-				z: defender.z,
-				scale: 0.2,
-				opacity: 0.6,
-				time: 500,
-			}, {
-				x: defender.x - 50,
-				y: defender.y - 20,
-				opacity: 0.3,
-				time: 700,
-			}, 'accel', 'explode');
-			scene.showEffect('energyball', {
-				x: defender.x + 15,
-				y: defender.y + 10,
-				z: defender.z,
-				scale: 0.2,
-				opacity: 0.7,
-				time: 600,
-			}, {
-				x: defender.x + 35,
-				y: defender.y + 30,
-				opacity: 0.3,
-				time: 800,
-			}, 'accel', 'explode');
-			scene.showEffect('energyball', {
-				x: defender.x - 15,
-				y: defender.y - 30,
-				z: defender.z,
-				scale: 0.2,
-				opacity: 0.7,
-				time: 600,
-			}, {
-				x: defender.x - 35,
-				y: defender.y - 40,
-				opacity: 0.3,
-				time: 800,
-			}, 'accel', 'explode');
-
-			defender.delay(400);
-			defender.anim({
-				z: defender.behind(5),
-				time: 200,
-			}, 'swing');
-			defender.anim({
-				time: 300,
-			}, 'swing');
-		},
-	},
-	carrotstrike: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('energyball', {
 				x: attacker.x,
