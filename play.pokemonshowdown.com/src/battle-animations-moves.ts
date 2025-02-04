@@ -33408,7 +33408,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 710,
 			}, 'accel', 'explode');
-			scene.showEffect('shadowball', {
+			scene.showEffect('feather', {
 				x: defender.x - 30,
 				y: defender.y - 20,
 				z: defender.z,
@@ -33434,7 +33434,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 810,
 			}, 'accel', 'explode');
-			scene.showEffect('shadowball', {
+			scene.showEffect('feather', {
 				x: defender.x - 15,
 				y: defender.y - 30,
 				z: defender.z,
@@ -33447,7 +33447,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 910,
 			}, 'accel', 'explode');
-			scene.showEffect('feather', {
+			scene.showEffect('shadowball', {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
