@@ -8675,7 +8675,7 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y,
 				z: defender.behind(0),
 			}, 'ballistic', 'fade'); 
-			scene.showEffect('iceball', {
+			scene.showEffect('shine', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -8739,7 +8739,7 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y,
 				z: defender.behind(0),
 			}, 'ballistic', 'fade'); 
-			scene.showEffect('shadowball', {
+			scene.showEffect('mudwisp', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
