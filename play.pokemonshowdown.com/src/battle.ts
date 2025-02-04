@@ -703,7 +703,7 @@ export class Side {
 			this.sideConditions[condition] = [effect.name, 1, 5, 0];
 			break;
 		case 'hologram':
-			this.sideConditions[condition] = [effect.name, 1, 5, 0];
+			this.sideConditions[condition] = [effect.name, 1, 5, this.battle.gen >= 4 ? 8 : 0];
 			break;
 		case 'tailwind':
 			this.sideConditions[condition] = [effect.name, 1, this.battle.gen >= 5 ? persist ? 6 : 4 : persist ? 5 : 3, 0];
@@ -2729,7 +2729,7 @@ export class Battle {
 				this.scene.resultAnim(poke, 'Reflect', 'good');
 				break;
 			case 'hologram':
-				this.scene.resultAnim(poke, 'Reflect', 'good');
+				this.scene.resultAnim(poke, 'Hologram', 'good');
 				break;
 			}
 			if (!(effect.id === 'typechange' && poke.terastallized)) {

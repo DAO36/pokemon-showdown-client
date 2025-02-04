@@ -1916,7 +1916,7 @@ export class PokemonSprite extends Sprite {
 		// Gen 1
 		lightscreen: ['Light Screen', 'good'],
 		reflect: ['Reflect', 'good'],
-		hologram: ['Reflect', 'good'],
+		hologram: ['Hologram', 'good'],
 	};
 	forme = '';
 	cryurl: string | undefined = undefined;
