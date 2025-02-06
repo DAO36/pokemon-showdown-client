@@ -21773,7 +21773,7 @@ export const BattleMoveAnims: AnimTable = {
 	furyattack: {
 		anim: BattleOtherAnims.xattack.anim,
 	},
-	gunfire: {
+	ssrb: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('shadowball', {
 				x: attacker.x,
