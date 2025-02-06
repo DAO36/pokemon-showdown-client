@@ -7767,6 +7767,36 @@ export const BattleMoveAnims: AnimTable = {
 			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
 		},
 	},
+	ratattack: {
+		anim(scene, [attacker, defender]) {
+			scene.backgroundEffect('#000000', 800, 0.3);
+			scene.showEffect('bottombite', {
+				x: defender.x,
+				y: defender.y + 70,
+				z: defender.z,
+				scale: 0.65,
+				opacity: 0,
+				time: 370,
+			}, {
+				y: defender.y + 20,
+				opacity: 1,
+				time: 500,
+			}, 'linear', 'explode');
+			scene.showEffect('topbite', {
+				x: defender.x,
+				y: defender.y - 70,
+				z: defender.z,
+				scale: 0.65,
+				opacity: 0,
+				time: 370,
+			}, {
+				y: defender.y - 20,
+				opacity: 1,
+				time: 500,
+			}, 'linear', 'explode');
+			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
+		},
+	},
 	mamamia: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 800, 0.3);
@@ -37402,6 +37432,167 @@ export const BattleMoveAnims: AnimTable = {
 				time: 1500,
 			}, 'accel', 'explode');
 			scene.showEffect('wisp', {
+				x: defender.x - 15,
+				y: defender.y - 30,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 0.7,
+				time: 1300,
+			}, {
+				x: defender.x - 35,
+				y: defender.y - 40,
+				opacity: 0.3,
+				time: 1500,
+			}, 'accel', 'explode');
+
+			attacker.anim({
+				x: attacker.x + 5,
+				y: attacker.y + 10,
+				time: 100,
+			}, 'ballistic');
+			attacker.anim({
+				x: attacker.x + 10,
+				y: attacker.y,
+				time: 50,
+			});
+			attacker.anim({
+				x: attacker.x - 5,
+				y: attacker.y + 10,
+				time: 200,
+			}, 'ballistic');
+			attacker.anim({
+				x: attacker.x - 10,
+				y: attacker.y,
+				time: 100,
+			});
+			attacker.anim({
+				x: attacker.x - 5,
+				y: attacker.y + 10,
+				time: 100,
+			}, 'ballistic');
+			attacker.anim({
+				x: attacker.x,
+				y: attacker.y,
+				time: 50,
+			});
+			attacker.anim({
+				z: attacker.behind(15),
+				time: 200,
+			}, 'decel');
+			attacker.anim({
+				z: attacker.behind(-15),
+				time: 100,
+			}, 'accel');
+			attacker.anim({
+				z: attacker.z,
+				time: 300,
+			}, 'swing');
+			defender.delay(1100);
+			defender.anim({
+				z: defender.behind(15),
+				time: 100,
+			}, 'swing');
+			defender.anim({
+				time: 300,
+			}, 'swing');
+		},
+	},
+	rolldice: {
+		anim(scene, [attacker, defender]) {
+			scene.backgroundEffect('#000000', 1300, 0.3);
+			scene.showEffect('shadowball', {
+				x: attacker.x + 20,
+				y: attacker.y - 60,
+				z: attacker.behind(15),
+				scale: 1,
+				xscale: 2,
+				opacity: 0.5,
+				time: 150,
+			}, {
+				scale: 1.5,
+				xscale: 4,
+				opacity: 0,
+			}, 'linear', 'fade');
+			scene.showEffect('shadowball', {
+				x: attacker.x - 20,
+				y: attacker.y - 60,
+				z: attacker.behind(15),
+				scale: 1,
+				xscale: 2,
+				opacity: 0.5,
+				time: 500,
+			}, {
+				scale: 1.5,
+				xscale: 4,
+				opacity: 0,
+			}, 'linear', 'fade');
+			scene.showEffect('shadowball', {
+				x: attacker.x,
+				y: attacker.y - 60,
+				z: attacker.behind(15),
+				scale: 1,
+				xscale: 2,
+				opacity: 0.5,
+				time: 650,
+			}, {
+				scale: 1.5,
+				xscale: 4,
+				opacity: 0,
+			}, 'linear', 'fade');
+			scene.showEffect('shadowball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.behind(-15),
+				scale: 0.7,
+				xscale: 1,
+				opacity: 0.8,
+				time: 900,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(5),
+				time: 1100,
+			}, 'linear', 'explode');
+			scene.showEffect('poisonwisp', {
+				x: defender.x + 30,
+				y: defender.y + 25,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 0.6,
+				time: 1100,
+			}, {
+				x: defender.x + 50,
+				y: defender.y + 10,
+				opacity: 0.3,
+				time: 1400,
+			}, 'accel', 'explode');
+			scene.showEffect('poisonwisp', {
+				x: defender.x - 30,
+				y: defender.y - 20,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 0.6,
+				time: 1200,
+			}, {
+				x: defender.x - 50,
+				y: defender.y - 20,
+				opacity: 0.3,
+				time: 1400,
+			}, 'accel', 'explode');
+			scene.showEffect('poisonwisp', {
+				x: defender.x + 15,
+				y: defender.y + 10,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 0.7,
+				time: 1300,
+			}, {
+				x: defender.x + 35,
+				y: defender.y + 30,
+				opacity: 0.3,
+				time: 1500,
+			}, 'accel', 'explode');
+			scene.showEffect('poisonwisp', {
 				x: defender.x - 15,
 				y: defender.y - 30,
 				z: defender.z,
