@@ -5456,7 +5456,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear');
 		},
 	},
-	iamgodok: {
+	imgodok: {
 		anim(scene, [attacker]) {
 			scene.showEffect('shadowball', {
 				x: attacker.x,
@@ -39337,7 +39337,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	keris: {
+	kerisslash: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('rightslash', {
 				x: defender.x,

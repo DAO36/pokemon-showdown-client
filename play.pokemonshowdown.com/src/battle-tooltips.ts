@@ -747,10 +747,7 @@ class BattleTooltips {
 			}
 			if (move.flags.punch && ability === 'muscleknight') {
 				text += `<p class="movetag">&#x2713; Fist <small>(boosted by Muscle Knight)</small></p>`;
-			}
-			if (move.flags.punch && ability === 'tonjokqueen') {
-				text += `<p class="movetag">&#x2713; Fist <small>(boosted by TonjokQueen)</small></p>`;
-			}
+			} 
 			if (move.flags.sound && ability === 'diva') {
 				text += `<p class="movetag">&#x2713; Sound <small>(boosted by Diva)</small></p>`;
 			}
@@ -762,6 +759,9 @@ class BattleTooltips {
 			}
 			if (move.flags.bite && ability === 'strongjaw') {
 				text += `<p class="movetag">&#x2713; Bite <small>(boosted by Strong Jaw)</small></p>`;
+			}
+			if (move.flags.bullet && ability === 'botanx') {
+				text += `<p class="movetag">&#x2713; Bullet <small>(boosted by Botan X)</small></p>`;
 			}
 			if (move.flags.bite && ability === 'bigcatmeansbigtrouble') {
 				text += `<p class="movetag">&#x2713; Bite <small>(boosted by Big Cat Means Big Trouble)</small></p>`;
@@ -1825,9 +1825,9 @@ class BattleTooltips {
 		} else if (value.tryAbility('Compound Eyes')) {
 			accuracyModifiers.push(5325);
 			value.abilityModify(1.3, "Compound Eyes");
-		} else if (value.tryAbility('Botan X')) {
+		} else if (value.tryAbility('Botan X2')) {
 			accuracyModifiers.push(5325);
-			value.abilityModify(1.3, "Botan X");
+			value.abilityModify(1.3, "Botan X2");
 		}
 
 		if (value.tryItem('Wide Lens')) {
@@ -2123,15 +2123,15 @@ class BattleTooltips {
 		}
 		if (move.flags['punch']) {
 			value.abilityModify(1.2, 'Iron Fist');
-		}
+		} 
 		if (move.flags['punch']) {
-			value.abilityModify(1.2, 'TonjokQueen');
-		}
-		if (move.flags['punch']) {
-			value.abilityModify(1.2, 'Muscle Knight');
+			value.abilityModify(1.5, 'Muscle Knight');
 		}
 		if (move.flags['pulse']) {
 			value.abilityModify(1.5, "Mega Launcher");
+		}
+		if (move.flags['bullet']) {
+			value.abilityModify(1.5, "Botan X");
 		}
 		if (move.flags['bite']) {
 			value.abilityModify(1.5, "Strong Jaw");
@@ -2143,7 +2143,7 @@ class BattleTooltips {
 			value.abilityModify(1.5, "Technician");
 		}
 		if (value.value <= 60) {
-			value.abilityModify(1.5, "The Legend of Polka");	
+			value.abilityModify(1.5, "Legend of Polka");	
 		}
 		if (['psn', 'tox'].includes(pokemon.status) && move.category === 'Physical') {
 			value.abilityModify(1.5, "Toxic Boost");
