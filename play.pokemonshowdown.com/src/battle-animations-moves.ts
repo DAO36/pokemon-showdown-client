@@ -7861,7 +7861,7 @@ export const BattleMoveAnims: AnimTable = {
 			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
 		},
 	},
-	mamamia: {
+	chattinichomp: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 800, 0.3);
 			scene.showEffect('topbite', {
@@ -21408,9 +21408,9 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'decel', 'fade');
 		},
 	},
-	godeyes: {
+	bigcatmeansbigtrouble: {
 		anim(scene, [attacker, defender]) {
-			scene.backgroundEffect('#F2E102', 250, 0.3);
+			scene.backgroundEffect('#00FFFF', 250, 0.3);
 			scene.backgroundEffect('#FFFFFF', 250, 0.2, 400);
 			scene.showEffect('stare', {
 				x: defender.x,

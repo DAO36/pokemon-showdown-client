@@ -762,10 +762,7 @@ class BattleTooltips {
 			}
 			if (move.flags.bullet && ability === 'botanx') {
 				text += `<p class="movetag">&#x2713; Bullet <small>(boosted by Botan X)</small></p>`;
-			}
-			if (move.flags.bite && ability === 'bigcatmeansbigtrouble') {
-				text += `<p class="movetag">&#x2713; Bite <small>(boosted by Big Cat Means Big Trouble)</small></p>`;
-			}	
+			} 
 			if ((move.recoil || move.hasCrashDamage) && ability === 'reckless') {
 				text += `<p class="movetag">&#x2713; Recoil <small>(boosted by Reckless)</small></p>`;
 			}
