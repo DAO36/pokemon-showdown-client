@@ -31244,7 +31244,7 @@ export const BattleMoveAnims: AnimTable = {
 				}, 'linear');
 			}
 
-			scene.showEffect('flareball', {
+			scene.showEffect('fireball', {
 				x: defender.x + 30,
 				y: defender.y + 25,
 				z: defender.z,
@@ -31257,7 +31257,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 800,
 			}, 'accel', 'explode');
-			scene.showEffect('flareball', {
+			scene.showEffect('fireball', {
 				x: defender.x - 30,
 				y: defender.y - 20,
 				z: defender.z,
@@ -31270,7 +31270,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 800,
 			}, 'accel', 'explode');
-			scene.showEffect('flareball', {
+			scene.showEffect('fireball', {
 				x: defender.x + 15,
 				y: defender.y + 10,
 				z: defender.z,
@@ -31283,7 +31283,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 900,
 			}, 'accel', 'explode');
-			scene.showEffect('flareball', {
+			scene.showEffect('fireball', {
 				x: defender.x - 15,
 				y: defender.y - 30,
 				z: defender.z,
@@ -31296,7 +31296,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 900,
 			}, 'accel', 'explode');
-			scene.showEffect('flareball', {
+			scene.showEffect('fireball', {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
