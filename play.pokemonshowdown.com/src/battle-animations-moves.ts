@@ -8510,6 +8510,85 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
+	staticslam: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect(attacker.sp, {
+				x: defender.leftof(-10),
+				y: attacker.y + 170,
+				z: attacker.behind(-35),
+				opacity: 0.3,
+				time: 25,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(0),
+			}, 'ballistic', 'fade');
+			scene.showEffect(attacker.sp, {
+				x: defender.leftof(-10),
+				y: attacker.y + 170,
+				z: attacker.behind(-35),
+				opacity: 0.3,
+				time: 75,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(0),
+			}, 'ballistic', 'fade');
+			scene.showEffect('electroball', {
+				x: defender.x,
+				y: defender.y + 20,
+				z: defender.z,
+				scale: 1,
+				opacity: 1,
+				time: 500,
+			}, {
+				x: defender.x,
+				y: defender.y + 10,
+				z: defender.behind(15),
+				scale: 2,
+				opacity: 0,
+				time: 900,
+			}, 'linear');
+			scene.showEffect('shine', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0,
+				opacity: 0.7,
+				time: 500,
+			}, {
+				scale: 3,
+				opacity: 0,
+				time: 750,
+			}, 'linear', 'fade');
+
+			attacker.anim({
+				x: defender.x,
+				y: defender.y + 170,
+				z: defender.behind(-30),
+				time: 400,
+			}, 'ballistic');
+			attacker.anim({
+				x: defender.x,
+				y: defender.y + 5,
+				z: defender.z,
+				time: 200,
+			});
+			attacker.anim({
+				time: 500,
+			}, 'ballistic2Back');
+			defender.delay(500);
+			defender.anim({
+				y: defender.y - 5,
+				z: defender.behind(40),
+				yscale: 0.9,
+				time: 300,
+			}, 'swing');
+			defender.anim({
+				time: 300,
+			}, 'swing');
+		},
+	},
 	magickick: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect(attacker.sp, {
@@ -10056,72 +10135,6 @@ export const BattleMoveAnims: AnimTable = {
 	heavyslam: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('shadowball', {
-				x: defender.x,
-				y: defender.y,
-				z: defender.z,
-				scale: 0,
-				opacity: 0.5,
-				time: 450,
-			}, {
-				scale: 2,
-				opacity: 0,
-				time: 700,
-			}, 'linear');
-			scene.showEffect('wisp', {
-				x: defender.x,
-				y: defender.y - 30,
-				z: defender.z,
-				scale: 1,
-				time: 500,
-			}, {
-				x: defender.x + 70,
-				scale: 0.8,
-				opacity: 0.3,
-				time: 800,
-			}, 'linear', 'fade');
-			scene.showEffect('wisp', {
-				x: defender.x,
-				y: defender.y - 30,
-				z: defender.z,
-				scale: 1,
-				time: 500,
-			}, {
-				x: defender.x - 70,
-				scale: 0.8,
-				opacity: 0.3,
-				time: 800,
-			}, 'linear', 'fade');
-
-			attacker.anim({
-				x: defender.x,
-				y: defender.y + 80,
-				z: defender.behind(-30),
-				time: 400,
-			}, 'ballistic');
-			attacker.anim({
-				x: defender.x,
-				y: defender.y + 5,
-				z: defender.behind(20),
-				time: 100,
-			});
-			attacker.anim({
-				time: 600,
-			}, 'ballistic2Back');
-			defender.delay(450);
-			defender.anim({
-				y: defender.y - 30,
-				z: defender.behind(20),
-				yscale: 0.5,
-				time: 200,
-			}, 'swing');
-			defender.anim({
-				time: 300,
-			}, 'swing');
-		},
-	},
-	staticslam: {
-		anim(scene, [attacker, defender]) {
-			scene.showEffect('electroball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
