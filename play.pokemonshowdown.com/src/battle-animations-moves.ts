@@ -11901,15 +11901,15 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
-				scale: 0.6,
+				scale: 0.5,
 				opacity: 0.6,
 				time: 425,
 			}, {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
-				scale: 1,
-				opacity: 1,
+				scale: 0.5,
+				opacity: 0.6,
 				time: 525,
 			}, 'linear', 'explode');
 			scene.showEffect('feather', {
@@ -11923,8 +11923,8 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x - 20,
 				y: defender.y + 30,
 				z: defender.z,
-				scale: 1,
-				opacity: 1,
+				scale: 0.5,
+				opacity: 0.6,
 				time: 550,
 			}, 'linear', 'explode');
 			scene.showEffect('feather', {
@@ -11938,8 +11938,8 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 35,
 				y: defender.y - 30,
 				z: defender.z,
-				scale: 1,
-				opacity: 1,
+				scale: 0.5,
+				opacity: 0.6,
 				time: 575,
 			}, 'linear', 'explode');
 			scene.showEffect('feather', {
@@ -11953,8 +11953,8 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x - 35,
 				y: defender.y - 30,
 				z: defender.z,
-				scale: 1,
-				opacity: 1,
+				scale: 0.5,
+				opacity: 0.6,
 				time: 775,
 			}, 'linear', 'explode');
 			scene.showEffect('feather', {
@@ -11968,8 +11968,8 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 10,
 				y: defender.y - 15,
 				z: defender.z,
-				scale: 1,
-				opacity: 1,
+				scale: 0.5,
+				opacity: 0.6,
 				time: 750,
 			}, 'linear', 'explode');
 			scene.showEffect('feather', {
@@ -11983,8 +11983,8 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x - 10,
 				y: defender.y + 15,
 				z: defender.z,
-				scale: 1,
-				opacity: 1,
+				scale: 0.5,
+				opacity: 0.6,
 				time: 800,
 			}, 'linear', 'explode');
 
