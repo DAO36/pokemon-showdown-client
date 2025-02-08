@@ -11578,14 +11578,14 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y,
 				z: defender.z,
 				scale: 0.6,
-				opacity: 0.6,
+				opacity: 0.3,
 				time: 425,
 			}, {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
 				scale: 1,
-				opacity: 1,
+				opacity: 0.6,
 				time: 525,
 			}, 'linear', 'explode');
 			scene.showEffect('shadowball', {
@@ -11593,14 +11593,14 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y + 20,
 				z: defender.z,
 				scale: 0.6,
-				opacity: 0.6,
+				opacity: 0.3,
 				time: 450,
 			}, {
 				x: defender.x - 20,
 				y: defender.y + 30,
 				z: defender.z,
 				scale: 1,
-				opacity: 1,
+				opacity: 0.6,
 				time: 550,
 			}, 'linear', 'explode');
 			scene.showEffect('shadowball', {
@@ -11608,14 +11608,14 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y - 20,
 				z: defender.z,
 				scale: 0.6,
-				opacity: 0.6,
+				opacity: 0.3,
 				time: 475,
 			}, {
 				x: defender.x + 35,
 				y: defender.y - 30,
 				z: defender.z,
 				scale: 1,
-				opacity: 1,
+				opacity: 0.6,
 				time: 575,
 			}, 'linear', 'explode');
 			scene.showEffect('shadowball', {
@@ -11623,14 +11623,14 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y - 20,
 				z: defender.z,
 				scale: 0.6,
-				opacity: 0.6,
+				opacity: 0.3,
 				time: 575,
 			}, {
 				x: defender.x - 35,
 				y: defender.y - 30,
 				z: defender.z,
 				scale: 1,
-				opacity: 1,
+				opacity: 0.6,
 				time: 775,
 			}, 'linear', 'explode');
 			scene.showEffect('shadowball', {
@@ -11638,14 +11638,14 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y - 10,
 				z: defender.z,
 				scale: 0.6,
-				opacity: 0.6,
+				opacity: 0.3,
 				time: 600,
 			}, {
 				x: defender.x + 10,
 				y: defender.y - 15,
 				z: defender.z,
 				scale: 1,
-				opacity: 1,
+				opacity: 0.6,
 				time: 750,
 			}, 'linear', 'explode');
 			scene.showEffect('shadowball', {
@@ -11653,14 +11653,14 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y + 10,
 				z: defender.z,
 				scale: 0.6,
-				opacity: 0.6,
+				opacity: 0.3,
 				time: 650,
 			}, {
 				x: defender.x - 10,
 				y: defender.y + 15,
 				z: defender.z,
 				scale: 1,
-				opacity: 1,
+				opacity: 0.6,
 				time: 800,
 			}, 'linear', 'explode');
 
@@ -12240,75 +12240,75 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x - 10,
 				y: defender.y + 20,
 				z: defender.z,
-				scale: 0.6,
-				opacity: 0.6,
+				scale: 0.3,
+				opacity: 0.3,
 				time: 450,
 			}, {
 				x: defender.x - 20,
 				y: defender.y + 30,
 				z: defender.z,
-				scale: 1,
-				opacity: 1,
+				scale: 0.3,
+				opacity: 0.3,
 				time: 550,
 			}, 'linear', 'explode');
 			scene.showEffect('rock2', {
 				x: defender.x + 30,
 				y: defender.y - 20,
 				z: defender.z,
-				scale: 0.6,
-				opacity: 0.6,
+				scale: 0.3,
+				opacity: 0.3,
 				time: 475,
 			}, {
 				x: defender.x + 35,
 				y: defender.y - 30,
 				z: defender.z,
-				scale: 1,
-				opacity: 1,
+				scale: 0.3,
+				opacity: 0.3,
 				time: 575,
 			}, 'linear', 'explode');
 			scene.showEffect('rock3', {
 				x: defender.x - 30,
 				y: defender.y - 20,
 				z: defender.z,
-				scale: 0.6,
-				opacity: 0.6,
+				scale: 0.3,
+				opacity: 0.3,
 				time: 575,
 			}, {
 				x: defender.x - 35,
 				y: defender.y - 30,
 				z: defender.z,
-				scale: 1,
-				opacity: 1,
+				scale: 0.3,
+				opacity: 0.3,
 				time: 775,
 			}, 'linear', 'explode');
 			scene.showEffect('rock2', {
 				x: defender.x,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 0.6,
-				opacity: 0.6,
+				scale: 0.3,
+				opacity: 0.3,
 				time: 600,
 			}, {
 				x: defender.x + 10,
 				y: defender.y - 15,
 				z: defender.z,
-				scale: 1,
-				opacity: 1,
+				scale: 0.3,
+				opacity: 0.3,
 				time: 750,
 			}, 'linear', 'explode');
 			scene.showEffect('rock1', {
 				x: defender.x,
 				y: defender.y + 10,
 				z: defender.z,
-				scale: 0.6,
-				opacity: 0.6,
+				scale: 0.3,
+				opacity: 0.3,
 				time: 650,
 			}, {
 				x: defender.x - 10,
 				y: defender.y + 15,
 				z: defender.z,
-				scale: 1,
-				opacity: 1,
+				scale: 0.3,
+				opacity: 0.3,
 				time: 800,
 			}, 'linear', 'explode');
 
@@ -34876,7 +34876,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 300,
 			}, 'decel', 'fade');
 
-			scene.showEffect('fireball', {
+			scene.showEffect('bluefireball', {
 				x: defender.x + 30,
 				y: defender.y + 25,
 				z: defender.z,
@@ -34889,7 +34889,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 710,
 			}, 'accel', 'explode');
-			scene.showEffect('fireball', {
+			scene.showEffect('bluefireball', {
 				x: defender.x - 30,
 				y: defender.y - 20,
 				z: defender.z,
@@ -34902,7 +34902,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 710,
 			}, 'accel', 'explode');
-			scene.showEffect('fireball', {
+			scene.showEffect('bluefireball', {
 				x: defender.x + 15,
 				y: defender.y + 10,
 				z: defender.z,
@@ -34915,7 +34915,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 810,
 			}, 'accel', 'explode');
-			scene.showEffect('fireball', {
+			scene.showEffect('bluefireball', {
 				x: defender.x - 15,
 				y: defender.y - 30,
 				z: defender.z,
@@ -34928,7 +34928,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 910,
 			}, 'accel', 'explode');
-			scene.showEffect('fireball', {
+			scene.showEffect('bluefireball', {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
