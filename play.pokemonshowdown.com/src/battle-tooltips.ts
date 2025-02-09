@@ -1806,7 +1806,7 @@ class BattleTooltips {
 			accuracyModifiers.push(6840);
 			value.modify(5 / 3, "Gravity"); 
 		if (move.id === 'blackhole')  
-			accuracyModifiers.push(3277);
+			accuracyModifiers.push(3257);
 			value.modify(0.8);
 		}
 
