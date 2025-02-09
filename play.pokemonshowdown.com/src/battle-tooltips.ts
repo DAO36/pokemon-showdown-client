@@ -1806,7 +1806,7 @@ class BattleTooltips {
 			accuracyModifiers.push(6840);
 			value.modify(5 / 3, "Gravity");
 		if (move.id === 'blackhole')
-			return; null
+			value.modify(10 / 8);
 		}
 
 		for (const active of pokemon.side.active) {
