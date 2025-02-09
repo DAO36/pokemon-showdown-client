@@ -1802,12 +1802,9 @@ class BattleTooltips {
 		// Accuracy modifiers start
 
 		let accuracyModifiers = [];
-		if (this.battle.hasPseudoWeather('Gravity')) {
+		if (this.battle.hasPseudoWeather('Gravity') && move.id !== 'blackhole') {
 			accuracyModifiers.push(6840);
-			value.modify(5 / 3, "Gravity"); 
-		if (move.id === 'blackhole')  
-			accuracyModifiers.push(3257);
-			value.modify(0.8);
+			value.modify(5 / 3, "Gravity");  
 		}
 
 		for (const active of pokemon.side.active) {
