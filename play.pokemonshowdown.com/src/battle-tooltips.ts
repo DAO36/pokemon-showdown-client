@@ -2149,7 +2149,7 @@ class BattleTooltips {
 			if (value.tryAbility("Sand Force")) value.weatherModify(1.3, "Sandstorm", "Sand Force");
 		}
 		if (['Rock', 'Ground', 'Steel'].includes(moveType) && this.battle.weather === 'sandstorm') {
-			if (value.tryAbility("Grindstone")) value.weatherModify(1.3, "Sandstorm", "Grindstone");
+			if (value.tryAbility("Graondstone")) value.weatherModify(1.3, "Sandstorm", "Graondstone");
 		}
 		if (move.secondaries) {
 			value.abilityModify(1.3, "Sheer Force");
