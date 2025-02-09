@@ -1317,7 +1317,7 @@ export const BattleMoveAnims: AnimTable = {
 			scene.backgroundEffect('#9AB440', 1000, 0.3);
 			for (const defender of defenders) {
 				BattleOtherAnims.dance.anim(scene, [defender]);
-				scene.showEffect('rock1', {
+				scene.showEffect('rocks', {
 					x: defender.x,
 					y: defender.y,
 					z: defender.z,
@@ -1331,7 +1331,7 @@ export const BattleMoveAnims: AnimTable = {
 					opacity: 0,
 					time: 1100,
 				}, 'linear', 'fade');
-				scene.showEffect('rock2', {
+				scene.showEffect('rocks', {
 					x: defender.x,
 					y: defender.y,
 					z: defender.z,
@@ -1345,7 +1345,7 @@ export const BattleMoveAnims: AnimTable = {
 					opacity: 0,
 					time: 1100,
 				}, 'linear', 'fade');
-				scene.showEffect('rock3', {
+				scene.showEffect('rocks', {
 					x: defender.x,
 					y: defender.y,
 					z: defender.z,
@@ -1359,7 +1359,7 @@ export const BattleMoveAnims: AnimTable = {
 					opacity: 0,
 					time: 1100,
 				}, 'linear', 'fade');
-				scene.showEffect('rock1', {
+				scene.showEffect('rocks', {
 					x: defender.x,
 					y: defender.y,
 					z: defender.z,
