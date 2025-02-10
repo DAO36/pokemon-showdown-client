@@ -10464,6 +10464,56 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		}, 
 	},
+	tnt: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('fireball', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0,
+				opacity: 0.5,
+				time: 450,
+			}, {
+				scale: 2,
+				opacity: 0,
+				time: 700,
+			}, 'linear');
+			scene.showEffect('fireball', {
+				x: defender.x,
+				y: defender.y - 30,
+				z: defender.z,
+				scale: 1,
+				time: 500,
+			}, {
+				x: defender.x + 70,
+				scale: 0.8,
+				opacity: 0.3,
+				time: 800,
+			}, 'linear', 'fade');
+			scene.showEffect('fireball', {
+				x: defender.x,
+				y: defender.y - 30,
+				z: defender.z,
+				scale: 1,
+				time: 500,
+			}, {
+				x: defender.x - 70,
+				scale: 0.8,
+				opacity: 0.3,
+				time: 800,
+			}, 'linear', 'fade');
+			defender.delay(450);
+			defender.anim({
+				y: defender.y - 30,
+				z: defender.behind(20),
+				yscale: 0.5,
+				time: 200,
+			}, 'swing');
+			defender.anim({
+				time: 300,
+			}, 'swing');
+		}, 
+	},
 	heavyslam: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('shadowball', {
@@ -28304,6 +28354,65 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 1,
 			}, 'ballistic');
 			scene.showEffect('rock2', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.1,
+				opacity: 0.5,
+				time: 225,
+			}, {
+				x: defender.leftof(10),
+				y: defender.y - 30,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+			}, 'ballistic');
+		},
+	},
+	carrottrap: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('greenmetal1', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.1,
+				opacity: 0.5,
+			}, {
+				x: defender.leftof(-40),
+				y: defender.y - 10,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+			}, 'ballistic');
+			scene.showEffect('greenmetal2', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.1,
+				opacity: 0.5,
+				time: 75,
+			}, {
+				x: defender.leftof(-20),
+				y: defender.y - 40,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+			}, 'ballistic');
+			scene.showEffect('greenmetal1', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.1,
+				opacity: 0.5,
+				time: 150,
+			}, {
+				x: defender.leftof(30),
+				y: defender.y - 20,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+			}, 'ballistic');
+			scene.showEffect('greenmetal2', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
