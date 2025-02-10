@@ -2294,22 +2294,22 @@ class BattleTooltips {
 			value.modify(2, 'PiCKIAxe + Sandstorm boost');
 		}
 		if (move.id === 'sharkattack' && value.tryWeather('Sandstorm')) {
-			value.modify(0.5, 'Shark Attack + Sandstorm nerf');
+			value.modify(0.5, 'Sandstorm nerf');
 		}
 		if (move.id === 'sharkattack' && value.tryWeather('Sunny Day')) {
-			value.modify(0.5, 'Shark Attack + Sunny Day nerf');
+			value.modify(0.5, 'Sunny Day nerf');
 		}
 		if (move.id === 'sharkattack' && value.tryWeather('Desolate Land')) {
-			value.modify(0.5, 'Shark Attack + Desolate Land nerf');
+			value.modify(0.5, 'Desolate Land nerf');
 		}
 		if (move.id === 'atlantisstrike' && value.tryWeather('Sandstorm')) {
-			value.modify(0.5, 'Atlantis Strike + Sandstorm nerf');
+			value.modify(0.5, 'Sandstorm nerf');
 		}
 		if (move.id === 'atlantisstrike' && value.tryWeather('Sunny Day')) {
-			value.modify(0.5, 'Atlantis Strike + Sunny Day nerf');
+			value.modify(0.5, 'Sunny Day nerf');
 		}
 		if (move.id === 'atlantisstrike' && value.tryWeather('Desolate Land')) {
-			value.modify(0.5, 'Atlantis Strike + Desolate Land nerf');
+			value.modify(0.5, 'Desolate Land nerf');
 		}
 
 		// Item
