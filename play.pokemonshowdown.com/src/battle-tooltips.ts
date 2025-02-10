@@ -2281,6 +2281,36 @@ class BattleTooltips {
 		if (move.id === 'risingvoltage' && this.battle.hasPseudoWeather('Electric Terrain') && target?.isGrounded()) {
 			value.modify(2, 'Rising Voltage + Electric Terrain boost');
 		} 
+		if (move.id === 'blackhole' && this.battle.hasPseudoWeather('Gravity') && target?.isGrounded()) {
+			value.modify(1.5, 'Gravity boost');
+		}
+		if (move.id === 'timeflies' && this.battle.hasPseudoWeather('Trick Room')) {
+			value.modify(1.5, 'Trick Room boost');
+		}
+		if (move.id === 'borosblast' && this.battle.hasPseudoWeather('Trick Room')) {
+			value.modify(2, 'Trick Room boost');
+		} 
+		if (move.id === 'pickiaxe' && value.tryWeather('Sandstorm')) {
+			value.modify(2, 'Sandstorm boost');
+		}
+		if (move.id === 'sharkattack' && value.tryWeather('Sandstorm')) {
+			value.modify(0.5, 'Sandstorm');
+		}
+		if (move.id === 'sharkattack' && value.tryWeather('Sunny Day')) {
+			value.modify(0.5, 'Sunny Day');
+		}
+		if (move.id === 'sharkattack' && value.tryWeather('Desolate Land')) {
+			value.modify(0.5, 'Desolate Land');
+		}
+		if (move.id === 'atlantisstrike' && value.tryWeather('Sandstorm')) {
+			value.modify(0.5, 'Sandstorm');
+		}
+		if (move.id === 'atlantisstrike' && value.tryWeather('Sunny Day')) {
+			value.modify(0.5, 'Sunny Day');
+		}
+		if (move.id === 'atlantisstrike' && value.tryWeather('Desolate Land')) {
+			value.modify(0.5, 'Desolate Land');
+		}
 
 		// Item
 		value = this.getItemBoost(move, value, moveType);
