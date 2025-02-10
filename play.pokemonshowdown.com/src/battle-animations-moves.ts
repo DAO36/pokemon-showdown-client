@@ -37447,7 +37447,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	fstorm: {
+	hivemind: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#9AB440', 700, 0.7);
 			scene.showEffect('web', {
