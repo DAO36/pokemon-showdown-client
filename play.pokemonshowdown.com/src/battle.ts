@@ -2961,8 +2961,6 @@ export class Battle {
 					curTarget.removeTurnstatus('quickguard' as ID);
 					curTarget.removeTurnstatus('craftyshield' as ID);
 					curTarget.removeTurnstatus('matblock' as ID);
-					curTarget.removeTurnstatus('phoenixshield' as ID);
-					curTarget.removeTurnstatus('lunarshield' as ID);
 					this.scene.updateStatbar(curTarget);
 				}
 				break;
@@ -2974,7 +2972,6 @@ export class Battle {
 					curTarget.removeTurnstatus('quickguard' as ID);
 					curTarget.removeTurnstatus('craftyshield' as ID);
 					curTarget.removeTurnstatus('matblock' as ID);
-					curTarget.removeTurnstatus('phoenixshield' as ID);
 					curTarget.removeTurnstatus('lunarshield' as ID);
 					this.scene.updateStatbar(curTarget);
 				}
