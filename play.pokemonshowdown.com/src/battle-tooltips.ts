@@ -1875,9 +1875,14 @@ class BattleTooltips {
 		// Applying modifiers
 		value.set(move.accuracy as number);
 
-		if (move.id === 'hurricane' || move.id === 'thunder') {
+		if (move.id === 'hurricane' || move.id === 'thunder' || move.id === 'tsunami') {
 			if (value.tryWeather('Sunny Day')) value.set(50, 'Sunny Day');
 			if (value.tryWeather('Desolate Land')) value.set(50, 'Desolate Land');
+		}
+		if (move.id === 'trident' || move.id === 'sharkattack') {
+			if (value.tryWeather('Sunny Day')) value.set(50, 'Sunny Day');
+			if (value.tryWeather('Desolate Land')) value.set(50, 'Desolate Land');
+			if (value.tryWeather('Sandstorm')) value.set(50, 'Sandstorm');
 		}
 
 		// Chained modifiers round down on 0.5
@@ -1912,7 +1917,7 @@ class BattleTooltips {
 		const modifiedStats = this.calculateModifiedStats(pokemon, serverPokemon);
 
 		value.reset(move.basePower);
-
+ 
 		if (move.id === 'acrobatics') {
 			if (!serverPokemon.item) {
 				value.modify(2, "Acrobatics + no item");
@@ -2275,6 +2280,36 @@ class BattleTooltips {
 		}
 		if (move.id === 'risingvoltage' && this.battle.hasPseudoWeather('Electric Terrain') && target?.isGrounded()) {
 			value.modify(2, 'Rising Voltage + Electric Terrain boost');
+		}
+		if (move.id === 'blackhole' && this.battle.hasPseudoWeather('Gravity') && target?.isGrounded()) {
+			value.modify(1.5, 'Blackhole + Gravity boost');
+		}
+		if (move.id === 'timeflies' && this.battle.hasPseudoWeather('Trick Room') && target?.isGrounded()) {
+			value.modify(1.5, 'Time Flies + Trick Room boost');
+		}
+		if (move.id === 'borosblast' && this.battle.hasPseudoWeather('Trick Room') && target?.isGrounded()) {
+			value.modify(2, 'Boros Blast + Trick Room boost');
+		} 
+		if (move.id === 'pickiaxe' && value.tryWeather('Sandstorm')) {
+			value.modify(2, 'PiCKIAxe + Sandstorm boost');
+		}
+		if (move.id === 'sharkattack' && value.tryWeather('Sandstorm')) {
+			value.modify(0.5, 'Shark Attack + Sandstorm nerf');
+		}
+		if (move.id === 'sharkattack' && value.tryWeather('Sunny Day')) {
+			value.modify(0.5, 'Shark Attack + Sunny Day nerf');
+		}
+		if (move.id === 'sharkattack' && value.tryWeather('Desolate Land')) {
+			value.modify(0.5, 'Shark Attack + Desolate Land nerf');
+		}
+		if (move.id === 'atlantisstrike' && value.tryWeather('Sandstorm')) {
+			value.modify(0.5, 'Atlantis Strike + Sandstorm nerf');
+		}
+		if (move.id === 'atlantisstrike' && value.tryWeather('Sunny Day')) {
+			value.modify(0.5, 'Atlantis Strike + Sunny Day nerf');
+		}
+		if (move.id === 'atlantisstrike' && value.tryWeather('Desolate Land')) {
+			value.modify(0.5, 'Atlantis Strike + Desolate Land nerf');
 		}
 
 		// Item
