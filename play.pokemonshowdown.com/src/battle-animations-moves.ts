@@ -1440,7 +1440,7 @@ export const BattleMoveAnims: AnimTable = {
 			}
 		},
 	},
-	magiconion: {
+	arcanegarlic: {
 		anim(scene, [attacker, ...defenders]) {
 			scene.backgroundEffect('#9AB440', 1000, 0.3);
 			for (const defender of defenders) {
@@ -5848,7 +5848,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'decel', 'fade');
 		},
 	},
-	gamermaid: {
+	onyan: {
 		anim(scene, [attacker]) {
 			scene.backgroundEffect('#000000', 700, 0.3);
 
