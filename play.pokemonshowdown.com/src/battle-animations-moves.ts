@@ -10530,7 +10530,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	macesmash2: {
+	macesmash: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('sword', {
 				x: defender.x,
@@ -18855,10 +18855,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	feint: {
 		anim: BattleOtherAnims.sneakattack.anim,
-	},
-	macesmash: {
-		anim: BattleOtherAnims.sneakattack.anim,
-	},
+	}, 
 	thief: {
 		anim: BattleOtherAnims.sneakattack.anim,
 	},
