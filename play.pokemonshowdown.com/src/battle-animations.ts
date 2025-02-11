@@ -1279,6 +1279,49 @@ export class BattleScene implements BattleSceneStub {
 			this.$spritesFront[spriteIndex].append(rock4.$el!);
 			this.sideConditions[siden][id] = [rock1, rock2, rock3, rock4];
 			break;
+		case 'carrottrap':
+			const greenmetal1 = new Sprite(BattleEffects.greenmetal1, {
+				display: 'block',
+				x: x + side.leftof(-40),
+				y: y - 10,
+				z: side.z,
+				opacity: 0.5,
+				scale: 0.2,
+			}, this);
+
+			const greenmetal2 = new Sprite(BattleEffects.greenmetal2, {
+				display: 'block',
+				x: x + side.leftof(-20),
+				y: y - 40,
+				z: side.z,
+				opacity: 0.5,
+				scale: 0.2,
+			}, this);
+
+			const greenmetal3 = new Sprite(BattleEffects.greenmetal1, {
+				display: 'block',
+				x: x + side.leftof(30),
+				y: y - 20,
+				z: side.z,
+				opacity: 0.5,
+				scale: 0.2,
+			}, this);
+
+			const greenmetal4 = new Sprite(BattleEffects.greenmetal2, {
+				display: 'block',
+				x: x + side.leftof(10),
+				y: y - 30,
+				z: side.z,
+				opacity: 0.5,
+				scale: 0.2,
+			}, this);
+
+			this.$spritesFront[spriteIndex].append(greenmetal1.$el!);
+			this.$spritesFront[spriteIndex].append(greenmetal2.$el!);
+			this.$spritesFront[spriteIndex].append(greenmetal3.$el!);
+			this.$spritesFront[spriteIndex].append(greenmetal4.$el!);
+			this.sideConditions[siden][id] = [greenmetal1, greenmetal2, greenmetal3, greenmetal4];
+			break;	
 		case 'gmaxsteelsurge':
 			const surge1 = new Sprite(BattleEffects.greenmetal1, {
 				display: 'block',
