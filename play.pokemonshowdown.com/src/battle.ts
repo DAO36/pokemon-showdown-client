@@ -2977,6 +2977,18 @@ export class Battle {
 					this.scene.updateStatbar(curTarget);
 				}
 				break;	
+			case 'fisted':
+				this.scene.resultAnim(poke, 'Protection broken', 'bad');
+				poke.removeTurnstatus('protect' as ID);
+				for (const curTarget of poke.side.pokemon) {
+					curTarget.removeTurnstatus('wideguard' as ID);
+					curTarget.removeTurnstatus('quickguard' as ID);
+					curTarget.removeTurnstatus('craftyshield' as ID);
+					curTarget.removeTurnstatus('matblock' as ID);
+					curTarget.removeTurnstatus('lunarshield' as ID);
+					this.scene.updateStatbar(curTarget);
+				}
+				break;		
 			case 'eeriespell':
 			case 'gmaxdepletion':
 			case 'spite':
