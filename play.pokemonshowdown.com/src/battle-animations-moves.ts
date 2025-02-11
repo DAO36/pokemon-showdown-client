@@ -13164,7 +13164,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	fuwamocomorning: {
+	baubau: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('foot', {
 				x: defender.x - 10,

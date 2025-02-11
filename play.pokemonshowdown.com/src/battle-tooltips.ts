@@ -1627,7 +1627,7 @@ class BattleTooltips {
 		if (move.id === 'aurawheel' && pokemon.getSpeciesForme() === 'Morpeko-Hangry') {
 			moveType = 'Dark';
 		}
-		if (move.id === 'fuwamocomorning' && pokemon.getSpeciesForme() === 'FuwaMoco-Wawa') {
+		if (move.id === 'baubau' && pokemon.getSpeciesForme() === 'FuwaMoco-Wawa') {
 			moveType = 'Fairy';
 		}
 		// Raging Bull's type depends on the Tauros forme
@@ -2292,6 +2292,9 @@ class BattleTooltips {
 		} 
 		if (move.id === 'pickiaxe' && value.tryWeather('Sandstorm')) {
 			value.modify(2, 'Sandstorm boost');
+		}
+		if (move.id === 'wamywater' && value.tryWeather('Snow')) {
+			value.modify(2, 'Snow boost');
 		}
 		if (move.id === 'sharkattack' && value.tryWeather('Sandstorm')) {
 			value.modify(0.5, 'Sandstorm');
