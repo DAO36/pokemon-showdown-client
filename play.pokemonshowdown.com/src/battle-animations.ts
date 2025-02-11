@@ -1280,7 +1280,7 @@ export class BattleScene implements BattleSceneStub {
 			this.sideConditions[siden][id] = [rock1, rock2, rock3, rock4];
 			break;
 		case 'carrottrap':
-			const greenmetal1 = new Sprite(BattleEffects.greenmetal1, {
+			const leaf1 = new Sprite(BattleEffects.leaf1, {
 				display: 'block',
 				x: x + side.leftof(-40),
 				y: y - 10,
@@ -1289,7 +1289,7 @@ export class BattleScene implements BattleSceneStub {
 				scale: 0.4,
 			}, this);
 
-			const greenmetal2 = new Sprite(BattleEffects.greenmetal2, {
+			const leaf2 = new Sprite(BattleEffects.leaf2, {
 				display: 'block',
 				x: x + side.leftof(-20),
 				y: y - 40,
@@ -1298,7 +1298,7 @@ export class BattleScene implements BattleSceneStub {
 				scale: 0.4,
 			}, this);
 
-			const greenmetal3 = new Sprite(BattleEffects.greenmetal1, {
+			const leaf3 = new Sprite(BattleEffects.leaf1, {
 				display: 'block',
 				x: x + side.leftof(30),
 				y: y - 20,
@@ -1307,7 +1307,7 @@ export class BattleScene implements BattleSceneStub {
 				scale: 0.4,
 			}, this);
 
-			const greenmetal4 = new Sprite(BattleEffects.greenmetal2, {
+			const leaf4 = new Sprite(BattleEffects.leaf2, {
 				display: 'block',
 				x: x + side.leftof(10),
 				y: y - 30,
@@ -1316,11 +1316,11 @@ export class BattleScene implements BattleSceneStub {
 				scale: 0.4,
 			}, this);
 
-			this.$spritesFront[spriteIndex].append(greenmetal1.$el!);
-			this.$spritesFront[spriteIndex].append(greenmetal2.$el!);
-			this.$spritesFront[spriteIndex].append(greenmetal3.$el!);
-			this.$spritesFront[spriteIndex].append(greenmetal4.$el!);
-			this.sideConditions[siden][id] = [greenmetal1, greenmetal2, greenmetal3, greenmetal4];
+			this.$spritesFront[spriteIndex].append(leaf1.$el!);
+			this.$spritesFront[spriteIndex].append(leaf2.$el!);
+			this.$spritesFront[spriteIndex].append(leaf3.$el!);
+			this.$spritesFront[spriteIndex].append(leaf4.$el!);
+			this.sideConditions[siden][id] = [leaf1, leaf2, leaf3, leaf4];
 			break;	
 		case 'gmaxsteelsurge':
 			const surge1 = new Sprite(BattleEffects.greenmetal1, {

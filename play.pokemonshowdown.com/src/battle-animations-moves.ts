@@ -28371,7 +28371,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	carrottrap: {
 		anim(scene, [attacker, defender]) {
-			scene.showEffect('greenmetal1', {
+			scene.showEffect('leaf1', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
@@ -28384,7 +28384,7 @@ export const BattleMoveAnims: AnimTable = {
 				scale: 0.4,
 				opacity: 1,
 			}, 'ballistic');
-			scene.showEffect('greenmetal2', {
+			scene.showEffect('leaf2', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
@@ -28398,7 +28398,7 @@ export const BattleMoveAnims: AnimTable = {
 				scale: 0.4,
 				opacity: 1,
 			}, 'ballistic');
-			scene.showEffect('greenmetal1', {
+			scene.showEffect('leaf1', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
@@ -28412,7 +28412,7 @@ export const BattleMoveAnims: AnimTable = {
 				scale: 0.4,
 				opacity: 1,
 			}, 'ballistic');
-			scene.showEffect('greenmetal2', {
+			scene.showEffect('leaf2', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
