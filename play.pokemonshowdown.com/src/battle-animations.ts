@@ -1286,7 +1286,7 @@ export class BattleScene implements BattleSceneStub {
 				y: y - 10,
 				z: side.z,
 				opacity: 0.5,
-				scale: 0.2,
+				scale: 0.4,
 			}, this);
 
 			const greenmetal2 = new Sprite(BattleEffects.greenmetal2, {
@@ -1295,7 +1295,7 @@ export class BattleScene implements BattleSceneStub {
 				y: y - 40,
 				z: side.z,
 				opacity: 0.5,
-				scale: 0.2,
+				scale: 0.4,
 			}, this);
 
 			const greenmetal3 = new Sprite(BattleEffects.greenmetal1, {
@@ -1304,7 +1304,7 @@ export class BattleScene implements BattleSceneStub {
 				y: y - 20,
 				z: side.z,
 				opacity: 0.5,
-				scale: 0.2,
+				scale: 0.4,
 			}, this);
 
 			const greenmetal4 = new Sprite(BattleEffects.greenmetal2, {
@@ -1313,7 +1313,7 @@ export class BattleScene implements BattleSceneStub {
 				y: y - 30,
 				z: side.z,
 				opacity: 0.5,
-				scale: 0.2,
+				scale: 0.4,
 			}, this);
 
 			this.$spritesFront[spriteIndex].append(greenmetal1.$el!);
