@@ -2294,7 +2294,7 @@ class BattleTooltips {
 			value.modify(2, 'Sandstorm boost');
 		}
 		if (move.id === 'wamywater' && value.tryWeather('Snow')) {
-			value.modify(2, 'Snow boost');
+			value.modify(1.5, 'Snow boost');
 		}
 		if (move.id === 'sharkattack' && value.tryWeather('Sandstorm')) {
 			value.modify(0.5, 'Sandstorm');
