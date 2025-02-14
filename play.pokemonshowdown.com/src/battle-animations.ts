@@ -4655,7 +4655,7 @@ export const BattleOtherAnims: AnimTable = {
 	blastfromthepasthit: {
 		anim(scene, [defender]) {
 			scene.backgroundEffect('#ffffff', 600, 0.6);
-			scene.showEffect('fireball', {
+			scene.showEffect('mistball', {
 				x: defender.x + 40,
 				y: defender.y,
 				z: defender.z,
@@ -4665,7 +4665,7 @@ export const BattleOtherAnims: AnimTable = {
 				scale: 6,
 				opacity: 0,
 			}, 'linear');
-			scene.showEffect('fireball', {
+			scene.showEffect('mistball', {
 				x: defender.x - 40,
 				y: defender.y - 20,
 				z: defender.z,
@@ -4676,7 +4676,7 @@ export const BattleOtherAnims: AnimTable = {
 				scale: 6,
 				opacity: 0,
 			}, 'linear');
-			scene.showEffect('fireball', {
+			scene.showEffect('mistball', {
 				x: defender.x + 10,
 				y: defender.y + 20,
 				z: defender.z,
