@@ -643,7 +643,7 @@ class BattleTextParser {
 			let [, pokemon, effect] = args;
 			const line1 = this.maybeAbility(effect, pokemon) || this.maybeAbility(kwArgs.from, kwArgs.of || pokemon);
 			let id = BattleTextParser.effectId(effect);
-			if (id === 'doomdesire' && id === 'futuresight' && id === 'blastfromthepast') {
+			if (id === 'doomdesire' || id === 'futuresight'|| id === 'blastfromthepast') {
 				const template = this.template('activate', effect);
 				return line1 + template.replace('[TARGET]', this.pokemon(pokemon));
 			}
