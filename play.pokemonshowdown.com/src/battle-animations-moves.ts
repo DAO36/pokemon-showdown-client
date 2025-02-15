@@ -10729,24 +10729,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear', 'fade');
 			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
 		},
-	},
-	knightfist: {
-		anim(scene, [attacker, defender]) {
-			scene.showEffect('rightchop', {
-				x: defender.leftof(30),
-				y: defender.y + 50,
-				z: defender.behind(-10),
-				scale: 0.6,
-				opacity: 1,
-				time: 475,
-			}, {
-				y: defender.y - 20,
-				opacity: 0.5,
-				time: 550,
-			}, 'linear', 'fade');
-			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
-		},
-	},
+	}, 
 	crosschop: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('rightslash', {
@@ -13947,6 +13930,45 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 			}, 'decel');
 			scene.showEffect('fireball', {
+				x: defender.x + 10,
+				y: defender.y + 20,
+				z: defender.z,
+				scale: 0,
+				opacity: 0.6,
+				time: 650,
+			}, {
+				scale: 7,
+				opacity: 0,
+			}, 'decel');
+			BattleOtherAnims.punchattack.anim(scene, [attacker, defender]);
+		},
+	},
+	knightmuscles: {
+		anim(scene, [attacker, defender]) {
+			scene.backgroundEffect('#000000', 700, 0.3);
+			scene.showEffect('fist', {
+				x: defender.x + 40,
+				y: defender.y,
+				z: defender.z,
+				scale: 0,
+				opacity: 0.6,
+				time: 350,
+			}, {
+				scale: 7,
+				opacity: 0,
+			}, 'decel');
+			scene.showEffect('fist', {
+				x: defender.x - 40,
+				y: defender.y - 20,
+				z: defender.z,
+				scale: 0,
+				opacity: 0.6,
+				time: 500,
+			}, {
+				scale: 7,
+				opacity: 0,
+			}, 'decel');
+			scene.showEffect('fist', {
 				x: defender.x + 10,
 				y: defender.y + 20,
 				z: defender.z,

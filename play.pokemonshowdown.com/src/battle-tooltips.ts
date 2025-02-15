@@ -745,8 +745,8 @@ class BattleTooltips {
 			if (move.flags.punch && ability === 'ironfist') {
 				text += `<p class="movetag">&#x2713; Fist <small>(boosted by Iron Fist)</small></p>`;
 			}
-			if (move.flags.punch && ability === 'muscleknight') {
-				text += `<p class="movetag">&#x2713; Fist <small>(boosted by Muscle Knight)</small></p>`;
+			if (move.flags.punch && ability === 'holyknight') {
+				text += `<p class="movetag">&#x2713; Fist <small>(boosted by Holy Knight)</small></p>`;
 			} 
 			if (move.flags.sound && ability === 'diva') {
 				text += `<p class="movetag">&#x2713; Sound <small>(boosted by Diva)</small></p>`;
@@ -1199,6 +1199,9 @@ class BattleTooltips {
 		if (pokemon.status) {
 			if (ability === 'marvelscale') {
 				stats.def = Math.floor(stats.def * 1.5);
+			}
+			if (ability === 'holyknight') {
+				stats.def = Math.floor(stats.spd * 1.5);
 			}
 			if (ability === 'quickfeet') {
 				speedModifiers.push(1.5);
@@ -2127,7 +2130,7 @@ class BattleTooltips {
 			value.abilityModify(1.2, 'Iron Fist');
 		} 
 		if (move.flags['punch']) {
-			value.abilityModify(1.5, 'Muscle Knight');
+			value.abilityModify(1.2, 'Holy Knight');
 		}
 		if (move.flags['pulse']) {
 			value.abilityModify(1.5, "Mega Launcher");
