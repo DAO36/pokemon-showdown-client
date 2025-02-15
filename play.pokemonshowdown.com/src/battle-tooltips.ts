@@ -2283,7 +2283,10 @@ class BattleTooltips {
 		}
 		if (move.id === 'risingvoltage' && this.battle.hasPseudoWeather('Electric Terrain') && target?.isGrounded()) {
 			value.modify(2, 'Rising Voltage + Electric Terrain boost');
-		} 
+		}
+		if (move.id === 'divasong' && this.battle.hasPseudoWeather('Misty Terrain') && target?.isGrounded()) {
+			value.modify(2, 'Misty Terrain boost');
+		}  
 		if (move.id === 'blackhole' && this.battle.hasPseudoWeather('Gravity') && target?.isGrounded()) {
 			value.modify(1.5, 'Gravity boost');
 		}

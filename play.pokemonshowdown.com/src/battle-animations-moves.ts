@@ -30398,7 +30398,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'decel', 'explode');
 		},
 	},
-	sakuraiattack: {
+	sakuraattack: {
 		anim(scene, [attacker, ...defenders]) {
 			for (const defender of defenders) {
 				defender.delay(125);
