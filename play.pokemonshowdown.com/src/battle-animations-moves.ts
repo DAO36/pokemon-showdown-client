@@ -20757,6 +20757,49 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear');
 		},
 	},
+	heavenlyharmony: {
+		anim(scene, [attacker]) {
+			scene.showEffect('mistball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0,
+				opacity: 0.5,
+				time: 0,
+			}, {
+				z: attacker.behind(-50),
+				scale: 7,
+				opacity: 0,
+				time: 400,
+			}, 'linear');
+			scene.showEffect('mistball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0,
+				opacity: 0.5,
+				time: 150,
+			}, {
+				z: attacker.behind(-50),
+				scale: 7,
+				opacity: 0,
+				time: 600,
+			}, 'linear');
+			scene.showEffect('mistball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0,
+				opacity: 0.5,
+				time: 300,
+			}, {
+				z: attacker.behind(-50),
+				scale: 7,
+				opacity: 0,
+				time: 800,
+			}, 'linear');
+		},
+	},
 	naturalasmr: {
 		anim(scene, [attacker]) {
 			scene.showEffect('energyball', {
