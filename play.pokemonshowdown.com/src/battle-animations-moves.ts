@@ -14428,13 +14428,13 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x - 60,
 				y: defender.y + 70,
 				z: defender.z,
-				scale: 0.75,
+				scale: 0.66,
 				opacity: 1,
 				time: 400,
 			}, {
 				x: defender.x + 60,
 				y: defender.y - 70,
-				scale: 0.6,
+				scale: 0.5,
 				opacity: 0,
 				time: 700,
 			}, 'decel');
@@ -14442,7 +14442,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
-				scale: 0.6,
+				scale: 0.4,
 				opacity: 1,
 				time: 600,
 			}, {
@@ -14456,7 +14456,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
-				scale: 0.6,
+				scale: 0.4,
 				opacity: 1,
 				time: 650,
 			}, {
@@ -14470,7 +14470,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
-				scale: 0.6,
+				scale: 0.4,
 				opacity: 1,
 				time: 700,
 			}, {
