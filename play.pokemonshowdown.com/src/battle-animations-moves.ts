@@ -5520,7 +5520,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear');
 		},
 	},
-	imgodok: {
+	ebifrionmight: {
 		anim(scene, [attacker]) {
 			scene.showEffect('shadowball', {
 				x: attacker.x,
@@ -17009,7 +17009,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	godlyattack: {
+	imgod: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 700, 0.2);
 			scene.showEffect('impact', {
@@ -36205,7 +36205,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'accel', 'fade');
 		},
 	},
-	icesword: {
+	foxkatana: {
 		anim(scene, [attacker, defender]) {
 			attacker.delay(300);
 			attacker.anim({

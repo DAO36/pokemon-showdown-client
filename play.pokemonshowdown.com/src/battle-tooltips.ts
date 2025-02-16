@@ -1118,10 +1118,10 @@ class BattleTooltips {
 		if (ability === 'hugepower') {
 			stats.atk *= 2;
 		}
-		if (ability === 'iamgod') {
+		if (ability === 'god') {
 			stats.atk *= 1.5;
 		}
-		if (ability === 'iamgod') {
+		if (ability === 'god') {
 			stats.spa *= 1.5;
 		}
 		if (ability === 'hustle' || (ability === 'gorillatactics' && !clientPokemon?.volatiles['dynamax'])) {

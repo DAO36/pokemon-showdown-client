@@ -2955,7 +2955,7 @@ export class Battle {
 			case 'phantomforce':
 			case 'shadowforce':
 			case 'macesmash':
-			case 'godlyattack':	
+			case 'imgod':	
 			case 'fisted':		
 			case 'feint':
 				this.scene.resultAnim(poke, 'Protection broken', 'bad');
