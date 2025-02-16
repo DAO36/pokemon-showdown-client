@@ -8219,7 +8219,7 @@ export const BattleMoveAnims: AnimTable = {
 			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
 		},
 	},
-	moguyummy: {
+	onigirichomp: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 800, 0.3);
 			scene.showEffect('topbite', {
@@ -12504,7 +12504,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear');
 		},
 	},
-	boxingdoggo: {
+	orayo: {
 		anim(scene, [attacker, defender]) {
 			attacker.anim({
 				x: defender.leftof(-30),
@@ -22443,7 +22443,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear', 'explode');
 		},
 	},
-	carrotstrike: {
+	rocketcarrots: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('energyball', {
 				x: attacker.x,
