@@ -2004,7 +2004,7 @@ class BattleTooltips {
 		if (move.id === 'magnitude') {
 			value.setRange(10, 150);
 		}
-		if (move.id === 'rolldice') {
+		if (move.id === 'playdice') {
 			value.setRange(25, 150);
 		}
 		if (['venoshock', 'barbbarrage'].includes(move.id) && target) {

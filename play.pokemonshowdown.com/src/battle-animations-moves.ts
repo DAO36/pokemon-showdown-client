@@ -40387,7 +40387,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	rolldice: {
+	playdice: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 1300, 0.3);
 			scene.showEffect('shadowball', {
