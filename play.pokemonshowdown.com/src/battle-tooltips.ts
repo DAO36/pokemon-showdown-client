@@ -748,8 +748,8 @@ class BattleTooltips {
 			if (move.flags.punch && ability === 'holyknight') {
 				text += `<p class="movetag">&#x2713; Fist <small>(boosted by Holy Knight)</small></p>`;
 			} 
-			if (move.flags.sound && ability === 'diva') {
-				text += `<p class="movetag">&#x2713; Sound <small>(boosted by Diva)</small></p>`;
+			if (move.flags.sound && ability === 'virtualdiva') {
+				text += `<p class="movetag">&#x2713; Sound <small>(boosted by Virtual Diva)</small></p>`;
 			}
 			if (move.flags.sound && ability === 'yabairys') {
 				text += `<p class="movetag">&#x2713; Sound <small>(boosted by YabaIRyS)</small></p>`;
@@ -2172,7 +2172,7 @@ class BattleTooltips {
 			value.abilityModify(1.3, "Punk Rock");
 		}
 		if (move.flags['sound']) {
-			value.abilityModify(1.3, "Diva");
+			value.abilityModify(1.3, "Virtual Diva");
 		}
 		if (move.flags['sound']) {
 			value.abilityModify(1.3, "YabaIRyS");
