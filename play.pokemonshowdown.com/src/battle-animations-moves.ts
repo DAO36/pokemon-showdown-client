@@ -27959,7 +27959,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	witchattack: {
+	blackmagic: {
 		anim(scene, [attacker, defender]) { 
 			scene.showEffect('moon', {
 				x: attacker.x,
