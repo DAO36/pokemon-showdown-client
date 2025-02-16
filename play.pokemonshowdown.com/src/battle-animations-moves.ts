@@ -16799,7 +16799,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	zombiestrike: {
+	pathofsincerity: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 700, 0.2);
 			scene.showEffect('sword', {
