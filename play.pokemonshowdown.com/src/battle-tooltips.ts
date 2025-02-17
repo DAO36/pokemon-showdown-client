@@ -1201,7 +1201,7 @@ class BattleTooltips {
 				stats.def = Math.floor(stats.def * 1.5);
 			}
 			if (ability === 'holyknight') {
-				stats.def = Math.floor(stats.spd * 1.5);
+				stats.spd = Math.floor(stats.spd * 1.5);
 			}
 			if (ability === 'quickfeet') {
 				speedModifiers.push(1.5);
