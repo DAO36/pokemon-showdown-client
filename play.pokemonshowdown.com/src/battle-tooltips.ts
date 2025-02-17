@@ -2126,6 +2126,18 @@ class BattleTooltips {
 		if (pokemon.status === 'brn' && move.category === 'Special') {
 			value.abilityModify(1.5, "Flare Boost");
 		}
+		if (pokemon.status === 'psn' && move.category === 'Special') {
+			value.abilityModify(1.5, "Sake Soaker");
+		}
+		if (pokemon.status === 'psn' && move.category === 'Physical') {
+			value.abilityModify(1.5, "Sake Soaker");
+		}
+		if (pokemon.status === 'tox' && move.category === 'Special') {
+			value.abilityModify(1.5, "Sake Soaker");
+		}
+		if (pokemon.status === 'tox' && move.category === 'Physical') {
+			value.abilityModify(1.5, "Sake Soaker");
+		}
 		if (move.flags['punch']) {
 			value.abilityModify(1.2, 'Iron Fist');
 		} 
