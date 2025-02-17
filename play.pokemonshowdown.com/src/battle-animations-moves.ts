@@ -9954,7 +9954,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	moonstrike: {
+	fullmoon: {
 		anim(scene, [attacker, defender]) {
 			let xstep = (defender.x - attacker.x) / 5;
 			let ystep = (defender.x - 100 - attacker.x) / 5;
@@ -11643,7 +11643,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	tentaclesstrike: {
+	tentacles: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('iceball', {
 				x: defender.x,
@@ -17089,7 +17089,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	nenemaxattack: {
+	nenemax: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 700, 0.2);
 			scene.showEffect('impact', {
@@ -22562,7 +22562,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear', 'fade');
 		}, 
 	},
-	tarotattack: { 
+	tarots: { 
 			anim(scene, [attacker, defender]) {
 				scene.showEffect('mistball', {
 					x: attacker.x,
@@ -30625,7 +30625,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'decel', 'explode');
 		},
 	},
-	sakuraattack: {
+	sakurastrike: {
 		anim(scene, [attacker, ...defenders]) {
 			for (const defender of defenders) {
 				defender.delay(125);
@@ -36944,7 +36944,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'accel', 'fade');
 		},
 	},
-	dualblades: {
+	dualwielding: {
 		anim(scene, [attacker, defender]) {
 			attacker.delay(300);
 			attacker.anim({
@@ -39653,7 +39653,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	syringestrike: {
+	syringe: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('heart', {
 				x: defender.x,
@@ -50127,7 +50127,7 @@ BattleMoveAnims['snipeshot'] = {anim: BattleMoveAnims['waterpulse'].anim};
 BattleMoveAnims['jawlock'] = {anim: BattleMoveAnims['crunch'].anim};
 BattleMoveAnims['sharkattack'] = {anim: BattleMoveAnims['crunch'].anim};
 BattleMoveAnims['gawrrage'] = {anim: BattleMoveAnims['outrage'].anim};
-BattleMoveAnims['peacockattack'] = {anim: BattleMoveAnims['featherdance'].anim};
+BattleMoveAnims['peafowlpower'] = {anim: BattleMoveAnims['featherdance'].anim};
 BattleMoveAnims['ameway2'] = {anim: BattleMoveAnims['dragondance'].anim};
 BattleMoveAnims['tako'] = {anim: BattleMoveAnims['hydropump'].anim};
 BattleMoveAnims['phoenixshield'] = {anim: BattleMoveAnims['burningbulwark'].anim};
