@@ -153,7 +153,7 @@ class BattleTextParser {
 				kwArgs.item = arg3;
 			} else if (id === 'magnitude') {
 				kwArgs.number = arg3;
-			} else if (id === 'rolldice') {
+			} else if (id === 'playdice') {
 				kwArgs.number = arg3;
 			} else if (id === 'skillswap' || id === 'mummy' || id === 'lingeringaroma' || id === 'wanderingspirit') {
 				kwArgs.ability = arg3;
