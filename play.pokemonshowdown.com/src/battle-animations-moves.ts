@@ -37237,7 +37237,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear', 'fade');
 		},
 	},
-	energyblade: {
+	acousticattack: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('electroball', {
 				x: defender.x + 60,
@@ -50136,7 +50136,7 @@ BattleMoveAnims['wormhole'] = {anim: BattleMoveAnims['hyperspacehole'].anim};
 BattleMoveAnims['timetogo'] = {anim: BattleMoveAnims['teleport'].anim};
 BattleMoveAnims['forbiddenknowledge'] = {anim: BattleMoveAnims['nightshade'].anim};
 BattleMoveAnims['bejeweled'] = {anim: BattleMoveAnims['powergem'].anim};
-BattleMoveAnims['underworldmusic'] = {anim: BattleMoveAnims['hypervoice'].anim};
+BattleMoveAnims['devilishdiva'] = {anim: BattleMoveAnims['hypervoice'].anim};
 BattleMoveAnims['divafork'] = {anim: BattleMoveAnims['nightslash'].anim};
 BattleMoveAnims['stuffcheeks'] = {anim: BattleMoveAnims['stockpile'].anim};
 BattleMoveAnims['noretreat'] = {anim: BattleMoveAnims['stockpile'].anim};
