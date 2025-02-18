@@ -8263,7 +8263,7 @@ export const BattleMoveAnims: AnimTable = {
 			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
 		},
 	},
-	ratattack: {
+	ratattack2: { // , {filter: 'hue-rotate(120deg)'});
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 800, 0.3);
 			scene.showEffect('topbite', {
@@ -8290,6 +8290,35 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 1,
 				time: 500,
 			}, 'linear', 'explode'); 
+		},
+	},
+	ratattack: { // , {filter: 'hue-rotate(120deg)'});
+		anim(scene, [attacker, defender]) {
+			scene.backgroundEffect('#000000', 800, 0.3);
+			scene.showEffect('topbite', {
+				x: defender.x,
+				y: defender.y + 70,
+				z: defender.z,
+				scale: 0.65,
+				opacity: 1,
+				time: 370,
+			}, {
+				y: defender.y + 20,
+				opacity: 1,
+				time: 500,
+			}, 'linear', 'explode', {filter: 'hue-rotate(90deg)'});
+			scene.showEffect('bottombite', {
+				x: defender.x,
+				y: defender.y - 70,
+				z: defender.z,
+				scale: 0.65,
+				opacity: 0,
+				time: 370,
+			}, {
+				y: defender.y - 20,
+				opacity: 1,
+				time: 500,
+			}, 'linear', 'explode', {filter: 'hue-rotate(90deg)'}); 
 		},
 	},
 	chattinichomp: {
