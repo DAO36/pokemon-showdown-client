@@ -14126,7 +14126,7 @@ export const BattleMoveAnims: AnimTable = {
 	fisted: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 700, 0.3);
-			scene.showEffect('shadowball', {
+			scene.showEffect('flareball', {
 				x: defender.x + 40,
 				y: defender.y,
 				z: defender.z,
