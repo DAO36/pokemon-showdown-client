@@ -8272,7 +8272,11 @@ export const BattleMoveAnims: AnimTable = {
 				z: defender.z,
 				scale: 0.65,
 				opacity: 0,
-				time: 370, 
+				time: 370,
+			}, {
+				y: defender.y + 20,
+				opacity: 1,
+				time: 500,
 			}, 'linear', 'explode');
 			scene.showEffect('bottombite', {
 				x: defender.x,
