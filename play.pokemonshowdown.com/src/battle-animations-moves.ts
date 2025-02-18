@@ -5626,7 +5626,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	ebifrionmight: {
 		anim(scene, [attacker]) {
-			scene.showEffect('shadowball', {
+			scene.showEffect('flareball', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
@@ -5638,7 +5638,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 400,
 			}, 'linear');
-			scene.showEffect('shadowball', {
+			scene.showEffect('flareball', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
@@ -5992,7 +5992,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 500,
 			}, 'linear');
-			scene.showEffect('mistball', {
+			scene.showEffect('energyball', {
 				x: attacker.x,
 				y: attacker.y + 30,
 				z: attacker.z,
@@ -6006,7 +6006,7 @@ export const BattleMoveAnims: AnimTable = {
 				scale: 0.25,
 				time: 750,
 			}, 'decel', 'fade');
-			scene.showEffect('mistball', {
+			scene.showEffect('energyball', {
 				x: attacker.x,
 				y: attacker.y + 70,
 				z: attacker.z,
