@@ -34547,7 +34547,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0, 
 			}, 'linear');
 
-			defender.delay(100);
+			defender.delay(500);
 			defender.anim({
 				x: defender.x - 30,
 				time: 75,
