@@ -763,6 +763,9 @@ class BattleTooltips {
 			if (move.flags.bite && ability === 'strongjaw') {
 				text += `<p class="movetag">&#x2713; Bite <small>(boosted by Strong Jaw)</small></p>`;
 			}
+			if (move.flags.dance && ability === 'dancingsiren') {
+				text += `<p class="movetag">&#x2713; Dance <small>(boosted by Dancing Siren)</small></p>`;
+			}
 			if (move.flags.wind && ability === 'rainshaman') {
 				text += `<p class="movetag">&#x2713; Bite <small>(boosted by Rain Shaman)</small></p>`;
 			}
@@ -2162,6 +2165,9 @@ class BattleTooltips {
 		if (move.flags['wind']) {
 			value.abilityModify(1.5, "Rain Shaman");
 		}
+		if (move.flags['dance']) {
+			value.abilityModify(1.5, "Dancing Siren");
+		}
 		if (move.flags['bite']) {
 			value.abilityModify(1.5, "Strong Jaw");
 		}
@@ -2172,7 +2178,7 @@ class BattleTooltips {
 			value.abilityModify(1.5, "Technician");
 		}
 		if (value.value <= 60) {
-			value.abilityModify(1.5, "Legend of Polka");	
+			value.abilityModify(1.5, "Legend of Polka2");	
 		}
 		if (['psn', 'tox'].includes(pokemon.status) && move.category === 'Physical') {
 			value.abilityModify(1.5, "Toxic Boost");
