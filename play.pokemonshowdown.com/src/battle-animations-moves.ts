@@ -8266,19 +8266,15 @@ export const BattleMoveAnims: AnimTable = {
 	ratattack: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 800, 0.3);
-			scene.showEffect('bottombite', {
+			scene.showEffect('topbite', {
 				x: defender.x,
-				y: defender.y + 70,
+				y: defender.y + 20,
 				z: defender.z,
 				scale: 0.65,
 				opacity: 0,
-				time: 370,
-			}, {
-				y: defender.y + 20,
-				opacity: 1,
-				time: 500,
+				time: 370, 
 			}, 'linear', 'explode');
-			scene.showEffect('topbite', {
+			scene.showEffect('bottombite', {
 				x: defender.x,
 				y: defender.y - 70,
 				z: defender.z,
@@ -8293,8 +8289,7 @@ export const BattleMoveAnims: AnimTable = {
 		},
 	},
 	chattinichomp: {
-		anim(scene, [attacker, defender]) {
-			scene.backgroundEffect('#000000', 800, 0.3);
+		anim(scene, [attacker, defender]) { 
 			scene.showEffect('topbite', {
 				x: defender.x,
 				y: defender.y + 70,
