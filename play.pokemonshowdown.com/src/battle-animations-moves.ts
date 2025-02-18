@@ -34530,7 +34530,7 @@ export const BattleMoveAnims: AnimTable = {
 				z: defender.z,
 				scale: 0,
 				opacity: 0.6,
-				time: 150,
+				time: 550,
 			}, {
 				scale: 6,
 				opacity: 0,
@@ -34542,7 +34542,7 @@ export const BattleMoveAnims: AnimTable = {
 				z: defender.z,
 				scale: 0,
 				opacity: 0.6,
-				time: 300,
+				time: 550,
 			}, {
 				scale: 6,
 				opacity: 0,
