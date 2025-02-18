@@ -34511,7 +34511,7 @@ export const BattleMoveAnims: AnimTable = {
 				z: defender.z,
 				scale: 0.4,
 				opacity: 1,
-				time: 400,
+				time: 350,
 			}, 'ballistic', 'explode');
 			scene.showEffect('fireball', {
 				x: defender.x + 40,
@@ -34522,7 +34522,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, {
 				scale: 6,
 				opacity: 0,
-				time: 800
+				time: 900
 			}, 'linear');
 			scene.showEffect('fireball', {
 				x: defender.x - 40,
@@ -34530,11 +34530,11 @@ export const BattleMoveAnims: AnimTable = {
 				z: defender.z,
 				scale: 0,
 				opacity: 0.6,
-				time: 800,
+				time: 900,
 			}, {
 				scale: 6,
 				opacity: 0,
-				time: 850
+				time: 950
 			}, 'linear');
 			scene.showEffect('fireball', {
 				x: defender.x + 10,
@@ -34542,33 +34542,33 @@ export const BattleMoveAnims: AnimTable = {
 				z: defender.z,
 				scale: 0,
 				opacity: 0.6,
-				time: 800,
+				time: 900,
 			}, {
 				scale: 6,
 				opacity: 0,
-				time: 850
+				time: 950
 			}, 'linear');
 
 			defender.delay(100);
 			defender.anim({
 				x: defender.x - 30,
-				time: 200,
+				time: 50,
 			});
 			defender.anim({
 				x: defender.x + 30,
-				time: 225,
+				time: 100,
 			});
 			defender.anim({
 				x: defender.x - 30,
-				time: 225,
+				time: 100,
 			});
 			defender.anim({
 				x: defender.x + 30,
-				time: 225,
+				time: 100,
 			});
 			defender.anim({
 				x: defender.x,
-				time: 225,
+				time: 100,
 			});
 		},
 	},
