@@ -913,7 +913,7 @@ class BattleTextParser {
 				return line1 + template.replace('[EFFECT]', this.effect(effect));
 			}
 
-			if (id === 'brickbreak' || id === 'axeattack') {
+			if (id === 'brickbreak') {
 				template = template.replace('[TEAM]', this.team(target.slice(0, 2)));
 			}
 			if (kwArgs.ability) {
