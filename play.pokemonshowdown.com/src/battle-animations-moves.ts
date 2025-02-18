@@ -28255,7 +28255,8 @@ export const BattleMoveAnims: AnimTable = {
 		},
 	},
 	blackmagic: {
-		anim(scene, [attacker, defender]) { 
+		anim(scene, [attacker, defender]) {
+			scene.backgroundEffect(`url('https://${Config.routes.client}/fx/bg-space.jpg')`, 800, 0.6);
 			scene.showEffect('moon', {
 				x: attacker.x,
 				y: attacker.y,
