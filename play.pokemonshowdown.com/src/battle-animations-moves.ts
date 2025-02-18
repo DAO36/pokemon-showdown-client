@@ -35153,7 +35153,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	nenemax: {
 		anim(scene, [attacker, defender]) {
-			scene.showEffect('energyball', {
+			scene.showEffect('heart', {
 				x: attacker.x,
 				y: attacker.y + 45,
 				z: attacker.z,
@@ -35164,7 +35164,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.6,
 				time: 400,
 			}, 'decel', 'fade');
-			scene.showEffect('iceball', {
+			scene.showEffect('heart', {
 				x: attacker.x - 45,
 				y: attacker.y - 20,
 				z: attacker.z,
@@ -35176,7 +35176,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.6,
 				time: 500,
 			}, 'decel', 'fade');
-			scene.showEffect('mistball', {
+			scene.showEffect('heart', {
 				x: attacker.x + 45,
 				y: attacker.y - 20,
 				z: attacker.z,
@@ -35189,7 +35189,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 600,
 			}, 'decel', 'fade');
 
-			scene.showEffect('energyball', {
+			scene.showEffect('heart', {
 				x: attacker.x,
 				y: attacker.y + 45,
 				z: attacker.z,
@@ -35203,7 +35203,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.8,
 				time: 700,
 			}, 'accel', 'explode');
-			scene.showEffect('mistball', {
+			scene.showEffect('heart', {
 				x: attacker.x - 45,
 				y: attacker.y - 20,
 				z: attacker.z,
@@ -35217,7 +35217,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.8,
 				time: 800,
 			}, 'accel', 'explode');
-			scene.showEffect('iceball', {
+			scene.showEffect('heart', {
 				x: attacker.x + 45,
 				y: attacker.y - 20,
 				z: attacker.z,
@@ -35232,7 +35232,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 900,
 			}, 'accel', 'explode');
 
-			scene.showEffect('energyball', {
+			scene.showEffect('heart', {
 				x: defender.x - 15,
 				y: defender.y,
 				z: defender.z,
