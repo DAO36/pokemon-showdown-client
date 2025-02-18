@@ -8271,7 +8271,7 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y + 20,
 				z: defender.z,
 				scale: 0.65,
-				opacity: 0,
+				opacity: 1,
 				time: 370,
 			}, {
 				y: defender.y + 20,
