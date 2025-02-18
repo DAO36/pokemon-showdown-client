@@ -8292,7 +8292,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear', 'explode'); 
 		},
 	},
-	ratattack: { // , {filter: 'hue-rotate(120deg)'}); 
+	ratattack3: { // , {filter: 'hue-rotate(120deg)'}); 
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 800, 0.3);
 			scene.showEffect('topbite', {
@@ -8342,6 +8342,59 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y - 20,
 				opacity: 1,
 				time: 630,
+			}, 'linear', 'explode'); 
+		},
+	},
+	ratattack: { // , {filter: 'hue-rotate(120deg)'}); 
+		anim(scene, [attacker, defender]) {
+			scene.backgroundEffect('#000000', 800, 0.3);
+			scene.showEffect('topbite', {
+				x: defender.x,
+				y: defender.y + 70,
+				z: defender.z,
+				scale: 0.4,
+				opacity: 1,
+				time: 370,
+			}, {
+				y: defender.y + 20,
+				opacity: 1,
+				time: 500,
+			}, 'linear', 'explode');
+			scene.showEffect('topbite', {
+				x: defender.x,
+				y: defender.y + 70,
+				z: defender.z,
+				scale: 0.8,
+				opacity: 1,
+				time: 400,
+			}, {
+				y: defender.y + 20,
+				opacity: 1,
+				time: 530,
+			}, 'linear', 'explode');
+			scene.showEffect('bottombite', {
+				x: defender.x,
+				y: defender.y - 70,
+				z: defender.z,
+				scale: 0.4,
+				opacity: 0,
+				time: 370,
+			}, {
+				y: defender.y - 20,
+				opacity: 1,
+				time: 500,
+			}, 'linear', 'explode');
+			scene.showEffect('bottombite', {
+				x: defender.x,
+				y: defender.y - 70,
+				z: defender.z,
+				scale: 0.8,
+				opacity: 0,
+				time: 400,
+			}, {
+				y: defender.y - 20,
+				opacity: 1,
+				time: 530,
 			}, 'linear', 'explode'); 
 		},
 	},
