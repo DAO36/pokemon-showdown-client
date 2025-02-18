@@ -34552,23 +34552,23 @@ export const BattleMoveAnims: AnimTable = {
 			defender.delay(100);
 			defender.anim({
 				x: defender.x - 30,
-				time: 100,
+				time: 200,
 			});
 			defender.anim({
 				x: defender.x + 30,
-				time: 125,
+				time: 225,
 			});
 			defender.anim({
 				x: defender.x - 30,
-				time: 125,
+				time: 225,
 			});
 			defender.anim({
 				x: defender.x + 30,
-				time: 125,
+				time: 225,
 			});
 			defender.anim({
 				x: defender.x,
-				time: 125,
+				time: 225,
 			});
 		},
 	},
