@@ -8352,7 +8352,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x,
 				y: defender.y + 70,
 				z: defender.z,
-				scale: 0.4,
+				scale: 0.3,
 				opacity: 1,
 				time: 370,
 			}, {
@@ -8364,19 +8364,19 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x,
 				y: defender.y + 70,
 				z: defender.z,
-				scale: 0.7,
+				scale: 0.6,
 				opacity: 1,
-				time: 420,
+				time: 440,
 			}, {
 				y: defender.y + 20,
 				opacity: 1,
-				time: 550,
+				time: 570,
 			}, 'linear', 'explode');
 			scene.showEffect('bottombite', {
 				x: defender.x,
 				y: defender.y - 70,
 				z: defender.z,
-				scale: 0.4,
+				scale: 0.3,
 				opacity: 0,
 				time: 370,
 			}, {
@@ -8388,13 +8388,13 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x,
 				y: defender.y - 70,
 				z: defender.z,
-				scale: 0.7,
+				scale: 0.6,
 				opacity: 0,
-				time: 420,
+				time: 440,
 			}, {
 				y: defender.y - 20,
 				opacity: 1,
-				time: 550,
+				time: 570,
 			}, 'linear', 'explode'); 
 		},
 	},
