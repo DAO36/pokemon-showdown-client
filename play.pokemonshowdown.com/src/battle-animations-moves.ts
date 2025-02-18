@@ -20923,6 +20923,49 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear');
 		},
 	},
+	devilishdiva: {
+		anim(scene, [attacker]) {
+			scene.showEffect('shadowball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0,
+				opacity: 0.5,
+				time: 0,
+			}, {
+				z: attacker.behind(-50),
+				scale: 7,
+				opacity: 0,
+				time: 400,
+			}, 'linear');
+			scene.showEffect('shadowball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0,
+				opacity: 0.5,
+				time: 150,
+			}, {
+				z: attacker.behind(-50),
+				scale: 7,
+				opacity: 0,
+				time: 600,
+			}, 'linear');
+			scene.showEffect('shadowball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0,
+				opacity: 0.5,
+				time: 300,
+			}, {
+				z: attacker.behind(-50),
+				scale: 7,
+				opacity: 0,
+				time: 800,
+			}, 'linear');
+		},
+	},
 	heavenlyharmony: {
 		anim(scene, [attacker]) {
 			scene.showEffect('mistball', {
@@ -50665,8 +50708,7 @@ BattleMoveAnims['hopesoda'] = {anim: BattleMoveAnims['milkdrink'].anim};
 BattleMoveAnims['wormhole'] = {anim: BattleMoveAnims['hyperspacehole'].anim};
 BattleMoveAnims['timetogo'] = {anim: BattleMoveAnims['teleport'].anim};
 BattleMoveAnims['forbiddenknowledge'] = {anim: BattleMoveAnims['nightshade'].anim};
-BattleMoveAnims['bejeweled'] = {anim: BattleMoveAnims['powergem'].anim};
-BattleMoveAnims['devilishdiva'] = {anim: BattleMoveAnims['hypervoice'].anim};
+BattleMoveAnims['bejeweled'] = {anim: BattleMoveAnims['powergem'].anim}; 
 BattleMoveAnims['divafork'] = {anim: BattleMoveAnims['nightslash'].anim};
 BattleMoveAnims['stuffcheeks'] = {anim: BattleMoveAnims['stockpile'].anim};
 BattleMoveAnims['noretreat'] = {anim: BattleMoveAnims['stockpile'].anim};
