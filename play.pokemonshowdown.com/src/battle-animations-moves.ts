@@ -15155,27 +15155,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 500,
 			}, 'linear');
 		},
-	},
-	tonjok: {
-		anim(scene, [attacker, defender]) {
-			BattleOtherAnims.fastattack.anim(scene, [attacker, defender]);
-			scene.showEffect('fist', {
-				x: defender.x,
-				y: defender.y,
-				z: defender.z,
-				scale: 1,
-				opacity: 1,
-				time: 260,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.behind(20),
-				scale: 2,
-				opacity: 0,
-				time: 500,
-			}, 'linear');
-		},
-	},
+	}, 
 	wickedblow: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 900, 0.3);
@@ -15198,6 +15178,23 @@ export const BattleMoveAnims: AnimTable = {
 		},
 	},
 	vacuumwave: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('fist', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.1,
+				opacity: 1,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 1,
+				time: 200,
+			}, 'accel', 'fade');
+		},
+	},
+	tonjok: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('fist', {
 				x: attacker.x,
