@@ -8289,8 +8289,7 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y - 20,
 				opacity: 1,
 				time: 500,
-			}, 'linear', 'explode');
-			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
+			}, 'linear', 'explode'); 
 		},
 	},
 	chattinichomp: {
