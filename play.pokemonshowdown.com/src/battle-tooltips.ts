@@ -757,6 +757,9 @@ class BattleTooltips {
 			if (move.flags.pulse && ability === 'megalauncher') {
 				text += `<p class="movetag">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>`;
 			}
+			if (move.flags.pulse && ability === 'supernenechi') {
+				text += `<p class="movetag">&#x2713; Pulse <small>(boosted by Super Nenechi)</small></p>`;
+			}
 			if (move.flags.bite && ability === 'strongjaw') {
 				text += `<p class="movetag">&#x2713; Bite <small>(boosted by Strong Jaw)</small></p>`;
 			}
@@ -2146,6 +2149,9 @@ class BattleTooltips {
 		}
 		if (move.flags['pulse']) {
 			value.abilityModify(1.5, "Mega Launcher");
+		}
+		if (move.flags['pulse']) {
+			value.abilityModify(1.5, "Super Nenechi");
 		}
 		if (move.flags['bullet']) {
 			value.abilityModify(1.5, "Botan X");
