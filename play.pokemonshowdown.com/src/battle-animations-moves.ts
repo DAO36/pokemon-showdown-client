@@ -2655,7 +2655,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	daredevil: {
+	bibiblast: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#B84038', 700, 0.6);
 			scene.showEffect('mistball', {
@@ -9100,7 +9100,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	clowntown: {
+	circusshow: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect(attacker.sp, {
 				x: defender.leftof(-10),
