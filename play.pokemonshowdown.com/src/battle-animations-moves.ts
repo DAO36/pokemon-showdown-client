@@ -24745,7 +24745,7 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	nekkostrike: {
 		anim(scene, [attacker, defender]) {
-			scene.showEffect('energyball', {
+			scene.showEffect('flareball', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
@@ -24755,11 +24755,11 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
-				scale: 0.7,
+				scale: 0.5,
 				opacity: 1,
 				time: 400,
 			}, 'ballistic', 'explode');
-			scene.showEffect('energyball', {
+			scene.showEffect('flareball', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
@@ -24770,11 +24770,11 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 40,
 				y: defender.y - 20,
 				z: defender.z,
-				scale: 0.7,
+				scale: 0.5,
 				opacity: 1,
 				time: 500,
 			}, 'ballistic', 'explode');
-			scene.showEffect('energyball', {
+			scene.showEffect('flareball', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
@@ -24785,7 +24785,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x - 30,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 0.7,
+				scale: 0.5,
 				opacity: 1,
 				time: 600,
 			}, 'ballistic', 'explode');
@@ -35154,10 +35154,10 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x,
 				y: attacker.y + 45,
 				z: attacker.z,
-				scale: 0.3,
+				scale: 0.5,
 				opacity: 0.2,
 			}, {
-				scale: 0.5,
+				scale: 0.6,
 				opacity: 0.6,
 				time: 400,
 			}, 'decel', 'fade');
@@ -35165,11 +35165,11 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x - 45,
 				y: attacker.y - 20,
 				z: attacker.z,
-				scale: 0.3,
+				scale: 0.5,
 				opacity: 0.2,
 				time: 100,
 			}, {
-				scale: 0.5,
+				scale: 0.6,
 				opacity: 0.6,
 				time: 500,
 			}, 'decel', 'fade');
@@ -35177,11 +35177,11 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x + 45,
 				y: attacker.y - 20,
 				z: attacker.z,
-				scale: 0.3,
+				scale: 0.5,
 				opacity: 0.2,
 				time: 200,
 			}, {
-				scale: 0.5,
+				scale: 0.6,
 				opacity: 0.6,
 				time: 600,
 			}, 'decel', 'fade');
@@ -35190,7 +35190,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x,
 				y: attacker.y + 45,
 				z: attacker.z,
-				scale: 0.5,
+				scale: 0.8,
 				opacity: 0.6,
 				time: 400,
 			}, {
@@ -35204,7 +35204,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x - 45,
 				y: attacker.y - 20,
 				z: attacker.z,
-				scale: 0.5,
+				scale: 0.8,
 				opacity: 0.6,
 				time: 500,
 			}, {
@@ -35218,7 +35218,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x + 45,
 				y: attacker.y - 20,
 				z: attacker.z,
-				scale: 0.5,
+				scale: 0.8,
 				opacity: 0.6,
 				time: 600,
 			}, {
@@ -35233,7 +35233,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x - 15,
 				y: defender.y,
 				z: defender.z,
-				scale: 0.5,
+				scale: 0.8,
 				opacity: 0.8,
 				time: 600,
 			}, {
@@ -35245,7 +35245,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 15,
 				y: defender.y,
 				z: defender.z,
-				scale: 0.5,
+				scale: 0.8,
 				opacity: 0.8,
 				time: 700,
 			}, {
@@ -35257,7 +35257,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
-				scale: 0.5,
+				scale: 0.8,
 				opacity: 0.8,
 				time: 800,
 			}, {
