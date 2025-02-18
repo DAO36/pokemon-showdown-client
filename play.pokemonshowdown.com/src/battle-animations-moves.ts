@@ -22174,7 +22174,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'decel', 'fade');
 		},
 	},
-	bigcatmeansbigtrouble: {
+	godeyes: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#00FFFF', 250, 0.3);
 			scene.backgroundEffect('#FFFFFF', 250, 0.2, 400);
