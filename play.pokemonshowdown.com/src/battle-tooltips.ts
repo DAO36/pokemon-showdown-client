@@ -763,6 +763,9 @@ class BattleTooltips {
 			if (move.flags.bite && ability === 'strongjaw') {
 				text += `<p class="movetag">&#x2713; Bite <small>(boosted by Strong Jaw)</small></p>`;
 			}
+			if (move.flags.wind && ability === 'rainshaman') {
+				text += `<p class="movetag">&#x2713; Bite <small>(boosted by Rain Shaman)</small></p>`;
+			}
 			if (move.flags.bullet && ability === 'botanx') {
 				text += `<p class="movetag">&#x2713; Bullet <small>(boosted by Botan X)</small></p>`;
 			} 
@@ -2155,6 +2158,9 @@ class BattleTooltips {
 		}
 		if (move.flags['bullet']) {
 			value.abilityModify(1.5, "Botan X");
+		}
+		if (move.flags['wind']) {
+			value.abilityModify(1.5, "Rain Shaman");
 		}
 		if (move.flags['bite']) {
 			value.abilityModify(1.5, "Strong Jaw");

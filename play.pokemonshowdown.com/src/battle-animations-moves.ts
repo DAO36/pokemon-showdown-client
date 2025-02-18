@@ -880,7 +880,7 @@ export const BattleMoveAnims: AnimTable = {
 	raindance: {
 		anim: BattleOtherAnims.dance.anim,
 	},
-	rainshaman: {
+	payung: {
 		anim: BattleOtherAnims.dance.anim,
 	},
 	sunnyday: {
