@@ -5992,7 +5992,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0,
 				time: 500,
 			}, 'linear');
-			scene.showEffect('energyball', {
+			scene.showEffect('mistball', {
 				x: attacker.x,
 				y: attacker.y + 30,
 				z: attacker.z,
@@ -6006,7 +6006,7 @@ export const BattleMoveAnims: AnimTable = {
 				scale: 0.25,
 				time: 750,
 			}, 'decel', 'fade');
-			scene.showEffect('energyball', {
+			scene.showEffect('mistball', {
 				x: attacker.x,
 				y: attacker.y + 70,
 				z: attacker.z,
