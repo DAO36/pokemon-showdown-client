@@ -2606,7 +2606,7 @@ export const BattleMoveAnims: AnimTable = {
 	watamebeam: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#B84038', 700, 0.6);
-			scene.showEffect('energyball', {
+			scene.showEffect('electroball', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.behind(-30),
@@ -2617,7 +2617,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 1,
 				time: 300,
 			}, 'decel', 'fade');
-			scene.showEffect('electroball', {
+			scene.showEffect('energyball', {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.behind(-30),
