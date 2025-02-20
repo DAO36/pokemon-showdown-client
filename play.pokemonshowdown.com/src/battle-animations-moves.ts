@@ -14080,7 +14080,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 350,
 			}, {
 				scale: 1,
-				opacity: 0,
+				opacity: 0.4,
 			}, 'decel');
 			scene.showEffect('web', {
 				x: defender.x - 40,
@@ -14091,7 +14091,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 500,
 			}, {
 				scale: 1,
-				opacity: 0,
+				opacity: 0.4,
 			}, 'decel');
 			scene.showEffect('web', {
 				x: defender.x + 10,
@@ -14102,7 +14102,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 650,
 			}, {
 				scale: 1,
-				opacity: 0,
+				opacity: 0.4,
 			}, 'decel');
 			BattleOtherAnims.punchattack.anim(scene, [attacker, defender]);
 		},
