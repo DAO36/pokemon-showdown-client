@@ -37643,7 +37643,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 710,
 			}, 'accel', 'explode');
-			scene.showEffect('fireball', {
+			scene.showEffect('bluefireball', {
 				x: defender.x + 15,
 				y: defender.y + 10,
 				z: defender.z,
