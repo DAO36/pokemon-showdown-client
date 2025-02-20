@@ -32885,12 +32885,12 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 1.5,
-				opacity: 0.6,
+				scale: 0.3,
+				opacity: 1,
 				time: 700,
 			}, {
-				scale: 2,
-				opacity: 0,
+				scale: 0.2,
+				opacity: 0.5,
 				time: 1000,
 			}, 'accel', 'fade');
 			scene.showEffect('leftslash', {
