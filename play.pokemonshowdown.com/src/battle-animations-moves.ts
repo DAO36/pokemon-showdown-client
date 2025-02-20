@@ -20009,6 +20009,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
+				scale: 0.7,
 				opacity: 0,
 			}, {
 				z: defender.behind(20),
@@ -20020,6 +20021,7 @@ export const BattleMoveAnims: AnimTable = {
 				y: defender.y,
 				z: defender.behind(20),
 				opacity: 1,
+				scale: 0.7,
 				time: 300,
 			}, {
 				z: attacker.z,
