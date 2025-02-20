@@ -36265,11 +36265,11 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 1.5,
-				opacity: 0.6,
+				scale: 0.2,
+				opacity: 1,
 				time: 610,
 			}, {
-				scale: 2,
+				scale: 0.2,
 				opacity: 0,
 				time: 910,
 			}, 'accel', 'fade');
@@ -36393,11 +36393,11 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 1.5,
-				opacity: 0.6,
+				scale: 0.2,
+				opacity: 1,
 				time: 610,
 			}, {
-				scale: 2,
+				scale: 0.2,
 				opacity: 0,
 				time: 910,
 			}, 'accel', 'fade');
@@ -36521,11 +36521,11 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 1.5,
-				opacity: 0.6,
+				scale: 0.2,
+				opacity: 1,
 				time: 610,
 			}, {
-				scale: 2,
+				scale: 0.2,
 				opacity: 0,
 				time: 910,
 			}, 'accel', 'fade');
@@ -36649,11 +36649,11 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 1.5,
-				opacity: 0.6,
+				scale: 0.2,
+				opacity: 1,
 				time: 610,
 			}, {
-				scale: 2,
+				scale: 0.2,
 				opacity: 0,
 				time: 910,
 			}, 'accel', 'fade');
@@ -36731,7 +36731,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, {
 				x: defender.x + 50,
 				y: defender.y + 10,
-				opacity: 0.5,
+				opacity: 0.8,
 				time: 710,
 			}, 'accel', 'explode');
 			scene.showEffect('feather', {
@@ -36744,7 +36744,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, {
 				x: defender.x - 50,
 				y: defender.y - 20,
-				opacity: 0.5,
+				opacity: 0.8,
 				time: 710,
 			}, 'accel', 'explode');
 			scene.showEffect('feather', {
@@ -36757,7 +36757,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, {
 				x: defender.x + 35,
 				y: defender.y + 30,
-				opacity: 0.5,
+				opacity: 0.8,
 				time: 810,
 			}, 'accel', 'explode');
 			scene.showEffect('feather', {
@@ -36770,7 +36770,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, {
 				x: defender.x - 35,
 				y: defender.y - 40,
-				opacity: 0.5,
+				opacity: 0.8,
 				time: 910,
 			}, 'accel', 'explode');
 			scene.showEffect('shadowball', {
@@ -36905,11 +36905,11 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 1.5,
-				opacity: 0.6,
+				scale: 0.2,
+				opacity: 1,
 				time: 610,
 			}, {
-				scale: 2,
+				scale: 0.2,
 				opacity: 0,
 				time: 910,
 			}, 'accel', 'fade');
@@ -37033,11 +37033,11 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 1.5,
-				opacity: 0.6,
+				scale: 0.2,
+				opacity: 1,
 				time: 610,
 			}, {
-				scale: 2,
+				scale: 0.2,
 				opacity: 0,
 				time: 910,
 			}, 'accel', 'fade');
@@ -37115,7 +37115,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, {
 				x: defender.x + 50,
 				y: defender.y + 10,
-				opacity: 0.5,
+				opacity: 0.8,
 				time: 710,
 			}, 'accel', 'explode');
 			scene.showEffect('bone', {
@@ -37128,7 +37128,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, {
 				x: defender.x - 50,
 				y: defender.y - 20,
-				opacity: 0.5,
+				opacity: 0.8,
 				time: 710,
 			}, 'accel', 'explode');
 			scene.showEffect('bone', {
@@ -37141,7 +37141,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, {
 				x: defender.x + 35,
 				y: defender.y + 30,
-				opacity: 0.5,
+				opacity: 0.8,
 				time: 810,
 			}, 'accel', 'explode');
 			scene.showEffect('bone', {
@@ -37154,10 +37154,10 @@ export const BattleMoveAnims: AnimTable = {
 			}, {
 				x: defender.x - 35,
 				y: defender.y - 40,
-				opacity: 0.5,
+				opacity: 0.8,
 				time: 910,
 			}, 'accel', 'explode');
-			scene.showEffect('bone', {
+			scene.showEffect('shadowball', {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
@@ -37289,11 +37289,11 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 1.5,
-				opacity: 0.6,
+				scale: 0.2,
+				opacity: 1,
 				time: 610,
 			}, {
-				scale: 2,
+				scale: 0.2,
 				opacity: 0,
 				time: 910,
 			}, 'accel', 'fade');
@@ -37417,11 +37417,11 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 1.5,
-				opacity: 0.6,
+				scale: 0.2,
+				opacity: 1,
 				time: 610,
 			}, {
-				scale: 2,
+				scale: 0.2,
 				opacity: 0,
 				time: 910,
 			}, 'accel', 'fade');
@@ -37499,7 +37499,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, {
 				x: defender.x + 50,
 				y: defender.y + 10,
-				opacity: 0.5,
+				opacity: 0.8,
 				time: 710,
 			}, 'accel', 'explode');
 			scene.showEffect('leaf2', {
@@ -37512,7 +37512,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, {
 				x: defender.x - 50,
 				y: defender.y - 20,
-				opacity: 0.5,
+				opacity: 0.8,
 				time: 710,
 			}, 'accel', 'explode');
 			scene.showEffect('leaf1', {
@@ -37525,7 +37525,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, {
 				x: defender.x + 35,
 				y: defender.y + 30,
-				opacity: 0.5,
+				opacity: 0.8,
 				time: 810,
 			}, 'accel', 'explode');
 			scene.showEffect('leaf2', {
@@ -37538,18 +37538,18 @@ export const BattleMoveAnims: AnimTable = {
 			}, {
 				x: defender.x - 35,
 				y: defender.y - 40,
-				opacity: 0.5,
+				opacity: 0.8,
 				time: 910,
 			}, 'accel', 'explode');
 			scene.showEffect('leaf1', {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 1.5,
-				opacity: 0.6,
+				scale: 0.2,
+				opacity: 1,
 				time: 610,
 			}, {
-				scale: 2,
+				scale: 0.8,
 				opacity: 0,
 				time: 910,
 			}, 'accel', 'fade');
@@ -37630,7 +37630,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 710,
 			}, 'accel', 'explode');
-			scene.showEffect('bluefireball', {
+			scene.showEffect('shadowball', {
 				x: defender.x - 30,
 				y: defender.y - 20,
 				z: defender.z,
@@ -37643,7 +37643,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 710,
 			}, 'accel', 'explode');
-			scene.showEffect('bluefireball', {
+			scene.showEffect('fireball', {
 				x: defender.x + 15,
 				y: defender.y + 10,
 				z: defender.z,
@@ -37656,7 +37656,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 810,
 			}, 'accel', 'explode');
-			scene.showEffect('bluefireball', {
+			scene.showEffect('shadowball', {
 				x: defender.x - 15,
 				y: defender.y - 30,
 				z: defender.z,
@@ -37673,11 +37673,11 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 1.5,
-				opacity: 0.6,
+				scale: 0.2,
+				opacity: 1,
 				time: 610,
 			}, {
-				scale: 2,
+				scale: 0.2,
 				opacity: 0,
 				time: 910,
 			}, 'accel', 'fade');
