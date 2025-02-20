@@ -36597,7 +36597,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 30,
 				y: defender.y + 25,
 				z: defender.z,
-				scale: 0.2,
+				scale: 0.5,
 				opacity: 1,
 				time: 410,
 			}, {
@@ -36610,7 +36610,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x - 30,
 				y: defender.y - 20,
 				z: defender.z,
-				scale: 0.2,
+				scale: 0.5,
 				opacity: 1,
 				time: 510,
 			}, {
@@ -36623,7 +36623,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 15,
 				y: defender.y + 10,
 				z: defender.z,
-				scale: 0.2,
+				scale: 0.5,
 				opacity: 1,
 				time: 610,
 			}, {
@@ -36636,7 +36636,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x - 15,
 				y: defender.y - 30,
 				z: defender.z,
-				scale: 0.2,
+				scale: 0.5,
 				opacity: 1,
 				time: 610,
 			}, {
@@ -36645,15 +36645,15 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 910,
 			}, 'accel', 'explode');
-			scene.showEffect('rocks', {
+			scene.showEffect('mudwisp', {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 0.2,
+				scale: 1.5,
 				opacity: 1,
 				time: 610,
 			}, {
-				scale: 0.2,
+				scale: 2,
 				opacity: 0,
 				time: 910,
 			}, 'accel', 'fade');
