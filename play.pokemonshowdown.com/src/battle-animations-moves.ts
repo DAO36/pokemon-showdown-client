@@ -37109,52 +37109,52 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 30,
 				y: defender.y + 25,
 				z: defender.z,
-				scale: 0.2,
+				scale: 0.4,
 				opacity: 1,
 				time: 410,
 			}, {
 				x: defender.x + 50,
 				y: defender.y + 10,
-				opacity: 0.8,
+				opacity: 1,
 				time: 710,
 			}, 'accel', 'explode');
 			scene.showEffect('bone', {
 				x: defender.x - 30,
 				y: defender.y - 20,
 				z: defender.z,
-				scale: 0.2,
+				scale: 0.4,
 				opacity: 1,
 				time: 510,
 			}, {
 				x: defender.x - 50,
 				y: defender.y - 20,
-				opacity: 0.8,
+				opacity: 1,
 				time: 710,
 			}, 'accel', 'explode');
 			scene.showEffect('bone', {
 				x: defender.x + 15,
 				y: defender.y + 10,
 				z: defender.z,
-				scale: 0.2,
+				scale: 4,
 				opacity: 1,
 				time: 610,
 			}, {
 				x: defender.x + 35,
 				y: defender.y + 30,
-				opacity: 0.8,
+				opacity: 1,
 				time: 810,
 			}, 'accel', 'explode');
 			scene.showEffect('bone', {
 				x: defender.x - 15,
 				y: defender.y - 30,
 				z: defender.z,
-				scale: 0.2,
+				scale: 4,
 				opacity: 1,
 				time: 610,
 			}, {
 				x: defender.x - 35,
 				y: defender.y - 40,
-				opacity: 0.8,
+				opacity: 4,
 				time: 910,
 			}, 'accel', 'explode');
 			scene.showEffect('shadowball', {
