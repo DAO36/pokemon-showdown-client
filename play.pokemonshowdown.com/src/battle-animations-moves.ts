@@ -37135,7 +37135,7 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x + 15,
 				y: defender.y + 10,
 				z: defender.z,
-				scale: 4,
+				scale: 0.4,
 				opacity: 1,
 				time: 610,
 			}, {
@@ -37148,13 +37148,13 @@ export const BattleMoveAnims: AnimTable = {
 				x: defender.x - 15,
 				y: defender.y - 30,
 				z: defender.z,
-				scale: 4,
+				scale: 0.4,
 				opacity: 1,
 				time: 610,
 			}, {
 				x: defender.x - 35,
 				y: defender.y - 40,
-				opacity: 4,
+				opacity: 0.4,
 				time: 910,
 			}, 'accel', 'explode');
 			scene.showEffect('shadowball', {
