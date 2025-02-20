@@ -28621,34 +28621,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 1000,
 			}, 'linear', 'explode');
 		},
-	},
-	imhorny: {
-		anim(scene, [attacker, defender]) {
-			scene.backgroundEffect(`#000000`, 1000, 0.4);
-			scene.showEffect('heart', {
-				x: attacker.x,
-				y: attacker.y,
-				z: attacker.z,
-				scale: 1,
-				opacity: 1,
-			}, {
-				y: attacker.y + 90,
-				opacity: 0,
-			}, 'linear');
-			scene.showEffect('heart', {
-				x: defender.x,
-				y: defender.y + 90,
-				z: defender.z,
-				scale: 1,
-				opacity: 0,
-				time: 500,
-			}, {
-				y: defender.y,
-				opacity: 1,
-				time: 1000,
-			}, 'linear', 'explode');
-		},
-	},
+	}, 
 	aochan: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect(`#000000`, 1000, 0.4);
@@ -30841,6 +30814,76 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'decel', 'explode');
 			scene.showEffect('leaf1', {
 				x: attacker.x + 30,
+				y: attacker.y - 25,
+				z: attacker.z,
+				scale: 0.4,
+				opacity: 0.3,
+			}, {
+				x: defender.x + 60,
+				y: defender.y,
+				z: defender.behind(50),
+				scale: 1,
+				opacity: 0.6,
+			}, 'decel', 'explode');
+		},
+	},
+	imhorny: {
+		anim(scene, [attacker, ...defenders]) {
+			for (const defender of defenders) {
+				defender.delay(125);
+				defender.anim({
+					z: defender.behind(5),
+					time: 75,
+				}, 'swing');
+				defender.anim({
+					time: 75,
+				}, 'swing');
+				defender.anim({
+					z: defender.behind(5),
+					time: 75,
+				}, 'swing');
+				defender.anim({
+					time: 75,
+				}, 'swing');
+				defender.anim({
+					z: defender.behind(5),
+					time: 75,
+				}, 'swing');
+				defender.anim({
+					time: 75,
+				}, 'swing');
+			}
+			const defender = defenders[1] || defenders[0];
+
+			scene.backgroundEffect('#0000DD', 700, 0.2);
+			scene.showEffect('heart', {
+				x: attacker.x,
+				y: attacker.y - 25,
+				z: attacker.z,
+				scale: 0.4,
+				opacity: 0.3,
+			}, {
+				x: defender.x,
+				y: defender.y + 10,
+				z: defender.behind(50),
+				scale: 1,
+				opacity: 0.6,
+			}, 'decel', 'explode');
+			scene.showEffect('heart', {
+				x: attacker.x - 25,
+				y: attacker.y - 25,
+				z: attacker.z,
+				scale: 0.4,
+				opacity: 0.3,
+			}, {
+				x: defender.x - 60,
+				y: defender.y,
+				z: defender.behind(50),
+				scale: 1,
+				opacity: 0.6,
+			}, 'decel', 'explode');
+			scene.showEffect('heart', {
+				x: attacker.x + 25,
 				y: attacker.y - 25,
 				z: attacker.z,
 				scale: 0.4,
