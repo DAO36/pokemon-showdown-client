@@ -1177,8 +1177,8 @@ class BattleTooltips {
 						speedModifiers.push(2);
 					}
 				if (ability === 'powerofatlantis') {
-						stats.spa = Math.floor(stats.spa * 1.5);
-						stats.atk = Math.floor(stats.atk * 1.5);
+						stats.spa = Math.floor(stats.spa * 1.3);
+						stats.atk = Math.floor(stats.atk * 1.3);
 					}	
 				}
 			}
