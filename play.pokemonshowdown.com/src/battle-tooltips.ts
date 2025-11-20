@@ -1127,6 +1127,15 @@ class BattleTooltips {
 		if (ability === 'hugepower') {
 			stats.atk *= 2;
 		}
+		if (ability === 'pokemonmaster') {
+			stats.atk *= 2;
+		}
+		if (ability === 'pokemonmaster') {
+			stats.spe *= 2;
+		}
+		if (ability === 'pokemonmaster') {
+			stats.spa *= 2;
+		}
 		if (ability === 'god') {
 			stats.atk *= 1.5;
 		}
