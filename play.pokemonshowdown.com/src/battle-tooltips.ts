@@ -2140,6 +2140,14 @@ class BattleTooltips {
 		}
 		if (!value.value) return value;
 
+		if (move.id === 'aurafist') {
+			value.set(Math.min(1000, 50 + 50 * pokemon.timesAttacked),
+				pokemon.timesAttacked > 0
+					? `Hit ${pokemon.timesAttacked} time${pokemon.timesAttacked > 1 ? 's' : ''}`
+					: undefined);
+		}
+		if (!value.value) return value;
+
 		// Other ability boosts
 		if (pokemon.status === 'brn' && move.category === 'Special') {
 			value.abilityModify(1.5, "Flare Boost");
