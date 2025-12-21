@@ -12364,6 +12364,102 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear');
 		},
 	},
+	faunasweep: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('energyball', {
+				x: attacker.x + 20,
+				y: attacker.y + 30,
+				z: defender.z,
+				scale: 0,
+				opacity: 1,
+			}, {
+				y: attacker.y - 20,
+				scale: 4,
+				opacity: 0,
+			}, 'decel');
+			scene.showEffect('energyball', {
+				x: Math.floor((attacker.x + defender.x) / 2) - 20,
+				y: Math.floor((attacker.y + defender.y) / 2) + 30,
+				z: Math.floor((attacker.z + defender.z) / 2),
+				scale: 0,
+				opacity: 1,
+				time: 150,
+			}, {
+				y: Math.floor((attacker.y + defender.y) / 2) - 20,
+				scale: 4,
+				opacity: 0,
+			}, 'decel');
+			scene.showEffect('energyball', {
+				x: defender.x + 10,
+				y: defender.y + 30,
+				z: defender.z,
+				scale: 0,
+				opacity: 1,
+				time: 300,
+			}, {
+				y: defender.y - 20,
+				scale: 4,
+				opacity: 0,
+			}, 'decel');
+			scene.showEffect(attacker.sp, {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				opacity: 0.3,
+				time: 50,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(70),
+				time: 350,
+			}, 'accel', 'fade');
+			scene.showEffect(attacker.sp, {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				opacity: 0.3,
+				time: 100,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(70),
+				time: 400,
+			}, 'accel', 'fade');
+			attacker.anim({
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(70),
+				time: 300,
+				opacity: 0.5,
+			}, 'accel');
+			attacker.anim({
+				x: defender.x,
+				y: defender.x,
+				z: defender.behind(100),
+				opacity: 0,
+				time: 100,
+			}, 'linear');
+			attacker.anim({
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.behind(70),
+				opacity: 0,
+				time: 1,
+			}, 'linear');
+			attacker.anim({
+				opacity: 1,
+				time: 500,
+			}, 'decel');
+			defender.delay(260);
+			defender.anim({
+				z: defender.behind(30),
+				time: 100,
+			}, 'swing');
+			defender.anim({
+				time: 300,
+			}, 'swing');
+		},
+	},
 	nemu: {
 		anim(scene, [attacker, defender]) {
 			attacker.anim({
