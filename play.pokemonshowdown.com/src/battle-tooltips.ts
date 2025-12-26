@@ -763,6 +763,9 @@ class BattleTooltips {
 			if (move.flags.bite && ability === 'strongjaw') {
 				text += `<p class="movetag">&#x2713; Bite <small>(boosted by Strong Jaw)</small></p>`;
 			}
+			if (move.flags.bite && ability === 'mogumogu') {
+				text += `<p class="movetag">&#x2713; Bite <small>(boosted by Mogu Mogu)</small></p>`;
+			}
 			if (move.flags.dance && ability === 'dancingsiren') {
 				text += `<p class="movetag">&#x2713; Dance <small>(boosted by Dancing Siren)</small></p>`;
 			}
@@ -2187,6 +2190,9 @@ class BattleTooltips {
 		}
 		if (move.flags['bite']) {
 			value.abilityModify(1.5, "Strong Jaw");
+		}
+		if (move.flags['bite']) {
+			value.abilityModify(1.5, "Mogu Mogu");
 		}
 		if (move.flags['bite']) {
 			value.abilityModify(1.5, "Big Cat Means Big Trouble");
