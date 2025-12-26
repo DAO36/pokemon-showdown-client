@@ -2171,7 +2171,7 @@ class BattleTooltips {
 			value.abilityModify(1.2, 'Iron Fist');
 		} 
 		if (move.flags['punch']) {
-			value.abilityModify(1.2, 'Holy Knight');
+			value.abilityModify(1.3, 'Holy Knight');
 		}
 		if (move.flags['pulse']) {
 			value.abilityModify(1.5, "Mega Launcher");
