@@ -35754,6 +35754,45 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'accel', 'fade');
 		},
 	},
+	doom: {
+		anim(scene, [attacker, ...defenders]) {
+			for (const defender of defenders) {
+				defender.anim({
+					y: defender.y - 80,
+					opacity: 0,
+					time: 300,
+				}, 'accel');
+				defender.anim({
+					y: defender.y,
+					opacity: 0,
+					time: 200,
+				});
+				defender.delay(200);
+				defender.anim({
+					y: defender.y,
+					opacity: 1,
+					time: 200,
+				});
+			}
+			const defender = defenders[1] || defenders[0];
+
+			scene.backgroundEffect('#AA0000', 700, 0.3);
+			scene.showEffect('mistball', {
+				x: defender.x,
+				y: defender.y - 50,
+				z: defender.z,
+				scale: 1,
+				xscale: 3,
+				opacity: 0.8,
+				time: 0,
+			}, {
+				scale: 2,
+				xscale: 8,
+				opacity: 0.1,
+				time: 600,
+			}, 'accel', 'fade');
+		},
+	},
 	blackhole: {
 		anim(scene, [attacker, ...defenders]) {
 			for (const defender of defenders) {
