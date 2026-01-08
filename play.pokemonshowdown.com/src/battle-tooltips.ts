@@ -751,9 +751,6 @@ class BattleTooltips {
 			if (move.flags.sound && ability === 'virtualdiva2') {
 				text += `<p class="movetag">&#x2713; Sound <small>(boosted by Virtual Diva2)</small></p>`;
 			}
-			if (move.flags.sound && ability === 'yabairys') {
-				text += `<p class="movetag">&#x2713; Sound <small>(boosted by YabaIRyS)</small></p>`;
-			}
 			if (move.flags.pulse && ability === 'megalauncher') {
 				text += `<p class="movetag">&#x2713; Pulse <small>(boosted by Mega Launcher)</small></p>`;
 			}
@@ -2226,9 +2223,6 @@ class BattleTooltips {
 		}
 		if (move.flags['sound']) {
 			value.abilityModify(1.3, "Virtual Diva2");
-		}
-		if (move.flags['sound']) {
-			value.abilityModify(1.3, "YabaIRyS");
 		}
 		if (move.flags['slicing']) {
 			value.abilityModify(1.5, "Sharpness");
