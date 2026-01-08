@@ -2222,6 +2222,9 @@ class BattleTooltips {
 			value.abilityModify(1.3, "Punk Rock");
 		}
 		if (move.flags['sound']) {
+			value.abilityModify(1.3, "YabaIRyS");
+		}
+		if (move.flags['sound']) {
 			value.abilityModify(1.3, "Virtual Diva2");
 		}
 		if (move.flags['slicing']) {
