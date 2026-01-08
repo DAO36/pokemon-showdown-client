@@ -2344,7 +2344,10 @@ class BattleTooltips {
 			value.modify(1.5, 'Gravity boost');
 		}
 		if (move.id === 'timeflies' && this.battle.hasPseudoWeather('Trick Room')) {
-			value.modify(1.5, 'Trick Room boost');
+			value.modify(2, 'Trick Room boost');
+		}
+		if (move.id === 'sandsoftime' && this.battle.hasPseudoWeather('Trick Room')) {
+			value.modify(2, 'Trick Room boost');
 		}
 		if (move.id === 'borosblast' && this.battle.hasPseudoWeather('Trick Room')) {
 			value.modify(2, 'Trick Room boost');
