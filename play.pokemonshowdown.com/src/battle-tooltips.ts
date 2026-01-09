@@ -2352,6 +2352,9 @@ class BattleTooltips {
 		if (move.id === 'blackhole' && this.battle.hasPseudoWeather('Gravity') && target?.isGrounded()) {
 			value.modify(1.5, 'Gravity boost');
 		}
+		if (move.id === 'wormhole' && this.battle.hasPseudoWeather('Gravity') && target?.isGrounded()) {
+			value.modify(2, 'Gravity boost');
+		}
 		if (move.id === 'timeflies' && this.battle.hasPseudoWeather('Trick Room')) {
 			value.modify(2, 'Trick Room boost');
 		}
