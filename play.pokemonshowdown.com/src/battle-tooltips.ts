@@ -2222,7 +2222,7 @@ class BattleTooltips {
 			value.abilityModify(1.3, "Punk Rock");
 		}
 		if (move.flags['sound']) {
-			value.abilityModify(1.3, "YabaIRyS");
+			value.abilityModify(1.3, "YabaIRyS2");
 		}
 		if (move.flags['sound']) {
 			value.abilityModify(1.3, "Virtual Diva2");
