@@ -20798,6 +20798,9 @@ export const BattleMoveAnims: AnimTable = {
 	sing: {
 		anim: BattleOtherAnims.sound.anim,
 	},
+	polkaradio: {
+		anim: BattleOtherAnims.sound.anim,
+	},
 	perishsong: {
 		anim: BattleOtherAnims.sound.anim,
 	},

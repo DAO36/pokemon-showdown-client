@@ -2345,7 +2345,10 @@ class BattleTooltips {
 		}
 		if (move.id === 'magickick' && this.battle.hasPseudoWeather('Magic Room')) {
 			value.modify(1.5, 'Magic Room boost');
-		}  
+		}
+		if (move.id === 'polkaradio' && this.battle.hasPseudoWeather('Wonder Room')) {
+			value.modify(2, 'Wonder Room boost');
+		}
 		if (move.id === 'blackhole' && this.battle.hasPseudoWeather('Gravity') && target?.isGrounded()) {
 			value.modify(1.5, 'Gravity boost');
 		}
