@@ -1791,7 +1791,7 @@ class BattleTooltips {
 			value.weatherModify(0, 'Snow');
 		}
 		if (move.id === 'haboob' && this.battle.gen >= 4) {
-			value.weatherModify(0, 'Sandstream');
+			value.weatherModify(0, 'Sandstorm');
 		}
 		if (['hurricane', 'thunder', 'bleakwindstorm', 'wildboltstorm', 'sandsearstorm', 'atlantisstrike', 'sharkattack', 'trident'].includes(move.id)) {
 			value.weatherModify(0, 'Rain Dance');
