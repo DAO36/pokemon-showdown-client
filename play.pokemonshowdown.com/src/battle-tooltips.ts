@@ -1790,7 +1790,10 @@ class BattleTooltips {
 			value.weatherModify(0, 'Hail');
 			value.weatherModify(0, 'Snow');
 		}
-		if (['hurricane', 'thunder', 'bleakwindstorm', 'wildboltstorm', 'sandsearstorm'].includes(move.id)) {
+		if (move.id === 'haboob' && this.battle.gen >= 4) {
+			value.weatherModify(0, 'Sandstream');
+		}
+		if (['hurricane', 'thunder', 'bleakwindstorm', 'wildboltstorm', 'sandsearstorm', 'atlantisstrike', 'sharkattack', 'trident'].includes(move.id)) {
 			value.weatherModify(0, 'Rain Dance');
 			value.weatherModify(0, 'Primordial Sea');
 		}
@@ -1900,10 +1903,15 @@ class BattleTooltips {
 			if (value.tryWeather('Sunny Day')) value.set(50, 'Sunny Day');
 			if (value.tryWeather('Desolate Land')) value.set(50, 'Desolate Land');
 		}
-		if (move.id === 'trident' || move.id === 'sharkattack') {
+		if (move.id === 'trident' || move.id === 'sharkattack' || move.id === 'atlantisstrike') {
 			if (value.tryWeather('Sunny Day')) value.set(50, 'Sunny Day');
 			if (value.tryWeather('Desolate Land')) value.set(50, 'Desolate Land');
 			if (value.tryWeather('Sandstorm')) value.set(50, 'Sandstorm');
+		}
+		if (move.id === 'haboob') {
+			if (value.tryWeather('Rain Dance')) value.set(50, 'Rain Dance');
+			if (value.tryWeather('Primordial Sea')) value.set(50, 'Primordial Sea');
+			if (value.tryWeather('Snow')) value.set(50, 'Snow');
 		}
 
 		// Chained modifiers round down on 0.5
