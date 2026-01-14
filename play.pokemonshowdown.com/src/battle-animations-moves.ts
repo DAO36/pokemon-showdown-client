@@ -6475,7 +6475,7 @@ export const BattleMoveAnims: AnimTable = {
 			scene.wait(200);
 		},
 	},
-	timetravel: {
+	ameway: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 1000, 0.3);
 			scene.showEffect('electroball', {
