@@ -1594,10 +1594,10 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 		}
 		if (id === 'skydrop') return true;
 		// strong moves
-		if (move.flags['charge'] && abilityid === 'ameway') {
+		if (move.flags['charge'] && abilityid === 'timetravel') {
 			return true;
 		}
-		if (move.flags['recharge'] && abilityid === 'ameway') {
+		if (move.flags['recharge'] && abilityid === 'timetravel') {
 			return true;
 		}
 		if (move.flags['charge']) {
