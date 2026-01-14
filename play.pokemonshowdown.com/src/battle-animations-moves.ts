@@ -12085,7 +12085,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 300,
 			}, 'swing');
 
-			scene.showEffect('fist', {
+			scene.showEffect('shadowball', {
 				x: defender.x,
 				y: defender.y,
 				z: defender.z,
@@ -12100,7 +12100,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 1,
 				time: 525,
 			}, 'linear', 'explode');
-			scene.showEffect('fist', {
+			scene.showEffect('shadowball', {
 				x: defender.x - 10,
 				y: defender.y + 20,
 				z: defender.z,
