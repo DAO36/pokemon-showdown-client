@@ -6475,7 +6475,7 @@ export const BattleMoveAnims: AnimTable = {
 			scene.wait(200);
 		},
 	},
-	ameway: {
+	timedattack: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 1000, 0.3);
 			scene.showEffect('electroball', {
@@ -34089,7 +34089,7 @@ export const BattleMoveAnims: AnimTable = {
 		},
 		prepareAnim: BattleOtherAnims.chargestatus.anim,
 	},
-	interdimensionaldetective: {
+	ameway: {
 		anim(scene, [attacker, defender]) {
 			let xstep = (defender.x - attacker.x) / 5;
 			let ystep = (defender.x - 200 - attacker.x) / 5;
