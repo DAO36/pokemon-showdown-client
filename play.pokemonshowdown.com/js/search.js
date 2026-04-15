@@ -154,10 +154,6 @@
 
 			i++;
 		}
-
-		// misbehaving ad
-		buf = buf.replace(/>Download</g, '>Down<!-- -->load<');
-
 		if (!this.renderedIndex) {
 			this.el.innerHTML = '<ul class="utilichart" style="height:' + (resultSet.length * 33) + 'px">' + buf + (!this.renderingDone ? '<li class="result more"><p><button class="button big">More</button></p></li>' : '') + '</ul>';
 			this.moreVisible = true;
@@ -213,7 +209,7 @@
 			var ability = this.engine.dex.abilities.get(id);
 			return this.renderAbilityRow(ability, matchStart, matchLength, errorMessage, attrs);
 		case 'type':
-			var type = { name: id[0].toUpperCase() + id.substr(1) };
+			var type = {name: id[0].toUpperCase() + id.substr(1)};
 			return this.renderTypeRow(type, matchStart, matchLength, errorMessage);
 		case 'egggroup':
 			// very hardcode
@@ -227,7 +223,7 @@
 			} else {
 				egName = id[0].toUpperCase() + id.substr(1);
 			}
-			var egggroup = { name: egName };
+			var egggroup = {name: egName};
 			return this.renderEggGroupRow(egggroup, matchStart, matchLength, errorMessage);
 		case 'tier':
 			// very hardcode
@@ -250,14 +246,14 @@
 				publ: "PUBL",
 				zubl: "ZUBL"
 			};
-			var tier = { name: tierTable[id] };
+			var tier = {name: tierTable[id]};
 			return this.renderTierRow(tier, matchStart, matchLength, errorMessage);
 		case 'category':
-			var category = { name: id[0].toUpperCase() + id.substr(1), id: id };
+			var category = {name: id[0].toUpperCase() + id.substr(1), id: id};
 			return this.renderCategoryRow(category, matchStart, matchLength, errorMessage);
 		case 'article':
 			var articleTitle = (window.BattleArticleTitles && BattleArticleTitles[id]) || (id[0].toUpperCase() + id.substr(1));
-			var article = { name: articleTitle, id: id };
+			var article = {name: articleTitle, id: id};
 			return this.renderArticleRow(article, matchStart, matchLength, errorMessage);
 		}
 		return 'Error: not found';
@@ -347,8 +343,8 @@
 		buf += '</span> ';
 
 		// abilities
-		if (gen >= 3 && !(this.engine && this.engine.dex.modid === 'gen7letsgo')) {
-			var abilities = pokemon.abilities;
+		if (gen >= 3) {
+			var abilities = Dex.forGen(gen).species.get(id).abilities;
 			if (gen >= 5) {
 				if (abilities['1']) {
 					buf += '<span class="col twoabilitycol">' + abilities['0'] + '<br />' +
@@ -570,10 +566,6 @@
 		// power, accuracy, pp
 		var pp = (move.pp === 1 || move.noPPBoosts ? move.pp : move.pp * 8 / 5);
 		if (this.engine && this.engine.dex.gen < 3) pp = Math.min(61, pp);
-		if (this.engine && this.engine.dex.modid === 'champions') {
-			pp = move.pp > 20 ? 20 : move.pp;
-			if (!move.noPPBoosts) pp = (pp / 5 + 1) * 4;
-		}
 		buf += '<span class="col labelcol">' + (move.category !== 'Status' ? ('<em>Power</em><br />' + (move.basePower || '&mdash;')) : '') + '</span> ';
 		buf += '<span class="col widelabelcol"><em>Accuracy</em><br />' + (move.accuracy && move.accuracy !== true ? move.accuracy + '%' : '&mdash;') + '</span> ';
 		buf += '<span class="col pplabelcol"><em>PP</em><br />' + pp + '</span> ';
@@ -611,10 +603,6 @@
 		// power, accuracy, pp
 		var pp = (move.pp === 1 || move.noPPBoosts ? move.pp : move.pp * 8 / 5);
 		if (this.engine && this.engine.dex.gen < 3) pp = Math.min(61, pp);
-		if (this.engine && this.engine.dex.modid === 'champions') {
-			pp = move.pp > 20 ? 20 : move.pp;
-			if (!move.noPPBoosts) pp = (pp / 5 + 1) * 4;
-		}
 		buf += '<span class="col labelcol">' + (move.category !== 'Status' ? ('<em>Power</em><br />' + (move.basePower || '&mdash;')) : '') + '</span> ';
 		buf += '<span class="col widelabelcol"><em>Accuracy</em><br />' + (move.accuracy && move.accuracy !== true ? move.accuracy + '%' : '&mdash;') + '</span> ';
 		buf += '<span class="col pplabelcol"><em>PP</em><br />' + pp + '</span> ';
@@ -652,15 +640,9 @@
 		buf += '</span> ';
 
 		// power, accuracy, pp
-		var pp = move.pp === 1 || move.noPPBoosts ? move.pp : move.pp * 8 / 5;
-		if (this.engine && this.engine.dex.gen < 3) pp = Math.min(61, pp);
-		if (this.engine && this.engine.dex.modid === 'champions') {
-			pp = move.pp > 20 ? 20 : move.pp;
-			if (!move.noPPBoosts) pp = (pp / 5 + 1) * 4;
-		}
 		buf += '<span class="col labelcol">' + (move.category !== 'Status' ? ('<em>Power</em><br />' + (move.basePower || '&mdash;')) : '') + '</span> ';
 		buf += '<span class="col widelabelcol"><em>Accuracy</em><br />' + (move.accuracy && move.accuracy !== true ? move.accuracy + '%' : '&mdash;') + '</span> ';
-		buf += '<span class="col pplabelcol"><em>PP</em><br />' + pp + '</span> ';
+		buf += '<span class="col pplabelcol"><em>PP</em><br />' + (move.pp !== 1 ? move.pp * 8 / 5 : move.pp) + '</span> ';
 
 		// desc
 		buf += '<span class="col movedesccol">' + BattleLog.escapeHTML(move.shortDesc || move.desc) + '</span> ';

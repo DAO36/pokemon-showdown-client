@@ -8,13 +8,13 @@
  * @license MIT
  */
 
-import { Dex, toID, type ID } from "./battle-dex";
+declare const BattleText: {[id: string]: {[templateName: string]: string}};
 
-export type Args = [string, ...string[]];
-export type KWArgs = { [kw: string]: string };
-export type SideID = 'p1' | 'p2' | 'p3' | 'p4';
+type Args = [string, ...string[]];
+type KWArgs = {[kw: string]: string};
+type SideID = 'p1' | 'p2' | 'p3' | 'p4';
 
-export class BattleTextParser {
+class BattleTextParser {
 	/** escaped for string.replace */
 	p1 = "Player 1";
 	/** escaped for string.replace */
@@ -47,7 +47,7 @@ export class BattleTextParser {
 		switch (cmd) {
 		case 'chatmsg': case 'chatmsg-raw': case 'raw': case 'error': case 'html':
 		case 'inactive': case 'inactiveoff': case 'warning':
-		case 'fieldhtml': case 'controlshtml': case 'pagehtml': case 'bigerror':
+		case 'fieldhtml': case 'controlshtml': case 'bigerror':
 		case 'debug': case 'tier': case 'challstr': case 'popup': case '':
 			return [cmd, line.slice(index + 1)];
 		case 'c': case 'chat': case 'uhtml': case 'uhtmlchange': case 'queryresponse': case 'showteam':
@@ -64,22 +64,22 @@ export class BattleTextParser {
 		return line.slice(1).split('|') as [string, ...string[]];
 	}
 
-	static parseBattleLine(line: string): { args: Args, kwArgs: KWArgs } {
+	static parseBattleLine(line: string): {args: Args, kwArgs: KWArgs} {
 		let args = this.parseLine(line, true);
-		if (args) return { args, kwArgs: {} };
+		if (args) return {args, kwArgs: {}};
 
 		args = line.slice(1).split('|') as [string, ...string[]];
 		const kwArgs: KWArgs = {};
 		while (args.length > 1) {
 			const lastArg = args[args.length - 1];
-			if (!lastArg.startsWith('[')) break;
+			if (lastArg.charAt(0) !== '[') break;
 			const bracketPos = lastArg.indexOf(']');
 			if (bracketPos <= 0) break;
 			// default to '.' so it evaluates to boolean true
 			kwArgs[lastArg.slice(1, bracketPos)] = lastArg.slice(bracketPos + 1).trim() || '.';
 			args.pop();
 		}
-		return BattleTextParser.upgradeArgs({ args, kwArgs });
+		return BattleTextParser.upgradeArgs({args, kwArgs});
 	}
 
 	static parseNameParts(text: string) {
@@ -102,7 +102,7 @@ export class BattleTextParser {
 				status = status.slice(1);
 			}
 		}
-		return { group, name, away, status };
+		return {group, name, away, status};
 	}
 
 	/**
@@ -110,19 +110,19 @@ export class BattleTextParser {
 	 * them to modern versions. Used to keep battle.ts itself cleaner. Not
 	 * guaranteed to mutate or not mutate its inputs.
 	 */
-	static upgradeArgs({ args, kwArgs }: { args: Args, kwArgs: KWArgs }): { args: Args, kwArgs: KWArgs } {
+	static upgradeArgs({args, kwArgs}: {args: Args, kwArgs: KWArgs}): {args: Args, kwArgs: KWArgs} {
 		switch (args[0]) {
 		case '-activate': {
-			if (kwArgs.item || kwArgs.move || kwArgs.number || kwArgs.ability) return { args, kwArgs };
+			if (kwArgs.item || kwArgs.move || kwArgs.number || kwArgs.ability) return {args, kwArgs};
 			let [, pokemon, effect, arg3, arg4] = args;
 			let target = kwArgs.of;
 			const id = BattleTextParser.effectId(effect);
 
-			if (kwArgs.block) return { args: ['-fail', pokemon], kwArgs };
+			if (kwArgs.block) return {args: ['-fail', pokemon], kwArgs};
 
-			if (id === 'wonderguard') return { args: ['-immune', pokemon], kwArgs: { from: 'ability:Wonder Guard' } };
+			if (id === 'wonderguard') return {args: ['-immune', pokemon], kwArgs: {from: 'ability:Wonder Guard'}};
 
-			if (id === 'beatup' && kwArgs.of) return { args, kwArgs: { name: kwArgs.of } };
+			if (id === 'beatup' && kwArgs.of) return {args, kwArgs: {name: kwArgs.of}};
 
 			if ([
 				'ingrain', 'quickguard', 'wideguard', 'craftyshield', 'matblock', 'protect', 'mist', 'safeguard',
@@ -131,22 +131,22 @@ export class BattleTextParser {
 			].includes(id)) {
 				if (target) {
 					kwArgs.of = pokemon;
-					return { args: ['-block', target, effect, arg3], kwArgs };
+					return {args: ['-block', target, effect, arg3], kwArgs};
 				}
-				return { args: ['-block', pokemon, effect, arg3], kwArgs };
+				return {args: ['-block', pokemon, effect, arg3], kwArgs};
 			}
 
 			if (id === 'charge') {
-				return { args: ['-singlemove', pokemon, effect], kwArgs: { of: target } };
+				return {args: ['-singlemove', pokemon, effect], kwArgs: {of: target}};
 			}
 			if ([
 				'bind', 'wrap', 'clamp', 'whirlpool', 'firespin', 'magmastorm', 'sandtomb', 'infestation', 'snaptrap', 'thundercage', 'trapped',
 			].includes(id)) {
-				return { args: ['-start', pokemon, effect], kwArgs: { of: target } };
+				return {args: ['-start', pokemon, effect], kwArgs: {of: target}};
 			}
 
 			if (id === 'fairylock') {
-				return { args: ['-fieldactivate', effect], kwArgs: {} };
+				return {args: ['-fieldactivate', effect], kwArgs: {}};
 			}
 
 			if (id === 'symbiosis' || id === 'poltergeist') {
@@ -170,7 +170,7 @@ export class BattleTextParser {
 
 		case '-fail': {
 			if (kwArgs.from === 'ability: Flower Veil') {
-				return { args: ['-block', kwArgs.of, 'ability: Flower Veil'], kwArgs: { of: args[1] } };
+				return {args: ['-block', kwArgs.of, 'ability: Flower Veil'], kwArgs: {of: args[1]}};
 			}
 			break;
 		}
@@ -189,7 +189,7 @@ export class BattleTextParser {
 			let [, pokemon, effect, move] = args;
 			if (['ability: Damp', 'ability: Dazzling', 'ability: Queenly Majesty', 'ability: Armor Tail', 'ability: Yandere', 'ability: Rain Shaman', 'ability: Dancing Siren', 'ability: YabaIRyS'].includes(effect)) {
 				args[0] = '-block';
-				return { args: ['-block', pokemon, effect, move, kwArgs.of], kwArgs: {} };
+				return {args: ['-block', pokemon, effect, move, kwArgs.of], kwArgs: {}};
 			}
 			break;
 		}
@@ -205,31 +205,18 @@ export class BattleTextParser {
 			break;
 		}
 
-		case '-weather': {
-			if (args[1] === 'Snow') args[1] = 'Snowscape';
-			break;
-		}
-
-		case '-ability': {
-			if (args[3] && (args[3].startsWith('p1') || args[3].startsWith('p2') || args[3] === 'boost')) {
-				args[4] = args[3];
-				args[3] = '';
-			}
-			break;
-		}
-
 		case '-nothing':
 			// OLD: |-nothing
 			// NEW: |-activate||move:Splash
-			return { args: ['-activate', '', 'move:Splash'], kwArgs };
+			return {args: ['-activate', '', 'move:Splash'], kwArgs};
 		}
-		return { args, kwArgs };
+		return {args, kwArgs};
 	}
 
 	extractMessage(buf: string) {
 		let out = '';
 		for (const line of buf.split('\n')) {
-			const { args, kwArgs } = BattleTextParser.parseBattleLine(line);
+			const {args, kwArgs} = BattleTextParser.parseBattleLine(line);
 			out += this.parseArgs(args, kwArgs) || '';
 		}
 		return out;
@@ -239,13 +226,13 @@ export class BattleTextParser {
 		if (this.lowercaseRegExp === undefined) {
 			const prefixes = ['pokemon', 'opposingPokemon', 'team', 'opposingTeam', 'party', 'opposingParty'].map(templateId => {
 				const template = BattleText.default[templateId];
-				if (template.startsWith(template.charAt(0).toUpperCase())) return '';
+				if (template.charAt(0) === template.charAt(0).toUpperCase()) return '';
 				const bracketIndex = template.indexOf('[');
 				if (bracketIndex >= 0) return template.slice(0, bracketIndex);
 				return template;
 			}).filter(prefix => prefix);
 			if (prefixes.length) {
-				let buf = `((?:^|\n)(?:  |  \\(|\\[)?)(` +
+				let buf = `((?:^|\n)(?:  |  \\\(|\\\[)?)(` +
 					prefixes.map(BattleTextParser.escapeRegExp).join('|') +
 					`)`;
 				this.lowercaseRegExp = new RegExp(buf, 'g');
@@ -312,7 +299,7 @@ export class BattleTextParser {
 		return '';
 	}
 
-	team(side: string, isFar = false) {
+	team(side: string, isFar: boolean = false) {
 		side = side.slice(0, 2);
 		if (side === this.perspective || side === BattleTextParser.allyID(side as SideID)) {
 			return !isFar ? BattleText.default.team : BattleText.default.opposingTeam;
@@ -368,23 +355,13 @@ export class BattleTextParser {
 			let id = BattleTextParser.effectId(namespace);
 			if (BattleText[id] && type in BattleText[id]) {
 				if (BattleText[id][type].charAt(1) === '.') type = BattleText[id][type].slice(2) as ID;
-				if (BattleText[id][type].startsWith('#')) id = BattleText[id][type].slice(1) as ID;
+				if (BattleText[id][type].charAt(0) === '#') id = BattleText[id][type].slice(1) as ID;
 				if (!BattleText[id][type]) return '';
-				let template = BattleText[id][type];
-				for (let i = Dex.gen - 1; i >= this.gen; i--) {
-					let curTemplate = BattleText[id][`${type}Gen${i}`];
-					if (curTemplate) template = curTemplate;
-				}
-				return template + '\n';
+				return BattleText[id][type] + '\n';
 			}
 		}
 		if (!BattleText.default[type]) return '';
-		let template = BattleText.default[type];
-		for (let i = Dex.gen - 1; i >= this.gen; i--) {
-			let curTemplate = BattleText.default[`${type}Gen${i}`];
-			if (curTemplate) template = curTemplate;
-		}
-		return template + '\n';
+		return BattleText.default[type] + '\n';
 	}
 
 	maybeAbility(effect: string | undefined, holder: string) {
@@ -400,15 +377,11 @@ export class BattleTextParser {
 
 	static stat(stat: string) {
 		const entry = BattleText[stat || "stats"];
-		if (!entry?.statName) return `???stat:${stat}???`;
+		if (!entry || !entry.statName) return `???stat:${stat}???`;
 		return entry.statName;
 	}
 
 	lineSection(args: Args, kwArgs: KWArgs) {
-		if (kwArgs.premajor) return 'preMajor';
-		if (kwArgs.postmajor) return 'postMajor';
-		if (kwArgs.major) return 'major';
-
 		const cmd = args[0];
 		switch (cmd) {
 		case 'done' : case 'turn':
@@ -441,7 +414,7 @@ export class BattleTextParser {
 			return 'postMajor';
 		}
 		}
-		return (cmd.startsWith('-') ? 'postMajor' : '');
+		return (cmd.charAt(0) === '-' ? 'postMajor' : '');
 	}
 
 	sectionBreak(args: Args, kwArgs: KWArgs) {
@@ -629,8 +602,7 @@ export class BattleTextParser {
 			let id = BattleTextParser.effectId(effect);
 			if (id === 'typechange') {
 				const template = this.template('typeChange', kwArgs.from);
-				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[TYPE]', arg3)
-					.replace('[SOURCE]', this.pokemon(kwArgs.of));
+				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[TYPE]', arg3).replace('[SOURCE]', this.pokemon(kwArgs.of));
 			}
 			if (id === 'typeadd') {
 				const template = this.template('typeAdd', kwArgs.from);
@@ -658,12 +630,13 @@ export class BattleTextParser {
 			if (kwArgs.damage) templateId = 'activate';
 			if (kwArgs.block) templateId = 'block';
 			if (kwArgs.upkeep) templateId = 'upkeep';
+			if (id === 'mist' && this.gen <= 2) templateId = 'startGen' + this.gen;
+			if (id === 'reflect' || id === 'lightscreen') templateId = 'startGen1';
 			if (templateId === 'start' && kwArgs.from?.startsWith('item:')) {
 				templateId += 'FromItem';
 			}
 			const template = this.template(templateId, kwArgs.from, effect);
-			return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[EFFECT]', this.effect(effect))
-				.replace('[MOVE]', arg3).replace('[SOURCE]', this.pokemon(kwArgs.of)).replace('[ITEM]', this.effect(kwArgs.from));
+			return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[EFFECT]', this.effect(effect)).replace('[MOVE]', arg3).replace('[SOURCE]', this.pokemon(kwArgs.of)).replace('[ITEM]', this.effect(kwArgs.from));
 		}
 
 		case '-end': {
@@ -680,13 +653,16 @@ export class BattleTextParser {
 				template = this.template('endFromItem', effect);
 			}
 			if (!template) template = this.template(templateId, effect);
-			return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[EFFECT]', this.effect(effect))
-				.replace('[SOURCE]', this.pokemon(kwArgs.of)).replace('[ITEM]', this.effect(kwArgs.from));
+			return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[EFFECT]', this.effect(effect)).replace('[SOURCE]', this.pokemon(kwArgs.of)).replace('[ITEM]', this.effect(kwArgs.from));
 		}
 
 		case '-ability': {
-			let [, pokemon, ability, oldAbility] = args;
+			let [, pokemon, ability, oldAbility, arg4] = args;
 			let line1 = '';
+			if (oldAbility && (oldAbility.startsWith('p1') || oldAbility.startsWith('p2') || oldAbility === 'boost')) {
+				arg4 = oldAbility;
+				oldAbility = '';
+			}
 			if (oldAbility) line1 += this.ability(oldAbility, pokemon);
 			line1 += this.ability(ability, pokemon);
 			if (kwArgs.fail) {
@@ -694,10 +670,9 @@ export class BattleTextParser {
 				return line1 + template;
 			}
 			if (kwArgs.from) {
-				if (!oldAbility) line1 = this.maybeAbility(kwArgs.from, pokemon) + line1;
+				line1 = this.maybeAbility(kwArgs.from, pokemon) + line1;
 				const template = this.template('changeAbility', kwArgs.from);
-				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[ABILITY]', this.effect(ability))
-					.replace('[SOURCE]', this.pokemon(kwArgs.of));
+				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[ABILITY]', this.effect(ability)).replace('[SOURCE]', this.pokemon(kwArgs.of));
 			}
 			const id = BattleTextParser.effectId(ability);
 			if (id === 'unnerve') {
@@ -728,14 +703,12 @@ export class BattleTextParser {
 			const line1 = this.maybeAbility(kwArgs.from, kwArgs.of || pokemon);
 			if (['thief', 'covet', 'bestow', 'magician', 'pickpocket'].includes(id)) {
 				const template = this.template('takeItem', kwArgs.from);
-				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[ITEM]', this.effect(item))
-					.replace('[SOURCE]', this.pokemon(target || kwArgs.of));
+				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[ITEM]', this.effect(item)).replace('[SOURCE]', this.pokemon(target || kwArgs.of));
 			}
 			if (id === 'frisk') {
 				const hasTarget = kwArgs.of && pokemon && kwArgs.of !== pokemon;
 				const template = this.template(hasTarget ? 'activate' : 'activateNoTarget', "Frisk");
-				return line1 + template.replace('[POKEMON]', this.pokemon(kwArgs.of)).replace('[ITEM]', this.effect(item))
-					.replace('[TARGET]', this.pokemon(pokemon));
+				return line1 + template.replace('[POKEMON]', this.pokemon(kwArgs.of)).replace('[ITEM]', this.effect(item)).replace('[TARGET]', this.pokemon(pokemon));
 			}
 			if (kwArgs.from) {
 				const template = this.template('addItem', kwArgs.from);
@@ -755,8 +728,7 @@ export class BattleTextParser {
 			const id = BattleTextParser.effectId(kwArgs.from);
 			if (id === 'gem') {
 				const template = this.template('useGem', item);
-				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[ITEM]', this.effect(item))
-					.replace('[MOVE]', kwArgs.move);
+				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[ITEM]', this.effect(item)).replace('[MOVE]', kwArgs.move);
 			}
 			if (id === 'stealeat') {
 				const template = this.template('removeItem', "Bug Bite");
@@ -764,8 +736,7 @@ export class BattleTextParser {
 			}
 			if (kwArgs.from) {
 				const template = this.template('removeItem', kwArgs.from);
-				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[ITEM]', this.effect(item))
-					.replace('[SOURCE]', this.pokemon(kwArgs.of));
+				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[ITEM]', this.effect(item)).replace('[SOURCE]', this.pokemon(kwArgs.of));
 			}
 			if (kwArgs.weaken) {
 				const template = this.template('activateWeaken');
@@ -779,10 +750,6 @@ export class BattleTextParser {
 		case '-status': {
 			const [, pokemon, status] = args;
 			const line1 = this.maybeAbility(kwArgs.from, kwArgs.of || pokemon);
-			if (kwArgs.from?.startsWith('item:')) {
-				const template = this.template('startFromItem', status);
-				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[ITEM]', this.effect(kwArgs.from));
-			}
 			if (BattleTextParser.effectId(kwArgs.from) === 'rest') {
 				const template = this.template('startFromRest', status);
 				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon));
@@ -826,8 +793,7 @@ export class BattleTextParser {
 			}
 			let template = this.template('start', effect, 'NODEFAULT');
 			if (!template) template = this.template('start').replace('[EFFECT]', this.effect(effect));
-			return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[SOURCE]', this.pokemon(kwArgs.of))
-				.replace('[TEAM]', this.team(pokemon.slice(0, 2)));
+			return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[SOURCE]', this.pokemon(kwArgs.of)).replace('[TEAM]', this.team(pokemon.slice(0, 2)));
 		}
 
 		case '-sidestart': {
@@ -957,11 +923,9 @@ export class BattleTextParser {
 				line1 += this.ability(kwArgs.ability2, target);
 			}
 			if (kwArgs.move || kwArgs.number || kwArgs.item || kwArgs.name) {
-				template = template.replace('[MOVE]', kwArgs.move).replace('[NUMBER]', kwArgs.number)
-					.replace('[ITEM]', kwArgs.item).replace('[NAME]', kwArgs.name);
+				template = template.replace('[MOVE]', kwArgs.move).replace('[NUMBER]', kwArgs.number).replace('[ITEM]', kwArgs.item).replace('[NAME]', kwArgs.name);
 			}
-			return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[TARGET]', this.pokemon(target))
-				.replace('[SOURCE]', this.pokemon(kwArgs.of));
+			return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[TARGET]', this.pokemon(target)).replace('[SOURCE]', this.pokemon(kwArgs.of));
 		}
 
 		case '-prepare': {
@@ -985,8 +949,7 @@ export class BattleTextParser {
 			}
 			if (kwArgs.from.startsWith('item:')) {
 				template = this.template(kwArgs.of ? 'damageFromPokemon' : 'damageFromItem');
-				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[ITEM]', this.effect(kwArgs.from))
-					.replace('[SOURCE]', this.pokemon(kwArgs.of));
+				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[ITEM]', this.effect(kwArgs.from)).replace('[SOURCE]', this.pokemon(kwArgs.of));
 			}
 			if (kwArgs.partiallytrapped || id === 'bind' || id === 'wrap') {
 				template = this.template('damageFromPartialTrapping');
@@ -1002,8 +965,7 @@ export class BattleTextParser {
 			let template = this.template('heal', kwArgs.from, 'NODEFAULT');
 			const line1 = this.maybeAbility(kwArgs.from, kwArgs.of || pokemon);
 			if (template) {
-				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[SOURCE]', this.pokemon(kwArgs.of))
-					.replace('[NICKNAME]', kwArgs.wisher);
+				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[SOURCE]', this.pokemon(kwArgs.of)).replace('[NICKNAME]', kwArgs.wisher);
 			}
 			if (template) {
 				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[SOURCE]', this.pokemon(kwArgs.of)).replace('[NICKNAME]', kwArgs.nurser);
@@ -1031,8 +993,7 @@ export class BattleTextParser {
 				templateId += (kwArgs.multiple ? 'MultipleFromZEffect' : 'FromZEffect');
 			} else if (amount && kwArgs.from?.startsWith('item:')) {
 				const template = this.template(templateId + 'FromItem', kwArgs.from);
-				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[STAT]', BattleTextParser.stat(stat))
-					.replace('[ITEM]', this.effect(kwArgs.from));
+				return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[STAT]', BattleTextParser.stat(stat)).replace('[ITEM]', this.effect(kwArgs.from));
 			}
 			const template = this.template(templateId, kwArgs.from);
 			return line1 + template.replace(/\[POKEMON\]/g, this.pokemon(pokemon)).replace('[STAT]', BattleTextParser.stat(stat));
@@ -1096,9 +1057,11 @@ export class BattleTextParser {
 		case '-block': {
 			let [, pokemon, effect, move, attacker] = args;
 			const line1 = this.maybeAbility(effect, kwArgs.of || pokemon);
-			const template = this.template('block', effect);
-			return line1 + template.replace('[POKEMON]', this.pokemon(pokemon))
-				.replace('[SOURCE]', this.pokemon(attacker || kwArgs.of)).replace('[MOVE]', move);
+			let id = BattleTextParser.effectId(effect);
+			let templateId = 'block';
+			if (id === 'mist' && this.gen <= 2) templateId = 'blockGen' + this.gen;
+			const template = this.template(templateId, effect);
+			return line1 + template.replace('[POKEMON]', this.pokemon(pokemon)).replace('[SOURCE]', this.pokemon(attacker || kwArgs.of)).replace('[MOVE]', move);
 		}
 
 		case '-fail': {
@@ -1172,6 +1135,7 @@ export class BattleTextParser {
 				id = 'dragonascent';
 				templateId = 'megaNoItem';
 			}
+			if (!id && cmd === '-mega' && this.gen < 7) templateId = 'megaGen6';
 			if (!item && cmd === '-mega') templateId = 'megaNoItem';
 			let template = this.template(templateId, id);
 			const side = pokemon.slice(0, 2);
@@ -1235,9 +1199,7 @@ export class BattleTextParser {
 	}
 }
 
-declare const require: any;
-declare const global: any;
 if (typeof require === 'function') {
 	// in Node
-	global.BattleTextParser = BattleTextParser;
+	(global as any).BattleTextParser = BattleTextParser;
 }

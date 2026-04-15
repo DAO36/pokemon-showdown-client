@@ -25,6 +25,3 @@ trim_trailing_whitespace = false
 indent_style = tab
 indent_size = 8
 trim_trailing_whitespace = false
-
-[COMMIT_EDITMSG]
-indent_style = space

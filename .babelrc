@@ -3,7 +3,7 @@
 		// TypeScript + JSX
 		["@babel/plugin-transform-typescript", {"isTSX": true, "allowDeclareFields": true}],
 		["@babel/plugin-transform-react-jsx", {"pragma": "preact.h", "pragmaFrag": "preact.Fragment", "useBuiltIns": true}],
-		["@babel/plugin-transform-class-properties", {"loose": true}],
+		["@babel/plugin-proposal-class-properties", {"loose": true}],
 
 		// ESNext
 		"remove-import-export",
@@ -29,9 +29,7 @@
 
 		// ES3
 		"@babel/plugin-transform-member-expression-literals",
-		"@babel/plugin-transform-property-literals",
-
-		"@babel/plugin-transform-strict-mode"
+		"@babel/plugin-transform-property-literals"
 	],
 	"ignore": [
 		"src/globals.d.ts"

@@ -1,36 +1,34 @@
-import type { Pokemon, Side } from './battle';
-import type { ScenePos, PokemonSprite } from './battle-animations';
-import type { BattleLog } from './battle-log';
-import type { ID } from './battle-dex';
-import type { Args, KWArgs } from './battle-text-parser';
+import type {Pokemon, Side} from './battle';
+import type {ScenePos, PokemonSprite} from './battle-animations';
+import type {BattleLog} from './battle-log';
 
 export class BattleSceneStub {
-	animating = false;
-	acceleration = NaN;
-	gen = NaN;
-	activeCount = NaN;
-	numericId = NaN;
-	timeOffset = NaN;
-	interruptionCount = NaN;
-	messagebarOpen = false;
-	log: BattleLog = { add: (args: Args, kwargs?: KWArgs) => {} } as any;
+	animating: boolean = false;
+	acceleration: number = NaN;
+	gen: number = NaN;
+	activeCount: number = NaN;
+	numericId: number = NaN;
+	timeOffset: number = NaN;
+	interruptionCount: number = NaN;
+	messagebarOpen: boolean = false;
+	log: BattleLog = {add: (args: Args, kwargs?: KWArgs) => {}} as any;
 	$frame?: JQuery;
 
 	abilityActivateAnim(pokemon: Pokemon, result: string): void { }
 	addPokemonSprite(pokemon: Pokemon): PokemonSprite { return null!; }
-	addSideCondition(siden: number, id: ID, instant?: boolean): void { }
+	addSideCondition(siden: number, id: ID, instant?: boolean | undefined): void { }
 	animationOff(): void { }
 	animationOn(): void { }
 	maybeCloseMessagebar(args: Args, kwArgs: KWArgs): boolean { return false; }
 	closeMessagebar(): boolean { return false; }
 	damageAnim(pokemon: Pokemon, damage: string | number): void { }
 	destroy(): void { }
-	finishAnimations(): JQuery.Promise<JQuery> | undefined { return undefined; }
+	finishAnimations(): JQuery.Promise<JQuery<HTMLElement>, any, any> | undefined { return void(0); }
 	healAnim(pokemon: Pokemon, damage: string | number): void { }
 	hideJoinButtons(): void { }
 	incrementTurn(): void { }
 	updateAcceleration(): void { }
-	message(message: string, hiddenMessage?: string): void { }
+	message(message: string, hiddenMessage?: string | undefined): void { }
 	pause(): void { }
 	setMute(muted: boolean): void { }
 	preemptCatchup(): void { }
@@ -55,7 +53,7 @@ export class BattleSceneStub {
 	updateSidebar(side: Side): void { }
 	updateSidebars(): void { }
 	updateStatbars(): void { }
-	updateWeather(instant?: boolean): void { }
+	updateWeather(instant?: boolean | undefined): void { }
 	upkeepWeather(): void { }
 	wait(time: number): void { }
 	setFrameHTML(html: any): void { }
@@ -79,9 +77,7 @@ export class BattleSceneStub {
 	afterMove(pokemon: Pokemon) { }
 }
 
-declare const require: any;
-declare const global: any;
 if (typeof require === 'function') {
 	// in Node
-	global.BattleSceneStub = BattleSceneStub;
+	(global as any).BattleSceneStub = BattleSceneStub;
 }
