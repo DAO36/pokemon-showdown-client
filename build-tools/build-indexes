@@ -287,7 +287,11 @@ function requireNoCache(pathSpec) {
 	}
 
 	for (const type in Dex.data.TypeChart) {
-		BattleSearchCountIndex[type + ' pokemon'] = Object.keys(Dex.data.Pokedex).filter(id => (Dex.data.Pokedex[id].types.indexOf(type) >= 0)).length;
+		BattleSearchCountIndex[type + ' pokemon'] = Object.keys(Dex.data.Pokedex)
+            .filter(id => (
+                !Dex.data.Pokedex[id].isCosmeticForme &&
+                Dex.data.Pokedex[id].types.indexOf(type) >= 0
+            )).length;
 	}
 
 	let buf = '// DO NOT EDIT - automatically built with build-tools/build-indexes\n\n';
