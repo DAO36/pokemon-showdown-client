@@ -25715,7 +25715,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'accel');
 		},
 	},
-	hopeful: {
+	hope: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('shine', {
 				x: defender.x + 15,
@@ -51302,7 +51302,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	hopeless: {
+	despair: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 1000, 0.3);
 
