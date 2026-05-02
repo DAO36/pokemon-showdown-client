@@ -1279,10 +1279,16 @@
 			if ($(window).width() < 640) this.show();
 		},
 		renderSet: function (set, i) {
+			var baseFormat = this.curTeam.format;
+			if (baseFormat.substr(-5) === 'draft') baseFormat = baseFormat.substr(0, baseFormat.length - 5);
 			var species = this.curTeam.dex.species.get(set.species);
-			var isLetsGo = this.curTeam.format.includes('letsgo');
-			var isBDSP = this.curTeam.format.includes('bdsp');
-			var isNatDex = this.curTeam.format.includes('nationaldex') || this.curTeam.format.includes('natdex');
+			var isChampions = baseFormat.includes('champions');
+			var isLetsGo = baseFormat.includes('letsgo');
+			var isBDSP = baseFormat.includes('bdsp');
+			var isNatDex = baseFormat.includes('nationaldex') || baseFormat.includes('natdex');
+			var isVGC = baseFormat.includes('battlespot') || baseFormat.includes('bss') ||
+				baseFormat.includes('vgc') || baseFormat.includes('battlefestival');
+			var isLC = baseFormat.startsWith('lc') || baseFormat.endsWith('lc');
 			var buf = '<li value="' + i + '">';
 			if (!set.species) {
 				if (this.deletedSet) {
@@ -1396,10 +1402,16 @@
 				} else if (BattleNatures[set.nature] && BattleNatures[set.nature].minus === j) {
 					evBuf += '<small>&minus;</small>';
 				}
-				var width = stats[j] * 75 / 504;
-				if (j == 'hp') width = stats[j] * 75 / 704;
+				var highestStat = j === 'hp' ? 714 : 499;
+				if (isChampions || isVGC) {
+					highestStat = j === 'hp' ? 362 : 252;
+				}
+				if (isLC) {
+					highestStat = j === 'hp' ? 45 : 29;
+				}
+				var width = stats[j] * 75 / highestStat;
 				if (width > 75) width = 75;
-				var color = Math.floor(stats[j] * 180 / 714);
+				var color = Math.floor(stats[j] * 180 / highestStat);
 				if (color > 360) color = 360;
 				var statName = this.curTeam.gen === 1 && j === 'spa' ? 'Spc' : BattleStatNames[j];
 				buf += '<span class="statrow"><label>' + statName + '</label> <span class="statgraph"><span style="width:' + width + 'px;background:hsl(' + color + ',40%,75%);"></span></span> ' + evBuf + '</span>';
@@ -2050,7 +2062,13 @@
 
 			var stats = {hp:'', atk:'', def:'', spa:'', spd:'', spe:''};
 
-			var supportsEVs = !this.curTeam.format.includes('letsgo');
+			var baseFormat = this.curTeam.format;
+			if (baseFormat.substr(-5) === 'draft') baseFormat = baseFormat.substr(0, baseFormat.length - 5);
+			var usesStatPoints = baseFormat.includes('champions');
+			var supportsEVs = !baseFormat.includes('letsgo');
+			var isVGC = baseFormat.includes('battlespot') || baseFormat.includes('bss') ||
+				baseFormat.includes('vgc') || baseFormat.includes('battlefestival');
+			var isLC = baseFormat.startsWith('lc') || baseFormat.endsWith('lc');
 
 			// stat cell
 			var buf = '<span class="statrow statrow-head"><label></label> <span class="statgraph"></span> <em>' + (supportsEVs ? 'EV' : 'AV') + '</em></span>';
@@ -2065,10 +2083,16 @@
 				} else if (BattleNatures[set.nature] && BattleNatures[set.nature].minus === stat) {
 					evBuf += '<small>&minus;</small>';
 				}
-				var width = stats[stat] * 75 / 504;
-				if (stat == 'hp') width = stats[stat] * 75 / 704;
+				var highestStat = stat === 'hp' ? 714 : 499;
+				if (usesStatPoints || isVGC) {
+					highestStat = stat === 'hp' ? 362 : 252;
+				}
+				if (isLC) {
+					highestStat = stat === 'hp' ? 45 : 29;
+				}
+				var width = stats[stat] * 75 / highestStat;
 				if (width > 75) width = 75;
-				var color = Math.floor(stats[stat] * 180 / 714);
+				var color = Math.floor(stats[stat] * 180 / highestStat);
 				if (color > 360) color = 360;
 				var statName = this.curTeam.gen === 1 && stat === 'spa' ? 'Spc' : BattleStatNames[stat];
 				buf += '<span class="statrow"><label>' + statName + '</label> <span class="statgraph"><span style="width:' + width + 'px;background:hsl(' + color + ',40%,75%);"></span></span> ' + evBuf + '</span>';
@@ -2088,10 +2112,16 @@
 			var totalev = 0;
 			for (var stat in stats) {
 				if (stat === 'spd' && this.curTeam.gen === 1) continue;
-				var width = stats[stat] * 180 / 504;
-				if (stat == 'hp') width = stats[stat] * 180 / 704;
+				var highestStat = stat === 'hp' ? 714 : 499;
+				if (usesStatPoints || isVGC) {
+					highestStat = stat === 'hp' ? 362 : 252;
+				}
+				if (isLC) {
+					highestStat = stat === 'hp' ? 45 : 29;
+				}
+				var width = stats[stat] * 180 / highestStat;
 				if (width > 179) width = 179;
-				var color = Math.floor(stats[stat] * 180 / 714);
+				var color = Math.floor(stats[stat] * 180 / highestStat);
 				if (color > 360) color = 360;
 				buf += '<div><em><span style="width:' + Math.floor(width) + 'px;background:hsl(' + color + ',85%,45%);border-color:hsl(' + color + ',85%,35%)"></span></em></div>';
 				totalev += (set.evs[stat] || 0);
@@ -2317,11 +2347,17 @@
 			var nature = BattleNatures[set.nature || 'Serious'];
 			if (!nature) nature = {};
 
-			var supportsEVs = !this.curTeam.format.includes('letsgo');
-			// var supportsAVs = !supportsEVs && this.curTeam.format.endsWith('norestrictions');
+			var baseFormat = this.curTeam.format;
+			if (baseFormat.substr(-5) === 'draft') baseFormat = baseFormat.substr(0, baseFormat.length - 5);
+			var usesStatPoints = baseFormat.includes('champions');
+			var supportsEVs = !baseFormat.includes('letsgo') && !usesStatPoints;
+			// var supportsAVs = !supportsEVs && baseFormat.endsWith('norestrictions');
 			var defaultEV = this.curTeam.gen <= 2 ? 252 : 0;
 			var maxEV = supportsEVs ? 252 : 200;
 			var stepEV = supportsEVs ? 4 : 1;
+			var isVGC = baseFormat.includes('battlespot') || baseFormat.includes('bss') ||
+				baseFormat.includes('vgc') || baseFormat.includes('battlefestival');
+			var isLC = baseFormat.startsWith('lc') || baseFormat.endsWith('lc');
 
 			// label column
 			buf += '<div class="col labelcol"><div></div>';
@@ -2343,10 +2379,16 @@
 			buf += '<div class="col graphcol"><div></div>';
 			for (var i in stats) {
 				stats[i] = this.getStat(i);
-				var width = stats[i] * 180 / 504;
-				if (i == 'hp') width = Math.floor(stats[i] * 180 / 704);
+				var highestStat = i === 'hp' ? 714 : 499;
+				if (usesStatPoints || isVGC) {
+					highestStat = i === 'hp' ? 362 : 252;
+				}
+				if (isLC) {
+					highestStat = i === 'hp' ? 45 : 29;
+				}
+				var width = stats[i] * 180 / highestStat;
 				if (width > 179) width = 179;
-				var color = Math.floor(stats[i] * 180 / 714);
+				var color = Math.floor(stats[i] * 180 / highestStat);
 				if (color > 360) color = 360;
 				buf += '<div><em><span style="width:' + Math.floor(width) + 'px;background:hsl(' + color + ',85%,45%);border-color:hsl(' + color + ',85%,35%)"></span></em></div>';
 			}
@@ -2394,7 +2436,7 @@
 				for (var i in stats) {
 					if (set.ivs[i] === undefined || isNaN(set.ivs[i])) set.ivs[i] = 31;
 					var val = '' + (set.ivs[i]);
-					buf += '<div><input type="number" name="iv-' + i + '" value="' + BattleLog.escapeHTML(val) + '" class="textbox inputform numform" min="0" max="31" step="1" /></div>';
+					buf += '<div><input type="number" name="iv-' + i + '" value="' + BattleLog.escapeHTML(val) + '" class="textbox inputform numform" min="' + (usesStatPoints ? 31 : 0) + '" max="31" step="1"' + (usesStatPoints ? ' disabled' : '') + ' /></div>';
 				}
 				var hpType = '';
 				if (set.moves) {

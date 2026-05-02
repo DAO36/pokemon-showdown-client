@@ -615,10 +615,22 @@ abstract class BattleTypedSearch<T extends SearchType> {
 			format = format.slice(7) as ID;
 			if (!format) format = 'ou' as ID;
 		}
-		if (format.startsWith('vgc')) this.formatType = 'doubles';
-		if (format === 'vgc2020') this.formatType = 'ssdlc1doubles';
-		if (format === 'vgc2023regulationd') this.formatType = 'predlcdoubles';
-		if (format === 'vgc2023regulatione') this.formatType = 'svdlc1doubles';
+		if (format.includes('champions')) {
+			this.formatType = 'champions';
+			this.dex = Dex.mod('champions' as ID);
+			format = format.slice(9) as ID;
+			if (format !== 'ou') format = 'ubers' as ID;
+		}
+		if (format.startsWith('vgc')) {
+			this.formatType = 'doubles';
+			this.isDoubles = true;
+		}
+		if (format === 'vgc2020') {
+			this.formatType = 'ssdlc1doubles';
+		}
+		if (format.startsWith('vgc2023')) {
+			this.formatType = format.endsWith('rege') ? 'svdlc1doubles' : 'predlcdoubles';
+		}
 		if (format.includes('bdsp')) {
 			if (format.includes('doubles')) {
 				this.formatType = 'bdspdoubles';
@@ -631,6 +643,15 @@ abstract class BattleTypedSearch<T extends SearchType> {
 		if (format.includes('bw1')) {
 			this.formatType = 'bw1';
 			this.dex = Dex.mod('gen5bw1' as ID);
+		}
+		if (format.includes('adv200')) {
+			this.formatType = 'rs';
+			this.dex = Dex.mod('gen3rs' as ID);
+		}
+		if (format.includes('frlg')) {
+			this.formatType = 'frlg';
+			this.dex = Dex.mod('gen3frlg' as ID);
+			format = format.slice(4) as ID;
 		}
 		if (format === 'partnersincrime') this.formatType = 'doubles';
 		if (format.startsWith('ffa') || format === 'freeforall') this.formatType = 'doubles';
@@ -949,9 +970,11 @@ class BattlePokemonSearch extends BattleTypedSearch<'pokemon'> {
 
 		let table = BattleTeambuilderTable;
 		if ((format.endsWith('cap') || format.endsWith('caplc')) && dex.gen < 9) {
-			table = table['gen' + dex.gen];
+			table = table[`gen${dex.gen}`];
+		} else if (this.formatType === 'champions') {
+			table = table[`champions`];
 		} else if (isVGCOrBS) {
-			table = table['gen' + dex.gen + 'vgc'];
+			table = table[`gen${dex.gen}vgc`];
 		} else if (dex.gen === 9 && isHackmons && !this.formatType) {
 			table = table['bh'];
 		} else if (
@@ -1043,11 +1066,12 @@ class BattlePokemonSearch extends BattleTypedSearch<'pokemon'> {
 		} else if (format === 'ou') tierSet = tierSet.slice(slices.OU);
 		else if (format === 'uu') tierSet = tierSet.slice(slices.UU);
 		else if (format === 'ru') tierSet = tierSet.slice(slices.RU || slices.UU);
-		else if (format === 'nu') tierSet = tierSet.slice(slices.NU || slices.RU || slices.UU);
-		else if (format === 'pu') tierSet = tierSet.slice(slices.PU || slices.NU);
-		else if (format === 'zu' && dex.gen === 5) tierSet = tierSet.slice(slices.PU || slices.NU);
-		else if (format === 'zu') tierSet = tierSet.slice(slices.ZU || slices.PU || slices.NU);
-		else if (format === 'lc' || format === 'lcuu' || format.startsWith('lc') || (format !== 'caplc' && format.endsWith('lc'))) tierSet = tierSet.slice(slices.LC);
+		else if (format === 'nu') tierSet = tierSet.slice(slices.NU);
+		else if (format === 'pu') tierSet = tierSet.slice(slices.PU);
+		else if (format === 'zu') tierSet = tierSet.slice(slices.ZU);
+		else if (
+			format === 'lc' || format === 'lcuu' || format.startsWith('lc') || (format !== 'caplc' && format.endsWith('lc'))
+		) tierSet = tierSet.slice(slices.LC);
 		else if (format === 'cap' || format.endsWith('cap')) {
 			tierSet = tierSet.slice(0, slices.AG || slices.Uber).concat(tierSet.slice(slices.OU));
 		} else if (format === 'caplc') {
@@ -1102,12 +1126,6 @@ class BattlePokemonSearch extends BattleTypedSearch<'pokemon'> {
 					return true;
 				});
 			}
-		}
-		if (format === 'zu' && dex.gen === 5 && table.gen5zuBans) {
-			tierSet = tierSet.filter(([type, id]) => {
-				if (id in table.gen5zuBans) return false;
-				return true;
-			});
 		}
 
 		// Filter out Gmax Pokemon from standard tier selection

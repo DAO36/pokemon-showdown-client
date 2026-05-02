@@ -153,15 +153,56 @@ class ChatRoom extends PSRoom {
 	}
 }
 
-class ChatTextEntry extends preact.Component<{
-	room: PSRoom, onMessage: (msg: string) => void, onKey: (e: KeyboardEvent) => boolean,
-	left?: number,
+export class CopyableURLBox extends preact.Component<{ url: string }> {
+	copy = () => {
+		const input = this.base!.children[0] as HTMLInputElement;
+		input.select();
+		document.execCommand('copy');
+	};
+	override render() {
+		return <div>
+			<input
+				type="text" class="textbox" readOnly size={45} value={this.props.url}
+				style="field-sizing:content"
+			/> {}
+			<button class="button" onClick={this.copy}>Copy</button> {}
+			<a href={this.props.url} target="_blank" class="no-panel-intercept">
+				<button class="button">Visit</button>
+			</a>
+		</div>;
+	}
+}
+
+interface UserAutoCompleteCandidate {
+	type: "user";
+	userid: string;
+	prefixIndex: number;
+}
+
+interface CmdAutoCompleteCandidate {
+	type: "command";
+	command: string;
+}
+
+export type AutoCompleteCandidate = UserAutoCompleteCandidate | CmdAutoCompleteCandidate;
+
+export class ChatTextEntry extends preact.Component<{
+	room: ChatRoom, onMessage: (msg: string, elem: HTMLElement) => void, onKey: (e: KeyboardEvent) => boolean,
+	left?: number, tinyLayout?: boolean,
 }> {
 	subscription: PSSubscription | null = null;
 	textbox: HTMLTextAreaElement = null!;
 	miniedit: MiniEdit | null = null;
 	history: string[] = [];
 	historyIndex = 0;
+	tabComplete: {
+		candidates: AutoCompleteCandidate[],
+		candidateIndex: number,
+		/** the text left of the cursor before tab completing */
+		prefix: string,
+		/** the text left of the cursor after tab completing */
+		cursor: string,
+	} | null = null;
 	override componentDidMount() {
 		this.subscription = PS.user.subscribe(() => {
 			this.forceUpdate();
@@ -275,10 +316,125 @@ class ChatTextEntry extends preact.Component<{
 		}
 		return false;
 	}
-	getSelection() {
-		return this.miniedit ?
-			(this.miniedit.getSelection() || {start: 0, end: 0}) :
-			{start: this.textbox.selectionStart, end: this.textbox.selectionEnd};
+	// TODO - add support for commands tabcomplete
+	handleTabComplete(reverse: boolean): boolean {
+		// Don't tab complete at the start of the text box.
+		let { value, start, end } = this.getSelection();
+		if (start !== end || end === 0) return false;
+
+		const users = this.props.room.users;
+		let prefix = value.slice(0, end);
+		if (this.tabComplete && prefix === this.tabComplete.cursor) {
+			// The user is cycling through the candidate names.
+			if (reverse) {
+				this.tabComplete.candidateIndex--;
+				if (this.tabComplete.candidateIndex < 0) {
+					this.tabComplete.candidateIndex = this.tabComplete.candidates.length - 1;
+				}
+			} else {
+				this.tabComplete.candidateIndex++;
+				if (this.tabComplete.candidateIndex >= this.tabComplete.candidates.length) {
+					this.tabComplete.candidateIndex = 0;
+				}
+			}
+		} else if (!value || reverse) {
+			// not tab completing - let them focus things
+			return false;
+		} else {
+			// This is a new tab completion.
+			// There needs to be non-whitespace to the left of the cursor.
+			// no command prefixes either, we're testing for usernames here.
+			prefix = prefix.trim();
+
+			/** match of the closest word left of the cursor */
+			const match1 = /^([\s\S!/]*?)([A-Za-z0-9][^, \n]*)$/.exec(prefix);
+			/** match of the closest two words left of the cursor */
+			const match2 = /^([\s\S!/]*?)([A-Za-z0-9][^, \n]* [^, ]*)$/.exec(prefix);
+			if (!match1 && !match2) return true;
+
+			const candidates: AutoCompleteCandidate[] = [];
+			const idprefix = (match1 ? toID(match1[2]) : '');
+			let spaceprefix = (match2 ? match2[2].replace(/[^A-Za-z0-9 ]+/g, '').toLowerCase() : '');
+			if (match2 && (match2[0] === '/' || match2[0] === '!')) spaceprefix = '';
+			for (const userid in users) {
+				if (spaceprefix && users[userid].slice(1).replace(/[^A-Za-z0-9 ]+/g, '')
+					.toLowerCase()
+					.startsWith(spaceprefix)) {
+					if (match2) candidates.push({ type: "user", userid, prefixIndex: match2[1].length });
+				} else if (idprefix && userid.startsWith(idprefix)) {
+					if (match1) candidates.push({ type: "user", userid, prefixIndex: match1[1].length });
+				}
+			}
+			// Sort by most recent to speak in the chat, or, in the case of a tie,
+			// in alphabetical order.
+			const userActivity = this.props.room.userActivity;
+			candidates.sort((a, b) => {
+				// command autocomplete options aren't added until after the user autocomplete options are sorted.
+				if (a.type !== "user" || b.type !== "user") return 0;
+				if (a.prefixIndex !== b.prefixIndex) {
+					// shorter prefix length comes first
+					return a.prefixIndex - b.prefixIndex;
+				}
+				const aIndex = userActivity?.indexOf(a.userid as ID) ?? -1;
+				const bIndex = userActivity?.indexOf(b.userid as ID) ?? -1;
+				if (aIndex !== bIndex) {
+					return bIndex - aIndex; // -1 is fortunately already in the correct order
+				}
+				return (a.userid < b.userid) ? -1 : 1; // alphabetical order
+			});
+
+			const currentLine = prefix.substring(prefix.lastIndexOf('\n') + 1);
+			const isCommandSearch = (currentLine.startsWith('/') && !currentLine.startsWith('//')) || currentLine.startsWith('!');
+			if (isCommandSearch) {
+				PS.mainmenu.makeQuery('cmdsearch', currentLine, true).then((data: string[]) => {
+					const cmds = data.sort((a, b) => a.length < b.length ? 1 : -1);
+					const nextCmd = cmds[cmds.length - 1];
+					const newValue = nextCmd + value.substring(end);
+					this.setValue(newValue, nextCmd.length, nextCmd.length);
+					const currentCandidates = this.tabComplete?.candidates ?? [];
+					for (const cmd of cmds) {
+						currentCandidates.unshift({ type: "command", command: cmd });
+					}
+					this.tabComplete = {
+						candidates: currentCandidates,
+						candidateIndex: 0,
+						prefix: nextCmd,
+						cursor: nextCmd,
+					};
+				});
+				return true;
+			}
+
+			if (!candidates.length) {
+				this.tabComplete = null;
+				return true;
+			}
+			this.tabComplete = {
+				candidates,
+				candidateIndex: 0,
+				prefix,
+				cursor: prefix,
+			};
+		}
+		// Substitute in the tab-completed name
+		const candidate = this.tabComplete.candidates[this.tabComplete.candidateIndex];
+		if (candidate.type === "user") {
+			let name = users[candidate.userid];
+			if (!name) return true;
+
+			name = Dex.getShortName(name.slice(1)); // Remove rank and busy characters
+			const cursor = this.tabComplete.prefix.slice(0, candidate.prefixIndex) + name;
+			this.setValue(cursor + value.slice(end), cursor.length);
+			this.tabComplete.cursor = cursor;
+		} else {
+			const prefixIndex = prefix.lastIndexOf('\n') + 1;
+			const fullPrefix = prefix.substring(0, prefixIndex) + Dex.getShortName(candidate.command);
+			const newValue = fullPrefix + value.substring(end);
+			this.setValue(newValue, fullPrefix.length, fullPrefix.length);
+			this.tabComplete.cursor = fullPrefix;
+			this.tabComplete.prefix = fullPrefix;
+		}
+		return true;
 	}
 	setSelection(start: number, end: number) {
 		if (this.miniedit) {

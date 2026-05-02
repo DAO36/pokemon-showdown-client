@@ -496,10 +496,13 @@ class BattlePanel extends PSRoomPanel<BattleRoom> {
 			const active = request.requestType === 'move' ? request.active[i] : null;
 			if (choice.choiceType === 'move') {
 				buf.push(`${pokemon.name} will `);
-				if (choice.mega) buf.push(`Mega Evolve and `);
-				if (choice.ultra) buf.push(`Ultra Burst and `);
-				if (choice.max && active?.canDynamax) buf.push(active?.canGigantamax ? `Gigantamax and ` : `Dynamax and `);
-				buf.push(`use `, <strong>{choices.getChosenMove(choice, i).name}</strong>);
+				if (choice.mega) buf.push(<strong>Mega</strong>, ` Evolve and `);
+				if (choice.megax) buf.push(<strong>Mega</strong>, ` Evolve (X) and `);
+				if (choice.megay) buf.push(<strong>Mega</strong>, ` Evolve (Y) and `);
+				if (choice.ultra) buf.push(<strong>Ultra</strong>, ` Burst and `);
+				if (choice.tera) buf.push(`Terastallize (`, <strong>{active?.canTerastallize || '???'}</strong>, `) and `);
+				if (choice.max && active?.canDynamax) buf.push(active?.gigantamax ? `Gigantamax and ` : `Dynamax and `);
+				buf.push(`use `, <strong>{choices.currentMove(choice, i)?.name}</strong>);
 				if (choice.targetLoc > 0) {
 					const target = battle.farSide.active[choice.targetLoc - 1];
 					if (!target) {
@@ -509,10 +512,11 @@ class BattlePanel extends PSRoomPanel<BattleRoom> {
 					}
 				} else if (choice.targetLoc < 0) {
 					const target = battle.nearSide.active[-choice.targetLoc - 1];
+					const ally = battle.gameType !== 'freeforall' ? 'ally' : '';
 					if (!target) {
-						buf.push(` at ally slot ${choice.targetLoc}`);
+						buf.push(` at ${ally} slot ${choice.targetLoc}`);
 					} else {
-						buf.push(` at ally ${target.name}`);
+						buf.push(` at ${ally} ${target.name}`);
 					}
 				}
 			} else if (choice.choiceType === 'switch') {

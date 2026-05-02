@@ -233,6 +233,23 @@ class MainMenuRoom extends PSRoom {
 		room.receiveLine([`c`, user1, message]);
 		PS.update();
 	}
+	/**
+	 * Client-to-server query. Handles `/crq` aka `/cmd`.
+	 *
+	 * Most queries are still handled hardcoded, so this is only for certain
+	 * special queries that need a Promise.
+	 */
+	makeQuery(id: string, param?: string, excludeParamFromListener?: boolean) {
+		let fullid = id;
+		if (param && !excludeParamFromListener) fullid += ` ${toID(param)}`;
+		return new Promise<any>(resolve => {
+			if (!this.listeners[fullid]) {
+				this.listeners[fullid] = [];
+				PS.send(`/cmd ${id} ${param || ''}`);
+			}
+			this.listeners[fullid]!.push(resolve);
+		});
+	}
 	handleQueryResponse(id: ID, response: any) {
 		switch (id) {
 		case 'userdetails':
