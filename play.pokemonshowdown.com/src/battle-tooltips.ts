@@ -1797,10 +1797,10 @@ class BattleTooltips {
 			value.weatherModify(0, 'Rain Dance');
 			value.weatherModify(0, 'Primordial Sea');
 		}
-		if (move.id === 'laserbeam' && this.battle.hasPseudoWeather('Electric Terrain')) {
+		if (move.id === 'laserbeam' && pokemon.isGrounded() && this.battle.hasPseudoWeather('Electric Terrain')) {
 			value.modify(0, 'Electric Terrain');
 		}
-		if (move.id === 'luknightlance' && this.battle.hasPseudoWeather('Misty Terrain')) {
+		if (move.id === 'luknightlance' && pokemon.isGrounded() && this.battle.hasPseudoWeather('Misty Terrain')) {
 			value.modify(0, 'Misty Terrain');
 		}
 		value.abilityModify(0, 'No Guard');
