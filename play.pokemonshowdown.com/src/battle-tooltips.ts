@@ -1797,6 +1797,16 @@ class BattleTooltips {
 			value.weatherModify(0, 'Rain Dance');
 			value.weatherModify(0, 'Primordial Sea');
 		}
+		if (move.id === 'laserbeam' && this.battle.hasPseudoWeather('Electric Terrain') && target?.isGrounded) {
+			value.modify(0, 'Electric Terrain');
+		}
+		if (move.id === 'luknightlance' && this.battle.hasPseudoWeather('Misty Terrain') && target?.isGrounded) {
+			value.modify(0, 'Misty Terrain');
+		}
+		if (move.id === 'nenemax' && this.battle.hasPseudoWeather('Grassy Terrain') && target?.isGrounded) {
+			pokemon.isGrounded
+			value.modify(0, 'Grassy Terrain');
+		}
 		value.abilityModify(0, 'No Guard');
 		if (!value.value) return value;
 
@@ -1829,15 +1839,6 @@ class BattleTooltips {
 		if (this.battle.hasPseudoWeather('Gravity') && move.id !== 'blackhole') {
 			accuracyModifiers.push(6840);
 			value.modify(5 / 3, "Gravity");  
-		}
-		if (move.id === 'laserbeam' && this.battle.hasPseudoWeather('Electric Terrain') && target?.isGrounded) {
-			value.modify(0, 'Electric Terrain');
-		}
-		if (move.id === 'nenemax' && this.battle.hasPseudoWeather('Grassy Terrain') && target?.isGrounded) {
-			value.modify(0, 'Grassy Terrain');
-		}
-		if (move.id === 'luknightlance' && this.battle.hasPseudoWeather('Misty Terrain') && target?.isGrounded) {
-			value.modify(0, 'Misty Terrain');
 		}
 
 		for (const active of pokemon.side.active) {
