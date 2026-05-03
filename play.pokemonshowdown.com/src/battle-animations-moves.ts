@@ -15583,6 +15583,23 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'accel', 'fade');
 		},
 	},
+	v7strike: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('mistball', {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				scale: 0.1,
+				opacity: 1,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0.5,
+				time: 200,
+			}, 'accel', 'fade');
+		},
+	},
 	yubiyubi: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('pointer', {
