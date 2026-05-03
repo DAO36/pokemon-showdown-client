@@ -9323,70 +9323,6 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	gmmf: {
-		anim(scene, [attacker, defender]) {
-			scene.showEffect(attacker.sp, {
-				x: defender.leftof(-10),
-				y: attacker.y + 170,
-				z: attacker.behind(-35),
-				opacity: 0.3,
-				time: 25,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.behind(0),
-			}, 'ballistic', 'fade');
-			scene.showEffect(attacker.sp, {
-				x: defender.leftof(-10),
-				y: attacker.y + 170,
-				z: attacker.behind(-35),
-				opacity: 0.3,
-				time: 75,
-			}, {
-				x: defender.x,
-				y: defender.y,
-				z: defender.behind(0),
-			}, 'ballistic', 'fade'); 
-			scene.showEffect('shadowball', {
-				x: defender.x,
-				y: defender.y,
-				z: defender.z,
-				scale: 0,
-				opacity: 0.7,
-				time: 500,
-			}, {
-				scale: 3,
-				opacity: 0,
-				time: 750,
-			}, 'linear', 'fade');
-
-			attacker.anim({
-				x: defender.x,
-				y: defender.y + 170,
-				z: defender.behind(-30),
-				time: 400,
-			}, 'ballistic');
-			attacker.anim({
-				x: defender.x,
-				y: defender.y + 5,
-				z: defender.z,
-				time: 200,
-			});
-			attacker.anim({
-				time: 500,
-			}, 'ballistic2Back');
-			defender.delay(500);
-			defender.anim({
-				y: defender.y - 5,
-				z: defender.behind(40),
-				yscale: 0.9,
-				time: 300,
-			}, 'swing');
-			defender.anim({
-				time: 300,
-			}, 'swing');
-		},
-	},
 	snowdash: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect(attacker.sp, {
@@ -42050,6 +41986,86 @@ export const BattleMoveAnims: AnimTable = {
 		},
 	},
 	brutalswing: {
+		anim(scene, [attacker, ...defenders]) {
+			scene.backgroundEffect('#000000', 1300, 0.3);
+
+			for (const defender of defenders) {
+				defender.delay(700);
+				defender.anim({
+					z: defender.behind(10),
+					time: 100,
+				}, 'swing');
+				defender.anim({
+					time: 200,
+				}, 'swing');
+				defender.anim({
+					z: defender.behind(10),
+					time: 100,
+				}, 'swing');
+				defender.anim({
+					time: 300,
+				}, 'swing');
+
+				scene.showEffect('shadowball', {
+					x: defender.x,
+					y: defender.y,
+					z: defender.z,
+					opacity: 0.3,
+					scale: 0,
+					time: 700,
+				}, {
+					scale: 2,
+					opacity: 0,
+					time: 1000,
+				}, 'linear');
+				scene.showEffect('shadowball', {
+					x: defender.x,
+					y: defender.y,
+					z: defender.z,
+					opacity: 0.3,
+					scale: 0,
+					time: 900,
+				}, {
+					scale: 2,
+					opacity: 0,
+					time: 1200,
+				}, 'linear');
+			}
+			const defender = defenders[1] || defenders[0];
+
+			attacker.anim({
+				x: defender.x,
+				y: defender.y + 80,
+				z: defender.behind(-30),
+				time: 400,
+			}, 'ballistic');
+			attacker.anim({
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(-50),
+				time: 100,
+			});
+			attacker.anim({
+				time: 500,
+			}, 'ballistic2Back');
+
+			scene.showEffect('shadowball', {
+				x: attacker.x,
+				y: attacker.y - 50,
+				z: defender.behind(-50),
+				scale: 1,
+				xscale: 5,
+				opacity: 0.8,
+				time: 500,
+			}, {
+				scale: 2,
+				xscale: 8,
+				opacity: 0.1,
+				time: 700,
+			}, 'decel', 'fade');
+		},
+	},
+	gmmf: {
 		anim(scene, [attacker, ...defenders]) {
 			scene.backgroundEffect('#000000', 1300, 0.3);
 
