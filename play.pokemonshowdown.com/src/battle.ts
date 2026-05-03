@@ -2954,6 +2954,7 @@ export class Battle {
 			case 'macesmash':
 			case 'imgod':	
 			case 'fisted':
+			case 'v7strike':
 			case 'feint':
 				this.scene.resultAnim(poke, 'Protection broken', 'bad');
 				poke.removeTurnstatus('protect' as ID);
