@@ -2040,13 +2040,13 @@ class BattleTooltips {
 			value.weatherModify(0, 'Rain Dance');
 			value.weatherModify(0, 'Primordial Sea');
 		}
-		if (move.id === 'laserbeam' && this.battle.hasPseudoWeather('Electric Terrain') && target?.isGrounded) {
+		if (move.id === 'laserbeam' && this.battle.hasPseudoWeather('Electric Terrain')) {
 			value.modify(0, 'Electric Terrain');
 		}
-		if (move.id === 'luknightlance' && this.battle.hasPseudoWeather('Misty Terrain') && target?.isGrounded) {
+		if (move.id === 'luknightlance' && this.battle.hasPseudoWeather('Misty Terrain')) {
 			value.modify(0, 'Misty Terrain');
 		}
-		if (move.id === 'nenemax' && this.battle.hasPseudoWeather('Grassy Terrain') && target?.isGrounded) {
+		if (move.id === 'nenemax' && this.battle.hasPseudoWeather('Grassy Terrain')) {
 			pokemon.isGrounded
 			value.modify(0, 'Grassy Terrain');
 		}
