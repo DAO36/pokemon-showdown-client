@@ -767,7 +767,7 @@ class BattleTooltips {
 				text += `<p class="movetag">&#x2713; Dance <small>(boosted by Dancing Siren)</small></p>`;
 			}
 			if (move.flags.wind && ability === 'rainshaman') {
-				text += `<p class="movetag">&#x2713; Bite <small>(boosted by Rain Shaman)</small></p>`;
+				text += `<p class="movetag">&#x2713; Wind <small>(boosted by Rain Shaman)</small></p>`;
 			}
 			if (move.flags.bullet && ability === 'botanx') {
 				text += `<p class="movetag">&#x2713; Bullet <small>(boosted by Botan X)</small></p>`;

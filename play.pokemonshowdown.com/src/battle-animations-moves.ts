@@ -14495,6 +14495,12 @@ export const BattleMoveAnims: AnimTable = {
 			BattleOtherAnims.drain.anim(scene, [attacker, defender]);
 		},
 	},
+	sweetberries: {
+		anim(scene, [attacker, defender]) {
+			scene.backgroundEffect('#B542AD', 900, 0.5);
+			BattleOtherAnims.drain.anim(scene, [attacker, defender]);
+		},
+	},
 	bitterblade: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 800, 0.3, 400);
@@ -28927,7 +28933,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	blackmagic: {
+	darkmagic: {
 		anim(scene, [attacker, defender]) { 
 			scene.showEffect('moon', {
 				x: attacker.x,
