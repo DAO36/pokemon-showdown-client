@@ -3416,7 +3416,7 @@ export const BattleMoveAnims: AnimTable = {
 	hologram: {
 		anim() {},
 	},
-	infirmary3: {
+	infirmary: {
 		anim() {},
 	},
 	mist: {
@@ -3611,47 +3611,6 @@ export const BattleMoveAnims: AnimTable = {
 	},
 	spikyshield: {
 		anim: BattleOtherAnims.selfstatus.anim,
-	},
-	infirmary: {
-		anim(scene, [attacker]) {
-			scene.backgroundEffect('linear-gradient(#390000 30%, #000000)', 600, 0.2);
-			scene.showEffect('mistball', {
-				x: attacker.x,
-				y: attacker.y - 30,
-				z: attacker.z,
-				scale: 0.5,
-				xscale: 0.25,
-				yscale: 0.75,
-				opacity: 0.5,
-			}, {
-				scale: 2,
-				xscale: 3.5,
-				opacity: 0.1,
-				time: 500,
-			}, 'decel', 'fade');
-			scene.showEffect('mistball', {
-				x: attacker.x,
-				y: attacker.y - 15,
-				z: attacker.z,
-				opacity: 0.5,
-				scale: 1.5,
-			}, {
-				scale: 1.8,
-				opacity: 0.1,
-				time: 500,
-			}, 'decel', 'fade');
-			scene.showEffect('heart', {
-				x: attacker.x,
-				y: attacker.y - 15,
-				z: attacker.z,
-				opacity: 1,
-				scale: 3,
-			}, {
-				scale: 1.8,
-				opacity: 0.5,
-				time: 500,
-			}, 'decel', 'fade', {filter: 'hue-rotate(90deg)'});
-		},
 	},
 	burningbulwark: {
 		anim(scene, [attacker]) {
