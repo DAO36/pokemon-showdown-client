@@ -1329,8 +1329,8 @@ export class BattleScene implements BattleSceneStub {
 		case 'infirmary':
 			const heart1 = new Sprite(BattleEffects.heart, {
 				display: 'block',
-				x: x + side.leftof(-40),
-				y: y - 10,
+				x: x + side.leftof(-50),
+				y: y - 20,
 				z: side.z,
 				opacity: 0.8,
 				scale: 0.4,
@@ -1338,8 +1338,8 @@ export class BattleScene implements BattleSceneStub {
 
 			const heart2 = new Sprite(BattleEffects.heart, {
 				display: 'block',
-				x: x + side.leftof(-20),
-				y: y - 40,
+				x: x + side.leftof(-30),
+				y: y - 50,
 				z: side.z,
 				opacity: 0.8,
 				scale: 0.4,
@@ -1347,8 +1347,8 @@ export class BattleScene implements BattleSceneStub {
 
 			const heart3 = new Sprite(BattleEffects.heart, {
 				display: 'block',
-				x: x + side.leftof(30),
-				y: y - 20,
+				x: x + side.leftof(40),
+				y: y - 30,
 				z: side.z,
 				opacity: 0.8,
 				scale: 0.4,
@@ -1356,8 +1356,8 @@ export class BattleScene implements BattleSceneStub {
 
 			const heart4 = new Sprite(BattleEffects.heart, {
 				display: 'block',
-				x: x + side.leftof(10),
-				y: y - 30,
+				x: x + side.leftof(20),
+				y: y - 40,
 				z: side.z,
 				opacity: 0.8,
 				scale: 0.4,
