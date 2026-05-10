@@ -1240,6 +1240,26 @@ export class BattleScene implements BattleSceneStub {
 				time: instant ? 0 : 300,
 			});
 			break;
+		case 'infirmary':
+			const infirmary = new Sprite(BattleEffects.magiccoat, {
+				display: 'block',
+				x,
+				y,
+				z: side.behind(-27),
+				xscale: 1,
+				yscale: 0,
+				opacity: 0.1,
+			}, this);
+			this.$spritesFront[spriteIndex].append(infirmary.$el!);
+			this.sideConditions[siden][id] = [infirmary];
+			infirmary.anim({
+				opacity: 0.7,
+				time: instant ? 0 : 400,
+			}).anim({
+				opacity: 0.3,
+				time: instant ? 0 : 300,
+			});
+			break;	
 		case 'stealthrock':
 			const rock1 = new Sprite(BattleEffects.rock1, {
 				display: 'block',
@@ -1326,11 +1346,11 @@ export class BattleScene implements BattleSceneStub {
 			this.$spritesFront[spriteIndex].append(leaf4.$el!);
 			this.sideConditions[siden][id] = [leaf1, leaf2, leaf3, leaf4];
 			break;
-		case 'infirmary':
+		case 'infirmary2':
 			const heart1 = new Sprite(BattleEffects.heart, {
 				display: 'block',
 				x: x + side.leftof(-40),
-				y: y + 10,
+				y: y + 20,
 				z: side.z,
 				opacity: 0.8,
 				scale: 0.4,
@@ -1339,7 +1359,7 @@ export class BattleScene implements BattleSceneStub {
 			const heart2 = new Sprite(BattleEffects.heart, {
 				display: 'block',
 				x: x + side.leftof(-20),
-				y: y + 40,
+				y: y + 50,
 				z: side.z,
 				opacity: 0.8,
 				scale: 0.4,
@@ -1348,7 +1368,7 @@ export class BattleScene implements BattleSceneStub {
 			const heart3 = new Sprite(BattleEffects.heart, {
 				display: 'block',
 				x: x + side.leftof(30),
-				y: y + 20,
+				y: y + 30,
 				z: side.z,
 				opacity: 0.8,
 				scale: 0.4,
@@ -1357,7 +1377,7 @@ export class BattleScene implements BattleSceneStub {
 			const heart4 = new Sprite(BattleEffects.heart, {
 				display: 'block',
 				x: x + side.leftof(10),
-				y: y + 30,
+				y: y + 40,
 				z: side.z,
 				opacity: 0.8,
 				scale: 0.4,
