@@ -1240,6 +1240,26 @@ export class BattleScene implements BattleSceneStub {
 				time: instant ? 0 : 300,
 			});
 			break;
+		case 'infirmary':
+			const infirmary = new Sprite(BattleEffects.mist, {
+				display: 'block',
+				x,
+				y,
+				z: side.behind(-27),
+				xscale: 1,
+				yscale: 0,
+				opacity: 0.1,
+			}, this);
+			this.$spritesFront[spriteIndex].append(infirmary.$el!);
+			this.sideConditions[siden][id] = [infirmary];
+			infirmary.anim({
+				opacity: 0.7,
+				time: instant ? 0 : 400,
+			}).anim({
+				opacity: 0.3,
+				time: instant ? 0 : 300,
+			});
+			break;	
 		case 'stealthrock':
 			const rock1 = new Sprite(BattleEffects.rock1, {
 				display: 'block',
@@ -1326,7 +1346,7 @@ export class BattleScene implements BattleSceneStub {
 			this.$spritesFront[spriteIndex].append(leaf4.$el!);
 			this.sideConditions[siden][id] = [leaf1, leaf2, leaf3, leaf4];
 			break;
-		case 'infirmary':
+		case 'infirmary2':
 			const heart1 = new Sprite(BattleEffects.heart, {
 				display: 'block',
 				x: x + side.leftof(-40),
@@ -2008,6 +2028,7 @@ export class PokemonSprite extends Sprite {
 		lightscreen: ['Light Screen', 'good'],
 		reflect: ['Reflect', 'good'],
 		hologram: ['Hologram', 'good'],
+		infirmary: ['Infirmary', 'good'],
 	};
 	forme = '';
 	cryurl: string | undefined = undefined;
@@ -3284,6 +3305,10 @@ const BattleEffects: {[k: string]: SpriteData} = {
 	},
 	mist: {
 		rawHTML: '<div class="sidecondition-mist" style="display:none;position:absolute" />',
+		w: 100, h: 50,
+	},
+	infirmary: {
+		rawHTML: '<div class="sidecondition-infirmary" style="display:none;position:absolute" />',
 		w: 100, h: 50,
 	},
 	hologram: {

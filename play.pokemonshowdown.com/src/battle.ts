@@ -702,6 +702,9 @@ export class Side {
 		case 'hologram':
 			this.sideConditions[condition] = [effect.name, 1, 5, this.battle.gen >= 4 ? 8 : 0];
 			break;
+		case 'infirmary':
+			this.sideConditions[condition] = [effect.name, 1, 5, this.battle.gen >= 4 ? 8 : 0];
+			break;	
 		case 'tailwind':
 			this.sideConditions[condition] = [effect.name, 1, this.battle.gen >= 5 ? persist ? 6 : 4 : persist ? 5 : 3, 0];
 			break;
@@ -713,7 +716,6 @@ export class Side {
 		case 'toxicspikes':
 		case 'stickyweb':
 		case 'carrottrap':
-		case 'infirmary':	
 			this.sideConditions[condition] = [effect.name, 1, 0, 0];
 			break;
 		case 'gmaxwildfire':
@@ -2730,6 +2732,9 @@ export class Battle {
 			case 'hologram':
 				this.scene.resultAnim(poke, 'Hologram', 'good');
 				break;
+			case 'infirmary':
+				this.scene.resultAnim(poke, 'Infirmary', 'good');
+				break;	
 			}
 			if (!(effect.id === 'typechange' && poke.terastallized)) {
 				poke.addVolatile(effect.id);
@@ -2947,6 +2952,7 @@ export class Battle {
 				target!.side.removeSideCondition('Reflect');
 				target!.side.removeSideCondition('LightScreen');
 				target!.side.removeSideCondition('Hologram');
+				target!.side.removeSideCondition('Infirmary');
 				break;
 			case 'hyperspacefury':
 			case 'hyperspacehole':
@@ -3058,7 +3064,8 @@ export class Battle {
 			case 'auroraveil':
 			case 'reflect':
 			case 'lightscreen':
-			case 'hologram':	
+			case 'hologram':
+			case 'infirmary':	
 			case 'safeguard':
 			case 'mist':
 			case 'gmaxwildfire':
