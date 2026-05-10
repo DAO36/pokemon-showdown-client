@@ -705,6 +705,9 @@ export class Side {
 		case 'tailwind':
 			this.sideConditions[condition] = [effect.name, 1, this.battle.gen >= 5 ? persist ? 6 : 4 : persist ? 5 : 3, 0];
 			break;
+		case 'infirmary':
+			this.sideConditions[condition] = [effect.name, 1, 5, this.battle.gen >= 4 ? 8 : 0];
+			break;
 		case 'luckychant':
 			this.sideConditions[condition] = [effect.name, 1, 5, 0];
 			break;
@@ -712,8 +715,7 @@ export class Side {
 		case 'spikes':
 		case 'toxicspikes':
 		case 'stickyweb':
-		case 'carrottrap':
-		case 'infirmary':	
+		case 'carrottrap':	
 			this.sideConditions[condition] = [effect.name, 1, 0, 0];
 			break;
 		case 'gmaxwildfire':
@@ -3055,6 +3057,7 @@ export class Battle {
 
 			switch (effect.id) {
 			case 'tailwind':
+			case 'infirmary':
 			case 'auroraveil':
 			case 'reflect':
 			case 'lightscreen':
