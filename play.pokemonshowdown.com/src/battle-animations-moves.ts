@@ -3416,9 +3416,6 @@ export const BattleMoveAnims: AnimTable = {
 	hologram: {
 		anim() {},
 	},
-	infirmary: {
-		anim() {},
-	},
 	mist: {
 		anim(scene, [attacker, defender]) {
 			let xf = [1, -1, 1, -1];
@@ -29483,7 +29480,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'ballistic');
 		},
 	},
-	infirmary2: {
+	infirmary: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('heart', {
 				x: attacker.x,
