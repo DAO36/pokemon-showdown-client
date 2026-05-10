@@ -1241,7 +1241,7 @@ export class BattleScene implements BattleSceneStub {
 			});
 			break;
 		case 'infirmary':
-			const infirmary = new Sprite(BattleEffects.mist, {
+			const infirmary = new Sprite(BattleEffects.heart, {
 				display: 'block',
 				x,
 				y,
