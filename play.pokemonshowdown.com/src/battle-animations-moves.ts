@@ -29489,7 +29489,7 @@ export const BattleMoveAnims: AnimTable = {
 				scale: 0.2,
 				opacity: 0.5,
 			}, {
-				x: defender.leftof(-40),
+				x: defender.x,
 				y: defender.y - 10,
 				z: defender.z,
 				scale: 0.4,
@@ -29503,7 +29503,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 75,
 			}, {
-				x: defender.leftof(-20),
+				x: defender.x,
 				y: defender.y - 40,
 				z: defender.z,
 				scale: 0.4,
@@ -29517,7 +29517,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 150,
 			}, {
-				x: defender.leftof(30),
+				x: defender.x,
 				y: defender.y - 20,
 				z: defender.z,
 				scale: 0.4,
@@ -29531,7 +29531,7 @@ export const BattleMoveAnims: AnimTable = {
 				opacity: 0.5,
 				time: 225,
 			}, {
-				x: defender.leftof(10),
+				x: defender.x,
 				y: defender.y - 30,
 				z: defender.z,
 				scale: 0.4,

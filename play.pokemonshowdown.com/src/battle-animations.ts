@@ -1327,7 +1327,7 @@ export class BattleScene implements BattleSceneStub {
 			this.sideConditions[siden][id] = [leaf1, leaf2, leaf3, leaf4];
 			break;
 		case 'infirmary':
-			const heart = new Sprite(BattleEffects.heart, {
+			const heart1 = new Sprite(BattleEffects.heart, {
 				display: 'block',
 				x: x + side.leftof(-40),
 				y: y - 10,
@@ -1336,7 +1336,7 @@ export class BattleScene implements BattleSceneStub {
 				scale: 0.4,
 			}, this);
 
-			const heart = new Sprite(BattleEffects.heart, {
+			const heart2 = new Sprite(BattleEffects.heart, {
 				display: 'block',
 				x: x + side.leftof(-20),
 				y: y - 40,
@@ -1345,7 +1345,7 @@ export class BattleScene implements BattleSceneStub {
 				scale: 0.4,
 			}, this);
 
-			const heart = new Sprite(BattleEffects.heart, {
+			const heart3 = new Sprite(BattleEffects.heart, {
 				display: 'block',
 				x: x + side.leftof(30),
 				y: y - 20,
@@ -1354,7 +1354,7 @@ export class BattleScene implements BattleSceneStub {
 				scale: 0.4,
 			}, this);
 
-			const heart = new Sprite(BattleEffects.heart, {
+			const heart4 = new Sprite(BattleEffects.heart, {
 				display: 'block',
 				x: x + side.leftof(10),
 				y: y - 30,
@@ -1363,11 +1363,11 @@ export class BattleScene implements BattleSceneStub {
 				scale: 0.4,
 			}, this);
 
-			this.$spritesFront[spriteIndex].append(heart.$el!);
-			this.$spritesFront[spriteIndex].append(heart.$el!);
-			this.$spritesFront[spriteIndex].append(heart.$el!);
-			this.$spritesFront[spriteIndex].append(heart.$el!);
-			this.sideConditions[siden][id] = [heart, heart, heart, heart];
+			this.$spritesFront[spriteIndex].append(heart1.$el!);
+			this.$spritesFront[spriteIndex].append(heart2.$el!);
+			this.$spritesFront[spriteIndex].append(heart3.$el!);
+			this.$spritesFront[spriteIndex].append(heart4.$el!);
+			this.sideConditions[siden][id] = [heart1, heart2, heart3, heart4];
 			break;		
 		case 'gmaxsteelsurge':
 			const surge1 = new Sprite(BattleEffects.greenmetal1, {
