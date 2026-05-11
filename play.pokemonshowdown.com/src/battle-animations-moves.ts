@@ -30295,7 +30295,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'ballistic');
 		},
 	},
-	haachamacooking: {
+	spidercooking: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('web', {
 				x: attacker.x,
