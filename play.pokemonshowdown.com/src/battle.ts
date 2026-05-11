@@ -2959,6 +2959,7 @@ export class Battle {
 			case 'phantomforce':
 			case 'shadowforce':
 			case 'macesmash':
+			case 'pokobee':	
 			case 'imgod':	
 			case 'fisted':
 			case 'v7strike':
