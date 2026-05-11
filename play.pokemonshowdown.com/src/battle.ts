@@ -2962,6 +2962,7 @@ export class Battle {
 			case 'pokobee':	
 			case 'imgod':	
 			case 'fisted':
+			case 'timeshatteringpunch':
 			case 'v7strike':
 			case 'feint':
 				this.scene.resultAnim(poke, 'Protection broken', 'bad');
