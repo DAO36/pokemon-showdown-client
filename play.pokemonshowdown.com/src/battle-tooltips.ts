@@ -1246,6 +1246,9 @@ class BattleTooltips {
 			if (ability === 'highspecsrobot') {
 				speedModifiers.push(2);
 			}	
+			if (ability === 'mixtape') {
+				speedModifiers.push(2);
+			}	
 			if (ability === 'hadronengine') {
 				stats.spa = Math.floor(stats.spa * 1.3333);
 			}
@@ -1783,14 +1786,17 @@ class BattleTooltips {
 		if (attackType === 'Ground' && abilityid === 'levitate') return 0;
 		if (attackType === 'Water' && abilityid === 'dryskin') return 0;
 		if (attackType === 'Fire' && abilityid === 'flashfire') return 0;
+		if (attackType === 'Fire' && abilityid === 'phoenix') return 0;
 		if (attackType === 'Electric' && abilityid === 'lightningrod' && dex.gen >= 5) return 0;
 		if (attackType === 'Grass' && abilityid === 'sapsipper') return 0;
 		if (attackType === 'Electric' && abilityid === 'motordrive') return 0;
 		if (attackType === 'Water' && abilityid === 'stormdrain' && dex.gen >= 5) return 0;
 		if (attackType === 'Electric' && abilityid === 'voltabsorb') return 0;
 		if (attackType === 'Water' && abilityid === 'waterabsorb') return 0;
+		if (attackType === 'Water' && abilityid === 'sucharge') return 0;
 		if (attackType === 'Ground' && abilityid === 'eartheater') return 0;
 		if (attackType === 'Fire' && abilityid === 'wellbakedbody') return 0;
+		if (attackType === 'Dark' && abilityid === 'erofi') return 0;
 
 		if (attackType === 'Fire' && abilityid === 'primordialsea' && !strict) return 0;
 		if (attackType === 'Water' && abilityid === 'desolateland' && !strict) return 0;
@@ -1801,6 +1807,7 @@ class BattleTooltips {
 		if (attackType === 'Fire' && abilityid === 'heatproof') factor *= 0.5;
 		if (attackType === 'Ghost' && abilityid === 'purifyingsalt') factor *= 0.5;
 		if (attackType === 'Fire' && abilityid === 'fluffy') factor *= 2;
+		if (attackType === 'Steel' && abilityid === 'rockhard') factor *= 2;
 		if ((attackType === 'Electric' || attackType === 'Rock' || attackType === 'Ice') && abilityid === 'deltastream') {
 			factor *= 0.5;
 		}
