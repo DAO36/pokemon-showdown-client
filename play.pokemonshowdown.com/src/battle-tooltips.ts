@@ -2272,7 +2272,7 @@ class BattleTooltips {
 				value.modify(2, 'Smelling Salts + Paralysis');
 			}
 		}
-		if (['storedpower', 'powertrip'].includes(move.id) && target) {
+		if (['storedpower', 'ceo', 'powertrip'].includes(move.id) && target) {
 			let boostCount = 0;
 			for (const boost of Object.values(pokemon.boosts)) {
 				if (boost > 0) boostCount += boost;
@@ -2402,6 +2402,14 @@ class BattleTooltips {
 		}
 		// Base power based on times hit
 		if (move.id === 'ragefist') {
+			value.set(Math.min(350, 50 + 50 * pokemon.timesAttacked),
+				pokemon.timesAttacked > 0
+					? `Hit ${pokemon.timesAttacked} time${pokemon.timesAttacked > 1 ? 's' : ''}`
+					: undefined);
+		}
+		if (!value.value) return value;
+
+		if (move.id === 'invest') {
 			value.set(Math.min(350, 50 + 50 * pokemon.timesAttacked),
 				pokemon.timesAttacked > 0
 					? `Hit ${pokemon.timesAttacked} time${pokemon.timesAttacked > 1 ? 's' : ''}`
