@@ -87,6 +87,81 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'ballistic2Under', 'fade');
 		},
 	},
+	monday: {
+		anim(scene, [attacker, defender]) {
+			BattleOtherAnims.dance.anim(scene, [attacker, defender]);
+			scene.showEffect('pointer', {
+				x: attacker.x + 50,
+				y: attacker.y + 30,
+				z: attacker.z,
+				scale: 0.4,
+				opacity: 1,
+			}, {
+				x: attacker.x + 30,
+				y: attacker.y + 35,
+				scale: 0.5,
+				xscale: 0.3,
+				yscale: 0.6,
+				opacity: 1,
+				time: 400,
+			}, 'decel', 'fade');
+			scene.showEffect('pointer', {
+				x: attacker.x + 30,
+				y: attacker.y + 35,
+				z: attacker.z,
+				scale: 0.5,
+				xscale: 0.3,
+				yscale: 0.6,
+				opacity: 1,
+				time: 400,
+			}, {
+				x: attacker.x + 60,
+				y: attacker.y + 30,
+				scale: 0.4,
+				xscale: 0.4,
+				yscale: 0.4,
+				opacity: 0,
+				time: 900,
+			}, 'linear');
+
+			scene.showEffect('angry', {
+				x: defender.x + 20,
+				y: defender.y + 20,
+				z: defender.z,
+				scale: 0.5,
+				opacity: 0.5,
+				time: 200,
+			}, {
+				scale: 1,
+				opacity: 1,
+				time: 500,
+			}, 'ballistic2Under', 'fade');
+			scene.showEffect('angry', {
+				x: defender.x - 20,
+				y: defender.y + 10,
+				z: defender.z,
+				scale: 0.5,
+				opacity: 0.5,
+				time: 300,
+			}, {
+				scale: 1,
+				opacity: 1,
+				time: 600,
+			}, 'ballistic2Under', 'fade');
+			scene.showEffect('angry', {
+				x: defender.x,
+				y: defender.y + 40,
+				z: defender.z,
+				scale: 0.5,
+				opacity: 0.5,
+				time: 400,
+			}, {
+				scale: 1,
+				opacity: 1,
+				time: 700,
+			}, 'ballistic2Under', 'fade');
+		},
+	},
 	instruct: {
 		anim(scene, [attacker, defender]) {
 			BattleOtherAnims.dance.anim(scene, [attacker, defender]);
