@@ -39604,6 +39604,69 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear', 'fade');
 		},
 	},
+	crescendocrash: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('electroball', {
+				x: defender.x + 60,
+				y: defender.y + 30,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+			}, {
+				x: defender.x - 70,
+				y: defender.y - 40,
+				z: defender.z,
+				scale: 0.4,
+				opacity: 0.4,
+				time: 200,
+			}, 'linear', 'fade');
+			scene.showEffect('electroball', {
+				x: defender.x + 60,
+				y: defender.y + 30,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 100,
+			}, {
+				x: defender.x - 70,
+				y: defender.y - 40,
+				z: defender.z,
+				scale: 0.4,
+				opacity: 0.4,
+				time: 300,
+			}, 'linear', 'fade');
+			scene.showEffect('electroball', {
+				x: defender.x + 80,
+				y: defender.y + 10,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 100,
+			}, {
+				x: defender.x - 50,
+				y: defender.y - 60,
+				z: defender.z,
+				scale: 0.4,
+				opacity: 0.4,
+				time: 300,
+			}, 'linear', 'fade');
+			scene.showEffect('electroball', {
+				x: defender.x + 80,
+				y: defender.y + 10,
+				z: defender.z,
+				scale: 0.2,
+				opacity: 1,
+				time: 200,
+			}, {
+				x: defender.x - 50,
+				y: defender.y - 60,
+				z: defender.z,
+				scale: 0.4,
+				opacity: 0.4,
+				time: 400,
+			}, 'linear', 'fade');
+		},
+	},
 	precipiceblades: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('linear-gradient(#390000 30%, #B84038)', 800, 0.4);
