@@ -5184,7 +5184,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	musuemmight: {
+	museummight: {
 		anim(scene, [attacker]) {
 			scene.showEffect('shadowball', {
 				x: attacker.x,
