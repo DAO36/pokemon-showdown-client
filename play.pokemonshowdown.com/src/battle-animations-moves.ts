@@ -55165,6 +55165,7 @@ BattleMoveAnims['lastresort'] = {anim: BattleMoveAnims['gigaimpact'].anim};
 BattleMoveAnims['horndrill'] = {anim: BattleMoveAnims['gigaimpact'].anim};
 BattleMoveAnims['trumpcard'] = {anim: BattleMoveAnims['gigaimpact'].anim};
 BattleMoveAnims['doubleedge'] = {anim: BattleMoveAnims['gigaimpact'].anim};
+BattleMoveAnims['glowinggamble'] = {anim: BattleMoveAnims['gigaimpact'].anim};
 
 BattleMoveAnims['paleowave'] = {anim: BattleMoveAnims['muddywater'].anim};
 BattleMoveAnims['rocktomb'] = {anim: BattleMoveAnims['rockslide'].anim};
