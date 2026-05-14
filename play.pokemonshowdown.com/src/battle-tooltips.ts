@@ -1188,7 +1188,11 @@ class BattleTooltips {
 				if (ability === 'powerofatlantis') {
 						stats.spa = Math.floor(stats.spa * 1.3);
 						stats.atk = Math.floor(stats.atk * 1.3);
-					}	
+					}
+				if (ability === 'publicitystunt') {
+						stats.spa = Math.floor(stats.spa * 1.5);
+						stats.atk = Math.floor(stats.atk * 1.5);
+					}		
 				}
 			}
 		}
