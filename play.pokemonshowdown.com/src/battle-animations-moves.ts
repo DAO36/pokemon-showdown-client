@@ -18417,6 +18417,76 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
+	carcrash: {
+		anim(scene, [attacker, defender]) {
+			scene.backgroundEffect('#000000', 700, 0.2);
+			scene.showEffect('gear', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0,
+				opacity: 0.4,
+				time: 300,
+			}, {
+				scale: 4,
+				opacity: 0,
+				time: 600,
+			}, 'linear');
+			scene.showEffect('fireball', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0,
+				opacity: 0.4,
+				time: 500,
+			}, {
+				scale: 4,
+				opacity: 0,
+				time: 800,
+			}, 'linear');
+			scene.showEffect(attacker.sp, {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				opacity: 0.3,
+				time: 50,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(-5),
+				time: 350,
+			}, 'accel', 'fade');
+			scene.showEffect(attacker.sp, {
+				x: attacker.x,
+				y: attacker.y,
+				z: attacker.z,
+				opacity: 0.3,
+				time: 100,
+			}, {
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(-5),
+				time: 400,
+			}, 'accel', 'fade');
+			attacker.anim({
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(-5),
+				time: 300,
+			}, 'accel');
+			attacker.anim({
+				time: 500,
+			}, 'ballistic2Back');
+			defender.delay(280);
+			defender.anim({
+				z: defender.behind(20),
+				time: 100,
+			}, 'swing');
+			defender.anim({
+				time: 300,
+			}, 'swing');
+		},
+	},
 	succubusstrike: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#000000', 700, 0.2);
@@ -41884,13 +41954,13 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
-				scale: 1.1,
+				scale: 0.5,
 				opacity: 1,
 			}, {
 				x: defender.x + 30,
 				y: defender.y + 30,
 				z: defender.z,
-				scale: 2,
+				scale: 1,
 				opacity: 0.6,
 				time: 200,
 			}, 'linear', 'explode');
@@ -41898,14 +41968,14 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
-				scale: 1.1,
+				scale: 0.5,
 				opacity: 1,
 				time: 75,
 			}, {
 				x: defender.x + 20,
 				y: defender.y - 30,
 				z: defender.z,
-				scale: 2,
+				scale: 1,
 				opacity: 0.6,
 				time: 275,
 			}, 'linear', 'explode');
@@ -41913,14 +41983,14 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
-				scale: 0.6,
+				scale: 0.25,
 				opacity: 0.6,
 				time: 150,
 			}, {
 				x: defender.x - 30,
 				y: defender.y,
 				z: defender.z,
-				scale: 1,
+				scale: 0.5,
 				opacity: 0.3,
 				time: 350,
 			}, 'linear', 'explode');
@@ -41928,14 +41998,14 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
-				scale: 1.1,
+				scale: 0.5,
 				opacity: 1,
 				time: 225,
 			}, {
 				x: defender.x - 10,
 				y: defender.y + 10,
 				z: defender.z,
-				scale: 2,
+				scale: 1,
 				opacity: 0.6,
 				time: 425,
 			}, 'linear', 'explode');
@@ -41943,14 +42013,14 @@ export const BattleMoveAnims: AnimTable = {
 				x: attacker.x,
 				y: attacker.y,
 				z: attacker.z,
-				scale: 1.1,
+				scale: 0.5,
 				opacity: 1,
 				time: 300,
 			}, {
 				x: defender.x + 10,
 				y: defender.y - 10,
 				z: defender.z,
-				scale: 2,
+				scale: 1,
 				opacity: 0.6,
 				time: 500,
 			}, 'linear', 'explode');
@@ -55664,7 +55734,6 @@ BattleMoveAnims['takedown'] = {anim: BattleMoveAnims['gigaimpact'].anim};
 BattleMoveAnims['dragonrush'] = {anim: BattleMoveAnims['gigaimpact'].anim};
 BattleMoveAnims['lastresort'] = {anim: BattleMoveAnims['gigaimpact'].anim};
 BattleMoveAnims['horndrill'] = {anim: BattleMoveAnims['gigaimpact'].anim};
-BattleMoveAnims['trumpcard'] = {anim: BattleMoveAnims['gigaimpact'].anim};
 BattleMoveAnims['doubleedge'] = {anim: BattleMoveAnims['gigaimpact'].anim};
 BattleMoveAnims['glowinggamble'] = {anim: BattleMoveAnims['gigaimpact'].anim};
 
