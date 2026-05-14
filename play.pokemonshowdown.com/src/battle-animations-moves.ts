@@ -4764,6 +4764,35 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'decel');
 		},
 	},
+	stunninglooks: {
+		anim(scene, [attacker]) {
+			scene.showEffect('iceball', {
+				x: attacker.x,
+				y: attacker.y + 20,
+				z: attacker.z,
+				scale: 0.5,
+				opacity: 0.1,
+				time: 500,
+			}, {
+				x: attacker.leftof(-30),
+				y: attacker.y + 20,
+				z: attacker.behind(-50),
+				scale: 1,
+				opacity: 0.3,
+				time: 800,
+			}, 'ballistic2Under', 'fade');
+
+			attacker.anim({
+				y: attacker.y + 4,
+				scale: 1.15,
+				time: 200,
+			}, 'linear');
+			attacker.delay(300);
+			attacker.anim({
+				time: 200,
+			}, 'decel');
+		},
+	},
 	shellsmash: {
 		anim(scene, [attacker]) {
 			scene.showEffect('shell', {
@@ -11417,6 +11446,89 @@ export const BattleMoveAnims: AnimTable = {
 		},
 	},
 	paintbrush: {
+		anim(scene, [attacker, defender]) {
+			attacker.anim({
+				x: defender.leftof(-30),
+				y: defender.y + 80,
+				z: defender.behind(-30),
+				time: 300,
+			}, 'ballistic');
+			attacker.anim({
+				x: defender.leftof(30),
+				y: defender.y + 5,
+				z: defender.z,
+				time: 100,
+			});
+			attacker.anim({
+				x: defender.leftof(30),
+				y: defender.y + 80,
+				z: defender.behind(-30),
+				time: 200,
+			}, 'ballisticUp');
+			attacker.anim({
+				x: defender.leftof(-30),
+				y: defender.y + 5,
+				z: defender.z,
+				time: 100,
+			});
+			attacker.anim({
+				time: 500,
+			}, 'ballistic2Back');
+			defender.delay(450);
+			defender.anim({
+				z: defender.behind(20),
+				time: 100,
+			}, 'swing');
+			defender.anim({
+				time: 200,
+			}, 'swing');
+			defender.anim({
+				z: defender.behind(20),
+				time: 100,
+			}, 'swing');
+			defender.anim({
+				time: 300,
+			}, 'swing');
+
+			scene.showEffect('rightslash', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 1,
+				opacity: 1,
+				time: 425,
+			}, {
+				scale: 2,
+				opacity: 0.5,
+				time: 725,
+			}, 'linear', 'fade');
+			scene.showEffect('iceball', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0,
+				opacity: 1,
+				time: 625,
+			}, {
+				scale: 3,
+				opacity: 0,
+				time: 1000,
+			}, 'linear', 'fade');
+			scene.showEffect('leftslash', {
+				x: defender.x,
+				y: defender.y,
+				z: defender.z,
+				scale: 0,
+				opacity: 1,
+				time: 625,
+			}, {
+				scale: 3,
+				opacity: 0,
+				time: 1000,
+			}, 'linear', 'fade');
+		},
+	},
+	dokushadash: {
 		anim(scene, [attacker, defender]) {
 			attacker.anim({
 				x: defender.leftof(-30),
