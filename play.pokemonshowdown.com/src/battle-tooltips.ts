@@ -2260,6 +2260,9 @@ class BattleTooltips {
 		if (move.id === 'lastrespects') {
 			value.set(Math.min(50 + 50 * pokemon.side.faintCounter));
 		}
+		if (move.id === 'flowglow') {
+			value.set(Math.min(50 + 50 * pokemon.side.faintCounter));
+		}
 		if (move.id === 'punishment' && target) {
 			let boostCount = 0;
 			for (const boost of Object.values(target.boosts)) {
