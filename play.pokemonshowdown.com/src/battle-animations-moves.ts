@@ -46177,7 +46177,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	comesticstrike: {
+	cosmeticstrike: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#440044', 700, 0.2);
 			scene.showEffect('shadowball', {
