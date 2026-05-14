@@ -3104,7 +3104,7 @@ class BattleStatGuesser {
 			if (move.category === 'Status') {
 				if (['batonpass', 'healingwish', 'lunardance'].includes(move.id)) {
 					moveCount['Support']++;
-				} else if (['metronome', 'assist', 'copycat', 'mefirst', 'photongeyser', 'shellsidearm'].includes(move.id)) {
+				} else if (['metronome', 'assist', 'copycat', 'mefirst', 'jokester', 'photongeyser', 'shellsidearm'].includes(move.id)) {
 					moveCount['Physical'] += 0.5;
 					moveCount['Special'] += 0.5;
 				} else if (move.id === 'naturepower') {

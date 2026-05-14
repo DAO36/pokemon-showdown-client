@@ -2948,6 +2948,7 @@ export class Battle {
 			case 'healbell':
 				this.scene.resultAnim(poke, 'Team Cured', 'good');
 				break;
+			case 'tigerclaws':	
 			case 'brickbreak':
 				target!.side.removeSideCondition('Reflect');
 				target!.side.removeSideCondition('LightScreen');

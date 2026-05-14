@@ -8231,6 +8231,47 @@ export const BattleMoveAnims: AnimTable = {
 			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
 		},
 	},
+	tigerclaws: {
+		anim(scene, [attacker, defender]) { 
+			scene.showEffect('rightslash', {
+				x: defender.x + 5,
+				y: defender.y + 20,
+				z: defender.z,
+				scale: 1,
+				opacity: 1,
+				time: 500,
+			}, {
+				scale: 3,
+				opacity: 0,
+				time: 800,
+			}, 'linear', 'fade');
+			scene.showEffect('rightslash', {
+				x: defender.x - 5,
+				y: defender.y - 20,
+				z: defender.z,
+				scale: 1,
+				opacity: 1,
+				time: 600,
+			}, {
+				scale: 3,
+				opacity: 0,
+				time: 900,
+			}, 'linear', 'fade');
+			scene.showEffect('rightslash', {
+				x: defender.x - 1,
+				y: defender.y - 1,
+				z: defender.z,
+				scale: 1,
+				opacity: 1,
+				time: 600,
+			}, {
+				scale: 3,
+				opacity: 0,
+				time: 1000,
+			}, 'linear', 'fade');
+			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
+		},
+	},
 	twinstrikes: {
 		anim(scene, [attacker, defender]) { 
 			scene.showEffect('rightslash', {
@@ -54821,6 +54862,7 @@ export const BattleMoveAnims: AnimTable = {
 BattleMoveAnims['torment'] = {anim: BattleMoveAnims['swagger'].anim};
 
 BattleMoveAnims['mefirst'] = {anim: BattleMoveAnims['mimic'].anim};
+BattleMoveAnims['jokester'] = {anim: BattleMoveAnims['mimic'].anim};
 
 BattleMoveAnims['conversion2'] = {anim: BattleMoveAnims['conversion'].anim};
 
