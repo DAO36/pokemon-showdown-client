@@ -17081,7 +17081,7 @@ export const BattleMoveAnims: AnimTable = {
 			BattleOtherAnims.contactattack.anim(scene, [attacker, defender]);
 		},
 	},
-	threehundredhorsepower: {
+	horsepower300: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('electroball', {
 				x: defender.x,
