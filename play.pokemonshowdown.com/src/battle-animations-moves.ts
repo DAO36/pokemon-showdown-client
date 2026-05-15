@@ -11675,7 +11675,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'linear', 'fade');
 		},
 	},
-	dokushadash: {
+	dresscode: {
 		anim(scene, [attacker, defender]) {
 			attacker.anim({
 				x: defender.leftof(-30),
@@ -42129,7 +42129,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	dresscode: {
+	dokushadazzle: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect('#9AB440', 700, 0.7);
 			scene.showEffect('shine', {
