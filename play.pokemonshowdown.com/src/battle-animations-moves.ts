@@ -8354,6 +8354,57 @@ export const BattleMoveAnims: AnimTable = {
 	knockdown: {
 		anim: BattleOtherAnims.contactattack.anim,
 	},
+	dresscode: {
+		anim(scene, [attacker, defender]) {
+			scene.showEffect('iceball', {
+				x: defender.x,
+				y: defender.y + 10,
+				z: defender.z,
+				scale: 0,
+				opacity: 0.5,
+				time: 400,
+			}, {
+				scale: 3,
+				opacity: 0,
+				time: 600,
+			}, 'linear');
+			attacker.anim({
+				x: defender.x,
+				y: defender.y,
+				z: defender.behind(-5),
+				time: 350,
+			}, 'ballistic2Under');
+			attacker.anim({
+				x: defender.x,
+				y: defender.y + 10,
+				z: defender.behind(5),
+				time: 50,
+			}, 'ballistic2Under');
+			attacker.anim({
+				time: 500,
+			}, 'ballistic2Back');
+			defender.delay(380);
+			defender.anim({
+				y: defender.y + 100,
+				z: defender.behind(5),
+				opacity: 0.5,
+				time: 300,
+			}, 'decel');
+			defender.anim({
+				time: 250,
+			}, 'accel');
+			defender.anim({
+				x: defender.x,
+				y: defender.y - 35,
+				yscale: 0.25,
+				time: 50,
+			}, 'swing');
+			defender.anim({
+				time: 300,
+			}, 'swing');
+			scene.wait(1000);
+		},
+	},
 	seismictoss: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect(`url('https://${Config.routes.client}/fx/bg-space.jpg')`, 500, 0.6, 300);
@@ -11593,89 +11644,6 @@ export const BattleMoveAnims: AnimTable = {
 		},
 	},
 	paintbrush: {
-		anim(scene, [attacker, defender]) {
-			attacker.anim({
-				x: defender.leftof(-30),
-				y: defender.y + 80,
-				z: defender.behind(-30),
-				time: 300,
-			}, 'ballistic');
-			attacker.anim({
-				x: defender.leftof(30),
-				y: defender.y + 5,
-				z: defender.z,
-				time: 100,
-			});
-			attacker.anim({
-				x: defender.leftof(30),
-				y: defender.y + 80,
-				z: defender.behind(-30),
-				time: 200,
-			}, 'ballisticUp');
-			attacker.anim({
-				x: defender.leftof(-30),
-				y: defender.y + 5,
-				z: defender.z,
-				time: 100,
-			});
-			attacker.anim({
-				time: 500,
-			}, 'ballistic2Back');
-			defender.delay(450);
-			defender.anim({
-				z: defender.behind(20),
-				time: 100,
-			}, 'swing');
-			defender.anim({
-				time: 200,
-			}, 'swing');
-			defender.anim({
-				z: defender.behind(20),
-				time: 100,
-			}, 'swing');
-			defender.anim({
-				time: 300,
-			}, 'swing');
-
-			scene.showEffect('rightslash', {
-				x: defender.x,
-				y: defender.y,
-				z: defender.z,
-				scale: 1,
-				opacity: 1,
-				time: 425,
-			}, {
-				scale: 2,
-				opacity: 0.5,
-				time: 725,
-			}, 'linear', 'fade');
-			scene.showEffect('iceball', {
-				x: defender.x,
-				y: defender.y,
-				z: defender.z,
-				scale: 0,
-				opacity: 1,
-				time: 625,
-			}, {
-				scale: 3,
-				opacity: 0,
-				time: 1000,
-			}, 'linear', 'fade');
-			scene.showEffect('leftslash', {
-				x: defender.x,
-				y: defender.y,
-				z: defender.z,
-				scale: 0,
-				opacity: 1,
-				time: 625,
-			}, {
-				scale: 3,
-				opacity: 0,
-				time: 1000,
-			}, 'linear', 'fade');
-		},
-	},
-	dresscode: {
 		anim(scene, [attacker, defender]) {
 			attacker.anim({
 				x: defender.leftof(-30),
