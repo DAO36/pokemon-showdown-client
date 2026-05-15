@@ -1597,6 +1597,9 @@ class BattleTooltips {
 		if (move.id === 'revelationdance') {
 			moveType = pokemonTypes[0];
 		}
+		if (move.id === 'dokushadazzle') {
+			moveType = pokemonTypes[0];
+		}
 		// Moves that require an item to change their type.
 		let item = this.battle.dex.items.get(value.itemName);
 		if (move.id === 'multiattack' && item.onMemory) {
@@ -1693,7 +1696,7 @@ class BattleTooltips {
 
 		// Other abilities that change the move type.
 		const noTypeOverride = [
-			'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'struggle', 'technoblast', 'terrainpulse', 'weatherball',
+			'judgment', 'dokushadazzle', 'multiattack', 'naturalgift', 'revelationdance', 'struggle', 'technoblast', 'terrainpulse', 'weatherball',
 		];
 		const allowTypeOverride = !noTypeOverride.includes(move.id) && (move.id !== 'terablast' || !pokemon.terastallized);
 		if (allowTypeOverride) {
@@ -2527,7 +2530,7 @@ class BattleTooltips {
 			}
 		}
 		const noTypeOverride = [
-			'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'struggle', 'technoblast', 'terrainpulse', 'weatherball',
+			'judgment', 'multiattack', 'naturalgift', 'dokushadazzle', 'revelationdance', 'struggle', 'technoblast', 'terrainpulse', 'weatherball',
 		];
 		const allowTypeOverride = !noTypeOverride.includes(move.id) && (move.id !== 'terablast' || !pokemon.terastallized);
 		if (
