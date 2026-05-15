@@ -5184,62 +5184,6 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'swing');
 		},
 	},
-	museummight: {
-		anim(scene, [attacker]) {
-			scene.showEffect('shadowball', {
-				x: attacker.x,
-				y: attacker.y + 15,
-				z: attacker.z,
-				scale: 0.7,
-				xscale: 2,
-				opacity: 0.6,
-				time: 0,
-			}, {
-				scale: 0.4,
-				xscale: 1,
-				opacity: 0.1,
-				time: 500,
-			}, 'decel', 'fade');
-			scene.showEffect('shadowball', {
-				x: attacker.x,
-				y: attacker.y - 5,
-				z: attacker.z,
-				scale: 0.7,
-				xscale: 2,
-				opacity: 0.6,
-				time: 50,
-			}, {
-				scale: 0.4,
-				xscale: 1,
-				opacity: 0.1,
-				time: 550,
-			}, 'decel', 'fade');
-			scene.showEffect('shadowball', {
-				x: attacker.x,
-				y: attacker.y - 20,
-				z: attacker.z,
-				scale: 0.7,
-				xscale: 2,
-				opacity: 0.6,
-				time: 100,
-			}, {
-				scale: 0.4,
-				xscale: 1,
-				opacity: 0.1,
-				time: 600,
-			}, 'decel', 'fade');
-
-			attacker.anim({
-				y: attacker.y + 5,
-				yscale: 1.1,
-				time: 300,
-			}, 'swing');
-			attacker.delay(400);
-			attacker.anim({
-				time: 300,
-			}, 'swing');
-		},
-	},
 	conversion: {
 		anim(scene, [attacker]) {
 			scene.showEffect(attacker.sp, {
