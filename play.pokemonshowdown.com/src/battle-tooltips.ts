@@ -2645,7 +2645,7 @@ class BattleTooltips {
 		if (move.id === 'pickiaxe' && value.tryWeather('Sandstorm')) {
 			value.modify(2, 'Sandstorm boost');
 		}
-		if (move.id === 'wamywater' && value.tryWeather('Snow')) {
+		if (move.id === 'wamywater' && value.tryWeather('Snowscape')) {
 			value.modify(2, 'Snow boost');
 		}
 		if (move.id === 'sharkattack' && value.tryWeather('Sandstorm')) {
