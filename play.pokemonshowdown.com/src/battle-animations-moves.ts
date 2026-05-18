@@ -39094,7 +39094,7 @@ export const BattleMoveAnims: AnimTable = {
 				time: 300,
 			}, 'swing');
 
-			scene.showEffect('leaf2', {
+			scene.showEffect('sword', {
 				x: attacker.leftof(-10),
 				y: attacker.y - 10,
 				z: attacker.z,
