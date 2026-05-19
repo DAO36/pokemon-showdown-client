@@ -31501,7 +31501,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'ballistic');
 		},
 	},
-	spidercooking: {
+	spidersoup: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('web', {
 				x: attacker.x,
