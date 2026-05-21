@@ -8559,7 +8559,7 @@ export const BattleMoveAnims: AnimTable = {
 			scene.wait(1000);
 		},
 	},
-	alienassault: {
+	area15: {
 		anim(scene, [attacker, defender]) {
 			scene.backgroundEffect(`url('https://${Config.routes.client}/fx/bg-space.jpg')`, 500, 0.6, 300);
 			scene.showEffect('moon', {
