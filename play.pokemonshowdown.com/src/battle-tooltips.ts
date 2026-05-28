@@ -1267,6 +1267,16 @@ class BattleTooltips {
 				speedModifiers.push(2);
 			} 
 		}
+		if (this.battle.hasPseudoWeather('Gravity')) {
+			if (ability === 'moonmight') {
+				stats.atk = Math.floor(stats.atk * 1.5);
+			} 
+		}
+		if (this.battle.hasPseudoWeather('Gravity')) {
+			if (ability === 'moonmight') {
+				stats.spa = Math.floor(stats.spa * 1.5);
+			} 
+		}
 		if (item === 'choicespecs' && !clientPokemon?.volatiles['dynamax']) {
 			stats.spa = Math.floor(stats.spa * 1.5);
 		}
