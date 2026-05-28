@@ -31339,7 +31339,7 @@ export const BattleMoveAnims: AnimTable = {
 			}, 'ballistic');
 		},
 	},
-	spidersoup: {
+	haachamacooking: {
 		anim(scene, [attacker, defender]) {
 			scene.showEffect('web', {
 				x: attacker.x,
