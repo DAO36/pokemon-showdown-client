@@ -2964,6 +2964,7 @@ export class Battle {
 			case 'imgod':	
 			case 'fisted':
 			case 'timeshatteringpunch':
+			case 'timedattack':
 			case 'v7strike':
 			case 'badass':	
 			case 'feint':
