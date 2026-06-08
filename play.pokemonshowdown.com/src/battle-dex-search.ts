@@ -1542,6 +1542,18 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 			return dex.gen > 3 && !moves.includes('glaiverush');
 		case 'petaldance':
 			return abilityid === 'owntempo';
+		case 'petaldance':
+			return abilityid === 'seiso';
+		case 'idolsong':
+			return abilityid === 'seiso';	
+		case 'outrage':
+			return abilityid === 'timetravel';
+		case 'timetantrum':
+			return abilityid === 'timetravel';
+		case 'thrash':
+		    return abilityid === 'timetravel';
+		case 'ragingfury':	
+			return abilityid === 'timetravel';		
 		case 'phantomforce':
 			return (!moves.includes('poltergeist') && !moves.includes('shadowclaw')) || this.formatType === 'doubles';
 		case 'poisonfang':
