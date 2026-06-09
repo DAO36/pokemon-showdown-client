@@ -9,7 +9,10 @@ class RoomsRoom extends PSRoom {
 	readonly classType: string = 'rooms';
 	constructor(options: RoomOptions) {
 		super(options);
-		PS.send(`|/cmd rooms`);
+		if (Object.keys(PS.prefs.serversettings).length) {
+			PS.send(`/updatesettings ${JSON.stringify(PS.prefs.serversettings)}`);
+		}
+		PS.send(`/cmd rooms`);
 	}
 }
 
@@ -105,13 +108,10 @@ class RoomsPanel extends PSRoomPanel {
 
 		return {start, abbr, hidden};
 	}
-	focus() {
-		(this.base!.querySelector('input[type=search]') as HTMLInputElement).focus();
-	}
-	render() {
-		if (this.hidden && PS.isVisible(this.props.room)) this.hidden = false;
+	override render() {
+		if (this.hidden && PS.isVisiblePanel(this.props.room)) this.hidden = false;
 		if (this.hidden) {
-			return <PSPanelWrapper room={this.props.room} scrollable>{null}</PSPanelWrapper>;
+			return <PSPanelWrapper room={this.props.room}>{null}</PSPanelWrapper>;
 		}
 		const rooms = PS.mainmenu.roomsCache;
 
@@ -129,7 +129,7 @@ class RoomsPanel extends PSRoomPanel {
 			];
 		}
 
-		return <PSPanelWrapper room={this.props.room} scrollable><div class="pad">
+		return <PSPanelWrapper room={this.props.room}><div class="pad">
 			<button class="button" style="float:right;font-size:10pt;margin-top:3px" onClick={this.hide}>
 				<i class="fa fa-caret-right"></i> Hide
 			</button>

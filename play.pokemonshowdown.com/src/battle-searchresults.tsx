@@ -188,7 +188,14 @@ class PSSearchResults extends preact.Component<{search: DexSearch}> {
 
 		let pp = (move.pp === 1 || move.noPPBoosts ? move.pp : move.pp * 8 / 5);
 		if (search.dex.gen < 3) pp = Math.min(61, pp);
-		return <li class="result"><a href={`${this.URL_ROOT}move/${id}`} data-target="push" data-entry={`move|${move.name}`}>
+		if (search.dex.modid === 'champions') {
+			pp = move.pp > 20 ? 20 : move.pp;
+			if (!move.noPPBoosts) pp = (pp / 5 + 1) * 4;
+		}
+		return <li class="result"><a
+			href={`${this.URL_ROOT}moves/${id}`} class={this.moveIds.includes(id) ? 'cur' : ''}
+			data-target="push" data-entry={entry}
+		>
 			<span class="col movenamecol">{this.renderName(move.name, matchStart, matchEnd, tagStart)}</span>
 
 			<span class="col typecol">

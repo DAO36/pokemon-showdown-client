@@ -10,20 +10,106 @@ declare var SockJS: any;
 class PSConnection {
 	socket: any = null;
 	connected = false;
-	queue = [] as string[];
+	lastMessageTimeBeforeReconnect = 0;
+	queue: string[] = [];
+	reconnectDelay = 1000;
+	private reconnectCap = 15000;
+	private shouldReconnect = true;
+	reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+	private worker: Worker | null = null;
+
 	constructor() {
 		this.connect();
 	}
-	connect() {
+
+	initConnection() {
+		if (!this.tryConnectInWorker()) this.directConnect();
+	}
+
+	canReconnect() {
+		const uptime = Date.now() - PS.startTime;
+		if (uptime > 24 * 60 * 60 * 1000) {
+			PS.confirm(`It's been over a day since you first connected. Please refresh.`, {
+				okButton: 'Refresh',
+			}).then(confirmed => {
+				if (confirmed) PS.room?.send(`/refresh`);
+			});
+			return false;
+		}
+		return this.shouldReconnect;
+	}
+
+	tryConnectInWorker(): boolean {
+		if (this.socket) return false; // must be one or the other
+		if (this.connected) return true;
+
+		if (this.worker) {
+			this.worker.postMessage({ type: 'connect', server: PS.server });
+			return true;
+		}
+
+		try {
+			const worker = new Worker('/js/client-connection-worker.js');
+			this.worker = worker;
+
+			worker.postMessage({ type: 'connect', server: PS.server });
+
+			worker.onmessage = event => {
+				const { type, data } = event.data;
+				switch (type) {
+				case 'connected':
+					console.log('\u2705 (CONNECTED via worker)');
+					this.lastMessageTimeBeforeReconnect = parseInt(PS.lastMessageTime) || 0;
+					this.connected = true;
+					if (PS.prefs.avatar) worker.postMessage({ type: 'send', data: `/avatar ${PS.prefs.avatar},1` });
+					this.queue.forEach(msg => worker.postMessage({ type: 'send', data: msg }));
+					this.queue = [];
+					PS.update();
+					break;
+				case 'message':
+					PS.receive(data);
+					break;
+				case 'disconnected':
+					this.handleDisconnect();
+					break;
+				case 'error':
+					console.warn(`Worker connection error: ${data}`);
+					this.worker = null;
+					// onerror can occur on abrupt disconnects or fatal errors.
+					// handleDisconnect ensures proper cleanup and also attemps to reconnect.
+					this.handleDisconnect(); // fallback
+					break;
+				}
+			};
+
+			worker.onerror = (ev: ErrorEvent) => {
+				console.warn('Worker connection error:', ev);
+				this.worker = null;
+				this.directConnect(); // fallback
+			};
+
+			return true;
+		} catch {
+			console.warn('Worker connection failed, falling back to regular connection.');
+			this.worker = null;
+			return false;
+		}
+	}
+
+	directConnect() {
+		if (this.worker) return; // must be one or the other
+
 		const server = PS.server;
 		const port = server.protocol === 'https' ? '' : ':' + server.port;
 		const url = server.protocol + '://' + server.host + port + server.prefix;
 		const socket = this.socket = new SockJS(url, [], {timeout: 5 * 60 * 1000});
 		socket.onopen = () => {
 			console.log('\u2705 (CONNECTED)');
+			this.lastMessageTimeBeforeReconnect = parseInt(PS.lastMessageTime) || 0;
 			this.connected = true;
-			PS.connected = true;
-			for (const msg of this.queue) socket.send(msg);
+			this.reconnectDelay = 1000;
+			if (PS.prefs.avatar) socket.send(`/avatar ${PS.prefs.avatar},1`);
+			this.queue.forEach(msg => socket.send(msg));
 			this.queue = [];
 			PS.update();
 		};

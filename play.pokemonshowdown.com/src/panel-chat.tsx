@@ -5,9 +5,20 @@
  * @license AGPLv3
  */
 
-declare const MiniEdit: typeof import('./miniedit').MiniEdit;
-type MiniEdit = import('./miniedit').MiniEdit;
-declare const formatText: any;
+import preact from "../js/lib/preact";
+import type { PSSubscription } from "./client-core";
+import { PS, PSRoom, type RoomOptions, type RoomID, type Team, Config } from "./client-main";
+import { PSView, PSPanelWrapper, PSRoomPanel } from "./panels";
+import { TeamForm } from "./panel-mainmenu";
+import { BattleLog } from "./battle-log";
+import type { Battle } from "./battle";
+import { MiniEdit } from "./miniedit";
+import { Dex, PSUtils, toID, type ID } from "./battle-dex";
+import { BattleTextParser, type Args } from "./battle-text-parser";
+import { PSLoginServer } from "./client-connection";
+import type { BattleRoom } from "./panel-battle";
+import { BattleChoiceBuilder } from "./battle-choices";
+import { ChatTournament, TournamentBox } from "./panel-chat-tournament";
 
 class ChatRoom extends PSRoom {
 	readonly classType: 'chat' | 'battle' = 'chat';
@@ -18,8 +29,23 @@ class ChatRoom extends PSRoom {
 	// PM-only properties
 	pmTarget: string | null = null;
 	challengeMenuOpen = false;
-	challengingFormat: string | null = null;
-	challengedFormat: string | null = null;
+	initialSlash = false;
+	challenging: Challenge | null = null;
+	/** True after challenge send/accept before server acknowledgement */
+	teamSent: string | null = null;
+	challenged: Challenge | null = null;
+	/** n.b. this will be null outside of battle rooms */
+	battle: Battle | null = null;
+	log: BattleLog | null = null;
+	tour: ChatTournament | null = null;
+	lastMessage: Args | null = null;
+	lastViewedTime: number | null = null;
+
+	joinLeave: { join: string[], leave: string[], messageId: string } | null = null;
+	/** in order from least to most recent */
+	userActivity: ID[] = [];
+	timeOffset = 0;
+	static highlightRegExp: Record<string, RegExp | null> | null = null;
 
 	constructor(options: RoomOptions) {
 		super(options);
@@ -35,40 +61,258 @@ class ChatRoom extends PSRoom {
 			this.connectWhenLoggedIn = false;
 		}
 	}
-	updateTarget(force?: boolean) {
-		if (this.id.startsWith('pm-')) {
-			const [id1, id2] = this.id.slice(3).split('-');
-			if (id1 === PS.user.userid && toID(this.pmTarget) !== id2) {
-				this.pmTarget = id2;
-			} else if (id2 === PS.user.userid && toID(this.pmTarget) !== id1) {
-				this.pmTarget = id1;
-			} else if (!force) {
+	override receiveLine(args: Args) {
+		switch (args[0]) {
+		case 'users':
+			const usernames = args[1].split(',');
+			const count = parseInt(usernames.shift()!, 10);
+			this.setUsers(count, usernames);
+			return;
+
+		case 'join': case 'j': case 'J':
+			this.addUser(args[1]);
+			this.handleJoinLeave("join", args[1], args[0] === "J");
+			return true;
+
+		case 'leave': case 'l': case 'L':
+			this.removeUser(args[1]);
+			this.handleJoinLeave("leave", args[1], args[0] === "L");
+			return true;
+
+		case 'name': case 'n': case 'N':
+			this.renameUser(args[1], args[2]);
+			break;
+
+		case 'tournament': case 'tournaments':
+			this.tour ||= new ChatTournament(this);
+			this.tour.receiveLine(args);
+			return;
+
+		case 'noinit':
+			if (this.battle && args[1] === 'joinfailed') {
+				this.receiveLine(['bigerror', args[2]]);
+				this.receiveLine(['html',
+					`<div class="broadcast-red pad"><p class="buttonbar"><button class="button" data-cmd="/close"><strong>Close</strong></button></p></div>`,
+				]);
+			} else if (this.battle) {
+				// check the Replays database
+				(this as any as BattleRoom).loadReplay();
+			} else {
+				const message = args[2] ? BattleLog.escapeHTML(args[2]) : `Chatroom "${BattleLog.escapeHTML(this.title)}" not found`;
+				this.receiveLine(['html',
+					`<div class="broadcast-red pad"><h3>${message}</h3><p class="buttonbar"><button class="button" data-cmd="/close"><strong>Close</strong></button></p></div>`,
+				]);
+			}
+			return;
+		case 'expire':
+			this.connected = 'expired';
+			this.receiveLine(['', `This room has expired (you can't chat in it anymore)`]);
+			return;
+
+		case 'chat': case 'c':
+			if (`${args[2]} `.startsWith('/challenge ')) {
+				this.updateChallenge(args[1], args[2].slice(11));
 				return;
+			} else if (args[2].startsWith('/warn ')) {
+				const reason = args[2].replace('/warn ', '');
+				PS.join(`rules-warn` as RoomID, {
+					args: {
+						type: 'warn',
+						message: reason?.trim() || undefined,
+					},
+					parentElem: null,
+				});
+				return;
+			}
+			// falls through
+		case 'c:':
+			if (args[0] === 'c:') PS.lastMessageTime = args[1];
+			this.lastMessage = args;
+			this.joinLeave = null;
+			const name = args[args[0] === 'c:' ? 2 : 1];
+			this.markUserActive(name);
+			if (this.tour) this.tour.joinLeave = null;
+			if (this.id.startsWith("dm-")) {
+				const fromUser = args[args[0] === 'c:' ? 2 : 1];
+				if (toID(fromUser) === PS.user.userid) break;
+				const message = args[args[0] === 'c:' ? 3 : 2];
+				const noNotify = this.log?.parseChatMessage(message, name, args[1])?.[2];
+				const isIgnored = PS.prefs.ignore?.[toID(fromUser)];
+				if (!noNotify && !isIgnored) {
+					let textContent = message;
+					if (/^\/(log|raw|html|uhtml|uhtmlchange) /.test(message)) {
+						textContent = message.split(' ').slice(1).join(' ')
+							.replace(/<[^>]*?>/g, '');
+					}
+					this.notify({
+						title: `${this.title}`,
+						body: textContent,
+					});
+				} else if (noNotify === 'subtle') {
+					this.subtleNotify();
+				}
 			} else {
 				this.pmTarget = id1;
 			}
-			if (!this.userCount) {
-				this.setUsers(2, [` ${id1}`, ` ${id2}`]);
-			}
-			this.title = `[PM] ${this.pmTarget}`;
+			break;
+		case ':':
+			this.timeOffset = Math.trunc(Date.now() / 1000) - (parseInt(args[1], 10) || 0);
+			PS.lastMessageTime = args[1];
+			break;
 		}
 	}
-	/**
-	 * @return true to prevent line from being sent to server
-	 */
-	handleMessage(line: string) {
-		if (!line.startsWith('/') || line.startsWith('//')) return false;
-		const spaceIndex = line.indexOf(' ');
-		const cmd = spaceIndex >= 0 ? line.slice(1, spaceIndex) : line.slice(1);
-		const target = spaceIndex >= 0 ? line.slice(spaceIndex + 1) : '';
-		switch (cmd) {
-		case 'j': case 'join': {
-			const roomid = /[^a-z0-9-]/.test(target) ? toID(target) as any as RoomID : target as RoomID;
-			PS.join(roomid);
+	override handleReconnect(msg: string): boolean | void {
+		if (this.battle) {
+			this.battle.reset();
+			this.battle.stepQueue = [];
+			return false;
+		} else {
+			let lines = msg.split('\n');
+
+			// cut off starting lines until we get to PS.lastMessage timestamp
+			// then cut off roomintro from the end
+			let cutOffStart = 0;
+			let cutOffEnd = lines.length;
+			const cutOffTime = PS.connection?.lastMessageTimeBeforeReconnect || parseInt(PS.lastMessageTime);
+			const cutOffExactLine = this.lastMessage ? '|' + this.lastMessage?.join('|') : '';
+			let reconnectMessage = '|raw|<div class="infobox">You reconnected.</div>';
+			for (let i = 0; i < lines.length; i++) {
+				if (lines[i].startsWith('|users|')) {
+					this.add(lines[i]);
+				}
+				if (lines[i] === cutOffExactLine) {
+					cutOffStart = i + 1;
+				} else if (lines[i].startsWith(`|c:|`)) {
+					const time = parseInt(lines[i].split('|')[2] || '');
+					if (time < cutOffTime) cutOffStart = i;
+				}
+				if (lines[i].startsWith('|raw|<div class="infobox"> You joined ')) {
+					const timestamp = BattleLog.renderTimestamp(Date.now() / 1000, PS.prefs.timestamps?.chatrooms);
+					reconnectMessage = `|raw|<div class="infobox">${timestamp}You reconnected to ${lines[i].slice(38)}`;
+					cutOffEnd = i;
+					if (!lines[i - 1]) cutOffEnd = i - 1;
+				}
+			}
+			console.log(`Reconnection log splice: (cutoff: ${cutOffTime})`);
+			console.log([
+				...lines.slice(0, cutOffStart),
+				'====================',
+				...lines.slice(cutOffStart, cutOffEnd),
+				'====================',
+				...lines.slice(cutOffEnd),
+			].join('\n'));
+			lines = lines.slice(cutOffStart, cutOffEnd);
+
+			if (lines.length) {
+				const timestamp = BattleLog.renderTimestamp(cutOffTime, PS.prefs.timestamps?.chatrooms);
+				this.receiveLine([`raw`, `<div class="infobox">${timestamp}You disconnected.</div>`]);
+				for (const line of lines) this.receiveLine(BattleTextParser.parseLine(line));
+				this.receiveLine(BattleTextParser.parseLine(reconnectMessage));
+			}
+			this.update(null);
 			return true;
-		} case 'part': case 'leave': {
-			const roomid = /[^a-z0-9-]/.test(target) ? toID(target) as any as RoomID : target as RoomID;
-			PS.leave(roomid || this.id);
+		}
+	}
+	updateTarget(name?: string | null) {
+		const selfWithGroup = `${PS.user.group || ' '}${PS.user.name}`;
+		if (this.id === 'dm-') {
+			this.pmTarget = selfWithGroup;
+			this.setUsers(1, [selfWithGroup]);
+			this.title = `Console`;
+		} else if (this.id.startsWith('dm-')) {
+			const id = this.id.slice(3);
+			if (toID(name) !== id) name = null;
+			name ||= this.pmTarget || id;
+			if (/[A-Za-z0-9]/.test(name.charAt(0))) name = ` ${name}`;
+			const nameWithGroup = name;
+			name = name.slice(1);
+			this.pmTarget = name;
+			if (!PS.user.userid) {
+				this.setUsers(1, [nameWithGroup]);
+			} else {
+				this.setUsers(2, [nameWithGroup, selfWithGroup]);
+			}
+			this.title = `[DM] ${nameWithGroup.trim()}`;
+		}
+	}
+	static getHighlight(message: string, roomid: string) {
+		let highlights = PS.prefs.highlights || {};
+		if (Array.isArray(highlights)) {
+			highlights = { global: highlights };
+			// Migrate from the old highlight system
+			PS.prefs.set('highlights', highlights);
+		}
+		if (!PS.prefs.noselfhighlight && PS.user.nameRegExp) {
+			if (PS.user.nameRegExp?.test(message)) return true;
+		}
+		if (!this.highlightRegExp) {
+			try {
+				this.updateHighlightRegExp(highlights);
+			} catch {
+				// If the expression above is not a regexp, we'll get here.
+				// Don't throw an exception because that would prevent the chat
+				// message from showing up, or, when the lobby is initialising,
+				// it will prevent the initialisation from completing.
+				return false;
+			}
+		}
+		const id = PS.server.id + '#' + roomid;
+		const globalHighlightsRegExp = this.highlightRegExp?.['global'];
+		const roomHighlightsRegExp = this.highlightRegExp?.[id];
+		return (((globalHighlightsRegExp?.test(message)) || (roomHighlightsRegExp?.test(message))));
+	}
+	static updateHighlightRegExp(highlights: Record<string, string[]>) {
+		// Enforce boundary for match sides, if a letter on match side is
+		// a word character. For example, regular expression "a" matches
+		// "a", but not "abc", while regular expression "!" matches
+		// "!" and "!abc".
+		this.highlightRegExp = {};
+		for (let i in highlights) {
+			if (!highlights[i].length) {
+				this.highlightRegExp[i] = null;
+				continue;
+			}
+			this.highlightRegExp[i] = new RegExp('(?:\\b|(?!\\w))(?:' + highlights[i].join('|') + ')(?:\\b|(?!\\w))', 'i');
+		}
+	}
+	handleHighlight = (args: Args) => {
+		let name;
+		let message;
+		let serverTime = 0;
+		if (args[0] === 'c:') {
+			serverTime = parseInt(args[1]);
+			name = args[2];
+			message = args[3];
+		} else {
+			name = args[1];
+			message = args[2];
+		}
+		if (toID(name) === PS.user.userid) return false;
+		if (message.startsWith(`/raw `) || message.startsWith(`/uhtml`) || message.startsWith(`/uhtmlchange`)) {
+			return false;
+		}
+
+		const lastMessageDates = Dex.prefs('logtimes') || (PS.prefs.set('logtimes', {}), Dex.prefs('logtimes'));
+		if (!lastMessageDates[PS.server.id]) lastMessageDates[PS.server.id] = {};
+		const lastMessageDate = lastMessageDates[PS.server.id][this.id] || 0;
+		// because the time offset to the server can vary slightly, subtract it to not have it affect comparisons between dates
+		const time = serverTime - (this.timeOffset || 0);
+		if (PS.isVisiblePanel(this)) {
+			this.lastViewedTime = null;
+			lastMessageDates[PS.server.id][this.id] = time;
+			PS.prefs.set('logtimes', lastMessageDates);
+		} else {
+			// To be saved on focus
+			const lastViewedTime = this.lastViewedTime || 0;
+			if (lastViewedTime < time) this.lastViewedTime = time;
+		}
+		if (ChatRoom.getHighlight(message, this.id)) {
+			const mayNotify = time > lastMessageDate;
+			if (mayNotify) this.notify({
+				title: `Mentioned by ${name} in ${this.id}`,
+				body: `"${message}"`,
+				id: 'highlight',
+			});
 			return true;
 		} case 'chall': case 'challenge': {
 			if (target) {
@@ -83,10 +327,252 @@ class ChatRoom extends PSRoom {
 		} case 'reject': {
 			this.challengedFormat = null;
 			this.update(null);
-			return false;
-		}}
-		return super.handleMessage(line);
-	}
+			this.sendDirect(`/reject ${target}`);
+		},
+		'clear'() {
+			this.log?.reset();
+			this.update(null);
+		},
+		'togglemessages'(target) {
+			if (this.pmTarget ||
+				this.type !== 'chat') return this.errorReply('This command can only be used in proper chat rooms.');
+			if (this.log) {
+				const userid = toID(target);
+				const classStart = 'revealed chat chatmessage-' + userid;
+				const nodes: HTMLElement[] = [];
+				let isHidden = true;
+				for (const node of this.log.innerElem.childNodes as any as HTMLElement[]) {
+					if (node.className && (node.className + ' ').startsWith(classStart)) {
+						nodes.push(node);
+					}
+				}
+				if (this.log.preemptElem) {
+					for (const node of this.log.preemptElem.childNodes as any as HTMLElement[]) {
+						if (node.className && (node.className + ' ').startsWith(classStart)) {
+							nodes.push(node);
+						}
+					}
+				}
+				isHidden = nodes[0].style.display === 'none';
+				nodes.every(node => {
+					node.style.display = isHidden ? '' : 'none';
+					return true;
+				});
+				isHidden = !isHidden;
+				const toggleButtons = this.log.innerElem.querySelectorAll(`button[name="toggleMessages"][value="${userid}"]`);
+				for (const button of toggleButtons) {
+					button.innerHTML = isHidden ?
+						`<small>(${nodes.length} line${nodes.length > 1 ? 's' : ''} from ${userid} hidden)</small>` :
+						`<small>(Hide ${nodes.length} line${nodes.length > 1 ? 's' : ''} from ${userid})</small>`;
+				}
+			}
+		},
+		'rank,ranking,rating,ladder'(target) {
+			let arg = target;
+			if (!arg) {
+				arg = PS.user.userid;
+			}
+			if (this.battle && !arg.includes(',')) {
+				arg += ", " + this.id.split('-')[1];
+			}
+
+			const targets = arg.split(',');
+			let formatTargeting = false;
+			const formats: { [key: string]: number } = {};
+			const gens: { [key: string]: number } = {};
+			for (let i = 1, len = targets.length; i < len; i++) {
+				targets[i] = $.trim(targets[i]);
+				if (targets[i].length === 4 && targets[i].startsWith('gen')) {
+					gens[targets[i]] = 1;
+				} else {
+					formats[toID(targets[i])] = 1;
+				}
+				formatTargeting = true;
+			}
+
+			PSLoginServer.query("ladderget", {
+				user: targets[0],
+			}).then(data => {
+				if (!data || !Array.isArray(data)) return this.add(`|error|Error: corrupted ranking data`);
+				let buffer = `<div class="ladder"><table><tr><td colspan="9">User: <strong>${toID(targets[0])}</strong></td></tr>`;
+				if (!data.length) {
+					buffer += '<tr><td colspan="9"><em>This user has not played any ladder games yet.</em></td></tr>';
+					buffer += '</table></div>';
+					return this.add(`|html|${buffer}`);
+				}
+				buffer += '<tr><th>Format</th><th><abbr title="Elo rating">Elo</abbr></th><th><abbr title="user\'s percentage chance of winning a random battle (aka GLIXARE)">GXE</abbr></th><th><abbr title="Glicko-1 rating: rating &#177; deviation">Glicko-1</abbr></th><th>COIL</th><th>W</th><th>L</th><th>Total</th>';
+				let suspect = false;
+				for (const item of data) {
+					if ('suspect' in item) suspect = true;
+				}
+				if (suspect) buffer += '<th>Suspect reqs possible?</th>';
+				buffer += '</tr>';
+				const hiddenFormats = [];
+				for (const row of data) {
+					if (!row) return this.add(`|error|Error: corrupted ranking data`);
+					const formatId = toID(row.formatid);
+					const matchesTarget = (
+						formats[formatId] ||
+						gens[formatId.slice(0, 4)] ||
+						(gens['gen6'] && !formatId.startsWith('gen'))
+					);
+					if (matchesTarget || (!formatTargeting && row.elo >= 1001 && (row.w + row.l + row.t > 0))) {
+						buffer += '<tr>';
+					} else {
+						buffer += '<tr class="hidden">';
+						hiddenFormats.push(window.BattleLog.escapeFormat(formatId, true));
+					}
+
+					// Validate all the numerical data
+					for (const value of [row.elo, row.rpr, row.rprd, row.gxe, row.w, row.l, row.t]) {
+						if (typeof value !== 'number' && typeof value !== 'string') {
+							return this.add(`|error|Error: corrupted ranking data`);
+						}
+					}
+
+					buffer += `<td> ${BattleLog.escapeHTML(BattleLog.formatName(formatId, true))} </td><td><strong>${Math.round(row.elo)}</strong></td>`;
+					if (row.rprd > 100) {
+						// High rating deviation. Provisional rating.
+						buffer += `<td>&ndash;</td>`;
+						buffer += `<td><span style="color:#888"><em>${Math.round(row.rpr)} <small> &#177; ${Math.round(row.rprd)} </small></em> <small>(provisional)</small></span></td>`;
+					} else {
+						buffer += `<td>${Math.trunc(row.gxe)}<small>.${row.gxe.toFixed(1).slice(-1)}%</small></td>`;
+						buffer += `<td><em>${Math.round(row.rpr)} <small> &#177; ${Math.round(row.rprd)}</small></em></td>`;
+					}
+					const N = parseInt(row.w, 10) + parseInt(row.l, 10) + parseInt(row.t, 10);
+					const COIL_B = undefined;
+
+					// Uncomment this after LadderRoom logic is implemented
+					// COIL_B = LadderRoom?.COIL_B[formatId];
+
+					if (COIL_B) {
+						buffer += `<td>${Math.round(40.0 * parseFloat(row.gxe) * 2.0 ** (-COIL_B / N))}</td>`;
+					} else {
+						buffer += '<td>&mdash;</td>';
+					}
+					buffer += `<td> ${row.w} </td><td> ${row.l} </td><td> ${N} </td>`;
+					if (suspect) {
+						if (typeof row.suspect === 'undefined') {
+							buffer += '<td>&mdash;</td>';
+						} else {
+							buffer += '<td>';
+							buffer += (row.suspect ? "Yes" : "No");
+							buffer += '</td>';
+						}
+					}
+					buffer += '</tr>';
+				}
+				if (hiddenFormats.length) {
+					if (hiddenFormats.length === data.length) {
+						if (formatTargeting) {
+							const formatsText = Object.keys(gens).concat(Object.keys(formats)).join(', ');
+							buffer += `<tr class="no-matches"><td colspan="8">` +
+								BattleLog.html`<em>This user has not played any ladder games that match ${formatsText}.</em></td></tr>`;
+						} else {
+							buffer += `<tr class="no-matches"><td colspan="8"><em>This user has no notable ladder activity.</em></td></tr>`;
+						}
+					}
+					buffer += `<tr><td colspan="8"><button class="button" name="showOtherFormats">` +
+						`Show ${hiddenFormats.length} hidden format${hiddenFormats.length === 1 ? '' : 's'}</button></td></tr>`;
+				}
+				let userid = toID(targets[0]);
+				let registered = PS.user.registered;
+				if (registered && PS.user.userid === userid) {
+					buffer += `<tr><td colspan="8" style="text-align:right"><a href="//${Config.routes.users}/${userid}">Reset W/L</a></tr></td>`;
+				}
+				buffer += '</table></div>';
+				this.add(`|html|${buffer}`);
+			});
+		},
+
+		// battle-specific commands
+		// ------------------------
+		'play'() {
+			if (!this.battle) return this.add('|error|You are not in a battle');
+			if (this.battle.atQueueEnd) {
+				if (this.battle.ended) this.battle.isReplay = true;
+				this.battle.reset();
+			}
+			this.battle.play();
+			this.update(null);
+		},
+		'pause'() {
+			if (!this.battle) return this.add('|error|You are not in a battle');
+			this.battle.pause();
+			this.update(null);
+		},
+		'ffto,fastfowardto'(target, cmd, parentElem) {
+			if (!this.battle) return this.add('|error|You are not in a battle');
+			if (!target) {
+				PS.prompt("Turn number?", {
+					defaultValue: `${this.battle.turn}`,
+					type: 'numeric',
+					okButton: 'Go',
+					parentElem,
+				}).then(turnNum => {
+					if (turnNum?.trim()) this.send(`/ffto ${turnNum}`, parentElem);
+				});
+				return;
+			}
+
+			let turnNum = Number(target);
+			if (target.startsWith('+') || turnNum < 0) {
+				turnNum += this.battle.seeking ?? this.battle.turn;
+				if (turnNum < 0) turnNum = 0;
+			} else if (target === 'end') {
+				turnNum = Infinity;
+			}
+			if (isNaN(turnNum)) {
+				this.errorReply(`Invalid turn number: ${target}`);
+				return;
+			}
+			if (this.battle.hardcoreMode) {
+				this.errorReply(`Turn navigation is disabled in hardcore mode.`);
+				return;
+			}
+			this.battle.seekTurn(turnNum);
+			this.update(null);
+		},
+		'switchsides'() {
+			if (!this.battle) return this.add('|error|You are not in a battle');
+			this.battle.switchViewpoint();
+		},
+		'cancel,undo'() {
+			if (!this.battle) return this.send('/cancelchallenge');
+
+			const room = this as any as BattleRoom;
+			if (!room.choices || !room.request) {
+				this.receiveLine([`error`, `/choose - You are not a player in this battle`]);
+				return;
+			}
+			if (room.choices.isDone() || room.choices.isEmpty()) {
+				// we _could_ check choices.noCancel, but the server will check anyway
+				this.sendDirect('/undo');
+			}
+			room.choices = new BattleChoiceBuilder(room.request);
+			this.update(null);
+		},
+		'move,switch,team,pass,shift,choose'(target, cmd) {
+			if (!this.battle) return this.add('|error|You are not in a battle');
+			const room = this as any as BattleRoom;
+			if (!room.choices) {
+				this.receiveLine([`error`, `/choose - You are not a player in this battle`]);
+				return;
+			}
+			if (cmd !== 'choose') target = `${cmd} ${target}`;
+			if (target === 'choose auto' || target === 'choose default') {
+				this.sendDirect('/choose default');
+				return;
+			}
+			const possibleError = room.choices.addChoice(target);
+			if (possibleError) {
+				this.errorReply(possibleError);
+				return;
+			}
+			if (room.choices.isDone()) this.sendDirect(`/choose ${room.choices.toString()}`);
+			this.update(null);
+		},
+	});
 	openChallenge() {
 		if (!this.pmTarget) {
 			this.receiveLine([`error`, `Can only be used in a PM.`]);
@@ -147,8 +633,69 @@ class ChatRoom extends PSRoom {
 		this.addUser(username);
 		this.update(null);
 	}
-	destroy() {
-		if (this.pmTarget) this.connected = false;
+
+	handleJoinLeave(action: 'join' | 'leave', name: string, silent: boolean) {
+		const showjoins = PS.prefs.showjoins?.[PS.server.id];
+		if (!(showjoins?.[this.id] ?? showjoins?.['global'] ?? !silent)) return;
+
+		this.joinLeave ||= {
+			join: [],
+			leave: [],
+			messageId: `joinleave-${Date.now()}`,
+		};
+		const user = BattleTextParser.parseNameParts(name);
+		const formattedName = user.group + user.name;
+		if (action === 'join' && this.joinLeave['leave'].includes(formattedName)) {
+			this.joinLeave['leave'].splice(this.joinLeave['leave'].indexOf(formattedName), 1);
+		} else if (action === 'leave' && this.joinLeave['join'].includes(formattedName)) {
+			this.joinLeave['join'].splice(this.joinLeave['join'].indexOf(formattedName), 1);
+		} else {
+			this.joinLeave[action].push(formattedName);
+		}
+
+		let message = this.formatJoinLeave(this.joinLeave['join'], 'joined');
+		if (this.joinLeave['join'].length && this.joinLeave['leave'].length) message += '; ';
+		message += this.formatJoinLeave(this.joinLeave['leave'], 'left');
+
+		this.add(`|uhtml|${this.joinLeave.messageId}|<small class="gray">${message}</small>`);
+	}
+
+	formatJoinLeave(preList: string[], action: 'joined' | 'left') {
+		if (!preList.length) return '';
+
+		let message = '';
+		let list: string[] = [];
+		let named: { [key: string]: boolean } = {};
+		for (let item of preList) {
+			if (!named[item]) list.push(item);
+			named[item] = true;
+		}
+		for (let j = 0; j < list.length; j++) {
+			if (j >= 5) {
+				message += `, and ${(list.length - 5)} others`;
+				break;
+			}
+			if (j > 0) {
+				if (j === 1 && list.length === 2) {
+					message += ' and ';
+				} else if (j === list.length - 1) {
+					message += ', and ';
+				} else {
+					message += ', ';
+				}
+			}
+			message += BattleLog.escapeHTML(list[j]);
+		}
+		return `${message} ${action}`;
+	}
+
+	override destroy() {
+		if (this.battle) {
+			// since battle is defined here, we might as well deallocate it here
+			this.battle.destroy();
+		} else {
+			this.log?.destroy();
+		}
 		super.destroy();
 	}
 }
@@ -384,9 +931,11 @@ export class ChatTextEntry extends preact.Component<{
 			});
 
 			const currentLine = prefix.substring(prefix.lastIndexOf('\n') + 1);
-			const isCommandSearch = (currentLine.startsWith('/') && !currentLine.startsWith('//')) || currentLine.startsWith('!');
+			const isCommandWord = (word: string) => (word.startsWith('/') && !word.startsWith('//')) || word.startsWith('!');
+			const currentWord = currentLine.substring(currentLine.lastIndexOf(' ') + 1);
+			const isCommandSearch = isCommandWord(currentWord);
 			if (isCommandSearch) {
-				PS.mainmenu.makeQuery('cmdsearch', currentLine, true).then((data: string[]) => {
+				PS.mainmenu.makeQuery('cmdsearch', currentWord, true).then((data: string[]) => {
 					const cmds = data.sort((a, b) => a.length < b.length ? 1 : -1);
 					const nextCmd = cmds[cmds.length - 1];
 					const newValue = nextCmd + value.substring(end);
@@ -589,10 +1138,17 @@ class ChatPanel extends PSRoomPanel<ChatRoom> {
 			</TeamForm>
 		</div> : null;
 
-		return <PSPanelWrapper room={room}>
-			<div class="tournament-wrapper hasuserlist"></div>
-			<ChatLog class="chat-log" room={this.props.room} onClick={this.focusIfNoSelection} left={tinyLayout ? 0 : 146}>
-				{challengeTo || challengeFrom && [challengeTo, challengeFrom]}
+		return <PSPanelWrapper room={room} focusClick noScroll fullSize>
+			<ChatLog
+				class={`chat-log${tinyLayout ? '' : ' hasuserlist'}`} room={this.props.room}
+				left={tinyLayout ? 0 : 146} top={room.tour?.info.isActive ? 30 : 0}
+			>
+				{challengeTo}{challengeFrom}{PS.isOffline && <p class="buttonbar">
+					<button class="button" data-cmd="/reconnect">
+						<i class="fa fa-plug" aria-hidden></i> <strong>Reconnect</strong>
+					</button> {}
+					{PS.connection?.reconnectTimer && <small>(Autoreconnect in {Math.round(PS.connection.reconnectDelay / 1000)}s)</small>}
+				</p>}
 			</ChatLog>
 			<ChatTextEntry room={this.props.room} onMessage={this.send} onKey={this.onKey} left={tinyLayout ? 0 : 146} />
 			<ChatUserList room={this.props.room} minimized={tinyLayout} />

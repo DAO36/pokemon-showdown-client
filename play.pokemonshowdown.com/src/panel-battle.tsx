@@ -54,8 +54,10 @@ class BattlesPanel extends PSRoomPanel<BattlesRoom> {
 	}
 	render() {
 		const room = this.props.room;
-		return <PSPanelWrapper room={room} scrollable><div class="pad">
-			<button class="button" style="float:right;font-size:10pt;margin-top:3px" name="close"><i class="fa fa-times"></i> Close</button>
+		return <PSPanelWrapper room={room}><div class="pad">
+			<button class="button" style="float:right;font-size:10pt;margin-top:3px" name="closeRoom">
+				<i class="fa fa-times" aria-hidden></i> Close
+			</button>
 			<div class="roomlist">
 				<p>
 					<button class="button" name="refresh" onClick={this.refresh}><i class="fa fa-refresh"></i> Refresh</button> <span style={Dex.getPokemonIcon('meloetta-pirouette') + ';display:inline-block;vertical-align:middle'} class="picon" title="Meloetta is PS's mascot! The Pirouette forme is Fighting-type, and represents our battles."></span>
@@ -95,31 +97,29 @@ class BattleRoom extends ChatRoom {
 	side: BattleRequestSideInfo | null = null;
 	request: BattleRequest | null = null;
 	choices: BattleChoiceBuilder | null = null;
+	autoTimerActivated: boolean | null = null;
+	/** should be false if we joined right after accepting or challenging a battle,
+	  * and true if we refreshed and rejoined a battle.
+		* null = initializing, we don't know yet */
+	rejoining: boolean | null = null;
 
-	/**
-	 * @return true to prevent line from being sent to server
-	 */
-	handleMessage(line: string) {
-		if (!line.startsWith('/') || line.startsWith('//')) return false;
-		const spaceIndex = line.indexOf(' ');
-		const cmd = spaceIndex >= 0 ? line.slice(1, spaceIndex) : line.slice(1);
-		const target = spaceIndex >= 0 ? line.slice(spaceIndex + 1) : '';
-		switch (cmd) {
-		case 'play': {
-			this.battle.play();
-			this.update(null);
-			return true;
-		} case 'pause': {
-			this.battle.pause();
-			this.update(null);
-			return true;
-		} case 'ffto': case 'fastfowardto': {
-			let turnNum = Number(target);
-			if (target.charAt(0) === '+' || turnNum < 0) {
-				turnNum += this.battle.turn;
-				if (turnNum < 0) turnNum = 0;
-			} else if (target === 'end') {
-				turnNum = -1;
+	loadReplay() {
+		const replayid = this.id.slice(7);
+		Net(`https://replay.pokemonshowdown.com/${replayid}.json`).get().catch(() => '').then(data => {
+			try {
+				const replay = JSON.parse(data);
+				this.title = `[${replay.format}] ${replay.players.join(' vs. ')}`;
+				this.battle.stepQueue = replay.log.split('\n');
+				this.battle.atQueueEnd = false;
+				this.battle.pause();
+				this.battle.seekTurn(0);
+				this.connected = 'client-only';
+				this.update(null);
+			} catch {
+				this.receiveLine(['bigerror', `Battle "${replayid}" not found`]);
+				this.receiveLine(['html',
+					`<div class="broadcast-red pad"><p class="buttonbar"><button class="button" data-cmd="/close"><strong>Close</strong></button></p></div>`,
+				]);
 			}
 			if (isNaN(turnNum)) {
 				this.receiveLine([`error`, `/ffto - Invalid turn number: ${target}`]);
@@ -274,13 +274,37 @@ class BattlePanel extends PSRoomPanel<BattleRoom> {
 		this.props.room.battle = battle;
 		(battle.scene as BattleScene).tooltips.listen($elem.find('.battle-controls'));
 		super.componentDidMount();
+		if (!PS.prefs.spectatefromstart) battle.seekTurn(Infinity);
+		if (PS.prefs.autohardcore) {
+			battle.setHardcoreMode(true);
+		}
 		battle.subscribe(() => this.forceUpdate());
 	}
-	receiveLine(args: Args) {
+	battleHeight = 360;
+	updateLayout() {
+		if (!this.base) return;
+		const room = this.props.room;
+		const width = this.base.offsetWidth;
+		if (width && width < 640) {
+			const scale = (width / 640);
+			room.battle?.scene.$frame!.css('transform', `scale(${scale})`);
+			this.battleHeight = Math.round(360 * scale);
+		} else {
+			room.battle?.scene.$frame!.css('transform', 'none');
+			this.battleHeight = 360;
+		}
+	}
+	fastForwardIfRejoining() {
+		const room = this.props.room;
+		if (!room.rejoining || !room.side) return;
+		room.rejoining = false;
+		room.battle.seekTurn(Infinity);
+	}
+	override receiveLine(args: Args) {
 		const room = this.props.room;
 		switch (args[0]) {
 		case 'initdone':
-			room.battle.seekTurn(Infinity);
+			if (!PS.prefs.spectatefromstart) room.battle.seekTurn(Infinity);
 			return;
 		case 'request':
 			this.receiveRequest(args[1] ? JSON.parse(args[1]) : null);
@@ -311,9 +335,11 @@ class BattlePanel extends PSRoomPanel<BattleRoom> {
 		BattleChoiceBuilder.fixRequest(request, room.battle);
 
 		if (request.side) {
+			const wasPlayer = !!room.side;
 			room.battle.myPokemon = request.side.pokemon;
 			room.battle.setViewpoint(request.side.id);
 			room.side = request.side;
+			if (!wasPlayer) this.fastForwardIfRejoining();
 		}
 
 		room.request = request;
@@ -676,15 +702,109 @@ class BattlePanel extends PSRoomPanel<BattleRoom> {
 	render() {
 		const room = this.props.room;
 
-		return <PSPanelWrapper room={room}>
-			<BattleDiv></BattleDiv>
-			<ChatLog class="battle-log hasuserlist" room={this.props.room} onClick={this.focusIfNoSelection} left={640} noSubscription>
+				<button class="button" data-cmd="/play" style="min-width:4.5em">
+					<i class="fa fa-undo" aria-hidden></i><br />Replay
+				</button> {}
+				{isNotTiny && !room.battle.hardcoreMode && <>
+					<button class="button button-first" data-cmd="/ffto 0" style="margin-right:2px">
+						<i class="fa fa-undo" aria-hidden></i><br />First turn
+					</button>
+					<button class="button button-first" data-cmd="/ffto -1">
+						<i class="fa fa-step-backward" aria-hidden></i><br />Prev turn
+					</button>
+				</>}
+			</p>
+			{room.side ? (
+				<p>
+					<button class="button" data-cmd="/close">
+						<strong>Main menu</strong><br /><small>(closes this battle)</small>
+					</button> {}
+					<button class="button" data-cmd={`/closeand /challenge ${room.battle.farSide.id},${room.battle.tier}`}>
+						<strong>Rematch</strong><br /><small>(closes this battle)</small>
+					</button>
+				</p>
+			) : (
+				<p>
+					<button class="button" data-cmd="/switchsides"><i class="fa fa-random" aria-hidden></i> Switch viewpoint</button> {}
+					{!room.battle.hardcoreMode && <button class="button" data-cmd="/ffto">
+						<i class="fa fa-random" aria-hidden></i> Go to turn
+					</button>}
+				</p>
+			)}
+		</div>;
+	}
+
+	handleDownloadReplay = (e: MouseEvent) => {
+		let room = this.props.room;
+		const target = e.currentTarget as HTMLAnchorElement;
+		// download replay
+		let filename = (room.battle.tier || 'Battle').replace(/[^A-Za-z0-9]/g, '');
+		let date = new Date();
+		filename += `-${date.getFullYear()}`;
+		filename += `-${date.getMonth() >= 9 ? '' : '0'}${date.getMonth() + 1}`;
+		filename += `-${date.getDate() >= 10 ? '' : '0'}${date.getDate()}`;
+		filename += '-' + toID(room.battle.p1.name);
+		filename += '-' + toID(room.battle.p2.name);
+		target.href = window.BattleLog.createReplayFileHref(room);
+		target.download = filename + '.html';
+		e.stopPropagation();
+	};
+
+	override render() {
+		const room = this.props.room;
+		this.updateLayout();
+		const id = `room-${room.id}`;
+		const hardcoreStyle = room.battle?.hardcoreMode ? <style
+			dangerouslySetInnerHTML={{ __html: `#${id} .battle .turn, #${id} .battle-history { display: none !important; }` }}
+		></style> : null;
+
+		if (room.width < 700) {
+			return <PSPanelWrapper room={room} focusClick noScroll="hidden">
+				{hardcoreStyle}
+				<BattleDiv room={room} />
+				<ChatLog
+					class="battle-log hasuserlist" room={room} top={this.battleHeight} noSubscription
+				>
+					<div class="battle-controls" role="complementary" aria-label="Battle Controls">
+						{this.renderControls()}
+					</div>
+				</ChatLog>
+				<ChatTextEntry room={room} onMessage={this.send} onKey={this.onKey} left={0} />
+				<ChatUserList room={room} top={this.battleHeight} minimized />
+				<button
+					data-href="battleoptions" class="button"
+					style={{ position: 'absolute', right: '10px', top: this.battleHeight + 2 }}
+				>
+					Battle options
+				</button>
+				{(room.battle && !room.battle.ended && room.request && room.battle.mySide.id === PS.user.userid) &&
+					<TimerButton room={room} />}
+				<div class="battle-controls-container"></div>
+			</PSPanelWrapper>;
+		}
+
+		return <PSPanelWrapper room={room} focusClick noScroll="hidden">
+			{hardcoreStyle}
+			<BattleDiv room={room} />
+			<ChatLog
+				class="battle-log hasuserlist" room={room} left={640} noSubscription
+			>
 				{}
 			</ChatLog>
-			<ChatTextEntry room={this.props.room} onMessage={this.send} onKey={this.onKey} left={640} />
-			<ChatUserList room={this.props.room} left={640} minimized />
-			<div class="battle-controls" role="complementary" aria-label="Battle Controls" style="top: 370px;">
-				{this.renderControls()}
+			<ChatTextEntry room={room} onMessage={this.send} onKey={this.onKey} left={640} />
+			<ChatUserList room={room} left={640} minimized />
+			<button
+				data-href="battleoptions" class="button"
+				style={{ position: 'absolute', right: '10px', top: '2px' }}
+			>
+				Battle options
+			</button>
+			<div class="battle-controls-container">
+				<div class="battle-controls" role="complementary" aria-label="Battle Controls" style="top: 370px;">
+					{(room.battle && !room.battle.ended && room.request && room.battle.mySide.id === PS.user.userid) &&
+						<TimerButton room={room} />}
+					{this.renderControls()}
+				</div>
 			</div>
 		</PSPanelWrapper>;
 	}
