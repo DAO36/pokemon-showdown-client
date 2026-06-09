@@ -1545,7 +1545,7 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 		case 'petaldance':
 			return abilityid === 'seiso';
 		case 'idolsong':
-			return abilityid === 'seiso';	
+			return abilityid === 'seiso';
 		case 'outrage':
 			return abilityid === 'timetravel';
 		case 'timetantrum':
@@ -1553,7 +1553,7 @@ class BattleMoveSearch extends BattleTypedSearch<'move'> {
 		case 'thrash':
 		    return abilityid === 'timetravel';
 		case 'ragingfury':	
-			return abilityid === 'timetravel';		
+			return abilityid === 'timetravel';
 		case 'phantomforce':
 			return (!moves.includes('poltergeist') && !moves.includes('shadowclaw')) || this.formatType === 'doubles';
 		case 'poisonfang':
