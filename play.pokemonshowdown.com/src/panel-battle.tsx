@@ -129,7 +129,7 @@ class BattleRoom extends ChatRoom {
 			this.update(null);
 			return true;
 		} case 'switchsides': {
-			this.battle.switchViewpoint(),
+			this.battle.switchViewpoint();
 			return true;
 		} case 'cancel': case 'undo': {
 			if (!this.choices || !this.request) {
