@@ -5,23 +5,8 @@
  * @license AGPLv3
  */
 
-import preact from "../js/lib/preact";
-import { PSLoginServer } from "./client-connection";
-import { PSBackground } from "./client-core";
-import { Config, PS, PSRoom, type RoomID, type RoomOptions, type Team } from "./client-main";
-import { PSIcon, PSPanelWrapper, PSRoomPanel } from "./panels";
-import type { BattlesRoom } from "./panel-battle";
-import type { ChatRoom } from "./panel-chat";
-import type { LadderFormatRoom } from "./panel-ladder";
-import type { RoomsRoom } from "./panel-rooms";
-import { TeamBox, type SelectType } from "./panel-teamdropdown";
-import { Dex, toID, type ID } from "./battle-dex";
-import type { Args } from "./battle-text-parser";
-import { BattleLog } from "./battle-log"; // optional
-
-export type RoomInfo = {
-	title: string, desc?: string, userCount?: number, section?: string, privacy?: 'hidden',
-	spotlight?: string, subRooms?: string[],
+type RoomInfo = {
+	title: string, desc?: string, userCount?: number, section?: string, spotlight?: string, subRooms?: string[],
 };
 
 class MainMenuRoom extends PSRoom {
@@ -55,14 +40,8 @@ class MainMenuRoom extends PSRoom {
 			});
 			return;
 		} case 'updateuser': {
-			const [, fullName, namedCode, avatar, settingsJSON] = args;
-			const named = namedCode === '1';
-			if (named) PS.user.initializing = false;
-			if (settingsJSON) {
-				PS.prefs.set('serversettings', { ...PS.prefs.serversettings, ...JSON.parse(settingsJSON) });
-			}
-			PS.user.setName(fullName, named, avatar);
-			PS.teams.loadRemoteTeams();
+			const [, fullName, namedCode, avatar] = args;
+			PS.user.setName(fullName, namedCode === '1', avatar);
 			return;
 		} case 'updatechallenges': {
 			const [, challengesBuf] = args;
@@ -80,21 +59,8 @@ class MainMenuRoom extends PSRoom {
 			this.parseFormats(args);
 			return;
 		} case 'popup': {
-			let [, message] = args;
-			for (const roomid in PS.rooms) {
-				const room = PS.rooms[roomid] as ChatRoom | MainMenuRoom;
-				if (room.teamSent) {
-					room.teamSent = null;
-					room.update(null);
-				}
-				if (room.type === 'team') (room as any).cancelUpload();
-			}
-			let width: number | undefined;
-			if (message.startsWith('|wide|')) {
-				message = message.slice(6);
-				width = 960;
-			}
-			PS.alert(message.replace(/\|\|/g, '\n'), { width });
+			const [, message] = args;
+			alert(message.replace(/\|\|/g, '\n'));
 			return;
 		}}
 		const lobby = PS.rooms['lobby'];
@@ -153,10 +119,6 @@ class MainMenuRoom extends PSRoom {
 				let searchShow = true;
 				let challengeShow = true;
 				let tournamentShow = true;
-				let partner = false;
-				let bestOfDefault = false;
-				let teraPreviewDefault = false;
-				let itemClauseDefault = false;
 				let team: 'preset' | null = null;
 				let teambuilderLevel: number | null = null;
 				let lastCommaIndex = name.lastIndexOf(',');
@@ -168,10 +130,6 @@ class MainMenuRoom extends PSRoom {
 					if (!(code & 4)) challengeShow = false;
 					if (!(code & 8)) tournamentShow = false;
 					if (code & 16) teambuilderLevel = 50;
-					if (code & 32) partner = true;
-					if (code & 64) bestOfDefault = true;
-					if (code & 128) teraPreviewDefault = true;
-					if (code & 256) itemClauseDefault = true;
 				} else {
 					// Backwards compatibility: late 0.9.0 -> 0.10.0
 					if (name.substr(name.length - 2) === ',#') { // preset teams
@@ -233,9 +191,6 @@ class MainMenuRoom extends PSRoom {
 					searchShow,
 					challengeShow,
 					tournamentShow,
-					bestOfDefault,
-					teraPreviewDefault,
-					itemClauseDefault,
 					rated: searchShow && id.substr(4, 7) !== 'unrated',
 					teambuilderLevel,
 					teambuilderFormat,
@@ -303,7 +258,6 @@ class MainMenuRoom extends PSRoom {
 			if (!userdetails) {
 				this.userdetailsCache[userid] = response;
 			} else {
-				response.status ||= '';
 				Object.assign(userdetails, response);
 			}
 			const userRoom = PS.rooms[`user-${userid}`] as UserRoom;
@@ -338,39 +292,9 @@ class MainMenuRoom extends PSRoom {
 			}
 			break;
 		case 'laddertop':
-			for (const [roomid, ladderRoom] of Object.entries(PS.rooms)) {
-				if (roomid.startsWith('ladder-')) {
-					(ladderRoom as LadderFormatRoom).update(response);
-				}
-			}
-			break;
-		case 'teamupload':
-			if (PS.teams.uploading) {
-				const team = PS.teams.uploading;
-				team.teamid = response.teamid;
-				team.uploaded = {
-					teamid: response.teamid,
-					notLoaded: false,
-					private: response.private,
-				};
-				PS.rooms[`team-${team.key}`]?.update(null);
-				PS.rooms.teambuilder?.update(null);
-				PS.teams.uploading = null;
-			}
-			break;
-		case 'teamupdate':
-			for (const team of PS.teams.list) {
-				if (team.teamid === response.teamid) {
-					team.uploaded = {
-						teamid: response.teamid,
-						notLoaded: false,
-						private: response.private,
-					};
-					PS.rooms[`team-${team.key}`]?.update(null);
-					PS.rooms.teambuilder?.update(null);
-					PS.teams.uploading = null;
-					break;
-				}
+			const ladderRoomEntries = Object.entries(PS.rooms).filter(entry => entry[0].startsWith('ladder'));
+			for (const [, ladderRoom] of ladderRoomEntries) {
+				(ladderRoom as LadderRoom).update(response);
 			}
 			break;
 		}
@@ -378,58 +302,16 @@ class MainMenuRoom extends PSRoom {
 }
 
 class NewsPanel extends PSRoomPanel {
-	static readonly id = 'news';
-	static readonly routes = ['news'];
-	static readonly title = 'News';
-	static readonly location = 'mini-window';
-	change = (ev: Event) => {
-		const target = ev.currentTarget as HTMLInputElement;
-		if (target.value === '1') {
-			document.cookie = "preactalpha=1; expires=Thu, 1 Jul 2026 12:00:00 UTC; path=/";
-		} else {
-			document.cookie = "preactalpha=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-		}
-		if (target.value === 'leave') {
-			document.location.href = `/`;
-		}
-	};
-	override render() {
-		const cookieSet = document.cookie.includes('preactalpha=1');
-		return <PSPanelWrapper room={this.props.room} fullSize>
-			<div class="construction">
-				This is the client rewrite beta test.
-				<form>
-					<label class="checkbox">
-						<input type="radio" name="preactalpha" value="1" onChange={this.change} checked={cookieSet} /> {}
-						Use Rewrite always
-					</label>
-					<label class="checkbox">
-						<input type="radio" name="preactalpha" value="0" onChange={this.change} checked={!cookieSet} /> {}
-						Use Rewrite with URL
-					</label>
-					<label class="checkbox">
-						<input type="radio" name="preactalpha" value="leave" onChange={this.change} /> {}
-						Back to the old client
-					</label>
-				</form>
-				Provide feedback in <a href="development" style="color:black">the Dev chatroom</a>.
-			</div>
-			<div class="readable-bg" dangerouslySetInnerHTML={{ __html: PS.newsHTML }}></div>
+	render() {
+		return <PSPanelWrapper room={this.props.room} scrollable>
+			<div class="mini-window-body" dangerouslySetInnerHTML={{__html: PS.newsHTML}}></div>
 		</PSPanelWrapper>;
 	}
 }
 
 class MainMenuPanel extends PSRoomPanel<MainMenuRoom> {
-	static readonly id = 'mainmenu';
-	static readonly routes = [''];
-	static readonly Model = MainMenuRoom;
-	static readonly icon = <i class="fa fa-home" aria-hidden></i>;
-	override componentDidMount() {
-		super.componentDidMount();
-		this.subscribeTo(PSBackground);
-	}
-	override focus() {
-		this.base?.querySelector<HTMLButtonElement>('.formatselect')?.focus();
+	focus() {
+		(this.base!.querySelector('button.big') as HTMLButtonElement).focus();
 	}
 	submit = (e: Event) => {
 		alert('todo: implement');
@@ -491,32 +373,13 @@ class MainMenuPanel extends PSRoomPanel<MainMenuRoom> {
 			</button>
 		</TeamForm>;
 	}
-	renderBackgroundCredit() {
-		const attrib = PSBackground.attrib;
-		if (!attrib) return null;
-		return (
-			<small>
-				<a href={attrib.url} target="_blank" class="subtle">"{attrib.title}" <small>background by {attrib.artist}</small></a>
-			</small>
-		);
-	}
-	override render() {
+	render() {
 		const onlineButton = ' button' + (PS.isOffline ? ' disabled' : '');
-		const tinyLayout = this.props.room.width < 620 ? ' tiny-layout' : '';
-		return <PSPanelWrapper room={this.props.room} onDragEnter={this.handleDragEnter}>
-			<div class={`mainmenu-mini-windows${tinyLayout}`}>
-				{this.renderMiniRooms()}
-			</div>
-			<div class={`mainmenu${tinyLayout}`}>
-				<div class="mainmenu-left">
-					{this.renderGames()}
-
-					{this.renderSearchButton()}
-
-					<div class="menugroup">
-						<p><a class="mainmenu2 mainmenu button" href="teambuilder">Teambuilder</a></p>
-						<p><a class={"mainmenu3 mainmenu" + onlineButton} href="ladder">Ladder</a></p>
-						<p><a class={"mainmenu4 mainmenu" + onlineButton} href="view-tournaments-all">Tournaments</a></p>
+		return <PSPanelWrapper room={this.props.room} scrollable>
+			<div class="mainmenuwrapper">
+				<div class="leftmenu">
+					<div class="activitymenu">
+						{this.renderMiniRooms()}
 					</div>
 					<div class="mainmenu">
 						{this.renderSearchButton()}
@@ -541,15 +404,14 @@ class MainMenuPanel extends PSRoomPanel<MainMenuRoom> {
 						}
 					</div>
 				</div>
-				<div class="mainmenu-footer">
-					<div class="bgcredit">{this.renderBackgroundCredit()}</div>
+				<div class="mainmenufooter">
+					<div class="bgcredit"></div>
 					<small>
 						<a href={`//${Config.routes.dex}/`} target="_blank">Pok&eacute;dex</a> | {}
 						<a href={`//${Config.routes.replays}/`} target="_blank">Replays</a> | {}
-						<a href="//smogon.com/forums/" target="_blank">Forum</a> | {}
 						<a href={`//${Config.routes.root}/rules`} target="_blank">Rules</a> | {}
-						<a href={`//${Config.routes.root}/credits`} target="_blank">Credits</a> | {}
-						<a href={`//${Config.routes.root}/privacy`} target="_blank">Privacy</a>
+						<a href={`//${Config.routes.dex}/credits`} target="_blank">Credits</a> | {}
+						<a href="//smogon.com/forums/" target="_blank">Forum</a>
 					</small>
 				</div>
 			</div>
@@ -621,7 +483,6 @@ class TeamDropdown extends preact.Component<{format: string}> {
 		return <button
 			name="team" value={this.teamKey}
 			class="select teamselect" data-href="/teamdropdown" data-format={teamFormat} onChange={this.change}
-			disabled={!!PS.mainmenu.searchingFormat()}
 		>
 			{PS.roomTypes['teamdropdown'] && <TeamBox team={team} noLink />}
 		</button>;
@@ -632,57 +493,16 @@ class TeamForm extends preact.Component<{
 	children: preact.ComponentChildren, class?: string, format?: string,
 	onSubmit: null | ((e: Event, format: string, team?: Team) => void),
 }> {
-	format = '';
-	teraPreview = false;
-	bestOf = false;
-	itemClause = false;
-	changeFormat = (ev: Event) => {
-		this.format = (ev.target as HTMLButtonElement).value;
+	state = {format: '[Gen 7] Random Battle'};
+	changeFormat = (e: Event) => {
+		this.setState({format: (e.target as HTMLButtonElement).value});
 	};
 	submit = (e: Event) => {
 		e.preventDefault();
 		const format = (this.base!.querySelector('button[name=format]') as HTMLButtonElement).value;
 		const teamKey = (this.base!.querySelector('button[name=team]') as HTMLButtonElement).value;
 		const team = teamKey ? PS.teams.byKey[teamKey] : undefined;
-		if (!window.BattleFormats[teambuilderFormat]?.team && !team) {
-			PS.alert('You need to go into the Teambuilder and build a team for this format.', {
-				parentElem: teamElement!,
-			});
-			return;
-		}
-		if (this.teraPreview) {
-			const hasCustomRules = format.includes('@@@');
-			format = `${format}${hasCustomRules ? ', Tera Type Preview' : '@@@ Tera Type Preview'}`;
-		}
-		if (this.bestOf) {
-			const hasCustomRules = format.includes('@@@');
-			const value = this.base?.querySelector<HTMLInputElement>('input[name=bestofvalue]')?.value;
-			format = `${format}${hasCustomRules ? `, Best of = ${value!}` : `@@@ Best of = ${value!}`}`;
-		}
-		if (this.itemClause) {
-			const hasCustomRules = format.includes('@@@');
-			format = `${format}${hasCustomRules ? ', Item Clause = 1' : '@@@ Item Clause = 1'}`;
-		}
-		PS.teams.loadTeam(team).then(() => {
-			(validate === 'validate' ? this.props.onValidate : this.props.onSubmit)?.(ev, format, team);
-		});
-	};
-	toggleCustomRule = (ev: Event) => {
-		const checked = (ev.target as HTMLInputElement)?.checked;
-		const rule = (ev.target as HTMLInputElement)?.name;
-		if (rule === 'terapreview') this.teraPreview = checked;
-		if (rule === 'bestof') this.bestOf = checked;
-		if (rule === 'itemclause=1') this.itemClause = checked;
-	};
-	handleClick = (ev: Event) => {
-		let target = ev.target as HTMLButtonElement | null;
-		while (target && target !== this.base) {
-			if (target.tagName === 'BUTTON' && target.name === 'validate') {
-				this.submit(ev, 'validate');
-				return;
-			}
-			target = target.parentNode as HTMLButtonElement | null;
-		}
+		if (this.props.onSubmit) this.props.onSubmit(e, format, team);
 	};
 	render() {
 		return <form class={this.props.class} onSubmit={this.submit}>
@@ -698,24 +518,6 @@ class TeamForm extends preact.Component<{
 					<TeamDropdown format={this.state.format} />
 				</label>
 			</p>
-			{this.props.selectType === 'challenge' &&
-				window.BattleFormats[formatId]?.teraPreviewDefault && <p>
-				<label class="checkbox">
-					<input type="checkbox" name="terapreview" onChange={this.toggleCustomRule} />
-					<abbr title="Start a battle with Tera Type Preview">Tera Type Preview</abbr></label></p>}
-			{this.props.selectType === 'challenge' &&
-				window.BattleFormats[formatId]?.bestOfDefault && <p>
-				<label class="checkbox"><input type="checkbox" name="bestof" onChange={this.toggleCustomRule} />
-					<abbr title="Start a team-locked best-of-n series">
-						Best-of-<input
-							name="bestofvalue" type="number" min="3" max="9" step="2" value="3" style="width: 28px; vertical-align: initial;"
-						/>
-					</abbr></label></p>}
-			{this.props.selectType === 'challenge' &&
-				window.BattleFormats[formatId]?.itemClauseDefault && <p>
-				<label class="checkbox">
-					<input type="checkbox" name="itemclause" onChange={this.toggleCustomRule} />
-					<abbr title="Start a battle with Item Clause">Item Clause</abbr></label></p>}
 			<p>{this.props.children}</p>
 		</form>;
 	}

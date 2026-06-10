@@ -206,27 +206,6 @@ const Dex = new class implements ModdedDex {
 		if (!gen) return this;
 		return this.mod(`gen${gen}` as ID);
 	}
-	formatGen(format: string) {
-		const formatid = toID(format);
-		if (!formatid) return Dex.gen;
-		if (!formatid.startsWith('gen')) return 6;
-		return parseInt(formatid.charAt(3)) || Dex.gen;
-	}
-	forFormat(format: string) {
-		let dex = Dex.forGen(Dex.formatGen(format));
-
-		const formatid = toID(format).slice(4);
-		if (dex.gen === 7 && formatid.includes('letsgo')) {
-			dex = Dex.mod('gen7letsgo' as ID);
-		}
-		if (dex.gen === 8 && formatid.includes('bdsp')) {
-			dex = Dex.mod('gen8bdsp' as ID);
-		}
-		if (dex.gen === 9 && formatid.includes('champions')) {
-			dex = Dex.mod('champions' as ID);
-		}
-		return dex;
-	}
 
 	resolveAvatar(avatar: string): string {
 		if (window.BattleAvatarNumbers && avatar in BattleAvatarNumbers) {
@@ -585,19 +564,37 @@ const Dex = new class implements ModdedDex {
 			let baseSpeciesid = toID(species.baseSpecies);
 			spriteData.cryurl = 'audio/cries/' + baseSpeciesid;
 			let formeid = species.formeid;
-			const specialFormeCries = [
-				'-bloodmoon', '-crowned', '-eternal', '-eternamax', '-four', '-hangry', '-hero', '-lowkey', '-noice', '-primal', '-rapidstrike', '-roaming', '-school', '-sky', '-starter', '-super', '-therian', '-unbound',
-			];
-			const specialBaseSpeciesCries = [
-				'calyrex', 'kyurem', 'cramorant', 'indeedee', 'lycanroc', 'necrozma', 'oinkologne', 'oricorio', 'slowpoke', 'tatsugiri', 'zygarde',
-			];
-			if (species.isMega ||
-				formeid && (specialFormeCries.includes(formeid) || specialBaseSpeciesCries.includes(baseSpeciesid))) {
-				if (species.isMega && (baseSpeciesid === 'meowstic' || baseSpeciesid === 'tatsugiri')) {
-					spriteData.cryurl += '-mega';
-				} else {
-					spriteData.cryurl += formeid;
-				}
+			if (species.isMega || formeid && (
+				formeid === '-crowned' ||
+				formeid === '-eternal' ||
+				formeid === '-eternamax' ||
+				formeid === '-four' ||
+				formeid === '-hangry' ||
+				formeid === '-hero' ||
+				formeid === '-lowkey' ||
+				formeid === '-noice' ||
+				formeid === '-primal' ||
+				formeid === '-rapidstrike' ||
+				formeid === '-roaming' ||
+				formeid === '-school' ||
+				formeid === '-sky' ||
+				formeid === '-starter' ||
+				formeid === '-super' ||
+				formeid === '-therian' ||
+				formeid === '-unbound' ||
+				baseSpeciesid === 'calyrex' ||
+				baseSpeciesid === 'kyurem' ||
+				baseSpeciesid === 'cramorant' ||
+				baseSpeciesid === 'indeedee' ||
+				baseSpeciesid === 'lycanroc' ||
+				baseSpeciesid === 'necrozma' ||
+				baseSpeciesid === 'oinkologne' ||
+				baseSpeciesid === 'oricorio' ||
+				baseSpeciesid === 'slowpoke' ||
+				baseSpeciesid === 'tatsugiri' ||
+				baseSpeciesid === 'zygarde'
+			)) {
+				spriteData.cryurl += formeid;
 			}
 			spriteData.cryurl += '.mp3';
 		}
@@ -734,9 +731,8 @@ const Dex = new class implements ModdedDex {
 
 		let top = Math.floor(num / 12) * 30;
 		let left = (num % 12) * 40;
-		let fainted = ((pokemon as Pokemon | ServerPokemon)?.fainted ?
-			`;opacity:.3;filter:grayscale(100%) brightness(.5)` : ``);
-		return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png?v22) no-repeat scroll -${left}px -${top}px${fainted}`;
+		let fainted = ((pokemon as Pokemon | ServerPokemon)?.fainted ? `;opacity:.3;filter:grayscale(100%) brightness(.5)` : ``);
+		return `background:transparent url(${Dex.resourcePrefix}sprites/pokemonicons-sheet.png?v17) no-repeat scroll -${left}px -${top}px${fainted}`;
 	}
 
 	getTeambuilderSpriteData(pokemon: any, gen: number = 0): TeambuilderSpriteData {

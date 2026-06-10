@@ -1229,8 +1229,7 @@
 			case 'raw':
 				return {message: '<div class="chat chatmessage-' + toID(name) + '">' + BattleLog.sanitizeHTML(target) + '</div>', noNotify: isNotPM};
 			case 'nonotify':
-			case 'subtlenotify':
-				return { message: '<div class="chat">' + timestamp + BattleLog.sanitizeHTML(target) + '</div>', noNotify: true };
+				return {message: '<div class="chat">' + timestamp + BattleLog.sanitizeHTML(target) + '</div>', noNotify: true};
 			case 'challenge':
 				return {challenge: target};
 			default:

@@ -597,10 +597,6 @@ function TeamBox(props: {team: Team | null, noLink?: boolean, button?: boolean})
  */
 
 class TeamDropdownPanel extends PSRoomPanel {
-	static readonly id = 'teamdropdown';
-	static readonly routes = ['teamdropdown'];
-	static readonly location = 'modal-popup';
-	static readonly noURL = true;
 	gen = '';
 	format: string | null = null;
 	getTeams() {
@@ -634,14 +630,7 @@ class TeamDropdownPanel extends PSRoomPanel {
 		const room = this.props.room;
 		if (!room.parentElem) {
 			return <PSPanelWrapper room={room}>
-				<div class="pad">
-					<p>This team selector is no longer available (the challenge was cancelled or something).</p>
-					<p class="buttonbar">
-						<button type="button" data-cmd="/close" class="button">
-							Close
-						</button>
-					</p>
-				</div>
+				<p>Error: You tried to open a team selector, but you have nothing to select a team for.</p>
 			</PSPanelWrapper>;
 		}
 		const baseFormat = room.parentElem.getAttribute('data-format') || Dex.modid;
@@ -745,9 +734,6 @@ interface FormatData {
 	searchShow?: boolean;
 	challengeShow?: boolean;
 	tournamentShow?: boolean;
-	bestOfDefault?: boolean;
-	teraPreviewDefault?: boolean;
-	itemClauseDefault?: boolean;
 	rated: boolean;
 	teambuilderLevel?: number | null;
 	teambuilderFormat?: ID;
@@ -761,11 +747,7 @@ declare var BattleFormats: {[id: string]: FormatData};
 declare var NonBattleGames: {[id: string]: string};
 
 class FormatDropdownPanel extends PSRoomPanel {
-	static readonly id = 'formatdropdown';
-	static readonly routes = ['formatdropdown'];
-	static readonly location = 'modal-popup';
-	static readonly noURL = true;
-	gen = '' as ID;
+	gen = '';
 	format: string | null = null;
 	click = (e: MouseEvent) => {
 		let curTarget = e.target as HTMLElement | null;
@@ -784,14 +766,7 @@ class FormatDropdownPanel extends PSRoomPanel {
 		const room = this.props.room;
 		if (!room.parentElem) {
 			return <PSPanelWrapper room={room}>
-				<div class="pad">
-					<p>This format selector is no longer available.</p>
-					<p class="buttonbar">
-						<button type="button" data-cmd="/close" class="button">
-							Close
-						</button>
-					</p>
-				</div>
+				<p>Error: You tried to open a format selector, but you have nothing to select a format for.</p>
 			</PSPanelWrapper>;
 		}
 

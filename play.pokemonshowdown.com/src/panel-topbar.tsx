@@ -186,36 +186,6 @@ class PSHeader extends preact.Component<{style: {}}> {
 			icon = <i class="fa fa-file-text-o"></i>;
 			break;
 		}
-		return { icon, title };
-	}
-	static renderRoomTab(id: RoomID, noAria?: boolean) {
-		const room = PS.rooms[id];
-		if (!room) return null;
-		const closable = (id === '' || id === 'rooms' ? '' : ' closable');
-		const cur = PS.isVisiblePanel(room) ? ' cur' : '';
-		let notifying = room.isSubtleNotifying ? ' subtle-notifying' : '';
-		let hoverTitle = '';
-		let notifications = room.notifications;
-		if (id === '') {
-			for (const roomid of PS.miniRoomList) {
-				const miniNotifications = PS.rooms[roomid]?.notifications;
-				if (miniNotifications?.length) notifications = [...notifications, ...miniNotifications];
-			}
-		}
-		if (notifications.length) {
-			notifying = ' notifying';
-			for (const notif of notifications) {
-				if (!notif.body) continue;
-				hoverTitle += `${notif.title}\n${notif.body}\n`;
-			}
-		}
-		let className = `roomtab button${notifying}${closable}${cur}`;
-
-		let { icon, title: roomTitle } = PSHeader.roomInfo(room);
-		if (room.type === 'rooms' && PS.leftPanelWidth !== null) roomTitle = '';
-		if (room.type === 'battle') className += ' roomtab-battle';
-
-		let closeButton = null;
 		if (closable) {
 			closeButton = <button class="closebutton" name="closeRoom" value={id} aria-label="Close">
 				<i class="fa fa-times-circle"></i>
@@ -280,53 +250,24 @@ class PSHeader extends preact.Component<{style: {}}> {
 	}
 }
 
-export class PSMiniHeader extends preact.Component {
-	menuOpen?: boolean;
-	override componentDidMount() {
-		window.addEventListener('scroll', this.handleScroll);
-	}
-	override componentWillUnmount() {
-		window.removeEventListener('scroll', this.handleScroll);
-	}
-	handleScroll = () => {
-		if (this.menuOpen !== !window.scrollX) this.forceUpdate();
-	};
-	override render() {
-		this.menuOpen = !window.scrollX;
+preact.render(<PSMain />, document.body, document.getElementById('ps-frame')!);
 
-		if (PS.leftPanelWidth !== null) return null;
+/**
+ * User popup
+ */
 
-		let notificationsCount = 0;
-		const notificationRooms = [...PS.leftRoomList, ...PS.rightRoomList];
-		for (const roomid of notificationRooms) {
-			const miniNotifications = PS.rooms[roomid]?.notifications;
-			if (miniNotifications?.length) notificationsCount++;
-		}
-		const { icon, title } = PSHeader.roomInfo(PS.panel);
-		const userColor = window.BattleLog && `color:${PS.user.away ? '#888' : BattleLog.usernameColor(PS.user.userid)}`;
-		const showMenuButton = PSView.narrowMode;
-		const notifying = (
-			!showMenuButton && this.menuOpen && Object.values(PS.rooms).some(room => room!.notifications.length)
-		) ? ' notifying' : '';
-		const menuButton = !showMenuButton ? (
-			null
-		) : !this.menuOpen ? (
-			<button onClick={PSView.scrollToHeader} class={`mini-header-left ${notifying}`} aria-label="Menu">
-				{!!notificationsCount && <div class="notification-badge">{notificationsCount}</div>}
-				<i class="fa fa-bars" aria-hidden></i>
-			</button>
-		) : (
-			<button onClick={PSView.scrollToRoom} class="mini-header-left" aria-label="Menu">
-				<i class="fa fa-arrow-right" aria-hidden></i>
-			</button>
-		);
-		return <div class="mini-header" style={`left:${PSView.verticalHeaderWidth + (PSView.narrowMode ? 0 : -1)}px;`}>
-			{menuButton}
-			{icon} {title}
-			<button data-href="options" class="mini-header-right" aria-label="Options">
-				{PS.user.named ? <strong style={userColor}>{PS.user.name}</strong> : <i class="fa fa-cog" aria-hidden></i>}
-			</button>
-		</div>;
+class UserRoom extends PSRoom {
+	readonly classType = 'user';
+	userid: ID;
+	name: string;
+	isSelf: boolean;
+	constructor(options: RoomOptions) {
+		super(options);
+		this.userid = this.id.slice(5) as ID;
+		this.isSelf = (this.userid === PS.user.userid);
+		this.name = options.username as string || this.userid;
+		if (/[a-zA-Z0-9]/.test(this.name.charAt(0))) this.name = ' ' + this.name;
+		PS.send(`|/cmd userdetails ${this.userid}`);
 	}
 }
 

@@ -92,7 +92,6 @@ export class Pokemon implements PokemonDetails, PokemonHealth {
 	prevItemEffect = '';
 	terastallized: string | '' = '';
 	teraType = '';
-	moddedType: Dex.TypeName[] = [];
 
 	boosts: {[stat: string]: number} = {};
 	status: StatusName | 'tox' | '' | '???' = '';
@@ -481,8 +480,6 @@ export class Pokemon implements PokemonDetails, PokemonHealth {
 			types = [this.terastallized as TypeName];
 		} else if (this.volatiles.typechange) {
 			types = this.volatiles.typechange[1].split('/');
-		} else if (this.moddedType.length) {
-			types = this.moddedType;
 		} else {
 			types = this.getSpecies(serverPokemon).types;
 		}
@@ -995,8 +992,6 @@ export interface ServerPokemon extends PokemonDetails, PokemonHealth {
 	details: string;
 	condition: string;
 	active: boolean;
-	reviving: boolean;
-	commanding: boolean;
 	/** unboosted stats */
 	stats: {
 		atk: number,
@@ -2591,10 +2586,6 @@ export class Battle {
 					poke.copyTypesFrom(ofpoke);
 				} else {
 					const types = Dex.sanitizeName(args[3] || '???');
-					// Kind of a hack/hardcode protocol for now due to time constraints, should be expanded upon later
-					if (fromeffect.id.startsWith('format')) {
-						poke.moddedType = types.split('/') as Dex.TypeName[];
-					}
 					poke.removeVolatile('typeadd' as ID);
 					poke.addVolatile('typechange' as ID, types);
 					if (!kwArgs.silent) {
@@ -3459,9 +3450,6 @@ export class Battle {
 			}
 			if (this.tier.includes('Super Staff Bros')) {
 				this.dex = Dex.mod('gen9ssb' as ID);
-			}
-			if (this.tier.includes(`Champions`)) {
-				this.dex = Dex.mod('champions' as ID);
 			}
 			this.log(args);
 			break;

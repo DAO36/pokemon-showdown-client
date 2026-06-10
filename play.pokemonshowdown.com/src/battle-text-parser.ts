@@ -1046,13 +1046,9 @@ class BattleTextParser {
 		}
 
 		case '-crit': case '-supereffective': case '-resisted': {
-			const [, pokemon, effectiveness] = args;
+			const [, pokemon] = args;
 			let templateId = cmd.slice(1);
 			if (templateId === 'supereffective') templateId = 'superEffective';
-			if (effectiveness === '2') {
-				if (templateId === 'superEffective') templateId = 'extremelyEffective';
-				if (templateId === 'resisted') templateId = 'mostlyIneffective';
-			}
 			if (kwArgs.spread) templateId += 'Spread';
 			const template = this.template(templateId);
 			return template.replace('[POKEMON]', this.pokemon(pokemon));

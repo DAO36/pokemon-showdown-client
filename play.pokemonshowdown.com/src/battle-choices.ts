@@ -245,11 +245,7 @@ class BattleChoiceBuilder {
 		const request = this.request;
 		switch (request.requestType) {
 		case 'move':
-			while (
-				(this.choices.length < request.active.length &&
-					!request.active[this.choices.length]) ||
-					request.side?.pokemon[this.choices.length]?.commanding
-			) {
+			while (this.choices.length < request.active.length && !request.active[this.choices.length]) {
 				this.choices.push('pass');
 			}
 			break;

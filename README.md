@@ -4,7 +4,7 @@ Pokémon Showdown Client
 Navigation: [Website][1] | [Server repository][2] | **Client repository** | [Dex repository][3]
 
   [1]: http://pokemonshowdown.com/
-  [2]: https://github.com/smogon/pokemon-showdown
+  [2]: https://github.com/Zarel/Pokemon-Showdown
   [3]: https://github.com/Zarel/Pokemon-Showdown-Dex
 
 Introduction
@@ -17,7 +17,7 @@ This is what runs `play.pokemonshowdown.com`.
 **WARNING: You probably want the [Pokémon Showdown server][4]**, if you're
 setting up a server.
 
-  [4]: https://github.com/smogon/pokemon-showdown
+  [4]: https://github.com/Zarel/Pokemon-Showdown
 
 Browser support
 ------------------------------------------------------------------------
@@ -41,22 +41,13 @@ Pokémon Showdown is mostly developed on Chrome, and Chrome or the desktop clien
 Testing
 ------------------------------------------------------------------------
 
-Development is proceeding on the client rewrite! The live version is
-available at https://play.pokemonshowdown.com/beta
-
-You can contribute to it yourself using the same process as before, just
-use `testclient-new.html` rather than `testclient-old.html`.
-
-Testing (the old client)
-------------------------------------------------------------------------
-
-Client testing requires a build step! Install the latest Node.js (we
-require v20 or later) and Git, and run `node build` (on Windows) or `./build`
+Client testing now requires a build step! Install the latest Node.js (we
+require v14 or later) and Git, and run `node build` (on Windows) or `./build`
 (on other OSes) to build.
 
 You can make and test client changes simply by building after each change,
-and opening `play.pokemonshowdown.com/testclient-old.html`. This will allow you
-to test changes to the client without setting up your own login server.
+and opening `testclient.html`. This will allow you to test changes to the
+client without setting up your own login server.
 
 ### Test keys
 
@@ -83,18 +74,18 @@ access this on Chrome through the URL bar:
 ### Other servers
 
 You can connect to an arbitrary server by navigating to
-`testclient-old.html?~~host:port`. For example, to connect to a server running
-locally on port 8000, you can navigate to `testclient-old.html?~~localhost:8000`.
+`testclient.html?~~host:port`. For example, to connect to a server running
+locally on port 8000, you can navigate to `testclient.html?~~localhost:8000`.
 
 **NOTE**: Certain browsers will convert `'?'` to `'%3F'` when reading files off
 of the local filesystem. As a workaround, try using a different browser or
 serving the files locally first (ie. run `npx http-server` from the
 directory this README is in, then navigate in your browser to
-`http://localhost:8080/testclient-old.html?~~localhost:8000`).
+`http://localhost:8080/testclient.html?~~localhost:8000`).
 
 ### Limitations
 
-Even with a test key, the following things will fail in `testclient`:
+Even with a test key, the following things will fail in `testclient.html`:
 
 + Registering
 + Logging into other accounts (you can still switch to other unregistered

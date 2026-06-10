@@ -172,77 +172,10 @@ class LadderPanel extends PSRoomPanel<LadderRoom> {
 				</p>
 			);
 		}
-		const showCOIL = room.ladderData?.toplist[0]?.coil !== undefined;
-
-		return <table class="table readable-bg">
-			<tr class="table-header">
-				<th></th>
-				<th>Name</th>
-				<th style={{ textAlign: 'center' }}><abbr title="Elo rating">Elo</abbr></th>
-				<th style={{ textAlign: 'center' }}>
-					<abbr title="user's percentage chance of winning a random battle (Glicko X-Act Estimate)">GXE</abbr>
-				</th>
-				<th style={{ textAlign: 'center' }}>
-					<abbr title="Glicko-1 rating system: rating&plusmn;deviation (provisional if deviation>100)">Glicko-1</abbr>
-				</th>
-				{showCOIL && <th style={{ textAlign: 'center' }}>COIL</th>}
-			</tr>
-			{room.ladderData.toplist.map((row, i) => <tr>
-				<td style={{ textAlign: 'right' }}>
-					{i < 3 && <i class="fa fa-trophy" aria-hidden style={{ color: ['#d6c939', '#adb2bb', '#ca8530'][i] }}></i>} {i + 1}
-				</td>
-				<td><span
-					class="username no-interact" style={{
-						fontWeight: i < 10 ? 'bold' : 'normal', color: BattleLog.usernameColor(row.userid),
-					}}
-				>
-					{row.username}
-				</span></td>
-				<td style={{ textAlign: 'center' }}><strong>{row.elo.toFixed(0)}</strong></td>
-				<td style={{ textAlign: 'center' }}>{Math.trunc(row.gxe)}<small>.{row.gxe.toFixed(1).slice(-1)}%</small></td>
-				<td style={{ textAlign: 'center' }}><em>{row.rpr.toFixed(0)}<small> &plusmn; {row.rprd.toFixed(0)}</small></em></td>
-				{showCOIL && <td style={{ textAlign: 'center' }}>{row.coil?.toFixed(0)}</td>}
-			</tr>)}
-			{!room.ladderData.toplist.length && <tr><td colSpan={5}>
-				<em>No one has played any ranked games yet.</em>
-			</td></tr>}
-		</table>;
-	}
-	override render() {
-		const room = this.props.room;
-		return <PSPanelWrapper room={room}>
-			<div class="ladder pad">
-				<p>
-					<button class="button" data-href="ladder" data-target="replace">
-						<i class="fa fa-chevron-left" aria-hidden></i> Format List
-					</button>
-				</p>
-				<p>
-					<button class="button" data-href="ladder" data-target="replace">
-						<i class="fa fa-refresh" aria-hidden></i> Refresh
-					</button> <a class="button" href="/view-seasonladder-gen9randombattle">
-						<i class="fa fa-trophy" aria-hidden></i> Seasonal rankings
-					</a>
-					{this.renderSearch()}
-				</p>
-				{this.renderHeader()}
-				{this.renderTable()}
-			</div>
-		</PSPanelWrapper>;
-	}
-}
-
-class LadderListPanel extends PSRoomPanel {
-	static readonly id = 'ladder';
-	static readonly routes = ['ladder'];
-	static readonly icon = <i class="fa fa-list-ol" aria-hidden></i>;
-	static readonly title = 'Ladder';
-
-	override componentDidMount() {
-		this.subscribeTo(PS.teams);
-	}
-	renderList() {
-		if (!window.BattleFormats) {
+		return null;
+	};
+	static BattleFormatList = () => {
+		if (!BattleFormats) {
 			return <p>Loading...</p>;
 		}
 		let currentSection: string = "";
@@ -275,11 +208,28 @@ class LadderListPanel extends PSRoomPanel {
 				</li>
 			);
 		}
-		return buf;
-	}
-	override render() {
-		const room = this.props.room;
-		return <PSPanelWrapper room={room}>
+		return <>{sections}</>;
+	};
+	static ShowFormatList = (props: {room: LadderRoom}) => {
+		const {room} = props;
+		return <>
+			<p>
+				<a class="button" href={`/${Config.routes.users}/`} target="_blank">
+					Look up a specific user's rating
+				</a>
+			</p>
+			<LadderPanel.Notice notice={room.notice} />
+			<p>
+				<button name="joinRoom" value="view-ladderhelp" class="button">
+					<i class="fa fa-info-circle"></i> How the ladder works
+				</button>
+			</p>
+			<LadderPanel.BattleFormatList />
+		</>;
+	};
+	render() {
+		const {room} = this.props;
+		return <PSPanelWrapper room={room} scrollable>
 			<div class="ladder pad">
 				{room.format === undefined && (
 					<LadderPanel.ShowFormatList room={room} />

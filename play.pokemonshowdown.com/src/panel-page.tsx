@@ -122,7 +122,7 @@ class PagePanel extends PSRoomPanel<PageRoom> {
 				</div>;
 			}
 		}
-		return <PSPanelWrapper room={room}>
+		return <PSPanelWrapper room={room} scrollable>
 			{renderPage}
 		</PSPanelWrapper>;
 	}

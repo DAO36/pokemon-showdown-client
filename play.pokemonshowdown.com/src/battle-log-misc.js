@@ -5,7 +5,8 @@
  *
  * - an MD5 hasher
  *
- * - nothing else, currently
+ * - a parseText function (for converting chat text to HTML),
+ *   cross-compiled from the server
  *
  * Licensing note: PS's client has complicated licensing:
  * - The client as a whole is AGPLv3
