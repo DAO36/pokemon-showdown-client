@@ -1040,7 +1040,7 @@ class BattleTooltips {
 
 		// check for burn, paralysis, guts, quick feet
 		if (pokemon.status) {
-			if (this.battle.gen > 2 && ability === 'guts' || ability === 'high on asacoco') {
+			if (this.battle.gen > 2 && ability === 'guts' || ability === 'highonasacoco') {
 				stats.atk = Math.floor(stats.atk * 1.5);
 			} else if (this.battle.gen < 2 && pokemon.status === 'brn') {
 				stats.atk = Math.floor(stats.atk * 0.5);
