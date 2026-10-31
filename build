@@ -36,27 +36,29 @@ var full = '';
 
 switch (process.argv[2] || '') {
 case 'full':
-	execSync(`node ./build/build-indexes`, options);
-	execSync(`node ./build/build-learnsets`, options);
-	execSync(`node ./build/build-minidex`, options);
+	execFileSync(process.execPath, ['./build-tools/build-indexes'].concat(
+		process.argv.includes('--no-update') ? ['--no-update'] : []
+	), options);
+	execSync(`node ./build-tools/build-learnsets`, options);
+	execSync(`node ./build-tools/build-minidex`, options);
 	full = ' full';
 	break;
 case 'indexes':
-	execSync(`node ./build/build-indexes`, options);
+	execSync(`node ./build-tools/build-indexes`, options);
 	break;
 case 'learnsets':
-	execSync(`node ./build/build-learnsets`, options);
+	execSync(`node ./build-tools/build-learnsets`, options);
 	break;
 case 'minidex':
 case 'sprites':
-	execSync(`node ./build/build-minidex`, options);
+	execSync(`node ./build-tools/build-minidex`, options);
 	break;
 case 'commands':
-	execSync(`node ./build/build-commands`, options);
+	execSync(`node ./build-tools/build-commands`, options);
 	break;
 case 'translations':
 	try {
-		execFileSync(process.execPath, ['./build/build-translations'].concat(process.argv.slice(3)), options);
+		execFileSync(process.execPath, ['./build-tools/build-translations'].concat(process.argv.slice(3)), options);
 	} catch (error) {
 		if (typeof error.status === 'number') process.exit(error.status);
 		throw error;
@@ -75,32 +77,10 @@ default:
 
 if (full) {
 	try {
-		execSync(`node ./build/build-commands`, options);
+		execSync(`node ./build-tools/build-commands`, options);
 	} catch (e) {
 		console.error(e);
 	}
 }
 
-switch (process.argv[2] || '') {
-case 'full':
-	execSync(`node ./build/build-indexes`, options);
-	execSync(`node ./build/build-learnsets`, options);
-	execSync(`node ./build/build-minidex`, options);
-	full = ' full';
-	break;
-default:
-	break;
-}
-
-// Run the data compilers manually using your copied files
-execSync(`node ./build/build-indexes`, options);
-execSync(`node ./build/build-learnsets`, options);
-execSync(`node ./build/build-minidex`, options);
-execSync(`node ./build/build-commands`, options);
-
-// Run the core layout compilers
-execSync(`node ./build/build-chat-plugins`, options);
-execSync(`node ./build/build-panels`, options);
-execSync(`node ./build/build-main`, options);
-
-console.log("CLIENT BUILT SUCCESSFULLY!");
+execSync(`node ./build-tools/update` + full, options);
