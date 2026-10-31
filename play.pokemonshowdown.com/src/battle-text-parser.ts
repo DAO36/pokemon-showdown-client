@@ -133,7 +133,7 @@ export class BattleTextParser {
 
 			if ([
 				'ingrain', 'quickguard', 'wideguard', 'craftyshield', 'matblock', 'protect', 'mist', 'safeguard',
-				'electricterrain', 'mistyterrain', 'psychicterrain', 'telepathy', 'stickyhold', 'suctioncups', 'aromaveil',
+				'electricterrain', 'mistyterrain', 'psychicterrain', 'hologram', 'telepathy', 'stickyhold', 'suctioncups', 'aromaveil',
 				'flowerveil', 'sweetveil', 'disguise', 'safetygoggles', 'protectivepads',
 			].includes(id)) {
 				if (target) {
@@ -203,7 +203,7 @@ export class BattleTextParser {
 
 		case 'cant': {
 			let [, pokemon, effect, move] = args;
-			if (['ability: Damp', 'ability: Dazzling', 'ability: Queenly Majesty', 'ability: Armor Tail'].includes(effect)) {
+			if (['ability: Damp', 'ability: Dazzling', 'ability: Queenly Majesty', 'ability: Armor Tail', 'ability: Yandere', 'ability: Rain Shaman', 'ability: Dancing Siren', 'ability: YabaIRyS'].includes(effect)) {
 				args[0] = '-block';
 				return { args: ['-block', pokemon, effect, move, kwArgs.of], kwArgs: {} };
 			}
@@ -884,8 +884,12 @@ export class BattleTextParser {
 				case 'darmanitan': id = 'zenmode'; templateName = 'transformEnd'; break;
 				case 'darmanitangalarzen': id = 'zenmode'; break;
 				case 'darmanitangalar': id = 'zenmode'; templateName = 'transformEnd'; break;
+				case 'akaihaatohaachama': id = 'chamachange'; break;
+				case 'akaihaato': id = 'chamachange'; templateName = 'transformEnd'; break;
 				case 'aegislashblade': id = 'stancechange'; break;
 				case 'aegislash': id = 'stancechange'; templateName = 'transformEnd'; break;
+				case 'moonahhoshinova': id = 'moonmania'; break;
+				case 'moonah': id = 'moonamania'; templateName = 'transformEnd'; break;
 				case 'wishiwashischool': id = 'schooling'; break;
 				case 'wishiwashi': id = 'schooling'; templateName = 'transformEnd'; break;
 				case 'miniormeteor': id = 'shieldsdown'; break;
@@ -1026,7 +1030,7 @@ export class BattleTextParser {
 			let [, pokemon, effect] = args;
 			const line1 = this.maybeAbility(effect, pokemon) || this.maybeAbility(kwArgs.from, kwArgs.of || pokemon);
 			let id = BattleTextParser.effectId(effect);
-			if (id === 'doomdesire' || id === 'futuresight') {
+			if (id === 'doomdesire' || id === 'futuresight' || id === 'blastfromthepast') {
 				const template = this.template('activate', effect);
 				return line1 + this.render(template, { TARGET: this.pokemon(pokemon) });
 			}
@@ -1313,7 +1317,7 @@ export class BattleTextParser {
 				});
 			}
 			if (!target &&
-				['hyperdrill', 'hyperspacefury', 'hyperspacehole', 'phantomforce', 'shadowforce', 'feint'].includes(id)) {
+				['fisted', 'macesmash', 'hyperdrill', 'hyperspacefury', 'hyperspacehole', 'phantomforce', 'shadowforce', 'feint'].includes(id)) {
 				[pokemon, target] = [kwArgs.of, pokemon];
 				if (!pokemon) pokemon = target;
 			}
