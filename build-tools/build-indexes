@@ -14,7 +14,7 @@ if (!fs.existsSync('caches/pokemon-showdown')) {
 		console.error('Missing caches/pokemon-showdown. Check out the server before using --no-update.');
 		process.exit(1);
 	}
-	child_process.execSync('git clone https://github.com/smogon/pokemon-showdown.git', {
+	child_process.execSync('git clone https://github.com/DAO36/pokemon-showdown', {
 		cwd: 'caches',
 	});
 }
