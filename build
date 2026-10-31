@@ -36,7 +36,7 @@ var full = '';
 
 switch (process.argv[2] || '') {
 case 'full':
-	// execSync(`node ./build/build-indexes`, options);
+	execSync(`node ./build/build-indexes`, options);
 	execSync(`node ./build/build-learnsets`, options);
 	execSync(`node ./build/build-minidex`, options);
 	full = ' full';
@@ -81,11 +81,26 @@ if (full) {
 	}
 }
 
-// Comment these two out so they don't look for the broken server index data
-// execSync(`node ./build/build-chat-plugins`, options);
-// execSync(`node ./build/build-panels`, options);
+switch (process.argv[2] || '') {
+case 'full':
+	execSync(`node ./build/build-indexes`, options);
+	execSync(`node ./build/build-learnsets`, options);
+	execSync(`node ./build/build-minidex`, options);
+	full = ' full';
+	break;
+default:
+	break;
+}
 
-// This is the only command actually required to lock in your config.js sprite links!
+// Run the data compilers manually using your copied files
+execSync(`node ./build/build-indexes`, options);
+execSync(`node ./build/build-learnsets`, options);
+execSync(`node ./build/build-minidex`, options);
+execSync(`node ./build/build-commands`, options);
+
+// Run the core layout compilers
+execSync(`node ./build/build-chat-plugins`, options);
+execSync(`node ./build/build-panels`, options);
 execSync(`node ./build/build-main`, options);
 
 console.log("CLIENT BUILT SUCCESSFULLY!");
