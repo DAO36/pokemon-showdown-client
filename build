@@ -36,27 +36,27 @@ var full = '';
 
 switch (process.argv[2] || '') {
 case 'full':
-	// execSync(`node ./build-tools/build-indexes`, options);
-	execSync(`node ./build-tools/build-learnsets`, options);
-	execSync(`node ./build-tools/build-minidex`, options);
+	// execSync(`node ./build/build-indexes`, options);
+	execSync(`node ./build/build-learnsets`, options);
+	execSync(`node ./build/build-minidex`, options);
 	full = ' full';
 	break;
 case 'indexes':
-	execSync(`node ./build-tools/build-indexes`, options);
+	execSync(`node ./build/build-indexes`, options);
 	break;
 case 'learnsets':
-	execSync(`node ./build-tools/build-learnsets`, options);
+	execSync(`node ./build/build-learnsets`, options);
 	break;
 case 'minidex':
 case 'sprites':
-	execSync(`node ./build-tools/build-minidex`, options);
+	execSync(`node ./build/build-minidex`, options);
 	break;
 case 'commands':
-	execSync(`node ./build-tools/build-commands`, options);
+	execSync(`node ./build/build-commands`, options);
 	break;
 case 'translations':
 	try {
-		execFileSync(process.execPath, ['./build-tools/build-translations'].concat(process.argv.slice(3)), options);
+		execFileSync(process.execPath, ['./build/build-translations'].concat(process.argv.slice(3)), options);
 	} catch (error) {
 		if (typeof error.status === 'number') process.exit(error.status);
 		throw error;
@@ -75,10 +75,17 @@ default:
 
 if (full) {
 	try {
-		execSync(`node ./build-tools/build-commands`, options);
+		execSync(`node ./build/build-commands`, options);
 	} catch (e) {
 		console.error(e);
 	}
 }
 
-// execSync(`node ./build-tools/update` + full, options);
+// execSync(`node ./build/update` + full, options);
+
+// Corrected build pathways to reference the real folder
+execSync(`node ./build/build-chat-plugins`, options);
+execSync(`node ./build/build-panels`, options);
+execSync(`node ./build/build-main`, options);
+
+console.log("CLIENT BUILT SUCCESSFULLY!");
