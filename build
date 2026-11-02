@@ -36,9 +36,9 @@ var full = '';
 
 switch (process.argv[2] || '') {
 case 'full':
-	execFileSync(process.execPath, ['./build-tools/build-indexes'].concat(
-		process.argv.includes('--no-update') ? ['--no-update'] : []
-	), options);
+	//execFileSync(process.execPath, ['./build-tools/build-indexes'].concat(
+	//	process.argv.includes('--no-update') ? ['--no-update'] : []
+	//), options);
 	execSync(`node ./build-tools/build-learnsets`, options);
 	execSync(`node ./build-tools/build-minidex`, options);
 	full = ' full';
