@@ -957,19 +957,6 @@ export const Dex = new class implements ModdedDex {
 			facing = 'back';
 		}
 
-				// ==================== CUSTOM REPOSITORY OVERRIDE ====================
-		const customMons = ['ao', 'riona', 'niko', 'su', 'chihaya', 'akirose'];
-		if (customMons.includes(name)) {
-			// Choose the folder path based on whether the sprite is a front or back sprite
-			let folder = facing === 'back' ? 'sprites/gen5-back/' : 'sprites/gen5/';
-			
-			// This matches your working URL layout perfectly
-			spriteData.url = `https://raw.githubusercontent.com/DAO36/cobblesouls-showdown-sprites/refs/heads/master/${folder}${name}.png`;
-			return spriteData; // Exit immediately so Showdown doesn't override this path!
-		}
-		// =====================================================================
-
-
 		// Decide which gen sprites to use.
 		//
 		// There are several different generations we care about here:
