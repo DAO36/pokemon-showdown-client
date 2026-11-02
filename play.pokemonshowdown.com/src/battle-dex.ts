@@ -479,14 +479,11 @@ export const Dex = new class implements ModdedDex {
 	pokeballs: string[] | null = null;
 
 	resourcePrefix = (() => {
-		let prefix = '';
-		if (window.document?.location?.protocol !== 'http:') prefix = 'https:';
-		return `${prefix}//raw.githubusercontent.com/DAO36/cobblesouls-showdown-sprites/master/`;
+		return `https://raw.githubusercontent.com/DAO36/cobblesouls-showdown-sprites/master/`;
 	})();
 
 	fxPrefix = (() => {
-		const protocol = (window.document?.location?.protocol !== 'http:') ? 'https:' : '';
-		return `${protocol}//${window.Config ? Config.routes.client : 'play.pokemonshowdown.com'}/fx/`;
+		return `https://raw.githubusercontent.com/DAO36/cobblesouls-showdown-sprites/master/`;
 	})();
 
 	loadedSpriteData = { xy: 1, bw: 0 };
