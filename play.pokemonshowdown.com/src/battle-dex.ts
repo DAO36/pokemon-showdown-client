@@ -481,12 +481,12 @@ export const Dex = new class implements ModdedDex {
 	resourcePrefix = (() => {
 		let prefix = '';
 		if (window.document?.location?.protocol !== 'http:') prefix = 'https:';
-		return `${prefix}//${window.Config ? Config.routes.client : 'play.pokemonshowdown.com'}/`;
+		return `${prefix}//${window.Config ? Config.routes.client : '//raw.githubusercontent.com/DAO36/cobblesouls-showdown-sprites/master/'}/`;
 	})();
 
 	fxPrefix = (() => {
 		const protocol = (window.document?.location?.protocol !== 'http:') ? 'https:' : '';
-		return `${protocol}//${window.Config ? Config.routes.client : 'play.pokemonshowdown.com'}/fx/`;
+		return `${protocol}//${window.Config ? Config.routes.client : '//raw.githubusercontent.com/DAO36/cobblesouls-showdown-sprites/master/'}/fx/`;
 	})();
 
 	loadedSpriteData = { xy: 1, bw: 0 };
