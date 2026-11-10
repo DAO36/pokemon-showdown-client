@@ -36,7 +36,7 @@ Config.customcolors = {
 
 Config.routes = {
 	root: 'pokemonshowdown.com',
-	client: 'raw.githubusercontent.com/DAO36/cobblesouls-showdown-sprites/master',
+	client: 'localhost:8080',
 	dex: 'dex.pokemonshowdown.com',
 	replays: 'replay.pokemonshowdown.com',
 	users: 'pokemonshowdown.com/users',
