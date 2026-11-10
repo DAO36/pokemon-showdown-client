@@ -33,3 +33,12 @@ Config.roomsFirstOpenScript = function () {
 Config.customcolors = {
 	'zarel': 'aeo'
 };
+
+Config.routes = {
+	root: 'pokemonshowdown.com',
+	client: 'raw.githubusercontent.com/DAO36/cobblesouls-showdown-sprites/master',
+	dex: 'dex.pokemonshowdown.com',
+	replays: 'replay.pokemonshowdown.com',
+	users: 'pokemonshowdown.com/users',
+	teams: 'teams.pokemonshowdown.com',
+};
