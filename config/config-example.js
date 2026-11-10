@@ -36,7 +36,7 @@ Config.customcolors = {
 
 Config.routes = {
 	root: 'pokemonshowdown.com',
-	client: 'localhost:8080',
+	client: 'localhost:8000',
 	dex: 'dex.pokemonshowdown.com',
 	replays: 'replay.pokemonshowdown.com',
 	users: 'pokemonshowdown.com/users',
